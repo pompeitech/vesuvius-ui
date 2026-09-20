@@ -1,0 +1,18 @@
+/* Named color themes, on top of the base palette in ../base.css.
+   Each theme is toggled independently from light/dark mode via a
+   `data-theme="<name>"` attribute on <html>; the .dark class keeps working
+   as normal and both stay in sync (see @pompeitech/vesuvius-ui's
+   ThemeProvider). Each file here is also its own `exports` subpath
+   (`@pompeitech/vesuvius-ui/themes/<name>.css`) — importing this file
+   pulls in all of them at once; import an individual one instead to ship
+   only the themes you actually offer. */
+@import "./lava.css";
+@import "./stripe.css";
+@import "./vercel.css";
+@import "./supabase.css";
+@import "./linear.css";
+@import "./claude.css";
+@import "./amber-minimal.css";
+@import "./claymorphism.css";
+@import "./alpine.css";
+@import "./aubergine.css";

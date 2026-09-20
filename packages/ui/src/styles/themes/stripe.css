@@ -1,0 +1,72 @@
+/* Stripe — white canvas, deep navy ink, and a violet-blurple action color. */
+[data-theme="stripe"] {
+  --background: #ffffff;
+  --foreground: #061b31;
+  --card: #f8fbff;
+  --card-foreground: #061b31;
+  --popover: #ffffff;
+  --popover-foreground: #061b31;
+  --primary: #533afd;
+  --primary-foreground: #ffffff;
+  --secondary: #eef5ff;
+  --secondary-foreground: #163a5f;
+  --muted: #f1f6fb;
+  --muted-foreground: #60738a;
+  --accent: #e9edff;
+  --accent-foreground: #3825c7;
+  --border: #dce7f2;
+  --input: #cddbeb;
+  --ring: #533afd;
+  --success: #0f9f74;
+  --warning: #b7791f;
+  --info: #1976d2;
+  --destructive: #d14343;
+  --chart-1: #533afd;
+  --chart-2: #00a98f;
+  --chart-3: #7a5af8;
+  --chart-4: #6b8afd;
+  --chart-5: #1ea7fd;
+  --sidebar: #f6faff;
+  --sidebar-foreground: #061b31;
+  --sidebar-primary: #533afd;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e9edff;
+  --sidebar-border: #dce7f2;
+  --sidebar-ring: #533afd;
+}
+
+[data-theme="stripe"].dark {
+  --background: #071426;
+  --foreground: #eaf3ff;
+  --card: #0c2038;
+  --card-foreground: #eaf3ff;
+  --popover: #0c2038;
+  --popover-foreground: #eaf3ff;
+  --primary: #7c6cff;
+  --primary-foreground: #ffffff;
+  --secondary: #122b47;
+  --secondary-foreground: #eaf3ff;
+  --muted: #10253d;
+  --muted-foreground: #9cb1c8;
+  --accent: #273a79;
+  --accent-foreground: #dfe2ff;
+  --border: #24405f;
+  --input: #24405f;
+  --ring: #8d80ff;
+  --success: #46d6ae;
+  --warning: #f5c26b;
+  --info: #67b7ff;
+  --destructive: #ff8585;
+  --chart-1: #8d80ff;
+  --chart-2: #46d6ae;
+  --chart-3: #b39cff;
+  --chart-4: #67b7ff;
+  --chart-5: #4bc8f5;
+  --sidebar: #091b30;
+  --sidebar-foreground: #eaf3ff;
+  --sidebar-primary: #7c6cff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #122b47;
+  --sidebar-border: #24405f;
+  --sidebar-ring: #8d80ff;
+}

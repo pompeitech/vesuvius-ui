@@ -1,0 +1,29 @@
+{
+  "name": "@pompeitech/storybook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 5002",
+    "build": "storybook build",
+    "lint": "biome lint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "10.6.0",
+    "@storybook/addon-themes": "10.6.0",
+    "@storybook/react-vite": "10.6.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^22.20.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@biomejs/biome": "^2.5.14",
+    "@pompeitech/config-typescript": "workspace:*",
+    "@pompeitech/vesuvius-ui": "workspace:*",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "storybook": "10.6.0",
+    "typescript": "5.9.3",
+    "vite": "^8.3.0"
+  }
+}

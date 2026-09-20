@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Version or publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      # No changesets pending → nothing happens.
+      # Changesets pending → opens/updates a "Version Packages" PR that bumps
+      #   package.json + writes CHANGELOG.md from the merged changeset files.
+      # That PR gets merged → this same step runs `pnpm release`
+      #   (build + `changeset publish`), which publishes to npm and tags the
+      #   release on GitHub.
+      - name: Create Version PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # actions/setup-node's registry-url wires npm/pnpm publish auth to
+          # this exact env var name — the secret itself can be named
+          # anything (add an "Automation" token from npmjs.com as NPM_TOKEN
+          # in this repo's Settings → Secrets and variables → Actions).
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

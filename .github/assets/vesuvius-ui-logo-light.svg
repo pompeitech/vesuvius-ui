@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Vesuvius UI — logo per sfondo chiaro</title>
+  <desc id="desc">Logo vettoriale trasparente nei colori Obsidian e Lava.</desc>
+  <g transform="translate(26 4)">
+    <g fill="#191512">
+      <path d="M54 390 160 238l56-22-58 174Z"/>
+      <path d="m169 220 63-101 30 38-43 48Z"/>
+      <path d="m276 160 34-50 35 46 5 67-65-18Z"/>
+      <path d="m354 237 104 153H354l-59-172Z"/>
+    </g>
+    <path fill="#E86B3F" d="m259 164 29 54-25 48 24 57-38 76h-46l31-81-17-54 35-48Z"/>
+  </g>
+  <text x="520" y="326" fill="#191512" font-family="Inter, Arial, sans-serif" font-size="220" font-weight="800" letter-spacing="-10">Vesuvius</text>
+  <text x="1535" y="326" fill="#E86B3F" font-family="Inter, Arial, sans-serif" font-size="220" font-weight="800" letter-spacing="-8">UI</text>
+</svg>

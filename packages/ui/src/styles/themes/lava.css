@@ -1,0 +1,124 @@
+/* "Lava" color theme — the flagship volcanic-stone palette. It re-tints
+   every surface and keeps the same complete light/dark token contract as
+   the other built-in themes. Hex → oklch conversions
+   below are computed (sRGB → linear → OKLab → OKLCH, the CSS Color 4
+   algorithm), not eyeballed, from:
+
+   Role         Name           Light      Dark
+   Primary      Lava           #D65A31    #E86B3F
+   Background   Pomice         #FAF6EF    #0F0E0D
+   Foreground   Ossidiana      #2B211D    #F5EFE8
+   Card         Marmo caldo    #FFFDF9    #181513
+   Secondary    Cenere chiara  #EDE4D8    #28221E
+   Accent       Terracotta ten.#F3D5BF    #3A2016
+   Muted text   Cenere         #756860    #A99D94
+   Border       Pietra         #DDD1C4    #3A302A
+   Destructive  Rosso pompeiano#B9382B    #E05B52
+   Highlight    Bronzo         #D8A146    #E0AA50
+
+   Foregrounds not in the table above (secondary/muted/accent-foreground,
+   card/popover, sidebar) are derived: dark ink (Ossidiana) on light
+   surfaces, light ink (the dark-mode Foreground) on dark surfaces —
+   destructive stays white in both modes, matching this kit's base theme
+   convention that destructive text is always white regardless of exact
+   lightness. */
+[data-theme="lava"] {
+  --background: oklch(0.974 0.01 81.795);
+  --foreground: oklch(0.258 0.017 42.922);
+
+  --card: oklch(0.994 0.006 84.566);
+  --card-foreground: oklch(0.258 0.017 42.922);
+
+  --popover: oklch(0.994 0.006 84.566);
+  --popover-foreground: oklch(0.258 0.017 42.922);
+
+  --primary: oklch(0.62 0.166 38.218);
+  /* The lava action is dark enough for the warm white label to remain
+     legible and gives the primary button the same high-contrast treatment
+     in both modes. */
+  --primary-foreground: oklch(0.985 0 0);
+  --primary-emphasis: oklch(0.49 0.15 38.218);
+
+  --secondary: oklch(0.923 0.019 75.316);
+  --secondary-foreground: oklch(0.258 0.017 42.922);
+
+  --muted: oklch(0.923 0.019 75.316);
+  --muted-foreground: oklch(0.48 0.021 53.706);
+
+  --accent: oklch(0.892 0.045 58.395);
+  --accent-foreground: oklch(0.258 0.017 42.922);
+
+  --destructive: oklch(0.53 0.168 29.503);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --highlight: oklch(0.744 0.125 77.154);
+  --highlight-foreground: oklch(0.258 0.017 42.922);
+
+  --border: oklch(0.867 0.022 69.752);
+  --input: oklch(0.867 0.022 69.752);
+  --ring: oklch(0.62 0.166 38.218);
+
+  --chart-1: oklch(0.62 0.166 38.218);
+  --chart-2: oklch(0.744 0.125 77.154);
+  --chart-3: oklch(0.53 0.168 29.503);
+  --chart-4: oklch(0.62 0.09 58);
+  --chart-5: oklch(0.55 0.02 55);
+
+  --sidebar: oklch(0.974 0.01 81.795);
+  --sidebar-foreground: oklch(0.258 0.017 42.922);
+  --sidebar-primary: oklch(0.62 0.166 38.218);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.892 0.045 58.395);
+  --sidebar-accent-foreground: oklch(0.258 0.017 42.922);
+  --sidebar-border: oklch(0.867 0.022 69.752);
+  --sidebar-ring: oklch(0.62 0.166 38.218);
+}
+
+[data-theme="lava"].dark {
+  --background: oklch(0.165 0.003 67.641);
+  --foreground: oklch(0.955 0.011 71.898);
+
+  --card: oklch(0.199 0.006 56);
+  --card-foreground: oklch(0.955 0.011 71.898);
+
+  --popover: oklch(0.199 0.006 56);
+  --popover-foreground: oklch(0.955 0.011 71.898);
+
+  --primary: oklch(0.672 0.166 39.361);
+  --primary-foreground: oklch(0.985 0 0);
+  --primary-emphasis: var(--primary);
+
+  --secondary: oklch(0.257 0.012 55.804);
+  --secondary-foreground: oklch(0.955 0.011 71.898);
+
+  --muted: oklch(0.257 0.012 55.804);
+  --muted-foreground: oklch(0.704 0.019 59.359);
+
+  --accent: oklch(0.275 0.044 41.669);
+  --accent-foreground: oklch(0.955 0.011 71.898);
+
+  --destructive: oklch(0.641 0.168 26.73);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --highlight: oklch(0.771 0.124 77.813);
+  --highlight-foreground: oklch(0.258 0.017 42.922);
+
+  --border: oklch(0.318 0.018 52.804);
+  --input: oklch(0.318 0.018 52.804);
+  --ring: oklch(0.672 0.166 39.361);
+
+  --chart-1: oklch(0.672 0.166 39.361);
+  --chart-2: oklch(0.771 0.124 77.813);
+  --chart-3: oklch(0.641 0.168 26.73);
+  --chart-4: oklch(0.7 0.09 58);
+  --chart-5: oklch(0.68 0.02 55);
+
+  --sidebar: oklch(0.165 0.003 67.641);
+  --sidebar-foreground: oklch(0.955 0.011 71.898);
+  --sidebar-primary: oklch(0.672 0.166 39.361);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.275 0.044 41.669);
+  --sidebar-accent-foreground: oklch(0.955 0.011 71.898);
+  --sidebar-border: oklch(0.318 0.018 52.804);
+  --sidebar-ring: oklch(0.672 0.166 39.361);
+}

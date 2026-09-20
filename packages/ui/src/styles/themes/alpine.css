@@ -1,0 +1,72 @@
+/* Alpine — cobalt structure, coral heat, and a warm blush canvas. */
+[data-theme="alpine"] {
+  --background: #fcf5f7;
+  --foreground: #17233c;
+  --card: #ffffff;
+  --card-foreground: #17233c;
+  --popover: #ffffff;
+  --popover-foreground: #17233c;
+  --primary: #3158d9;
+  --primary-foreground: #ffffff;
+  --secondary: #f07b68;
+  --secondary-foreground: #4b1f2a;
+  --muted: #f4e9ed;
+  --muted-foreground: #68758e;
+  --accent: #e9a9b5;
+  --accent-foreground: #542b42;
+  --border: #ead8de;
+  --input: #d8c4cd;
+  --ring: #3158d9;
+  --success: #228b68;
+  --warning: #c47b28;
+  --info: #3f78c9;
+  --destructive: #d94b58;
+  --chart-1: #3158d9;
+  --chart-2: #f07b68;
+  --chart-3: #e9a9b5;
+  --chart-4: #5b7ce2;
+  --chart-5: #228b68;
+  --sidebar: #f7e9ee;
+  --sidebar-foreground: #17233c;
+  --sidebar-primary: #3158d9;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3d6dc;
+  --sidebar-border: #ead8de;
+  --sidebar-ring: #3158d9;
+}
+
+[data-theme="alpine"].dark {
+  --background: #0d172d;
+  --foreground: #f5f3f5;
+  --card: #142340;
+  --card-foreground: #f5f3f5;
+  --popover: #142340;
+  --popover-foreground: #f5f3f5;
+  --primary: #6f8cff;
+  --primary-foreground: #0d172d;
+  --secondary: #f08473;
+  --secondary-foreground: #35151f;
+  --muted: #1a2a49;
+  --muted-foreground: #a6b2ca;
+  --accent: #633d58;
+  --accent-foreground: #f8dce3;
+  --border: #2b3d60;
+  --input: #2b3d60;
+  --ring: #8da4ff;
+  --success: #58c79f;
+  --warning: #f0bd70;
+  --info: #86b8f4;
+  --destructive: #ff8b96;
+  --chart-1: #8da4ff;
+  --chart-2: #f08473;
+  --chart-3: #f3b4c0;
+  --chart-4: #6f8cff;
+  --chart-5: #58c79f;
+  --sidebar: #101e38;
+  --sidebar-foreground: #f5f3f5;
+  --sidebar-primary: #6f8cff;
+  --sidebar-primary-foreground: #0d172d;
+  --sidebar-accent: #253653;
+  --sidebar-border: #2b3d60;
+  --sidebar-ring: #8da4ff;
+}

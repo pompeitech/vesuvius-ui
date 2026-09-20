@@ -1,0 +1,13 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  # admin-kit, website and docs are moving to their own repos; mock-data
+  # and utils only exist for admin-kit. Excluding them (not deleting them)
+  # keeps this workspace's install/lockfile scoped to what's actually
+  # committed here (packages/ui + apps/storybook) while the folders stay
+  # on disk untouched for when those repos get split out.
+  - "!apps/admin-kit"
+  - "!apps/website"
+  - "!apps/docs"
+  - "!packages/mock-data"
+  - "!packages/utils"

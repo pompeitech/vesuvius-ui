@@ -1,0 +1,16 @@
+{
+  "extends": "@pompeitech/config-typescript/react-library.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  // Molecules & organisms aren't part of the v0.1.0 (atoms-only) release —
+  // see src/index.ts. Their deps were trimmed from package.json too, so
+  // typechecking them here would fail on missing modules. Narrow this list
+  // as each tier ships. src/foundations is a cross-tier demo (mixes
+  // atoms+molecules+organisms) that comes back once those tiers do too.
+  "exclude": ["src/molecules", "src/organisms", "src/foundations"]
+}

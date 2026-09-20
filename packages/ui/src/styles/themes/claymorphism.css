@@ -1,0 +1,72 @@
+/* Claymorphism — mid-tone clay canvas, puffed surfaces and a bold violet action color. */
+[data-theme="claymorphism"] {
+  --background: #e0e0e0;
+  --foreground: #3f3f46;
+  --card: #f6f6f6;
+  --card-foreground: #3f3f46;
+  --popover: #f6f6f6;
+  --popover-foreground: #3f3f46;
+  --primary: #8b5cf6;
+  --primary-foreground: #ffffff;
+  --secondary: #d4d4d8;
+  --secondary-foreground: #3f3f46;
+  --muted: #dcdcdc;
+  --muted-foreground: #71717a;
+  --accent: #ede9fe;
+  --accent-foreground: #6d28d9;
+  --border: #c8c8cc;
+  --input: #c8c8cc;
+  --ring: #8b5cf6;
+  --success: #16a34a;
+  --warning: #ca8a04;
+  --info: #2563eb;
+  --destructive: #dc2626;
+  --chart-1: #8b5cf6;
+  --chart-2: #06b6d4;
+  --chart-3: #f59e0b;
+  --chart-4: #ec4899;
+  --chart-5: #22c55e;
+  --sidebar: #d6d6d8;
+  --sidebar-foreground: #3f3f46;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ede9fe;
+  --sidebar-border: #c8c8cc;
+  --sidebar-ring: #8b5cf6;
+}
+
+[data-theme="claymorphism"].dark {
+  --background: #252525;
+  --foreground: #f4f4f5;
+  --card: #353539;
+  --card-foreground: #f4f4f5;
+  --popover: #353539;
+  --popover-foreground: #f4f4f5;
+  --primary: #a78bfa;
+  --primary-foreground: #241548;
+  --secondary: #45454b;
+  --secondary-foreground: #f4f4f5;
+  --muted: #3a3a3f;
+  --muted-foreground: #b4b4bd;
+  --accent: #4b3b6f;
+  --accent-foreground: #ede9fe;
+  --border: #55555d;
+  --input: #55555d;
+  --ring: #a78bfa;
+  --success: #4ade80;
+  --warning: #facc15;
+  --info: #60a5fa;
+  --destructive: #f87171;
+  --chart-1: #a78bfa;
+  --chart-2: #22d3ee;
+  --chart-3: #fbbf24;
+  --chart-4: #f472b6;
+  --chart-5: #4ade80;
+  --sidebar: #2d2d31;
+  --sidebar-foreground: #f4f4f5;
+  --sidebar-primary: #a78bfa;
+  --sidebar-primary-foreground: #241548;
+  --sidebar-accent: #45454b;
+  --sidebar-border: #55555d;
+  --sidebar-ring: #a78bfa;
+}

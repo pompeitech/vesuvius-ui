@@ -1,0 +1,15 @@
+/* Public stylesheet of @pompeitech/vesuvius-ui. Consumers import this once
+   (e.g. `import "@pompeitech/vesuvius-ui/styles.css"`) to get Tailwind +
+   the design tokens (light/dark) + every named color theme + any
+   component-level base styles.
+
+   Want only some of the 8 named themes in your bundle instead of all of
+   them? Import `./base.css` (tokens only, no themes) plus just the
+   `./themes/<name>.css` files you want to offer — see the README. */
+@import "./base.css";
+@import "./themes/index.css";
+
+/* Tailwind v4 automatic content detection walks up from this file looking
+   for template sources — make sure this package's own components are
+   always scanned regardless of which app ends up importing this file. */
+@source "../**/*.{ts,tsx}";

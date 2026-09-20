@@ -1,0 +1,325 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Published consumers import this file from `src/styles`, while the compiled
+   component classes live in `dist`. Register them here so every supported
+   stylesheet entry point generates the kit's utilities without asking each
+   consumer to maintain a node_modules-relative @source path. */
+@source "../../dist/**/*.js";
+
+/* Dark mode is toggled by adding/removing the `.dark` class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --radius: 0.625rem;
+
+  /* Body/UI font (Tailwind's own --font-sans default, made explicit so it
+     can be swapped in one place) and a separate heading font — defaults
+     to the same stack so nothing visually changes until you override it,
+     e.g. `--font-heading: "Cal Sans", var(--font-sans);` after loading a
+     display font. Not theme-dependent, so defined once here, not per
+     color theme. */
+  --font-heading:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --primary-emphasis: var(--primary);
+
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --success: oklch(0.72 0.19 149.579);
+  --success-foreground: oklch(0.145 0 0);
+  --success-emphasis: oklch(0.42 0.14 149.579);
+
+  --warning: oklch(0.795 0.184 86.047);
+  --warning-foreground: oklch(0.145 0 0);
+  --warning-emphasis: oklch(0.42 0.11 70.08);
+
+  --info: oklch(0.6 0.2 255);
+  --info-foreground: oklch(0.145 0 0);
+  --info-emphasis: oklch(0.45 0.16 255);
+
+  --highlight: oklch(0.795 0.184 86.047);
+  --highlight-foreground: oklch(0.145 0 0);
+  --highlight-emphasis: oklch(0.42 0.11 70.08);
+
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --primary-emphasis: var(--primary);
+
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --success: oklch(0.696 0.17 149.579);
+  --success-foreground: oklch(0.145 0 0);
+  --success-emphasis: var(--success);
+
+  --warning: oklch(0.769 0.188 70.08);
+  --warning-foreground: oklch(0.145 0 0);
+  --warning-emphasis: var(--warning);
+
+  --info: oklch(0.7 0.16 255);
+  --info-foreground: oklch(0.145 0 0);
+  --info-emphasis: var(--info);
+
+  --highlight: oklch(0.769 0.188 70.08);
+  --highlight-foreground: oklch(0.145 0 0);
+  --highlight-emphasis: var(--highlight);
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Map the semantic CSS variables above to Tailwind utility tokens, so
+   `bg-background`, `text-foreground`, `border-border`, etc. become
+   available everywhere this preset is imported. */
+@theme inline {
+  /* Generates the `font-heading` utility from --font-heading above. */
+  --font-heading: var(--font-heading);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-emphasis: var(--primary-emphasis);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-emphasis: var(--success-emphasis);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-emphasis: var(--warning-emphasis);
+
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-emphasis: var(--info-emphasis);
+
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-emphasis: var(--highlight-emphasis);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Registers the `animate-accordion-down`/`animate-accordion-up` utilities
+     used by the Accordion (and Collapsible) components, driven by Radix's
+     `--radix-accordion-content-height` custom property. */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+
+    /* Keep every native overflow surface aligned with the active Vesuvius
+       theme. This belongs to the design-system reset so dashboards and
+       component-internal scroll areas do not fall back to a white browser
+       scrollbar in dark mode. */
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklch, var(--foreground) 28%, transparent) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--foreground) 28%, transparent);
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklch, var(--foreground) 45%, transparent);
+    background-clip: padding-box;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Tailwind v4 dropped v3's opinionated `cursor: pointer` on buttons from
+     Preflight (reverting to the browser's own `cursor: default`) — clickable
+     things should still look clickable. Covers real <button>s and anything
+     rendered with role="button" via asChild (Toggle, SidebarMenuButton, …). */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  /* Calendar (react-day-picker) and Table/DataTable render real
+     <table>/<thead>/<tr>/<th>/<td> markup. Some hosts' own global CSS
+     resets (Docusaurus/Infima's is a real, encountered example — an
+     unscoped `table { display: block; ... }` plus cell borders/padding/
+     striping, applied to every <table> on the page) silently override it.
+     `!important` guards the container-level properties that matter for
+     both: per the cascade-layers spec, an `!important` declaration always
+     outranks a non-important one regardless of layering, unlike our
+     normal (losing) utility classes. Calendar has no [data-slot] of its
+     own on its <table> (react-day-picker's unstyled markup) — scoped via
+     its `group/calendar` wrapper class instead. */
+  .group\/calendar table,
+  [data-slot="table"] {
+    display: table !important;
+    border-collapse: collapse !important;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Calendar's own cells carry no intentional border/padding/background of
+     their own (all visual styling lives on the DayButton inside) — safe to
+     zero out entirely. Table/DataTable's cells DO have intentional
+     padding/borders of their own (see composed/table/table.tsx's own
+     `!`-marked utility classes below) — zeroing those here would be wrong,
+     so this stays scoped to Calendar only. */
+  .group\/calendar thead,
+  .group\/calendar tr {
+    background-color: transparent !important;
+    border: 0 !important;
+  }
+  .group\/calendar th,
+  .group\/calendar td {
+    border: 0 !important;
+    padding: 0 !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    background-color: transparent !important;
+  }
+}
