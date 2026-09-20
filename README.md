@@ -9,7 +9,7 @@ A React + TypeScript component kit built on [Radix UI](https://www.radix-ui.com/
 
 [![npm version](https://img.shields.io/npm/v/@pompeitech/vesuvius-ui.svg)](https://www.npmjs.com/package/@pompeitech/vesuvius-ui)
 [![CI](https://github.com/pompeitech/vesuvius-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/pompeitech/vesuvius-ui/actions/workflows/ci.yml)
-[![license](https://img.shields.io/npm/l/@pompeitech/vesuvius-ui.svg)](./LICENSE)
+[![license](https://img.shields.io/npm/l/@pompeitech/vesuvius-ui.svg?v=1)](./LICENSE)
 
 ---
 

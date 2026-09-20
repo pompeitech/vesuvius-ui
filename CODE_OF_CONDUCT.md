@@ -23,7 +23,7 @@ Examples of unacceptable behavior:
 ## Enforcement
 
 Instances of unacceptable behavior may be reported to the maintainers at
-[opensource@pompei.tech](mailto:opensource@pompei.tech). All complaints will be reviewed and
+[davide.dantonio1984@gmail.com](mailto:davide.dantonio1984@gmail.com). All complaints will be reviewed and
 investigated, and will result in a response deemed necessary and appropriate to the circumstances.
 Maintainers are obligated to respect the privacy and security of the reporter.
 
