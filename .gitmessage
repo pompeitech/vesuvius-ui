@@ -1,0 +1,19 @@
+# <type>: <short summary, imperative mood, no trailing period>  (≤ 72 chars)
+# |<----  Using a max of 72 characters  ---->|
+
+# Body — explain *why*, not *what* (the diff already shows what):
+# - what problem this solves, or what would break without it
+# - anything a reviewer needs but couldn't infer from the diff
+
+# Types: feat | fix | docs | test | refactor | chore | ci
+#
+# feat:     a new component, prop, or capability
+# fix:      a bug fix
+# docs:     documentation only (README, CONTRIBUTING, code comments)
+# test:     adding or fixing tests, no production code change
+# refactor: no behavior change, no new tests needed
+# chore:    tooling, deps, config — nothing that ships to consumers
+# ci:       GitHub Actions / workflow changes
+#
+# Remember to `pnpm changeset` before committing if this change affects
+# what gets published to npm — see CONTRIBUTING.md.

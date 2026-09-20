@@ -8,7 +8,7 @@ named color themes ship as part of the same package, each individually importabl
 > **This is `0.1.0` — the atoms tier.** 20 primitive components (Button, Input, Card, Badge...),
 > each fully tested and documented in Storybook. Molecules (Dialog, Select, DataTable...) and
 > organisms ship incrementally in later `0.x` releases — see the
-> [repo README](https://github.com/davidedantonio/vesuvius-ui#status--roadmap) for the roadmap and
+> [repo README](https://github.com/pompeitech/vesuvius-ui#status--roadmap) for the roadmap and
 > [`CHANGELOG.md`](./CHANGELOG.md) for release history.
 
 ## Install

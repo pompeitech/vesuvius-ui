@@ -8,7 +8,7 @@ A React + TypeScript component kit built on [Radix UI](https://www.radix-ui.com/
 [Tailwind CSS v4](https://tailwindcss.com/), designed atom-first and shipped incrementally.
 
 [![npm version](https://img.shields.io/npm/v/@pompeitech/vesuvius-ui.svg)](https://www.npmjs.com/package/@pompeitech/vesuvius-ui)
-[![CI](https://github.com/davidedantonio/vesuvius-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/davidedantonio/vesuvius-ui/actions/workflows/ci.yml)
+[![CI](https://github.com/pompeitech/vesuvius-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/pompeitech/vesuvius-ui/actions/workflows/ci.yml)
 [![license](https://img.shields.io/npm/l/@pompeitech/vesuvius-ui.svg)](./LICENSE)
 
 ---
@@ -108,7 +108,7 @@ This release ships with a full [Storybook](https://storybook.js.org/) covering e
 variants, states, all of it. Clone the repo and run it locally:
 
 ```bash
-git clone https://github.com/davidedantonio/vesuvius-ui.git
+git clone https://github.com/pompeitech/vesuvius-ui.git
 cd vesuvius-ui
 pnpm install
 pnpm storybook
@@ -164,6 +164,12 @@ See [`.changeset/README.md`](./.changeset/README.md) for details, and
 
 While the kit is pre-1.0, expect the occasional breaking change between minor versions as the
 atomic-design API surface settles — each one will be called out explicitly in the changelog.
+
+## Contributing
+
+Bug reports, feature requests and PRs are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for
+setup, coding conventions, commit message format, and what a new component needs before it can be
+merged. This project follows a [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## License
 
