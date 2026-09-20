@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { AvatarGroup } from '../../molecules/avatar-group/avatar-group'
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 
 const meta = {
@@ -29,18 +28,5 @@ export const FallbackOnly: Story = {
   )
 }
 
-export const Group: Story = {
-  render: () => (
-    <AvatarGroup>
-      <Avatar>
-        <AvatarFallback>AB</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>CD</AvatarFallback>
-      </Avatar>
-      <Avatar>
-        <AvatarFallback>EF</AvatarFallback>
-      </Avatar>
-    </AvatarGroup>
-  )
-}
+// A "Group" story (stacked avatars) belongs to the AvatarGroup molecule,
+// which lands in a later release — see src/molecules/avatar-group.
