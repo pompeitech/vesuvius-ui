@@ -3,5 +3,11 @@
   "compilerOptions": {
     "types": ["node", "vitest", "@testing-library/jest-dom"]
   },
-  "include": ["vitest.config.ts", "vitest.setup.ts", "tests/atoms"]
+  "include": [
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "tests/atoms",
+    "tests/molecules/select.test.tsx",
+    "tests/molecules/list.test.tsx"
+  ]
 }

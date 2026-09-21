@@ -33,12 +33,12 @@ It's under active, incremental development, released in public a slice at a time
 
 ## Status & roadmap
 
-**Current release: `0.1.0` — the atoms tier.**
+**Current release: `0.2.0` — atoms, plus the first two molecules.**
 
 | Tier | Status | Components |
 | --- | --- | --- |
 | **Atoms** | ✅ Shipped in `0.1.0` | 20 — see the list below |
-| **Molecules** | 🚧 In progress, shipping a few at a time | Accordion, Dialog, Select, Combobox, DataTable's smaller siblings, and more |
+| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; Accordion, Dialog, Combobox, DataTable's smaller siblings, and more still to come |
 | **Organisms** | 🚧 Planned | DataTable, Kanban Board, Calendar, Rich Text Editor, and more |
 
 This isn't a "0.1.0 because nothing's finished yet" release — it's the first of a series. Each new
@@ -54,6 +54,10 @@ Textarea · Typography
 
 Plus the theming system (`ThemeProvider`, `useTheme`, 10 named color themes) and a couple of shared
 utilities (`cn`, `useIsMobile`).
+
+### Molecules shipped in `0.2.0`
+
+`Select` (built on `@radix-ui/react-select`) and `List`/`ListItem`.
 
 ## Installation
 
@@ -139,7 +143,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.1.0` ships 20 test files, one per atom, all green in CI on every push and pull
+snapshots. `0.2.0` ships 22 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning

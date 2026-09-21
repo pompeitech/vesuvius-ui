@@ -7,9 +7,9 @@ import { mergeConfig } from 'vite'
 // packages/ui — this app is only the Storybook runner/config pointing at
 // them, so nothing needs to be duplicated here.
 //
-// Scoped to atoms/** for the v0.1.0 release (molecules/organisms stories
-// exist on disk but aren't part of this release yet — broaden this glob
-// as each tier ships, in step with src/index.ts and tsup.config.ts).
+// Scoped to shipped tiers only — other molecules/organisms stories exist
+// on disk but aren't part of a release yet — broaden this list as each
+// component ships, in step with src/index.ts and tsup.config.ts.
 //
 // @pompeitech/vesuvius-ui's package.json now points "main"/"exports" at its *built*
 // dist/ (see M12: it's a real, npm-publishable package), which would mean
@@ -19,7 +19,11 @@ import { mergeConfig } from 'vite'
 // published consumers still get the dist build via the package.json
 // `exports` map untouched here.
 const config: StorybookConfig = {
-  stories: ['../../../packages/ui/src/atoms/**/*.stories.@(ts|tsx|mdx)'],
+  stories: [
+    '../../../packages/ui/src/atoms/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/select/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/list/**/*.stories.@(ts|tsx|mdx)'
+  ],
   addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',

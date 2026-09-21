@@ -22,10 +22,14 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts'],
     css: false,
     restoreMocks: true,
-    // Scoped to atoms for the v0.1.0 release — tests/molecules and
-    // tests/organisms exist on disk but their components' deps were
-    // trimmed from package.json until those tiers ship. Broaden this
-    // as each tier lands (see src/index.ts).
-    include: ['tests/atoms/**/*.test.{ts,tsx}']
+    // Scoped to shipped components only — the rest of tests/molecules and
+    // tests/organisms exist on disk but their components' deps aren't in
+    // package.json until they ship. Broaden this as each one lands (see
+    // src/index.ts).
+    include: [
+      'tests/atoms/**/*.test.{ts,tsx}',
+      'tests/molecules/select.test.{ts,tsx}',
+      'tests/molecules/list.test.{ts,tsx}'
+    ]
   }
 })

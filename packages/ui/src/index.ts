@@ -32,6 +32,10 @@ export * from './atoms/switch'
 export * from './atoms/textarea'
 export * from './atoms/typography'
 
+// Molecules
+export * from './molecules/list'
+export * from './molecules/select'
+
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
 // The source already lives under ./molecules and ./organisms; it's just
 // not wired into this barrel (or into tsup.config.ts's build entries, or
@@ -57,7 +61,6 @@ export * from './atoms/typography'
 // export * from './molecules/navigation-menu'
 // export * from './molecules/pagination'
 // export * from './molecules/popover'
-// export * from './molecules/select'
 // export * from './molecules/sheet'
 // export * from './molecules/sidebar'
 // export * from './molecules/stack'
@@ -65,7 +68,6 @@ export * from './atoms/typography'
 // export * from './molecules/stepper'
 // export * from './molecules/table'
 // export * from './molecules/tabs'
-// export * from './molecules/list'
 // export * from './molecules/theme-switcher'
 // export * from './molecules/copy-button'
 // export * from './molecules/file-uploader'
