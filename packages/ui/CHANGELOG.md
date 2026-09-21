@@ -1,5 +1,12 @@
 # @pompeitech/vesuvius-ui
 
+## 0.2.0
+
+### Minor Changes
+
+- 37b04b7: Add the first two molecules: `Select` (built on `@radix-ui/react-select`) and `List`/`ListItem`.
+  Each ships with full unit test coverage and a Storybook story, same as every atom in `0.1.0`.
+
 ## 0.1.0 — 2026-09-20
 
 ### Added
