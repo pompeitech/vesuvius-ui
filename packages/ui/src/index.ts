@@ -34,10 +34,13 @@ export * from './atoms/typography'
 
 // Molecules
 export * from './molecules/accordion'
+export * from './molecules/breadcrumb'
 export * from './molecules/list'
 export * from './molecules/popover'
 export * from './molecules/select'
 export * from './molecules/tabs'
+export * from './molecules/toggle'
+export * from './molecules/toggle-group'
 export * from './molecules/tooltip'
 
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
@@ -47,8 +50,6 @@ export * from './molecules/tooltip'
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
 // export * from './molecules/alert-dialog'
-// export * from './molecules/avatar-group'
-// export * from './molecules/breadcrumb'
 // export * from './molecules/chart-card'
 // export * from './molecules/collapsible'
 // export * from './molecules/command'
@@ -78,8 +79,6 @@ export * from './molecules/tooltip'
 // export * from './molecules/file-preview'
 // export * from './organisms/timeline'
 // export * from './molecules/toast'
-// export * from './molecules/toggle'
-// export * from './molecules/toggle-group'
 // export * from './molecules/user-avatar'
 //
 // export * from './organisms/calendar'
