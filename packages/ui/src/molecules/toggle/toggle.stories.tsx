@@ -29,3 +29,22 @@ export const Outline: Story = {
     </Toggle>
   )
 }
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-3">
+      <Toggle size="xs" aria-label="Extra small">
+        <Bold />
+      </Toggle>
+      <Toggle size="sm" aria-label="Small">
+        <Bold />
+      </Toggle>
+      <Toggle size="default" aria-label="Default">
+        <Bold />
+      </Toggle>
+      <Toggle size="lg" aria-label="Large">
+        <Bold />
+      </Toggle>
+    </div>
+  )
+}

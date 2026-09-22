@@ -18,6 +18,17 @@ export const WithStep: Story = {
   args: { defaultValue: 10, step: 5, 'aria-label': 'Quantity' }
 }
 
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex w-56 flex-col gap-3">
+      <NumberInput size="xs" aria-label="Extra small quantity" />
+      <NumberInput size="sm" aria-label="Small quantity" />
+      <NumberInput size="default" aria-label="Default quantity" />
+      <NumberInput size="lg" aria-label="Large quantity" />
+    </div>
+  )
+}
+
 export const Disabled: Story = {
   args: { defaultValue: 3, disabled: true, 'aria-label': 'Quantity' }
 }

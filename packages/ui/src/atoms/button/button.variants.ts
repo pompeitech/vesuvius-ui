@@ -17,8 +17,8 @@ export const buttonVariants = cva(
       size: {
         xs: `${controlHeightClassNames.xs} rounded-md px-2.5 text-xs`,
         sm: `${controlHeightClassNames.sm} rounded-md px-3 text-xs`,
-        default: `${controlHeightClassNames.default} px-4 text-sm`,
-        lg: `${controlHeightClassNames.lg} rounded-md px-6 text-sm`,
+        default: `${controlHeightClassNames.default} px-3 text-sm`,
+        lg: `${controlHeightClassNames.lg} rounded-md px-3.5 text-sm`,
         'icon-xs': 'size-7',
         'icon-sm': 'size-8',
         icon: 'size-9',

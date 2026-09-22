@@ -12,4 +12,10 @@ describe('PasswordInput', () => {
     await user.click(screen.getByRole('button', { name: 'Show password' }))
     expect(input).toHaveAttribute('type', 'text')
   })
+
+  test('sizes its eye-toggle button to match the input size', () => {
+    render(<PasswordInput aria-label="Password" size="lg" />)
+    expect(screen.getByLabelText('Password')).toHaveClass('h-10')
+    expect(screen.getByRole('button', { name: 'Show password' })).toHaveClass('size-10')
+  })
 })

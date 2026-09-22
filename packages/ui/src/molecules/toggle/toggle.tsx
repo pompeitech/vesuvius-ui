@@ -12,6 +12,7 @@ export const Toggle = forwardRef<ComponentRef<typeof TogglePrimitive.Root>, Togg
     <TogglePrimitive.Root
       ref={ref}
       data-slot="toggle"
+      data-size={size ?? 'default'}
       className={cn(toggleVariants({ variant, size, className }))}
       {...props}
     />

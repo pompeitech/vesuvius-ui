@@ -20,6 +20,25 @@ export const Default: Story = {
   )
 }
 
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-3">
+      <IconButton size="xs" aria-label="Extra small">
+        <Pencil />
+      </IconButton>
+      <IconButton size="sm" aria-label="Small">
+        <Pencil />
+      </IconButton>
+      <IconButton size="default" aria-label="Default">
+        <Pencil />
+      </IconButton>
+      <IconButton size="lg" aria-label="Large">
+        <Pencil />
+      </IconButton>
+    </div>
+  )
+}
+
 export const Examples: Story = {
   render: () => (
     <div className="flex flex-wrap items-center gap-3">
