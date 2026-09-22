@@ -33,8 +33,12 @@ export * from './atoms/textarea'
 export * from './atoms/typography'
 
 // Molecules
+export * from './molecules/accordion'
 export * from './molecules/list'
+export * from './molecules/popover'
 export * from './molecules/select'
+export * from './molecules/tabs'
+export * from './molecules/tooltip'
 
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
 // The source already lives under ./molecules and ./organisms; it's just
@@ -42,7 +46,6 @@ export * from './molecules/select'
 // package.json's `exports` map) until its release. Re-enable a batch by
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
-// export * from './molecules/accordion'
 // export * from './molecules/alert-dialog'
 // export * from './molecules/avatar-group'
 // export * from './molecules/breadcrumb'
@@ -60,14 +63,12 @@ export * from './molecules/select'
 // export * from './molecules/input-group'
 // export * from './molecules/navigation-menu'
 // export * from './molecules/pagination'
-// export * from './molecules/popover'
 // export * from './molecules/sheet'
 // export * from './molecules/sidebar'
 // export * from './molecules/stack'
 // export * from './molecules/stat-card'
 // export * from './molecules/stepper'
 // export * from './molecules/table'
-// export * from './molecules/tabs'
 // export * from './molecules/theme-switcher'
 // export * from './molecules/copy-button'
 // export * from './molecules/file-uploader'
@@ -79,7 +80,6 @@ export * from './molecules/select'
 // export * from './molecules/toast'
 // export * from './molecules/toggle'
 // export * from './molecules/toggle-group'
-// export * from './molecules/tooltip'
 // export * from './molecules/user-avatar'
 //
 // export * from './organisms/calendar'

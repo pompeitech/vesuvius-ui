@@ -21,8 +21,12 @@ import { mergeConfig } from 'vite'
 const config: StorybookConfig = {
   stories: [
     '../../../packages/ui/src/atoms/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/accordion/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/list/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/popover/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/select/**/*.stories.@(ts|tsx|mdx)',
-    '../../../packages/ui/src/molecules/list/**/*.stories.@(ts|tsx|mdx)'
+    '../../../packages/ui/src/molecules/tabs/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/tooltip/**/*.stories.@(ts|tsx|mdx)'
   ],
   addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {

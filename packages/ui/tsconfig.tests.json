@@ -7,7 +7,11 @@
     "vitest.config.ts",
     "vitest.setup.ts",
     "tests/atoms",
+    "tests/molecules/accordion.test.tsx",
+    "tests/molecules/list.test.tsx",
+    "tests/molecules/popover.test.tsx",
     "tests/molecules/select.test.tsx",
-    "tests/molecules/list.test.tsx"
+    "tests/molecules/tabs.test.tsx",
+    "tests/molecules/tooltip.test.tsx"
   ]
 }
