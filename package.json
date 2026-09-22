@@ -3,6 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "author": "Davide D'Antonio <davide.dantonio1984@gmail.com>",
+  "homepage": "https://github.com/pompeitech/vesuvius-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pompeitech/vesuvius-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pompeitech/vesuvius-ui/issues"
+  },
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {

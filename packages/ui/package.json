@@ -21,6 +21,15 @@
   ],
   "author": "Davide D'Antonio <davide.dantonio1984@gmail.com>",
   "license": "MIT",
+  "homepage": "https://github.com/pompeitech/vesuvius-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pompeitech/vesuvius-ui.git",
+    "directory": "packages/ui"
+  },
+  "bugs": {
+    "url": "https://github.com/pompeitech/vesuvius-ui/issues"
+  },
   "type": "module",
   "sideEffects": [
     "**/*.css"
