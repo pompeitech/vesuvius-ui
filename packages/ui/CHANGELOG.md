@@ -1,5 +1,13 @@
 # @pompeitech/vesuvius-ui
 
+## 0.4.0
+
+### Minor Changes
+
+- f5f2290: Add three more molecules: `Breadcrumb`, `Toggle` (built on `@radix-ui/react-toggle`), and
+  `ToggleGroup` (built on `@radix-ui/react-toggle-group`). Each ships with full unit test coverage
+  and a Storybook story, same as every other component in the kit.
+
 ## 0.3.0
 
 ### Minor Changes
