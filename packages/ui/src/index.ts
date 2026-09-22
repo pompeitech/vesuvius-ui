@@ -50,6 +50,7 @@ export * from './molecules/tooltip'
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
 // export * from './molecules/alert-dialog'
+// export * from './molecules/avatar-group'
 // export * from './molecules/chart-card'
 // export * from './molecules/collapsible'
 // export * from './molecules/command'
