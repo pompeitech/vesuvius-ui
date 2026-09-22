@@ -33,12 +33,12 @@ It's under active, incremental development, released in public a slice at a time
 
 ## Status & roadmap
 
-**Current release: `0.7.0` — atoms, plus eighteen molecules.**
+**Current release: `0.6.0` — atoms, plus eighteen molecules.**
 
 | Tier | Status | Components |
 | --- | --- | --- |
 | **Atoms** | ✅ Shipped in `0.1.0` | 20 — see the list below |
-| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog` shipped in `0.6.0`; `Collapsible`, `Sheet`, `Sidebar` shipped in `0.7.0`; DataTable's smaller siblings and more still to come |
+| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; DataTable's smaller siblings and more still to come |
 | **Organisms** | 🚧 Planned | DataTable, Kanban Board, Calendar, Rich Text Editor, and more |
 
 This isn't a "0.1.0 because nothing's finished yet" release — it's the first of a series. Each new
@@ -55,16 +55,16 @@ Textarea · Typography
 Plus the theming system (`ThemeProvider`, `useTheme`, 10 named color themes) and a couple of shared
 utilities (`cn`, `useIsMobile`).
 
-### Molecules shipped in `0.2.0` – `0.7.0`
+### Molecules shipped in `0.2.0` – `0.6.0`
 
 `Select` (built on `@radix-ui/react-select`) and `List`/`ListItem` in `0.2.0`; `Accordion`,
 `Popover`, `Tabs`, and `Tooltip` (each built on their respective Radix UI primitive) in `0.3.0`;
 `Breadcrumb`, `Toggle`, and `ToggleGroup` (the latter two built on `@radix-ui/react-toggle` and
 `@radix-ui/react-toggle-group`) in `0.4.0`; `Dialog`, `DropdownMenu`, and `AlertDialog` (each built
 on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`), `Combobox` (`Command`
-+ `Popover`), and `ConfirmDialog` (built on `AlertDialog`) in `0.6.0`; `Collapsible` (built on
++ `Popover`), `ConfirmDialog` (built on `AlertDialog`), `Collapsible` (built on
 `@radix-ui/react-collapsible`), `Sheet` (built on `@radix-ui/react-dialog`), and `Sidebar` (composes
-`Collapsible`, `Sheet`, `DropdownMenu`, and `Tooltip`) in `0.7.0`.
+`Collapsible`, `Sheet`, `DropdownMenu`, and `Tooltip`) in `0.6.0`.
 
 ## Installation
 
@@ -150,7 +150,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.7.0` ships 38 test files — one per component — all green in CI on every push and pull
+snapshots. `0.6.0` ships 38 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning
