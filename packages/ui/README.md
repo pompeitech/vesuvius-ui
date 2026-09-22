@@ -5,10 +5,11 @@ CSS v4. Ships as a real, versioned, publishable package — compiled ESM + full 
 declarations (see [`tsup.config.ts`](./tsup.config.ts)), not raw source. Design tokens and 10
 named color themes ship as part of the same package, each individually importable.
 
-> **This is `0.4.0`** — all 20 atoms plus nine molecules (`Select`, `List`, `Accordion`, `Popover`,
-> `Tabs`, `Tooltip`, `Breadcrumb`, `Toggle`, `ToggleGroup`), each fully tested and documented in
-> Storybook. The rest of the molecules (Dialog, Combobox, DataTable...) and organisms ship
-> incrementally in later `0.x` releases — see the
+> **This is `0.5.0`** — all 20 atoms plus twelve molecules (`Select`, `List`, `Accordion`, `Popover`,
+> `Tabs`, `Tooltip`, `Breadcrumb`, `Toggle`, `ToggleGroup`, `Dialog`, `DropdownMenu`,
+> `AlertDialog`), each fully tested and documented in Storybook. The rest of the molecules
+> (Combobox, DataTable's smaller siblings...) and organisms ship incrementally in later `0.x`
+> releases — see the
 > [repo README](https://github.com/pompeitech/vesuvius-ui#status--roadmap) for the roadmap and
 > [`CHANGELOG.md`](./CHANGELOG.md) for release history.
 

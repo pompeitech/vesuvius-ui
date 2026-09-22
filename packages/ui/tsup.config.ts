@@ -9,7 +9,10 @@ export default defineConfig({
     // rather than globbing 'src/molecules/*/index.ts', so an in-progress
     // molecule can't accidentally end up in a published build.
     'src/molecules/accordion/index.ts',
+    'src/molecules/alert-dialog/index.ts',
     'src/molecules/breadcrumb/index.ts',
+    'src/molecules/dialog/index.ts',
+    'src/molecules/dropdown-menu/index.ts',
     'src/molecules/list/index.ts',
     'src/molecules/popover/index.ts',
     'src/molecules/select/index.ts',

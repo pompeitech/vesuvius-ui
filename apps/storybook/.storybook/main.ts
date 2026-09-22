@@ -22,7 +22,10 @@ const config: StorybookConfig = {
   stories: [
     '../../../packages/ui/src/atoms/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/accordion/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/alert-dialog/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/breadcrumb/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/dialog/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/dropdown-menu/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/list/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/popover/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/select/**/*.stories.@(ts|tsx|mdx)',

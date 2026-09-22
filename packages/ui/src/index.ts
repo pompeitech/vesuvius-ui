@@ -34,7 +34,10 @@ export * from './atoms/typography'
 
 // Molecules
 export * from './molecules/accordion'
+export * from './molecules/alert-dialog'
 export * from './molecules/breadcrumb'
+export * from './molecules/dialog'
+export * from './molecules/dropdown-menu'
 export * from './molecules/list'
 export * from './molecules/popover'
 export * from './molecules/select'
@@ -49,15 +52,12 @@ export * from './molecules/tooltip'
 // package.json's `exports` map) until its release. Re-enable a batch by
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
-// export * from './molecules/alert-dialog'
 // export * from './molecules/avatar-group'
 // export * from './molecules/chart-card'
 // export * from './molecules/collapsible'
 // export * from './molecules/command'
 // export * from './molecules/combobox'
 // export * from './molecules/context-menu'
-// export * from './molecules/dialog'
-// export * from './molecules/dropdown-menu'
 // export * from './molecules/empty-state'
 // export * from './molecules/form-helper-text'
 // export * from './molecules/grid'

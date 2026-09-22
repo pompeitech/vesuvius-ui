@@ -29,7 +29,10 @@ export default defineConfig({
     include: [
       'tests/atoms/**/*.test.{ts,tsx}',
       'tests/molecules/accordion.test.{ts,tsx}',
+      'tests/molecules/alert-dialog.test.{ts,tsx}',
       'tests/molecules/breadcrumb.test.{ts,tsx}',
+      'tests/molecules/dialog.test.{ts,tsx}',
+      'tests/molecules/dropdown-menu.test.{ts,tsx}',
       'tests/molecules/list.test.{ts,tsx}',
       'tests/molecules/popover.test.{ts,tsx}',
       'tests/molecules/select.test.{ts,tsx}',
