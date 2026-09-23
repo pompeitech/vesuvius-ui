@@ -30,11 +30,13 @@ export default defineConfig({
       'tests/atoms/**/*.test.{ts,tsx}',
       'tests/molecules/accordion.test.{ts,tsx}',
       'tests/molecules/alert-dialog.test.{ts,tsx}',
+      'tests/molecules/avatar-group.test.{ts,tsx}',
       'tests/molecules/breadcrumb.test.{ts,tsx}',
       'tests/molecules/collapsible.test.{ts,tsx}',
       'tests/molecules/combobox.test.{ts,tsx}',
       'tests/molecules/command.test.{ts,tsx}',
       'tests/molecules/confirm-dialog.test.{ts,tsx}',
+      'tests/molecules/copy-button.test.{ts,tsx}',
       'tests/molecules/dialog.test.{ts,tsx}',
       'tests/molecules/dropdown-menu.test.{ts,tsx}',
       'tests/molecules/list.test.{ts,tsx}',
@@ -49,7 +51,8 @@ export default defineConfig({
       'tests/molecules/toast.test.{ts,tsx}',
       'tests/molecules/toggle.test.{ts,tsx}',
       'tests/molecules/toggle-group.test.{ts,tsx}',
-      'tests/molecules/tooltip.test.{ts,tsx}'
+      'tests/molecules/tooltip.test.{ts,tsx}',
+      'tests/molecules/user-avatar.test.{ts,tsx}'
     ]
   }
 })

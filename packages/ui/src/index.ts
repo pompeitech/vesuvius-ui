@@ -35,11 +35,13 @@ export * from './atoms/typography'
 // Molecules
 export * from './molecules/accordion'
 export * from './molecules/alert-dialog'
+export * from './molecules/avatar-group'
 export * from './molecules/breadcrumb'
 export * from './molecules/collapsible'
 export * from './molecules/combobox'
 export * from './molecules/command'
 export * from './molecules/confirm-dialog'
+export * from './molecules/copy-button'
 export * from './molecules/dialog'
 export * from './molecules/dropdown-menu'
 export * from './molecules/list'
@@ -54,6 +56,7 @@ export * from './molecules/toast'
 export * from './molecules/toggle'
 export * from './molecules/toggle-group'
 export * from './molecules/tooltip'
+export * from './molecules/user-avatar'
 
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
 // The source already lives under ./molecules and ./organisms; it's just
@@ -61,7 +64,6 @@ export * from './molecules/tooltip'
 // package.json's `exports` map) until its release. Re-enable a batch by
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
-// export * from './molecules/avatar-group'
 // export * from './molecules/chart-card'
 // export * from './molecules/context-menu'
 // export * from './molecules/empty-state'
@@ -75,12 +77,10 @@ export * from './molecules/tooltip'
 // export * from './molecules/stat-card'
 // export * from './molecules/stepper'
 // export * from './molecules/table'
-// export * from './molecules/copy-button'
 // export * from './molecules/file-uploader'
 // export * from './molecules/filter-bar'
 // export * from './molecules/file-preview'
 // export * from './organisms/timeline'
-// export * from './molecules/user-avatar'
 //
 // export * from './organisms/calendar'
 // export * from './organisms/charts'

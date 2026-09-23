@@ -10,11 +10,13 @@ export default defineConfig({
     // molecule can't accidentally end up in a published build.
     'src/molecules/accordion/index.ts',
     'src/molecules/alert-dialog/index.ts',
+    'src/molecules/avatar-group/index.ts',
     'src/molecules/breadcrumb/index.ts',
     'src/molecules/collapsible/index.ts',
     'src/molecules/combobox/index.ts',
     'src/molecules/command/index.ts',
     'src/molecules/confirm-dialog/index.ts',
+    'src/molecules/copy-button/index.ts',
     'src/molecules/dialog/index.ts',
     'src/molecules/dropdown-menu/index.ts',
     'src/molecules/list/index.ts',
@@ -28,7 +30,8 @@ export default defineConfig({
     'src/molecules/toast/index.ts',
     'src/molecules/toggle/index.ts',
     'src/molecules/toggle-group/index.ts',
-    'src/molecules/tooltip/index.ts'
+    'src/molecules/tooltip/index.ts',
+    'src/molecules/user-avatar/index.ts'
     // 'src/organisms/*/index.ts' — re-add once organisms ship
   ],
   format: ['esm'],

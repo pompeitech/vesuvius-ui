@@ -23,11 +23,13 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/atoms/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/accordion/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/alert-dialog/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/avatar-group/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/breadcrumb/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/collapsible/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/combobox/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/command/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/confirm-dialog/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/copy-button/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/dialog/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/dropdown-menu/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/list/**/*.stories.@(ts|tsx|mdx)',
@@ -41,7 +43,8 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/molecules/toast/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/toggle/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/toggle-group/**/*.stories.@(ts|tsx|mdx)',
-    '../../../packages/ui/src/molecules/tooltip/**/*.stories.@(ts|tsx|mdx)'
+    '../../../packages/ui/src/molecules/tooltip/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/user-avatar/**/*.stories.@(ts|tsx|mdx)'
   ],
   addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {

@@ -9,11 +9,13 @@
     "tests/atoms",
     "tests/molecules/accordion.test.tsx",
     "tests/molecules/alert-dialog.test.tsx",
+    "tests/molecules/avatar-group.test.tsx",
     "tests/molecules/breadcrumb.test.tsx",
     "tests/molecules/collapsible.test.tsx",
     "tests/molecules/combobox.test.tsx",
     "tests/molecules/command.test.tsx",
     "tests/molecules/confirm-dialog.test.tsx",
+    "tests/molecules/copy-button.test.tsx",
     "tests/molecules/dialog.test.tsx",
     "tests/molecules/dropdown-menu.test.tsx",
     "tests/molecules/list.test.tsx",
@@ -28,6 +30,7 @@
     "tests/molecules/toast.test.tsx",
     "tests/molecules/toggle.test.tsx",
     "tests/molecules/toggle-group.test.tsx",
-    "tests/molecules/tooltip.test.tsx"
+    "tests/molecules/tooltip.test.tsx",
+    "tests/molecules/user-avatar.test.tsx"
   ]
 }
