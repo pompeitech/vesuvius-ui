@@ -33,12 +33,12 @@ It's under active, incremental development, released in public a slice at a time
 
 ## Status & roadmap
 
-**Current release: `0.8.0` — atoms, plus twenty-four molecules.**
+**Current release: `0.9.0` — atoms, plus twenty-seven molecules.**
 
 | Tier | Status | Components |
 | --- | --- | --- |
 | **Atoms** | ✅ Shipped in `0.1.0` | 20 — see the list below |
-| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; `ThemeSwitcher`, `NotificationCenter`, `Toast` shipped in `0.7.0`; `AvatarGroup`, `CopyButton`, `UserAvatar` shipped in `0.8.0`; DataTable's smaller siblings and more still to come |
+| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; `ThemeSwitcher`, `NotificationCenter`, `Toast` shipped in `0.7.0`; `AvatarGroup`, `CopyButton`, `UserAvatar` shipped in `0.8.0`; `EmptyState`, `Pagination`, `Table` shipped in `0.9.0`; DataTable's smaller siblings and more still to come |
 | **Organisms** | 🚧 Planned | DataTable, Kanban Board, Calendar, Rich Text Editor, and more |
 
 This isn't a "0.1.0 because nothing's finished yet" release — it's the first of a series. Each new
@@ -55,7 +55,7 @@ Textarea · Typography
 Plus the theming system (`ThemeProvider`, `useTheme`, 10 named color themes) and a couple of shared
 utilities (`cn`, `useIsMobile`).
 
-### Molecules shipped in `0.2.0` – `0.8.0`
+### Molecules shipped in `0.2.0` – `0.9.0`
 
 `Select` (built on `@radix-ui/react-select`) and `List`/`ListItem` in `0.2.0`; `Accordion`,
 `Popover`, `Tabs`, and `Tooltip` (each built on their respective Radix UI primitive) in `0.3.0`;
@@ -67,7 +67,7 @@ on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`),
 `Collapsible`, `Sheet`, `DropdownMenu`, and `Tooltip`) in `0.6.0`; `ThemeSwitcher` (composes
 `DropdownMenu`, `Popover`, and `Command`), `NotificationCenter` (built on `Popover`), and `Toast`
 (built on `sonner`) in `0.7.0`; `AvatarGroup`, `CopyButton`, and `UserAvatar` (each built on the
-`Avatar`/`IconButton` atoms) in `0.8.0`.
+`Avatar`/`IconButton` atoms) in `0.8.0`; `EmptyState`, `Pagination`, and `Table` in `0.9.0`.
 
 ## Installation
 
@@ -153,7 +153,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.8.0` ships 45 test files — one per component — all green in CI on every push and pull
+snapshots. `0.9.0` ships 48 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning
