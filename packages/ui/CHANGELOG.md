@@ -1,5 +1,13 @@
 # @pompeitech/vesuvius-ui
 
+## 0.9.0
+
+### Minor Changes
+
+- f9aa95b: Add three more molecules: `EmptyState`, `Pagination`, and `Table` — each self-contained, no
+  dependency on any other not-yet-shipped molecule. Each ships with full unit test coverage and a
+  Storybook story, same as every other component in the kit.
+
 ## 0.8.0
 
 ### Minor Changes
