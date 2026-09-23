@@ -1,5 +1,13 @@
 # @pompeitech/vesuvius-ui
 
+## 0.8.0
+
+### Minor Changes
+
+- f5abded: Add three more molecules: `AvatarGroup`, `CopyButton`, and `UserAvatar` — each built directly on
+  the `Avatar`/`IconButton` atoms, with no dependency on any other not-yet-shipped molecule. Each
+  ships with full unit test coverage and a Storybook story, same as every other component in the kit.
+
 ## 0.7.0
 
 ### Minor Changes
