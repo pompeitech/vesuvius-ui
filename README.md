@@ -61,8 +61,8 @@ utilities (`cn`, `useIsMobile`).
 `Popover`, `Tabs`, and `Tooltip` (each built on their respective Radix UI primitive) in `0.3.0`;
 `Breadcrumb`, `Toggle`, and `ToggleGroup` (the latter two built on `@radix-ui/react-toggle` and
 `@radix-ui/react-toggle-group`) in `0.4.0`; `Dialog`, `DropdownMenu`, and `AlertDialog` (each built
-on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`), `Combobox` (`Command`
-+ `Popover`), `ConfirmDialog` (built on `AlertDialog`), `Collapsible` (built on
+on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`), `Combobox`
+(`Command` and `Popover`), `ConfirmDialog` (built on `AlertDialog`), `Collapsible` (built on
 `@radix-ui/react-collapsible`), `Sheet` (built on `@radix-ui/react-dialog`), and `Sidebar` (composes
 `Collapsible`, `Sheet`, `DropdownMenu`, and `Tooltip`) in `0.6.0`; `ThemeSwitcher` (composes
 `DropdownMenu`, `Popover`, and `Command`), `NotificationCenter` (built on `Popover`), and `Toast`
