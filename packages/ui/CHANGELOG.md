@@ -1,5 +1,13 @@
 # @pompeitech/vesuvius-ui
 
+## 0.10.0
+
+### Minor Changes
+
+- 27c4f04: Add four more molecules: `Grid`, `Header`, `InputGroup`, and `Stack` — a layout-and-structure
+  batch, each self-contained with no new runtime dependencies. Each ships with full unit test
+  coverage and a Storybook story, same as every other component in the kit.
+
 ## 0.9.0
 
 ### Minor Changes
