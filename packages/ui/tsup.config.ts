@@ -54,7 +54,8 @@ export default defineConfig({
     'src/organisms/date-picker/index.ts',
     'src/organisms/date-range-picker/index.ts',
     'src/organisms/date-time-picker/index.ts',
-    'src/organisms/date-time-range-picker/index.ts'
+    'src/organisms/date-time-range-picker/index.ts',
+    'src/organisms/time-picker/index.ts'
   ],
   format: ['esm'],
   sourcemap: true,
