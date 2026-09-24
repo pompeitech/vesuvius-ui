@@ -5,18 +5,18 @@ CSS v4. Ships as a real, versioned, publishable package — compiled ESM + full 
 declarations (see [`tsup.config.ts`](./tsup.config.ts)), not raw source. Design tokens and 10
 named color themes ship as part of the same package, each individually importable.
 
-> **This is `0.17.0`** — all 20 atoms plus forty molecules (`Select`, `List`, `Accordion`,
+> **This is `0.18.0`** — all 20 atoms plus forty molecules (`Select`, `List`, `Accordion`,
 > `Popover`, `Tabs`, `Tooltip`, `Breadcrumb`, `Toggle`, `ToggleGroup`, `Dialog`, `DropdownMenu`,
 > `AlertDialog`, `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar`,
 > `ThemeSwitcher`, `NotificationCenter`, `Toast`, `AvatarGroup`, `CopyButton`, `UserAvatar`,
 > `EmptyState`, `Pagination`, `Table`, `Grid`, `Header`, `InputGroup`, `Stack`, `FilePreview`,
 > `FileUploader`, `FilterBar`, `FormHelperText`, `Stepper`, `ContextMenu`, `NavigationMenu`,
-> `ChartCard`, `StatCard`), plus twelve organisms: `Charts` (`SimpleBarChart`, `SimpleLineChart`,
+> `ChartCard`, `StatCard`), plus thirteen organisms: `Charts` (`SimpleBarChart`, `SimpleLineChart`,
 > `SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`, `RadialProgressChart`, `Sparkline`,
 > `HeatmapGrid`), `Calendar`, `DatePicker`, `DateRangePicker`, `DateTimePicker`,
-> `DateTimeRangePicker`, `TimePicker`, `MultiSelect`, `PeopleSelect`, `Timeline`, `TreeView`, and
-> `Wizard`, each fully tested and documented in Storybook. The rest of the molecules (DataTable's
-> smaller siblings...) and organisms (DataTable, Kanban Board, Rich Text Editor) ship
+> `DateTimeRangePicker`, `TimePicker`, `MultiSelect`, `PeopleSelect`, `Timeline`, `TreeView`,
+> `Wizard`, and `KanbanBoard`, each fully tested and documented in Storybook. The rest of the
+> molecules (DataTable's smaller siblings...) and organisms (DataTable, Rich Text Editor) ship
 > incrementally in later `0.x` releases — see the
 > [repo README](https://github.com/pompeitech/vesuvius-ui#status--roadmap) for the roadmap and
 > [`CHANGELOG.md`](./CHANGELOG.md) for release history.

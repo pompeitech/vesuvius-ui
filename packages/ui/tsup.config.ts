@@ -55,6 +55,7 @@ export default defineConfig({
     'src/organisms/date-range-picker/index.ts',
     'src/organisms/date-time-picker/index.ts',
     'src/organisms/date-time-range-picker/index.ts',
+    'src/organisms/kanban-board/index.ts',
     'src/organisms/multi-select/index.ts',
     'src/organisms/people-select/index.ts',
     'src/organisms/time-picker/index.ts',

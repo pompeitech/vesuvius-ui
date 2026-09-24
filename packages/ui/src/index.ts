@@ -81,6 +81,7 @@ export * from './organisms/date-picker'
 export * from './organisms/date-range-picker'
 export * from './organisms/date-time-picker'
 export * from './organisms/date-time-range-picker'
+export * from './organisms/kanban-board'
 export * from './organisms/multi-select'
 export * from './organisms/people-select'
 export * from './organisms/time-picker'
@@ -94,7 +95,6 @@ export * from './organisms/wizard'
 // package.json's `exports` map) until its release. Re-enable a batch by
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
-// export * from './organisms/kanban-board'
 // export * from './organisms/rich-text-editor'
 //
 // Organisms/DataTable — exported explicitly (not `export *`) because its

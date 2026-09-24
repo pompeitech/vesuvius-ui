@@ -58,6 +58,7 @@
     "tests/organisms/date-time-picker.test.tsx",
     "tests/organisms/date-time-range-picker.test.tsx",
     "tests/organisms/heatmap-grid.test.tsx",
+    "tests/organisms/kanban-board.test.tsx",
     "tests/organisms/multi-select.test.tsx",
     "tests/organisms/people-select.test.tsx",
     "tests/organisms/radial-progress-chart.test.tsx",
