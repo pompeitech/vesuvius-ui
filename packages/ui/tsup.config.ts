@@ -57,7 +57,10 @@ export default defineConfig({
     'src/organisms/date-time-range-picker/index.ts',
     'src/organisms/multi-select/index.ts',
     'src/organisms/people-select/index.ts',
-    'src/organisms/time-picker/index.ts'
+    'src/organisms/time-picker/index.ts',
+    'src/organisms/timeline/index.ts',
+    'src/organisms/tree-view/index.ts',
+    'src/organisms/wizard/index.ts'
   ],
   format: ['esm'],
   sourcemap: true,

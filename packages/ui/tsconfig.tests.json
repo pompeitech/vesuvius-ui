@@ -65,6 +65,9 @@
     "tests/organisms/simple-radar-chart.test.tsx",
     "tests/organisms/sparkline.test.tsx",
     "tests/organisms/time-picker.test.tsx",
-    "tests/organisms/time-picker.utils.test.ts"
+    "tests/organisms/time-picker.utils.test.ts",
+    "tests/organisms/timeline.test.tsx",
+    "tests/organisms/tree-view.test.tsx",
+    "tests/organisms/wizard.test.tsx"
   ]
 }

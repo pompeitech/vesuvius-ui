@@ -86,7 +86,10 @@ export default defineConfig({
       'tests/organisms/simple-radar-chart.test.{ts,tsx}',
       'tests/organisms/sparkline.test.{ts,tsx}',
       'tests/organisms/time-picker.test.{ts,tsx}',
-      'tests/organisms/time-picker.utils.test.{ts,tsx}'
+      'tests/organisms/time-picker.utils.test.{ts,tsx}',
+      'tests/organisms/timeline.test.{ts,tsx}',
+      'tests/organisms/tree-view.test.{ts,tsx}',
+      'tests/organisms/wizard.test.{ts,tsx}'
     ]
   }
 })

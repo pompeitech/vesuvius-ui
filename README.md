@@ -33,13 +33,13 @@ It's under active, incremental development, released in public a slice at a time
 
 ## Status & roadmap
 
-**Current release: `0.16.0` — atoms, forty molecules, plus nine organisms.**
+**Current release: `0.17.0` — atoms, forty molecules, plus twelve organisms.**
 
 | Tier | Status | Components |
 | --- | --- | --- |
 | **Atoms** | ✅ Shipped in `0.1.0` | 20 — see the list below |
 | **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; `ThemeSwitcher`, `NotificationCenter`, `Toast` shipped in `0.7.0`; `AvatarGroup`, `CopyButton`, `UserAvatar` shipped in `0.8.0`; `EmptyState`, `Pagination`, `Table` shipped in `0.9.0`; `Grid`, `Header`, `InputGroup`, `Stack` shipped in `0.10.0`; `FilePreview`, `FileUploader`, `FilterBar`, `FormHelperText`, `Stepper` shipped in `0.11.0`; `ContextMenu`, `NavigationMenu` shipped in `0.12.0`; `ChartCard`, `StatCard` shipped in `0.13.0`; DataTable's smaller siblings and more still to come |
-| **Organisms** | 🚧 Shipping a few at a time | `Charts` (`SimpleBarChart`, `SimpleLineChart`, `SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`, `RadialProgressChart`, `HeatmapGrid`, `Sparkline`) shipped in `0.13.0`; `Calendar`, `DatePicker`, `DateRangePicker`, `DateTimePicker`, `DateTimeRangePicker` shipped in `0.14.0`; `TimePicker` shipped in `0.15.0`; `MultiSelect`, `PeopleSelect` shipped in `0.16.0`; DataTable, Kanban Board, Rich Text Editor, and more still to come |
+| **Organisms** | 🚧 Shipping a few at a time | `Charts` (`SimpleBarChart`, `SimpleLineChart`, `SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`, `RadialProgressChart`, `HeatmapGrid`, `Sparkline`) shipped in `0.13.0`; `Calendar`, `DatePicker`, `DateRangePicker`, `DateTimePicker`, `DateTimeRangePicker` shipped in `0.14.0`; `TimePicker` shipped in `0.15.0`; `MultiSelect`, `PeopleSelect` shipped in `0.16.0`; `Timeline`, `TreeView`, `Wizard` shipped in `0.17.0`; DataTable, Kanban Board, Rich Text Editor still to come |
 
 This isn't a "0.1.0 because nothing's finished yet" release — it's the first of a series. Each new
 `0.x` release adds a batch of components on top of the last, with its own changelog entry (see
@@ -73,7 +73,7 @@ on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`),
 `@radix-ui/react-context-menu`) and `NavigationMenu` (built on `@radix-ui/react-navigation-menu`)
 in `0.12.0`; `ChartCard` and `StatCard` (both built on the `Charts` organism) in `0.13.0`.
 
-### Organisms shipped in `0.13.0` – `0.16.0`
+### Organisms shipped in `0.13.0` – `0.17.0`
 
 `Charts` — a Recharts-based set of chart components (`SimpleBarChart`, `SimpleLineChart`,
 `SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`), plus a pure-SVG `RadialProgressChart` and
@@ -85,7 +85,11 @@ theming/tooltip/legend primitives — in `0.13.0`. `Calendar` (built on `react-d
 segmented hour/minute/(optional) second/period input with full keyboard support (arrow keys,
 digit typing with auto-advance) — in `0.15.0`. `MultiSelect` (a `Command`/`Popover` combobox with
 removable chips and overflow collapsing) and `PeopleSelect` (the same pattern, single-select, with
-`UserAvatar` and an optional "Unassigned" clear option) — in `0.16.0`.
+`UserAvatar` and an optional "Unassigned" clear option) — in `0.16.0`. `Timeline` (activity-feed
+and roadmap variants, with per-item status colors and optional click handlers), `TreeView` (a
+keyboard-navigable file-tree pattern with single/multi-select and expand/collapse), and `Wizard`
+(a multi-step flow built on `Stepper`, with per-step async validation gating advancement) — in
+`0.17.0`.
 
 ## Installation
 
@@ -171,7 +175,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.16.0` ships 79 test files — one per component — all green in CI on every push and pull
+snapshots. `0.17.0` ships 82 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning

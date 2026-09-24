@@ -69,7 +69,10 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/organisms/date-time-range-picker/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/multi-select/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/people-select/**/*.stories.@(ts|tsx|mdx)',
-    '../../../packages/ui/src/organisms/time-picker/**/*.stories.@(ts|tsx|mdx)'
+    '../../../packages/ui/src/organisms/time-picker/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/timeline/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/tree-view/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/wizard/**/*.stories.@(ts|tsx|mdx)'
   ],
   addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {
