@@ -63,6 +63,7 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/molecules/user-avatar/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/calendar/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/charts/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/data-table/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/date-picker/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/date-range-picker/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/date-time-picker/**/*.stories.@(ts|tsx|mdx)',

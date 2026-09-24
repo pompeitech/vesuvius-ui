@@ -53,6 +53,7 @@
     "tests/organisms/chart-legend.test.tsx",
     "tests/organisms/chart-tooltip.test.tsx",
     "tests/organisms/chart-utils.test.ts",
+    "tests/organisms/data-table.test.tsx",
     "tests/organisms/date-picker.test.tsx",
     "tests/organisms/date-range-picker.test.tsx",
     "tests/organisms/date-time-picker.test.tsx",

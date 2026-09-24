@@ -74,6 +74,7 @@ export default defineConfig({
       'tests/organisms/chart-legend.test.{ts,tsx}',
       'tests/organisms/chart-tooltip.test.{ts,tsx}',
       'tests/organisms/chart-utils.test.{ts,tsx}',
+      'tests/organisms/data-table.test.{ts,tsx}',
       'tests/organisms/date-picker.test.{ts,tsx}',
       'tests/organisms/date-range-picker.test.{ts,tsx}',
       'tests/organisms/date-time-picker.test.{ts,tsx}',
