@@ -79,6 +79,8 @@ export default defineConfig({
       'tests/organisms/date-time-picker.test.{ts,tsx}',
       'tests/organisms/date-time-range-picker.test.{ts,tsx}',
       'tests/organisms/heatmap-grid.test.{ts,tsx}',
+      'tests/organisms/multi-select.test.{ts,tsx}',
+      'tests/organisms/people-select.test.{ts,tsx}',
       'tests/organisms/radial-progress-chart.test.{ts,tsx}',
       'tests/organisms/simple-charts.test.{ts,tsx}',
       'tests/organisms/simple-radar-chart.test.{ts,tsx}',

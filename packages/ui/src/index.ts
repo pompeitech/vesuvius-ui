@@ -81,6 +81,8 @@ export * from './organisms/date-picker'
 export * from './organisms/date-range-picker'
 export * from './organisms/date-time-picker'
 export * from './organisms/date-time-range-picker'
+export * from './organisms/multi-select'
+export * from './organisms/people-select'
 export * from './organisms/time-picker'
 
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
@@ -92,8 +94,6 @@ export * from './organisms/time-picker'
 // export * from './organisms/timeline'
 //
 // export * from './organisms/kanban-board'
-// export * from './organisms/multi-select'
-// export * from './organisms/people-select'
 // export * from './organisms/rich-text-editor'
 // export * from './organisms/tree-view'
 // export * from './organisms/wizard'
