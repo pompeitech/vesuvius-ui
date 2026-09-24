@@ -167,7 +167,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.14.0` ships 75 test files — one per component — all green in CI on every push and pull
+snapshots. `0.14.0` ships 76 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning
