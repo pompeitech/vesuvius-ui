@@ -84,19 +84,12 @@ export * from './organisms/date-time-range-picker'
 export * from './organisms/kanban-board'
 export * from './organisms/multi-select'
 export * from './organisms/people-select'
+export * from './organisms/rich-text-editor'
 export * from './organisms/time-picker'
 export * from './organisms/timeline'
 export * from './organisms/tree-view'
 export * from './organisms/wizard'
 
-// Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
-// The source already lives under ./molecules and ./organisms; it's just
-// not wired into this barrel (or into tsup.config.ts's build entries, or
-// package.json's `exports` map) until its release. Re-enable a batch by
-// uncommenting it here + the matching tsup entry + exports subpath.
-//
-// export * from './organisms/rich-text-editor'
-//
 // Organisms/DataTable — exported explicitly (not `export *`) because its
 // generic `Table<TData>` TanStack type would otherwise collide by name
 // with the `Table` component from molecules/table.

@@ -58,6 +58,7 @@ export default defineConfig({
     'src/organisms/kanban-board/index.ts',
     'src/organisms/multi-select/index.ts',
     'src/organisms/people-select/index.ts',
+    'src/organisms/rich-text-editor/index.ts',
     'src/organisms/time-picker/index.ts',
     'src/organisms/timeline/index.ts',
     'src/organisms/tree-view/index.ts',

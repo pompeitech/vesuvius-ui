@@ -70,6 +70,7 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/organisms/kanban-board/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/multi-select/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/people-select/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/rich-text-editor/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/time-picker/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/timeline/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/organisms/tree-view/**/*.stories.@(ts|tsx|mdx)',

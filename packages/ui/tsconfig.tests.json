@@ -62,6 +62,7 @@
     "tests/organisms/multi-select.test.tsx",
     "tests/organisms/people-select.test.tsx",
     "tests/organisms/radial-progress-chart.test.tsx",
+    "tests/organisms/rich-text-editor.test.tsx",
     "tests/organisms/simple-charts.test.tsx",
     "tests/organisms/simple-radar-chart.test.tsx",
     "tests/organisms/sparkline.test.tsx",
