@@ -54,6 +54,10 @@
       "types": "./dist/molecules/*/index.d.ts",
       "import": "./dist/molecules/*/index.js"
     },
+    "./organisms/*": {
+      "types": "./dist/organisms/*/index.d.ts",
+      "import": "./dist/organisms/*/index.js"
+    },
     "./styles.css": "./src/styles/globals.css",
     "./base.css": "./src/styles/base.css",
     "./themes.css": "./src/styles/themes/index.css",
@@ -103,6 +107,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "lucide-react": "^1.45.0",
+    "recharts": "^3.10.1",
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",

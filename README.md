@@ -33,13 +33,13 @@ It's under active, incremental development, released in public a slice at a time
 
 ## Status & roadmap
 
-**Current release: `0.12.0` — atoms, plus thirty-eight molecules.**
+**Current release: `0.13.0` — atoms, forty molecules, plus the first organism.**
 
 | Tier | Status | Components |
 | --- | --- | --- |
 | **Atoms** | ✅ Shipped in `0.1.0` | 20 — see the list below |
-| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; `ThemeSwitcher`, `NotificationCenter`, `Toast` shipped in `0.7.0`; `AvatarGroup`, `CopyButton`, `UserAvatar` shipped in `0.8.0`; `EmptyState`, `Pagination`, `Table` shipped in `0.9.0`; `Grid`, `Header`, `InputGroup`, `Stack` shipped in `0.10.0`; `FilePreview`, `FileUploader`, `FilterBar`, `FormHelperText`, `Stepper` shipped in `0.11.0`; `ContextMenu`, `NavigationMenu` shipped in `0.12.0`; DataTable's smaller siblings and more still to come |
-| **Organisms** | 🚧 Planned | DataTable, Kanban Board, Calendar, Rich Text Editor, and more |
+| **Molecules** | 🚧 Shipping a few at a time | `Select`, `List` shipped in `0.2.0`; `Accordion`, `Popover`, `Tabs`, `Tooltip` shipped in `0.3.0`; `Breadcrumb`, `Toggle`, `ToggleGroup` shipped in `0.4.0`; `Dialog`, `DropdownMenu`, `AlertDialog` shipped in `0.5.0`; `Command`, `Combobox`, `ConfirmDialog`, `Collapsible`, `Sheet`, `Sidebar` shipped in `0.6.0`; `ThemeSwitcher`, `NotificationCenter`, `Toast` shipped in `0.7.0`; `AvatarGroup`, `CopyButton`, `UserAvatar` shipped in `0.8.0`; `EmptyState`, `Pagination`, `Table` shipped in `0.9.0`; `Grid`, `Header`, `InputGroup`, `Stack` shipped in `0.10.0`; `FilePreview`, `FileUploader`, `FilterBar`, `FormHelperText`, `Stepper` shipped in `0.11.0`; `ContextMenu`, `NavigationMenu` shipped in `0.12.0`; `ChartCard`, `StatCard` shipped in `0.13.0`; DataTable's smaller siblings and more still to come |
+| **Organisms** | 🚧 Shipping a few at a time | `Charts` (`SimpleBarChart`, `SimpleLineChart`, `SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`, `RadialProgressChart`, `HeatmapGrid`, `Sparkline`) shipped in `0.13.0`; DataTable, Kanban Board, Calendar, Rich Text Editor, and more still to come |
 
 This isn't a "0.1.0 because nothing's finished yet" release — it's the first of a series. Each new
 `0.x` release adds a batch of components on top of the last, with its own changelog entry (see
@@ -55,7 +55,7 @@ Textarea · Typography
 Plus the theming system (`ThemeProvider`, `useTheme`, 10 named color themes) and a couple of shared
 utilities (`cn`, `useIsMobile`).
 
-### Molecules shipped in `0.2.0` – `0.12.0`
+### Molecules shipped in `0.2.0` – `0.13.0`
 
 `Select` (built on `@radix-ui/react-select`) and `List`/`ListItem` in `0.2.0`; `Accordion`,
 `Popover`, `Tabs`, and `Tooltip` (each built on their respective Radix UI primitive) in `0.3.0`;
@@ -71,7 +71,15 @@ on their respective Radix UI primitive) in `0.5.0`; `Command` (built on `cmdk`),
 `Grid`, `Header`, `InputGroup`, and `Stack` in `0.10.0`; `FilePreview`, `FileUploader`,
 `FilterBar`, `FormHelperText`, and `Stepper` in `0.11.0`; `ContextMenu` (built on
 `@radix-ui/react-context-menu`) and `NavigationMenu` (built on `@radix-ui/react-navigation-menu`)
-in `0.12.0`.
+in `0.12.0`; `ChartCard` and `StatCard` (both built on the `Charts` organism) in `0.13.0`.
+
+### Organisms shipped in `0.13.0`
+
+`Charts` — a Recharts-based set of chart components (`SimpleBarChart`, `SimpleLineChart`,
+`SimpleAreaChart`, `SimplePieChart`, `SimpleRadarChart`), plus a pure-SVG `RadialProgressChart` and
+`Sparkline`, and a pure-CSS `HeatmapGrid`. `ChartContainer`, `ChartTooltip`/`ChartTooltipContent`,
+and `ChartLegend`/`ChartLegendContent` are exported too, for building custom charts on the same
+theming/tooltip/legend primitives.
 
 ## Installation
 
@@ -157,7 +165,7 @@ development).
 
 Every component ships with real unit tests — rendered with React Testing Library, asserted against
 actual DOM output and accessibility attributes (roles, `aria-*`, `data-slot`), not shallow
-snapshots. `0.12.0` ships 59 test files — one per component — all green in CI on every push and pull
+snapshots. `0.13.0` ships 70 test files — one per component — all green in CI on every push and pull
 request.
 
 ## Releases & versioning

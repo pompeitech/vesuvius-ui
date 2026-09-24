@@ -32,6 +32,7 @@ export default defineConfig({
       'tests/molecules/alert-dialog.test.{ts,tsx}',
       'tests/molecules/avatar-group.test.{ts,tsx}',
       'tests/molecules/breadcrumb.test.{ts,tsx}',
+      'tests/molecules/chart-card.test.{ts,tsx}',
       'tests/molecules/collapsible.test.{ts,tsx}',
       'tests/molecules/combobox.test.{ts,tsx}',
       'tests/molecules/command.test.{ts,tsx}',
@@ -57,6 +58,7 @@ export default defineConfig({
       'tests/molecules/sheet.test.{ts,tsx}',
       'tests/molecules/sidebar.test.{ts,tsx}',
       'tests/molecules/stack.test.{ts,tsx}',
+      'tests/molecules/stat-card.test.{ts,tsx}',
       'tests/molecules/stepper.test.{ts,tsx}',
       'tests/molecules/table.test.{ts,tsx}',
       'tests/molecules/tabs.test.{ts,tsx}',
@@ -66,7 +68,16 @@ export default defineConfig({
       'tests/molecules/toggle.test.{ts,tsx}',
       'tests/molecules/toggle-group.test.{ts,tsx}',
       'tests/molecules/tooltip.test.{ts,tsx}',
-      'tests/molecules/user-avatar.test.{ts,tsx}'
+      'tests/molecules/user-avatar.test.{ts,tsx}',
+      'tests/organisms/chart-container.test.{ts,tsx}',
+      'tests/organisms/chart-legend.test.{ts,tsx}',
+      'tests/organisms/chart-tooltip.test.{ts,tsx}',
+      'tests/organisms/chart-utils.test.{ts,tsx}',
+      'tests/organisms/heatmap-grid.test.{ts,tsx}',
+      'tests/organisms/radial-progress-chart.test.{ts,tsx}',
+      'tests/organisms/simple-charts.test.{ts,tsx}',
+      'tests/organisms/simple-radar-chart.test.{ts,tsx}',
+      'tests/organisms/sparkline.test.{ts,tsx}'
     ]
   }
 })

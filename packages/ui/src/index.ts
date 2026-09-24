@@ -37,6 +37,7 @@ export * from './molecules/accordion'
 export * from './molecules/alert-dialog'
 export * from './molecules/avatar-group'
 export * from './molecules/breadcrumb'
+export * from './molecules/chart-card'
 export * from './molecules/collapsible'
 export * from './molecules/combobox'
 export * from './molecules/command'
@@ -62,6 +63,7 @@ export * from './molecules/select'
 export * from './molecules/sheet'
 export * from './molecules/sidebar'
 export * from './molecules/stack'
+export * from './molecules/stat-card'
 export * from './molecules/stepper'
 export * from './molecules/table'
 export * from './molecules/tabs'
@@ -72,18 +74,18 @@ export * from './molecules/toggle-group'
 export * from './molecules/tooltip'
 export * from './molecules/user-avatar'
 
+// Organisms
+export * from './organisms/charts'
+
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
 // The source already lives under ./molecules and ./organisms; it's just
 // not wired into this barrel (or into tsup.config.ts's build entries, or
 // package.json's `exports` map) until its release. Re-enable a batch by
 // uncommenting it here + the matching tsup entry + exports subpath.
 //
-// export * from './molecules/chart-card'
-// export * from './molecules/stat-card'
 // export * from './organisms/timeline'
 //
 // export * from './organisms/calendar'
-// export * from './organisms/charts'
 // export * from './organisms/date-picker'
 // export * from './organisms/date-range-picker'
 // export * from './organisms/date-time-range-picker'

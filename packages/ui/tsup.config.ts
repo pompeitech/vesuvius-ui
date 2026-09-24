@@ -12,6 +12,7 @@ export default defineConfig({
     'src/molecules/alert-dialog/index.ts',
     'src/molecules/avatar-group/index.ts',
     'src/molecules/breadcrumb/index.ts',
+    'src/molecules/chart-card/index.ts',
     'src/molecules/collapsible/index.ts',
     'src/molecules/combobox/index.ts',
     'src/molecules/command/index.ts',
@@ -37,6 +38,7 @@ export default defineConfig({
     'src/molecules/sheet/index.ts',
     'src/molecules/sidebar/index.ts',
     'src/molecules/stack/index.ts',
+    'src/molecules/stat-card/index.ts',
     'src/molecules/stepper/index.ts',
     'src/molecules/table/index.ts',
     'src/molecules/tabs/index.ts',
@@ -45,8 +47,9 @@ export default defineConfig({
     'src/molecules/toggle/index.ts',
     'src/molecules/toggle-group/index.ts',
     'src/molecules/tooltip/index.ts',
-    'src/molecules/user-avatar/index.ts'
-    // 'src/organisms/*/index.ts' — re-add once organisms ship
+    'src/molecules/user-avatar/index.ts',
+    // Organisms ship one batch at a time too, same discipline as molecules.
+    'src/organisms/charts/index.ts'
   ],
   format: ['esm'],
   sourcemap: true,

@@ -25,6 +25,7 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/molecules/alert-dialog/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/avatar-group/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/breadcrumb/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/chart-card/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/collapsible/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/combobox/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/command/**/*.stories.@(ts|tsx|mdx)',
@@ -50,6 +51,7 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/molecules/sheet/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/sidebar/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/stack/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/molecules/stat-card/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/stepper/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/table/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/tabs/**/*.stories.@(ts|tsx|mdx)',
@@ -58,7 +60,8 @@ const config: StorybookConfig = {
     '../../../packages/ui/src/molecules/toggle/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/toggle-group/**/*.stories.@(ts|tsx|mdx)',
     '../../../packages/ui/src/molecules/tooltip/**/*.stories.@(ts|tsx|mdx)',
-    '../../../packages/ui/src/molecules/user-avatar/**/*.stories.@(ts|tsx|mdx)'
+    '../../../packages/ui/src/molecules/user-avatar/**/*.stories.@(ts|tsx|mdx)',
+    '../../../packages/ui/src/organisms/charts/**/*.stories.@(ts|tsx|mdx)'
   ],
   addons: ['@storybook/addon-a11y', '@storybook/addon-themes'],
   framework: {

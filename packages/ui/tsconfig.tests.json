@@ -11,6 +11,7 @@
     "tests/molecules/alert-dialog.test.tsx",
     "tests/molecules/avatar-group.test.tsx",
     "tests/molecules/breadcrumb.test.tsx",
+    "tests/molecules/chart-card.test.tsx",
     "tests/molecules/collapsible.test.tsx",
     "tests/molecules/combobox.test.tsx",
     "tests/molecules/command.test.tsx",
@@ -36,6 +37,7 @@
     "tests/molecules/sheet.test.tsx",
     "tests/molecules/sidebar.test.tsx",
     "tests/molecules/stack.test.tsx",
+    "tests/molecules/stat-card.test.tsx",
     "tests/molecules/stepper.test.tsx",
     "tests/molecules/table.test.tsx",
     "tests/molecules/tabs.test.tsx",
@@ -45,6 +47,15 @@
     "tests/molecules/toggle.test.tsx",
     "tests/molecules/toggle-group.test.tsx",
     "tests/molecules/tooltip.test.tsx",
-    "tests/molecules/user-avatar.test.tsx"
+    "tests/molecules/user-avatar.test.tsx",
+    "tests/organisms/chart-container.test.tsx",
+    "tests/organisms/chart-legend.test.tsx",
+    "tests/organisms/chart-tooltip.test.tsx",
+    "tests/organisms/chart-utils.test.ts",
+    "tests/organisms/heatmap-grid.test.tsx",
+    "tests/organisms/radial-progress-chart.test.tsx",
+    "tests/organisms/simple-charts.test.tsx",
+    "tests/organisms/simple-radar-chart.test.tsx",
+    "tests/organisms/sparkline.test.tsx"
   ]
 }
