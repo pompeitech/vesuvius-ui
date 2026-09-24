@@ -75,7 +75,12 @@ export * from './molecules/tooltip'
 export * from './molecules/user-avatar'
 
 // Organisms
+export * from './organisms/calendar'
 export * from './organisms/charts'
+export * from './organisms/date-picker'
+export * from './organisms/date-range-picker'
+export * from './organisms/date-time-picker'
+export * from './organisms/date-time-range-picker'
 
 // Molecules & Organisms — land from v0.2.0 onward, shipped incrementally.
 // The source already lives under ./molecules and ./organisms; it's just
@@ -85,11 +90,6 @@ export * from './organisms/charts'
 //
 // export * from './organisms/timeline'
 //
-// export * from './organisms/calendar'
-// export * from './organisms/date-picker'
-// export * from './organisms/date-range-picker'
-// export * from './organisms/date-time-range-picker'
-// export * from './organisms/date-time-picker'
 // export * from './organisms/kanban-board'
 // export * from './organisms/multi-select'
 // export * from './organisms/people-select'

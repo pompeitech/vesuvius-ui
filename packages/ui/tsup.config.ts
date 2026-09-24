@@ -49,7 +49,12 @@ export default defineConfig({
     'src/molecules/tooltip/index.ts',
     'src/molecules/user-avatar/index.ts',
     // Organisms ship one batch at a time too, same discipline as molecules.
-    'src/organisms/charts/index.ts'
+    'src/organisms/calendar/index.ts',
+    'src/organisms/charts/index.ts',
+    'src/organisms/date-picker/index.ts',
+    'src/organisms/date-range-picker/index.ts',
+    'src/organisms/date-time-picker/index.ts',
+    'src/organisms/date-time-range-picker/index.ts'
   ],
   format: ['esm'],
   sourcemap: true,
