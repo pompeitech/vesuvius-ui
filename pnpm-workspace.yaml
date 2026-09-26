@@ -5,3 +5,6 @@ packages:
   - "apps/docs"
   - "packages/mock-data"
   - "packages/utils"
+
+onlyBuiltDependencies:
+  - esbuild
