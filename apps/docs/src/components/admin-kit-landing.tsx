@@ -1,7 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import { useState } from 'react'
+import { Badge, Button, Card } from '@pompeitech/vesuvius-ui'
 import {
   ArrowRight,
   BarChart3,
@@ -15,9 +14,9 @@ import {
   Users,
   WalletCards
 } from 'lucide-react'
-import { Badge, Button, Card } from '@pompeitech/vesuvius-ui'
+import { useState } from 'react'
 
-const previewHref = '/admin-dashboard/'
+const previewHref = 'https://vesuvius-ui-admin-kit.vercel.app'
 const downloadHref = 'https://github.com/pompeitech/vesuvius-ui/archive/refs/heads/main.zip'
 
 type Showcase = {
@@ -314,45 +313,45 @@ export function AdminKitLanding({ locale }: { locale: string }) {
   const showcases = getShowcases(isEnglish)
   const copy = isEnglish
     ? {
-        heroTitle: 'Your next admin panel, already off the charts.',
-        heroDescription:
-          'A complete React application kit for building dashboards, ecommerce experiences and operational workspaces with product-grade quality.',
-        preview: 'Open live preview',
-        download: 'Download Admin Kit',
-        features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 themes'],
-        builtFor: 'Built for momentum',
-        seriousStart: 'Not a template. A serious starting point.',
-        seriousDescription:
-          'Every area is designed like a product: hierarchy, states, empty states, tables and actions that hold up from demo day to daily work.',
-        explore: 'Explore section',
-        ready: 'Ready when you are',
-        finalTitle: 'Take your next product beyond the usual CRUD.',
-        finalDescription:
-          'See the app in action, then download the kit and start composing your own experience.',
-        goPreview: 'Go to preview',
-        shipsWith: 'Ships with',
-        screens: '24+ production screens'
-      }
+      heroTitle: 'Your next admin panel, already off the charts.',
+      heroDescription:
+        'A complete React application kit for building dashboards, ecommerce experiences and operational workspaces with product-grade quality.',
+      preview: 'Open live preview',
+      download: 'Download Admin Kit',
+      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 themes'],
+      builtFor: 'Built for momentum',
+      seriousStart: 'Not a template. A serious starting point.',
+      seriousDescription:
+        'Every area is designed like a product: hierarchy, states, empty states, tables and actions that hold up from demo day to daily work.',
+      explore: 'Explore section',
+      ready: 'Ready when you are',
+      finalTitle: 'Take your next product beyond the usual CRUD.',
+      finalDescription:
+        'See the app in action, then download the kit and start composing your own experience.',
+      goPreview: 'Go to preview',
+      shipsWith: 'Ships with',
+      screens: '24+ production screens'
+    }
     : {
-        heroTitle: 'Il tuo prossimo admin panel, già fuori scala.',
-        heroDescription:
-          'Un application kit React completo per costruire dashboard, ecommerce e workspace operativi con una qualità da prodotto finito.',
-        preview: 'Apri la live preview',
-        download: 'Scarica Admin Kit',
-        features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 temi'],
-        builtFor: 'Built for momentum',
-        seriousStart: 'Non è un template. È un punto di partenza serio.',
-        seriousDescription:
-          'Ogni area è pensata come un prodotto: gerarchia, stati, empty states, tabelle e azioni che reggono il passaggio dalla demo al lavoro quotidiano.',
-        explore: 'Esplora sezione',
-        ready: 'Ready when you are',
-        finalTitle: 'Porta il tuo prossimo prodotto oltre il solito CRUD.',
-        finalDescription:
-          'Guarda l’app in azione, poi scarica il kit e inizia a comporre la tua esperienza.',
-        goPreview: 'Vai alla preview',
-        shipsWith: 'Ships with',
-        screens: '24+ production screens'
-      }
+      heroTitle: 'Il tuo prossimo admin panel, già fuori scala.',
+      heroDescription:
+        'Un application kit React completo per costruire dashboard, ecommerce e workspace operativi con una qualità da prodotto finito.',
+      preview: 'Apri la live preview',
+      download: 'Scarica Admin Kit',
+      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 temi'],
+      builtFor: 'Built for momentum',
+      seriousStart: 'Non è un template. È un punto di partenza serio.',
+      seriousDescription:
+        'Ogni area è pensata come un prodotto: gerarchia, stati, empty states, tabelle e azioni che reggono il passaggio dalla demo al lavoro quotidiano.',
+      explore: 'Esplora sezione',
+      ready: 'Ready when you are',
+      finalTitle: 'Porta il tuo prossimo prodotto oltre il solito CRUD.',
+      finalDescription:
+        'Guarda l’app in azione, poi scarica il kit e inizia a comporre la tua esperienza.',
+      goPreview: 'Vai alla preview',
+      shipsWith: 'Ships with',
+      screens: '24+ production screens'
+    }
   const [active, setActive] = useState('dashboards')
   const activeShowcase = showcases.find(showcase => showcase.id === active) ?? showcases[0]!
   const Icon = activeShowcase.icon
