@@ -1,0 +1,72 @@
+---
+title: Sheet
+---
+
+# Sheet
+
+Un [`Dialog`](/docs/components/molecules/dialog) di Radix sotto il cofano, stilizzato per scorrere da un bordo invece di apparire centrato — un cassetto di navigazione mobile, un pannello filtri, un riquadro dettagli.
+
+```tsx
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "@pompeitech/vesuvius-ui";
+```
+
+## Da destra (default)
+
+<ComponentPreview code={`<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Edit profile</SheetTitle>
+      <SheetDescription>Make changes to your profile here.</SheetDescription>
+    </SheetHeader>
+    <div className="grid gap-4 px-4">
+      <div className="grid gap-1.5">
+        <Label htmlFor="sheet-name">Name</Label>
+        <Input id="sheet-name" defaultValue="Pedro Duarte" />
+      </div>
+    </div>
+    <SheetFooter>
+      <SheetClose asChild>
+        <Button>Save changes</Button>
+      </SheetClose>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>`}>
+  <Demo
+    name="sheet-right"
+    triggerLabel="Apri"
+    title="Modifica profilo"
+    description="Apporta qui le modifiche al tuo profilo."
+    nameLabel="Nome"
+    saveLabel="Salva modifiche"
+  />
+</ComponentPreview>
+
+## Da sinistra
+
+<ComponentPreview code={`<SheetContent side="left">...</SheetContent>`}>
+  <Demo
+    name="sheet-left"
+    triggerLabel="Apri da sinistra"
+    title="Navigazione"
+    description="Scorre dal bordo sinistro."
+  />
+</ComponentPreview>
+
+## API
+
+Ogni parte corrisponde a quella di [`Dialog`](/docs/components/molecules/dialog) (stessa radice `open`/`onOpenChange`/`modal`, stessa forma di `Trigger`/`Header`/`Title`/`Description`/`Footer`/`Close`), con un'aggiunta:
+
+**SheetContent**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` | Da quale bordo scorre. |
+
+Più ogni prop accettata da `DialogContent` — renderizzato in Portal, con focus intrappolato, si chiude con <kbd>Esc</kbd> o click esterno.
+
+### Accessibilità
+
+Come `Dialog`: `role="dialog"` con `aria-modal="true"`, `SheetTitle` obbligatorio per il nome accessibile (dagli una `className="sr-only"` invece di ometterlo se nessun titolo visibile si adatta al design), focus intrappolato mentre è aperto e restituito al trigger alla chiusura.

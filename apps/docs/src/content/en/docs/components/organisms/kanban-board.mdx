@@ -1,0 +1,51 @@
+---
+title: Kanban Board
+---
+
+# Kanban Board
+
+A generic drag-and-drop board for workflow columns. The component owns the DnD interaction and column layout; the host keeps ownership of item state through `onItemMove` and decides how each card is rendered.
+
+```tsx
+import { KanbanBoard } from "@pompeitech/vesuvius-ui";
+```
+
+## Interactive example
+
+Drag a card to another column. The board fills the available width and keeps
+horizontal scrolling inside the board when the columns need more space.
+
+<ComponentPreview
+  code={`const [items, setItems] = useState(initialItems);
+
+<KanbanBoard
+  columns={columns}
+  items={items}
+  getItemId={(item) => item.id}
+  getItemColumn={(item) => item.status}
+  onItemMove={(item, status) => setItems(/* update status */)}
+  renderItem={(item) => <Card>{item.title}</Card>}
+/>`}
+  className="w-full"
+>
+  <Demo name="kanban-board" />
+</ComponentPreview>
+
+## API
+
+**KanbanBoard**
+
+| Prop                            | Type                                         | Description                                      |
+| ------------------------------- | -------------------------------------------- | ------------------------------------------------ |
+| `columns`                       | `{ id, title, count? }[]`                    | Ordered drop columns.                            |
+| `items`                         | `TItem[]`                                    | Cards currently shown on the board.              |
+| `getItemId`                     | `(item: TItem) => string`                    | Stable draggable item identity.                  |
+| `getItemColumn`                 | `(item: TItem) => TColumnId`                 | Returns the current column for an item.          |
+| `onItemMove`                    | `(item: TItem, columnId: TColumnId) => void` | Called after dropping an item on another column. |
+| `renderItem`                    | `(item: TItem) => ReactNode`                 | Renders the card content.                        |
+| `columnWidth`                   | `string`                                     | CSS width for each column. Defaults to `16rem`.  |
+| `className` / `columnClassName` | `string`                                     | Layout classes for the board and columns.        |
+
+### Accessibility
+
+Columns are labeled drop regions and the board uses a pointer activation distance so clicking a card does not accidentally start a drag. Card content remains responsible for its own keyboard interaction and accessible name.

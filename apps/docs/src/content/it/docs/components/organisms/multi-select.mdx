@@ -1,0 +1,65 @@
+---
+title: Multi Select
+---
+
+# Multi Select
+
+Una palette [`Command`](/docs/components/molecules/command) ricercabile per scegliere più valori, mostrati come chip rimovibili nel trigger. Per un valore singolo, vedi [`Select`](/docs/components/molecules/select).
+
+```tsx
+import { MultiSelect, type MultiSelectOption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const [values, setValues] = useState<string[]>(["sales", "engineering"]);
+
+<MultiSelect
+  options={departments}
+  value={values}
+  onValueChange={setValues}
+  placeholder="Select departments..."
+  aria-label="Departments"
+/>`}>
+  <Demo name="multi-select" placeholder="Seleziona reparti..." ariaLabel="Reparti" />
+</ComponentPreview>
+
+## Overflow (+N altri)
+
+<ComponentPreview
+  code={`<MultiSelect options={departments} value={values} onValueChange={setValues} maxDisplay={2} aria-label="Departments" />`}
+>
+  <Demo
+    name="multi-select"
+    placeholder="Seleziona reparti..."
+    ariaLabel="Reparti"
+    maxDisplay={2}
+    allSelected
+  />
+</ComponentPreview>
+
+## API
+
+**MultiSelect**
+
+| Prop                     | Tipo                                | Default     | Descrizione                                                        |
+| ------------------------ | ----------------------------------- | ----------- | ------------------------------------------------------------------ |
+| `options`                | `MultiSelectOption[]`               |             | Obbligatorio.                                                      |
+| `value` / `defaultValue` | `string[]`                          |             | Valori selezionati, controllati o non controllati.                 |
+| `onValueChange`          | `(values: string[]) => void`        |             | Chiamata quando cambia la selezione.                               |
+| `size`                   | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` | Altezza fissa del trigger: 28, 32, 36 o 40 px.                     |
+| `placeholder`            | `string`                            |             | Mostrato sul trigger quando nulla è selezionato.                   |
+| `maxDisplay`             | `number`                            |             | Chip mostrati prima che il resto si raccolga in un chip "+N more". |
+| `disabled`               | `boolean`                           | `false`     |                                                                    |
+
+**MultiSelectOption**
+
+| Campo   | Tipo         | Descrizione                                                                              |
+| ------- | ------------ | ---------------------------------------------------------------------------------------- |
+| `label` | `string`     | Obbligatorio.                                                                            |
+| `value` | `string`     | Obbligatorio — identificatore univoco.                                                   |
+| `icon`  | `LucideIcon` | Icona iniziale opzionale mostrata sia nell'elenco dropdown che su ogni chip selezionato. |
+
+### Accessibilità
+
+Dato che il trigger renderizza chip rimovibili invece di semplice testo, passa sempre `aria-label` sul `MultiSelect` stesso (come in ogni esempio sopra) — il solo contenuto visibile del trigger non si legge come un nome di campo chiaro per la tecnologia assistiva. Il pulsante di rimozione di ogni chip è focalizzabile in modo indipendente ed etichettato con l'opzione che rimuove.

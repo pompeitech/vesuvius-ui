@@ -1,0 +1,78 @@
+---
+title: Table
+---
+
+# Table
+
+A plain, styled `<table>` — static markup, no sorting/filtering/pagination logic. For that, see `DataTable`.
+
+```tsx
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableCaption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">INV001</TableCell>
+      <TableCell><Badge variant="success">Paid</Badge></TableCell>
+      <TableCell className="text-right">$250.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV002</TableCell>
+      <TableCell><Badge variant="warning">Pending</Badge></TableCell>
+      <TableCell className="text-right">$150.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`} className="w-full">
+  <Table className="w-[500px]">
+    <TableCaption>A list of your recent invoices.</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Invoice</TableHead>
+        <TableHead>Status</TableHead>
+        <TableHead className="text-right">Amount</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell className="font-medium">INV001</TableCell>
+        <TableCell><Badge variant="success">Paid</Badge></TableCell>
+        <TableCell className="text-right">$250.00</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">INV002</TableCell>
+        <TableCell><Badge variant="warning">Pending</Badge></TableCell>
+        <TableCell className="text-right">$150.00</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</ComponentPreview>
+
+## API
+
+| Component | Renders | Notes |
+| --- | --- | --- |
+| `Table` | `<table>` | Wraps itself in an `overflow-x-auto` scroll container automatically — no manual wrapper needed for a table wider than its column. |
+| `TableHeader` | `<thead>` | |
+| `TableBody` | `<tbody>` | |
+| `TableFooter` | `<tfoot>` | Styled with a subtle background to distinguish it from `TableBody`. |
+| `TableRow` | `<tr>` | Gets a hover background and bottom border automatically. |
+| `TableHead` | `<th>` | |
+| `TableCell` | `<td>` | |
+| `TableCaption` | `<caption>` | Rendered below the table by default, muted text. |
+
+All accept every native prop of their underlying element, plus `className`.
+
+### Accessibility
+
+A real semantic `<table>` — `TableHead`/`TableCaption` give screen readers the structure they need for free. Use `TableCaption` (rather than an adjacent `<h2>`/`<p>`) to describe the table's purpose, since it's programmatically associated with the table itself.

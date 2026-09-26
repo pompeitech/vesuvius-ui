@@ -1,0 +1,117 @@
+---
+title: Breadcrumb
+---
+
+# Breadcrumb
+
+Un `nav[aria-label="breadcrumb"]` — la pagina corrente viene renderizzata come testo con `aria-current="page"`, non come link.
+
+```tsx
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Ecommerce</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Edit product</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`}>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Ecommerce</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Prodotti</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Modifica prodotto</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+
+## Compresso con un'ellissi
+
+`BreadcrumbEllipsis` è un marcatore "…" puramente visivo per un percorso troppo lungo da mostrare per intero — non comprime nulla automaticamente, decidi tu quali elementi nascondere:
+
+<ComponentPreview code={`<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbEllipsis />
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Edit product</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`}>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Prodotti</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Modifica prodotto</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+
+## Con un link del router
+
+`asChild` di `BreadcrumbLink` renderizza il suo stile su un singolo figlio invece che su un semplice `<a>` — il modo consueto per sostituire il proprio componente link del router (`Link` di React Router, `Link` di Next, …) senza perdere lo stile del breadcrumb:
+
+```tsx
+<BreadcrumbLink asChild>
+  <Link to="/products">Products</Link>
+</BreadcrumbLink>
+```
+
+## API
+
+| Componente | Renderizza | Prop |
+| --- | --- | --- |
+| `Breadcrumb` | `<nav aria-label="breadcrumb">` | Ogni prop nativa di `<nav>`. |
+| `BreadcrumbList` | `<ol>` che avvolge ogni elemento | Ogni prop nativa di `<ol>`. |
+| `BreadcrumbItem` | `<li>` | Ogni prop nativa di `<li>`. |
+| `BreadcrumbLink` | `<a>` (o il suo figlio `asChild`) | `href`, `asChild` (`boolean`, default `false`), più ogni prop nativa di `<a>`. |
+| `BreadcrumbPage` | `<span>` | La voce corrente, non-link — imposta automaticamente `aria-current="page"` e `aria-disabled`; ogni prop nativa di `<span>`. |
+| `BreadcrumbSeparator` | `<li>` con `role="presentation"` | `children` (default: un'icona chevron) — passa children diversi (ad es. `"/"`) per sovrascriverlo. |
+| `BreadcrumbEllipsis` | `<span>` | Un "…" visivo per un percorso compresso, con un'etichetta `sr-only "More"` per gli screen reader; nessuna prop personalizzata. |
+
+Tutti accettano le prop del loro elemento nativo sottostante, più `className`.
+
+### Accessibilità
+
+L'`aria-label="breadcrumb"` della radice e l'`aria-current="page"` di `BreadcrumbPage` sono impostati automaticamente — l'unica cosa di cui sei responsabile è non rendere la pagina corrente un `BreadcrumbLink` (dovrebbe sempre essere un `BreadcrumbPage`, dato che non è un link navigabile).

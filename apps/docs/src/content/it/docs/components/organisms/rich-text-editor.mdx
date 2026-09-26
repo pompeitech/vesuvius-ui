@@ -1,0 +1,49 @@
+---
+title: Rich Text Editor
+---
+
+# Rich Text Editor
+
+Un editor basato su [Tiptap](https://tiptap.dev/) con una toolbar fissa — grassetto/corsivo/barrato, heading, liste, blockquote, annulla/ripeti. Memorizza ed emette HTML semplice tramite `value`/`onChange`, quindi si inserisce direttamente in un campo di [`Form`](/docs/components/molecules/form). `RichTextViewer` renderizza quello stesso HTML in sola lettura, con tipografia corrispondente.
+
+```tsx
+import { RichTextEditor, RichTextViewer } from "@pompeitech/vesuvius-ui";
+```
+
+## Editor
+
+<ComponentPreview code={`const [value, setValue] = useState("<p>Write something...</p>");
+
+<RichTextEditor value={value} onChange={setValue} />`} className="w-full">
+  <Demo name="rich-text-editor" placeholder="Scrivi qualcosa..." />
+</ComponentPreview>
+
+## Viewer (sola lettura)
+
+<ComponentPreview code={`<RichTextViewer html="<p>Rendered <strong>read-only</strong>, matching typography.</p>" />`} className="w-full">
+  <RichTextViewer html="<p>Renderizzato <strong>in sola lettura</strong>, con tipografia corrispondente.</p>" />
+</ComponentPreview>
+
+## API
+
+**RichTextEditor**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` | `string` | | Il contenuto dell'editor come stringa HTML. |
+| `onChange` | `(html: string) => void` | | Chiamata con il nuovo HTML a ogni modifica. |
+| `placeholder` | `string` | | Mostrato nell'editor vuoto. |
+| `editable` | `boolean` | `true` | Imposta `false` per bloccare la modifica mantenendo la toolbar montata (raro — preferisci `RichTextViewer` per una visualizzazione genuinamente di sola lettura). |
+
+Più ogni prop nativa di `<div>` sul wrapper radice.
+
+**RichTextViewer**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `html` | `string` | Obbligatorio — l'HTML da renderizzare in sola lettura. |
+| `className` | `string` | |
+
+### Accessibilità
+
+I pulsanti della toolbar portano etichette accessibili e riflettono lo stato di formattazione attivo (`aria-pressed`) per la selezione corrente, come [`Toggle`](/docs/components/molecules/toggle). Dato che il valore memorizzato è HTML grezzo, sanifica o fidati in modo appropriato della sua fonte prima di renderizzarlo altrove (ad es. con `RichTextViewer`) — questo componente non sanifica per te.

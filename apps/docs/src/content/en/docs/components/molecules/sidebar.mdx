@@ -1,0 +1,217 @@
+---
+title: Sidebar
+---
+
+# Sidebar
+
+The app shell's collapsible side navigation — icon-only collapse, an offcanvas mobile [`Sheet`](/docs/components/molecules/sheet), and tooltips when collapsed to icons. In real usage `Sidebar` is `position: fixed` to the viewport by design (`collapsible="icon"` or `"offcanvas"`, as in the real app-shell snippet below) — the live preview here instead uses `collapsible="none"` (a plain, non-fixed `<div>`) just so it can render contained inside this bounded box; this is the same technique this very docs site's own sidebar uses.
+
+```tsx
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTooltipProvider, SidebarTrigger } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<SidebarProvider className="h-full min-h-0 w-full">
+  <Sidebar collapsible="none" className="h-full">
+    <SidebarHeader>
+      <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive>
+                <HomeIcon />
+                <span>Dashboard</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <PackageIcon />
+                <span>Products</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <SettingsIcon />
+                <span>Settings</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+      <SidebarTrigger />
+      <span className="text-sm font-medium">Dashboard</span>
+    </header>
+    <div className="p-4 text-sm text-muted-foreground">Page content</div>
+  </SidebarInset>
+</SidebarProvider>`} className="w-full p-0">
+  <div className="h-96 w-full overflow-hidden rounded-lg border border-border">
+    <SidebarTooltipProvider>
+      <SidebarProvider className="h-full min-h-0 w-full">
+        <Sidebar collapsible="none" className="h-full">
+          <SidebarHeader>
+            <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarGroup>
+              <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton isActive>
+                      <HomeIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <PackageIcon />
+                      <span>Products</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <SettingsIcon />
+                      <span>Settings</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+        <SidebarInset>
+          <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+            <SidebarTrigger />
+            <span className="text-sm font-medium">Dashboard</span>
+          </header>
+          <div className="p-4 text-sm text-muted-foreground">Page content</div>
+        </SidebarInset>
+      </SidebarProvider>
+    </SidebarTooltipProvider>
+  </div>
+</ComponentPreview>
+
+`SidebarTrigger` still works in this preview (it toggles `SidebarProvider`'s `open` state), but with `collapsible="none"` the `Sidebar` itself doesn't actually collapse — that behavior needs `collapsible="icon"` or `"offcanvas"`, which in turn need `position: fixed`. The real app-shell shape:
+
+```tsx
+function AppShell() {
+  return (
+    <SidebarTooltipProvider>
+      <SidebarProvider>
+        <Sidebar collapsible="icon">
+          <SidebarHeader>
+            <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarGroup>
+              <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton tooltip="Dashboard">
+                      <HomeIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+        <SidebarInset>
+          <header className="flex h-14 items-center gap-2 border-b px-4">
+            <SidebarTrigger />
+            <span className="text-sm font-medium">Dashboard</span>
+          </header>
+          <div className="p-4">Page content</div>
+        </SidebarInset>
+      </SidebarProvider>
+    </SidebarTooltipProvider>
+  );
+}
+```
+
+For rendering the menu tree itself from data instead of hand-nesting `SidebarMenuItem`s, see `SidebarNav`.
+
+## API
+
+**SidebarProvider**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled expanded state (desktop). |
+| `defaultOpen` | `boolean` | `true` | Initial state, uncontrolled — persisted to `localStorage` across reloads either way. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+
+Also registers the <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>B</kbd> keyboard shortcut to toggle the sidebar globally while mounted.
+
+**useSidebar()** — the hook every part below reads from; throws outside a `SidebarProvider`.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `state` | `"expanded" \| "collapsed"` | Derived from `open`. |
+| `open` / `setOpen` | `boolean` / `(open: boolean) => void` | Desktop expanded state. |
+| `openMobile` / `setOpenMobile` | `boolean` / `(open: boolean) => void` | Mobile offcanvas [`Sheet`](/docs/components/molecules/sheet) state. |
+| `isMobile` | `boolean` | |
+| `toggleSidebar` | `() => void` | Toggles `open` (desktop) or `openMobile` (mobile) depending on `isMobile`. |
+
+**SidebarTooltipProvider** — wraps Radix's `TooltipProvider`; required as an ancestor for the icon-collapsed state's tooltips to work. Every prop `TooltipProvider` accepts.
+
+**Sidebar**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `side` | `"left" \| "right"` | `"left"` | |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` | `"floating"`/`"inset"` add a border/shadow and inset margin instead of a flush edge-to-edge panel. |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` | `"offcanvas"` hides completely and slides in; `"icon"` shrinks to icon-only width; `"none"` renders as a plain, non-fixed `<div>` that never collapses — the only mode embeddable in a bounded container, as in the preview above. |
+
+**SidebarTrigger** — every [`Button`](/docs/components/atoms/button) prop; calls `toggleSidebar()` on click.
+
+**SidebarInset** — the `<main>` next to the sidebar. Every native `<main>` prop.
+
+**SidebarHeader** / **SidebarFooter** / **SidebarContent** — plain layout `<div>`s, no custom props.
+
+**SidebarGroup** / **SidebarGroupLabel** / **SidebarGroupContent** — a labeled section within `SidebarContent`; `SidebarGroupLabel` accepts `asChild` (`boolean`, default `false`).
+
+**SidebarGroupAction** — an optional action button pinned to a group's top-right (e.g. an "add" icon next to the group label); every native `<button>` prop plus `asChild`.
+
+**SidebarMenu** / **SidebarMenuItem** — the `<ul>`/`<li>` wrapping each entry; every native prop of their respective element.
+
+**SidebarMenuButton**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `isActive` | `boolean` | `false` | Highlights the item as the current page. |
+| `tooltip` | `string \| ComponentProps<typeof TooltipContent>` | | Shown when the sidebar is collapsed to icon-only, since the label text is hidden then — a plain string, or a full `TooltipContent` props object for more control. |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | |
+| `variant` | `"default" \| "outline"` | `"default"` | |
+| `asChild` | `boolean` | `false` | |
+
+Plus every native `<button>` prop.
+
+**SidebarMenuAction** — a secondary action button pinned to a menu item's right edge (a "..." menu trigger, a quick action); every native `<button>` prop plus `asChild`, and `showOnHover` (`boolean`, default `false`) to keep it hidden until the row is hovered/focused.
+
+**SidebarMenuBadge** — every native `<div>` prop; a trailing count/badge on a menu item.
+
+**SidebarMenuSkeleton** — loading placeholder matching a `SidebarMenuItem`'s shape; `showIcon` (`boolean`, default `false`).
+
+**SidebarMenuSub** / **SidebarMenuSubItem** / **SidebarMenuSubButton** — one level of nested items under a `SidebarMenuItem`; `SidebarMenuSubButton` additionally accepts `isActive` and `size` (`"sm" \| "md"`, default `"md"`).
+
+**SidebarSeparator** — every [`Separator`](/docs/components/atoms/separator) prop; a divider between groups.
+
+**SidebarInput** — every [`Input`](/docs/components/atoms/input) prop, pre-styled to sit inside the sidebar (typically in `SidebarHeader`, for a search box).
+
+**SidebarRail** — a thin draggable strip at the sidebar's edge that toggles it on click, for a desktop affordance beyond `SidebarTrigger`; every native `<button>` prop.
+
+### Accessibility
+
+`SidebarMenuButton` renders a real `<button>` (or `asChild`'s element), reachable and operable by <kbd>Tab</kbd>/<kbd>Enter</kbd>/<kbd>Space</kbd> like any button. When `collapsible="icon"` hides the text label, always pass `tooltip` — otherwise the collapsed button has no discoverable name for sighted mouse users hovering it, even though the underlying `aria-label`/text is still present for screen readers via the hidden `<span>`.

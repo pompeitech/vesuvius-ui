@@ -1,0 +1,158 @@
+---
+title: Button
+---
+
+# Button
+
+Un `<button>` stilizzato (o, con `asChild`, qualsiasi elemento tu gli passi) — 6 varianti, 4 dimensioni di testo, 4 dimensioni solo-icona.
+
+```tsx
+import { Button } from "@pompeitech/vesuvius-ui";
+```
+
+## Varianti
+
+<ComponentPreview
+  code={`<Button variant="default">Default</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>`}
+>
+  <Button variant="default">Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
+</ComponentPreview>
+
+## Dimensioni
+
+La scala condivisa dei controlli è `xs` 28 px, `sm` 32 px, `default` 36 px e `lg` 40 px. Queste altezze sono allineate con `Input`, `SelectTrigger` e `MultiSelect`.
+
+<ComponentPreview
+  code={`<Button size="xs">Extra small</Button>
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>`}
+>
+  <Button size="xs">Extra small</Button>
+  <Button size="sm">Small</Button>
+  <Button size="default">Default</Button>
+  <Button size="lg">Large</Button>
+</ComponentPreview>
+
+## Dimensioni icona
+
+Una dimensione icona dedicata per ogni dimensione di testo sopra, così un pulsante solo-icona può abbinarsi a qualsiasi pulsante gli stia accanto:
+
+<ComponentPreview
+  code={`<Button size="icon-xs" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon-sm" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon-lg" aria-label="Send email">
+  <MailIcon />
+</Button>`}
+>
+  <Button size="icon-xs" aria-label="Invia email">
+    <MailIcon />
+  </Button>
+  <Button size="icon-sm" aria-label="Invia email">
+    <MailIcon />
+  </Button>
+  <Button size="icon" aria-label="Invia email">
+    <MailIcon />
+  </Button>
+  <Button size="icon-lg" aria-label="Invia email">
+    <MailIcon />
+  </Button>
+</ComponentPreview>
+
+## Disabilitato
+
+<ComponentPreview code={`<Button disabled>Button</Button>`}>
+  <Button disabled>Button</Button>
+</ComponentPreview>
+
+## Con un'icona
+
+Qualsiasi figlio `<svg>` (incluse le icone Lucide) è dimensionato automaticamente a `size-4` e riceve lo spazio giusto dal testo adiacente — nessuno span contenitore necessario:
+
+<ComponentPreview
+  code={`<Button>
+  <MailIcon />
+  Send email
+</Button>
+<Button variant="outline">
+  Continue
+  <MailIcon />
+</Button>`}
+>
+  <Button>
+    <MailIcon />
+    Invia email
+  </Button>
+  <Button variant="outline">
+    Continua
+    <MailIcon />
+  </Button>
+</ComponentPreview>
+
+## Stato di caricamento
+
+Non esiste una prop `loading` — componila a partire da `disabled` (per prevenire un secondo invio e rimuovere gli stati hover/focus) più un'icona rotante, come qualsiasi altro uso di icone sopra:
+
+<ComponentPreview
+  code={`<Button disabled>
+  <Loader2 className="animate-spin" />
+  Please wait
+</Button>`}
+>
+  <Button disabled>
+    <Loader2 className="animate-spin" />
+    Attendere
+  </Button>
+</ComponentPreview>
+
+## Larghezza piena
+
+<ComponentPreview
+  code={`<Button className="w-full">Continue</Button>`}
+  className="w-full"
+>
+  <Button className="w-full">Continua</Button>
+</ComponentPreview>
+
+## Come link
+
+`asChild` renderizza lo stile del button su qualsiasi singolo elemento figlio tu gli passi (tramite lo `Slot` di Radix), invece che su un `<button>` — utile per un `<Link>` del router che deve apparire come un pulsante. Il figlio diventa l'effettivo elemento DOM renderizzato, quindi deve accettare le stesse prop che accetterebbe un `<button>` (`className`, gestori di eventi, …), come fa qualsiasi ancora o componente link di un router.
+
+```tsx
+<Button asChild>
+  <a href="/get-started">Get Started</a>
+</Button>
+```
+
+## API
+
+**Button**
+
+| Prop      | Tipo                                                                                 | Default     | Descrizione                                                                                                                                                        |
+| --------- | ------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"`        | `"default"` | Stile visivo.                                                                                                                                                      |
+| `size`    | `"xs" \| "sm" \| "default" \| "lg" \| "icon-xs" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` | Le dimensioni `icon-*` sono pulsanti quadrati solo-icona che abbinano l'altezza di ogni dimensione di testo (abbinale ad `aria-label` — vedi Accessibilità sotto). |
+| `asChild` | `boolean`                                                                            | `false`     | Renderizza come il singolo elemento figlio invece che come `<button>`.                                                                                             |
+
+Più ogni prop nativa di `<button>` (`onClick`, `disabled`, `type`, `form`, …), e `ref` (inoltrato all'elemento `<button>` sottostante, o a qualsiasi elemento renderizzi il figlio di `asChild`).
+
+### Accessibilità
+
+Un pulsante solo-icona (qualsiasi dimensione `icon-*`) non ha testo visibile da annunciare per uno screen reader — abbinalo sempre ad `aria-label` (vedi l'esempio con le dimensioni icona sopra). `disabled` su un `<button>` nativo lo rimuove già dall'ordine di tabulazione e lo annuncia come non disponibile; non serve `aria-disabled` extra a meno che tu non abbia specificamente bisogno che l'elemento _resti_ focalizzabile mentre è disabilitato (una vera tecnica di accessibilità per spiegare _perché_ un'azione non è disponibile, ma non il comportamento predefinito di questo componente). Ogni `<button>` (e qualsiasi altra cosa renderizzata con `role="button"`, ad es. `asChild`) riceve anche `cursor: pointer` ripristinato — Tailwind v4 l'ha rimosso dal proprio reset di base.

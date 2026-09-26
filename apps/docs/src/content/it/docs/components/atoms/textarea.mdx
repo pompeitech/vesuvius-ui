@@ -1,0 +1,61 @@
+---
+title: Textarea
+---
+
+# Textarea
+
+Un `<textarea>` nativo stilizzato.
+
+```tsx
+import { Textarea } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Textarea placeholder="Type your message here." />`}>
+  <Textarea placeholder="Scrivi qui il tuo messaggio." className="max-w-sm" />
+</ComponentPreview>
+
+## Disabilitato
+
+<ComponentPreview code={`<Textarea placeholder="Type your message here." disabled />`}>
+  <Textarea placeholder="Scrivi qui il tuo messaggio." disabled className="max-w-sm" />
+</ComponentPreview>
+
+## Con un'etichetta
+
+<ComponentPreview code={`<div className="grid w-full max-w-sm gap-1.5">
+  <Label htmlFor="message">Your message</Label>
+  <Textarea id="message" placeholder="Type your message here." />
+</div>`}>
+  <div className="grid w-full max-w-sm gap-1.5">
+    <Label htmlFor="docs-message-it">Il tuo messaggio</Label>
+    <Textarea id="docs-message-it" placeholder="Scrivi qui il tuo messaggio." />
+  </div>
+</ComponentPreview>
+
+## Dimensione fissa (senza maniglia di ridimensionamento)
+
+La maniglia di ridimensionamento predefinita del browser è attiva — disattivala con `resize-none` quando un layout fisso conta più che permettere all'utente di ridimensionare:
+
+<ComponentPreview code={`<Textarea placeholder="Fixed height, no resize handle." className="resize-none" />`}>
+  <Textarea placeholder="Altezza fissa, nessuna maniglia di ridimensionamento." className="max-w-sm resize-none" />
+</ComponentPreview>
+
+## API
+
+**Textarea**
+
+Ogni prop nativa di `<textarea>`, incluse `ref`, `rows` e `maxLength`.
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `rows` | `number` | Altezza visibile in righe di testo. |
+| `maxLength` | `number` | Limite nativo di caratteri, imposto dal browser. |
+| `disabled` | `boolean` | |
+
+Nessun extra — il componente aggiunge solo stile, nessun comportamento di auto-ridimensionamento al contenuto (aggiungilo tu stesso tramite una libreria come `react-textarea-autosize` se ti serve; `Textarea` inoltra `ref`, quindi si compone direttamente con una).
+
+### Accessibilità
+
+Come [`Input`](/docs/components/atoms/input) — abbina sempre a una `<Label htmlFor>` o `aria-label`.

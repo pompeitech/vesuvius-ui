@@ -1,0 +1,96 @@
+---
+title: Input
+---
+
+# Input
+
+Un `<input>` nativo stilizzato — ogni tipo nativo (`text`, `email`, `password`, `number`, `file`, ...) condivide lo stesso trattamento visivo.
+
+```tsx
+import { Input } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Input type="email" placeholder="Email" />`}>
+  <Input type="email" placeholder="Email" className="max-w-sm" />
+</ComponentPreview>
+
+## Con un'etichetta
+
+<ComponentPreview
+  code={`<div className="grid w-full max-w-sm gap-1.5">
+  <Label htmlFor="email">Email</Label>
+  <Input type="email" id="email" placeholder="Email" />
+</div>`}
+>
+  <div className="grid w-full max-w-sm gap-1.5">
+    <Label htmlFor="docs-input-email-it">Email</Label>
+    <Input type="email" id="docs-input-email-it" placeholder="Email" />
+  </div>
+</ComponentPreview>
+
+## Dimensioni
+
+Le quattro dimensioni usano la stessa scala di altezza di Button, Select e MultiSelect:
+
+<ComponentPreview
+  code={`<Input size="xs" placeholder="Extra small" />
+<Input size="sm" placeholder="Small" />
+<Input size="default" placeholder="Default" />
+<Input size="lg" placeholder="Large" />`}
+>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <Input size="xs" aria-label="Input extra small" placeholder="Extra small" />
+    <Input size="sm" aria-label="Input small" placeholder="Small" />
+    <Input size="default" aria-label="Input default" placeholder="Default" />
+    <Input size="lg" aria-label="Input large" placeholder="Large" />
+  </div>
+</ComponentPreview>
+
+## Disabilitato
+
+<ComponentPreview code={`<Input disabled type="email" placeholder="Email" />`}>
+  <Input disabled type="email" placeholder="Email" className="max-w-sm" />
+</ComponentPreview>
+
+## Input di tipo file
+
+Il selettore nativo `type="file"` riceve lo stesso trattamento di bordo/focus degli input di testo, con il proprio pulsante stilizzato in coerenza:
+
+<ComponentPreview code={`<Input type="file" />`}>
+  <Input type="file" className="max-w-sm" />
+</ComponentPreview>
+
+## Stato non valido
+
+Imposta `aria-invalid` — non esiste una prop separata `error`/`invalid`, così lo stesso attributo che usano gli screen reader guida anche lo stile:
+
+<ComponentPreview
+  code={`<Input aria-invalid placeholder="Email" defaultValue="not-an-email" />`}
+>
+  <Input
+    aria-invalid
+    placeholder="Email"
+    defaultValue="not-an-email"
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+## API
+
+**Input**
+
+| Prop           | Tipo                                | Default     | Descrizione                                                                       |
+| -------------- | ----------------------------------- | ----------- | --------------------------------------------------------------------------------- |
+| `type`         | `React.HTMLInputTypeAttribute`      | `"text"`    | Qualsiasi tipo di input nativo.                                                   |
+| `size`         | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` | Altezza del controllo: 28, 32, 36 o 40 px.                                        |
+| `aria-invalid` | `boolean`                           |             | Guida lo stile di stato non valido/errore — non esiste una prop `error` separata. |
+
+Più ogni altra prop nativa di `<input>` (`disabled`, `placeholder`, `value`/`defaultValue`, `onChange`, `required`, `min`/`max`, `accept`, ...).
+
+Comunemente abbinato a [`Label`](/docs/components/atoms/label) per la didascalia del campo e (in un contesto di form) a testo di aiuto/errore sotto di esso.
+
+### Accessibilità
+
+Associa sempre un `Input` a una `Label` tramite `htmlFor`/`id` corrispondenti (come sopra) invece di affidarti solo al `placeholder` — il testo placeholder scompare non appena l'utente inizia a scrivere e non è un nome accessibile affidabile per ogni tecnologia assistiva.

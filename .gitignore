@@ -14,9 +14,6 @@ storybook-static/
 
 # Docusaurus
 .docusaurus/
-# apps/web's build output copied in by build:admin-dashboard — regenerated
-# on every docs build, not meant to be committed.
-apps/docs/static/admin-dashboard/
 .next/
 
 # env
@@ -25,26 +22,26 @@ apps/docs/static/admin-dashboard/
 .env.*.local
 
 # AI assistants
-/.claude/
-/.codex/
-/.cursor/
-/.continue/
-/.windsurf/
-/.gemini/
-/.aider*
-/.roo/
-/cline_docs/
+.claude/
+.codex/
+.cursor/
+.continue/
+.windsurf/
+.gemini/
+.aider*
+.roo/
+cline_docs/
 
 # AI instruction files
-/CLAUDE.md
-/AGENTS.md
-/GEMINI.md
-/.cursorrules
-/.windsurfrules
-/.clinerules
-/copilot-instructions.md
-/.github/copilot-instructions.md
-/.github/instructions/
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.cursorrules
+.windsurfrules
+.clinerules
+copilot-instructions.md
+.github/copilot-instructions.md
+.github/instructions/
 
 # editor / os
 .DS_Store

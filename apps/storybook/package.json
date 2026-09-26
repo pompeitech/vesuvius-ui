@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev": "storybook dev -p 5002",
     "storybook": "storybook dev -p 5002",
     "build": "storybook build",
     "lint": "biome lint .",

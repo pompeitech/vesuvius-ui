@@ -1,0 +1,50 @@
+---
+title: Toggle Group
+---
+
+# Toggle Group
+
+A Radix `ToggleGroup` — a row of toggle buttons, single selection (renders as `role="radiogroup"`) or multiple (`role="group"`).
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Single selection
+
+<ComponentPreview code={`<ToggleGroup type="single" defaultValue="left" variant="outline">
+  <ToggleGroupItem value="left" aria-label="Align left"><AlignLeft /></ToggleGroupItem>
+  <ToggleGroupItem value="center" aria-label="Align center"><AlignCenter /></ToggleGroupItem>
+  <ToggleGroupItem value="right" aria-label="Align right"><AlignRight /></ToggleGroupItem>
+</ToggleGroup>`}>
+  <ToggleGroup type="single" defaultValue="left" variant="outline">
+    <ToggleGroupItem value="left" aria-label="Align left"><AlignLeft /></ToggleGroupItem>
+    <ToggleGroupItem value="center" aria-label="Align center"><AlignCenter /></ToggleGroupItem>
+    <ToggleGroupItem value="right" aria-label="Align right"><AlignRight /></ToggleGroupItem>
+  </ToggleGroup>
+</ComponentPreview>
+
+## API
+
+**ToggleGroup**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `"single" \| "multiple"` | | Required. `"single"` allows at most one pressed item (`role="radiogroup"`); `"multiple"` allows any number (`role="group"`). |
+| `value` / `defaultValue` | `string` (single) or `string[]` (multiple) | | Must match `type`. |
+| `onValueChange` | `(value: string \| string[]) => void` | | |
+| `disabled` | `boolean` | `false` | Disables every item. |
+| `variant` | `"default" \| "outline"` | `"default"` | Shared by every item unless an item overrides it. |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | Shared by every item unless an item overrides it. |
+
+**ToggleGroupItem**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | Required — unique within the group. |
+| `disabled` | `boolean` | Disables just this one item. |
+| `variant` / `size` | Same as `ToggleGroup`'s | Overrides the group's shared value for this one item. |
+
+### Accessibility
+
+`type="single"` uses roving `tabIndex` like a native radio group — arrow keys move between items and select immediately. Always give each `ToggleGroupItem` an `aria-label` when it holds only an icon (as in the example above), since the item itself has no visible text.

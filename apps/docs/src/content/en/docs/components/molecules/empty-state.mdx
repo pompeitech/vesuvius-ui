@@ -1,0 +1,30 @@
+---
+title: Empty State
+---
+
+# Empty State
+
+A consistent first-run, filtered or empty result state for pages, cards and tables.
+
+<ComponentPreview code={`<EmptyState
+  icon={FileSearchIcon}
+  title="No orders yet"
+  description="Orders will appear here once your first customer checks out."
+  action={<Button size="sm">Create order</Button>}
+/>`}>
+  <Demo name="empty-state-default" />
+</ComponentPreview>
+
+Use `compact` inside a card or table body where vertical space is limited.
+
+## API
+
+| Prop          | Type            | Default | Description                               |
+| ------------- | --------------- | ------- | ----------------------------------------- |
+| `title`       | `string`        | —       | Primary empty-state heading.              |
+| `description` | `string`        | —       | Supporting explanation.                   |
+| `icon`        | `ComponentType` | —       | Optional decorative icon.                 |
+| `action`      | `ReactNode`     | —       | Optional action, usually a Button.        |
+| `compact`     | `boolean`       | `false` | Uses tighter spacing for embedded states. |
+
+The root accepts native `<div>` props.

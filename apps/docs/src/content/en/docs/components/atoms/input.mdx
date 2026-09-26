@@ -1,0 +1,96 @@
+---
+title: Input
+---
+
+# Input
+
+A styled native `<input>` — every native type (`text`, `email`, `password`, `number`, `file`, ...) shares the same visual treatment.
+
+```tsx
+import { Input } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Input type="email" placeholder="Email" />`}>
+  <Input type="email" placeholder="Email" className="max-w-sm" />
+</ComponentPreview>
+
+## With a label
+
+<ComponentPreview
+  code={`<div className="grid w-full max-w-sm gap-1.5">
+  <Label htmlFor="email">Email</Label>
+  <Input type="email" id="email" placeholder="Email" />
+</div>`}
+>
+  <div className="grid w-full max-w-sm gap-1.5">
+    <Label htmlFor="docs-input-email">Email</Label>
+    <Input type="email" id="docs-input-email" placeholder="Email" />
+  </div>
+</ComponentPreview>
+
+## Sizes
+
+The four sizes use the same height scale as Button, Select, and MultiSelect:
+
+<ComponentPreview
+  code={`<Input size="xs" placeholder="Extra small" />
+<Input size="sm" placeholder="Small" />
+<Input size="default" placeholder="Default" />
+<Input size="lg" placeholder="Large" />`}
+>
+  <div className="flex w-full max-w-sm flex-col gap-3">
+    <Input size="xs" aria-label="Extra small input" placeholder="Extra small" />
+    <Input size="sm" aria-label="Small input" placeholder="Small" />
+    <Input size="default" aria-label="Default input" placeholder="Default" />
+    <Input size="lg" aria-label="Large input" placeholder="Large" />
+  </div>
+</ComponentPreview>
+
+## Disabled
+
+<ComponentPreview code={`<Input disabled type="email" placeholder="Email" />`}>
+  <Input disabled type="email" placeholder="Email" className="max-w-sm" />
+</ComponentPreview>
+
+## File input
+
+The native `type="file"` picker gets the same border/focus treatment as text inputs, with its own button styled to match:
+
+<ComponentPreview code={`<Input type="file" />`}>
+  <Input type="file" className="max-w-sm" />
+</ComponentPreview>
+
+## Invalid state
+
+Set `aria-invalid` — no separate `error`/`invalid` prop, so the same attribute that screen readers use also drives the styling:
+
+<ComponentPreview
+  code={`<Input aria-invalid placeholder="Email" defaultValue="not-an-email" />`}
+>
+  <Input
+    aria-invalid
+    placeholder="Email"
+    defaultValue="not-an-email"
+    className="max-w-sm"
+  />
+</ComponentPreview>
+
+## API
+
+**Input**
+
+| Prop           | Type                                | Default     | Description                                                           |
+| -------------- | ----------------------------------- | ----------- | --------------------------------------------------------------------- |
+| `type`         | `React.HTMLInputTypeAttribute`      | `"text"`    | Any native input type.                                                |
+| `size`         | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` | Control height: 28, 32, 36, or 40 px.                                 |
+| `aria-invalid` | `boolean`                           |             | Drives the invalid/error styling — there is no separate `error` prop. |
+
+Plus every other native `<input>` prop (`disabled`, `placeholder`, `value`/`defaultValue`, `onChange`, `required`, `min`/`max`, `accept`, ...).
+
+Commonly paired with [`Label`](/docs/components/atoms/label) for the field caption and (in a form context) helper/error text below it.
+
+### Accessibility
+
+Always associate an `Input` with a `Label` via matching `htmlFor`/`id` (as above) rather than relying on `placeholder` alone — placeholder text disappears the moment the user types and is not a reliable accessible name for every assistive technology.

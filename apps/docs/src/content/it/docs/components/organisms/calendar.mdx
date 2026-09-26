@@ -1,0 +1,74 @@
+---
+title: Calendar
+---
+
+# Calendar
+
+Una griglia calendario [react-day-picker](https://daypicker.dev/) v10, restilizzata per abbinarsi al kit — data singola, un intervallo, o multiple. La base per `DatePicker`, `DateRangePicker` e `DateTimePicker`, che la avvolgono ciascuno in un trigger + popover.
+
+```tsx
+import { Calendar } from "@pompeitech/vesuvius-ui";
+```
+
+## Data singola
+
+<ComponentPreview code={`const [date, setDate] = useState<Date | undefined>(new Date());
+
+<Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />`}>
+  <Demo name="calendar-single" />
+</ComponentPreview>
+
+## Navigazione a dropdown mese/anno
+
+<ComponentPreview code={`<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  captionLayout="dropdown"
+  startMonth={new Date(1950, 0)}
+  endMonth={new Date(2050, 11)}
+  className="rounded-md border"
+/>`}>
+  <Calendar
+    mode="single"
+    selected={new Date()}
+    captionLayout="dropdown"
+    startMonth={new Date(1950, 0)}
+    endMonth={new Date(2050, 11)}
+    className="rounded-md border"
+  />
+</ComponentPreview>
+
+## Intervallo
+
+<ComponentPreview code={`<Calendar mode="range" selected={range} onSelect={setRange} numberOfMonths={2} className="rounded-md border" />`} className="overflow-x-auto">
+  <Calendar mode="range" numberOfMonths={2} captionLayout="dropdown" className="rounded-md border" />
+</ComponentPreview>
+
+## API
+
+**Calendar** accetta ogni prop che accetta il `DayPicker` di react-day-picker, più un'aggiunta:
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `buttonVariant` | `"ghost" \| "outline"` | `"ghost"` | Stile dei pulsanti di navigazione mese prec/succ e, con `captionLayout="dropdown"`, dei trigger dei dropdown mese/anno. |
+
+Le prop di `DayPicker` più comunemente usate:
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `mode` | `"single" \| "range" \| "multiple"` | | Modalità di selezione — cambia la forma attesa da `selected`/`onSelect`. |
+| `selected` | `Date` (single) / `DateRange` (range) / `Date[]` (multiple) | | La forma dipende da `mode`. |
+| `onSelect` | corrisponde alla forma di `selected` | | |
+| `numberOfMonths` | `number` | `1` | Quanti mesi vengono renderizzati affiancati. |
+| `captionLayout` | `"label" \| "dropdown"` | `"label"` | `"label"` mostra un semplice testo "Mese Anno"; `"dropdown"` lo sostituisce con due dropdown simili a [`Select`](/docs/components/molecules/select), delimitati da `startMonth`/`endMonth`. |
+| `startMonth` / `endMonth` | `Date` | | Limiti per la navigazione e per l'elenco anni di `captionLayout="dropdown"`. |
+| `showOutsideDays` | `boolean` | `true` | Mostra i giorni iniziali/finali dei mesi adiacenti, attenuati. |
+| `disabled` | `Date \| Date[] \| DateRange \| Matcher \| Matcher[]` | | Date che non possono essere selezionate. |
+| `min` / `max` | `number` | | Per `mode="range"`: numero minimo/massimo di giorni che l'intervallo deve coprire. |
+
+Vedi [la documentazione di react-day-picker](https://daypicker.dev/) per il riferimento completo — ogni prop che accetta (formatter, modifier, locale, numeri di settimana, e altro) passa direttamente attraverso.
+
+### Accessibilità
+
+Costruito sulla propria implementazione `role="grid"` di react-day-picker — le frecce spostano il focus di un giorno, <kbd>PageUp</kbd>/<kbd>PageDown</kbd> saltano di un mese, <kbd>Home</kbd>/<kbd>End</kbd> saltano all'inizio/fine della settimana, e <kbd>Invio</kbd>/<kbd>Spazio</kbd> seleziona il giorno a fuoco. Il giorno corrente e quello/i selezionato/i vengono annunciati automaticamente tramite `aria-current`/`aria-selected`.

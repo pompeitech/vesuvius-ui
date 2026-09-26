@@ -1,0 +1,305 @@
+---
+title: Theming
+---
+
+# Theming
+
+Vesuvius UI separa due assi indipendenti: **modalità chiara/scura** e **tema colore** (palette). Entrambi sono gestiti da `ThemeProvider`, montato una sola volta alla radice della tua app.
+
+```tsx
+import { ThemeProvider } from "@pompeitech/vesuvius-ui";
+
+<ThemeProvider defaultTheme="system" defaultColorTheme="lava">
+  <App />
+</ThemeProvider>;
+```
+
+## API
+
+**ThemeProvider**
+
+| Prop                   | Tipo                            | Default                     | Descrizione                                                                                                                                                                                                                                              |
+| ---------------------- | ------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultTheme`         | `"light" \| "dark" \| "system"` | `"system"`                  | Modalità applicata prima che l'utente ne scelga una. `"system"` segue `prefers-color-scheme` e continua ad ascoltare i cambi a livello di sistema operativo.                                                                                             |
+| `defaultColorTheme`    | `ColorTheme`                    | `"lava"`                    | Tema colore applicato prima che l'utente ne scelga uno.                                                                                                                                                                                                  |
+| `colorThemes`          | `readonly ColorTheme[]`         | tutti e 10 i predefiniti    | L'insieme completo dei temi colore selezionabili — passa un sottoinsieme per limitare cosa `ThemePalettePicker`/`ThemeSwitcher` offrono, oppure aggiungi il nome di un tuo tema personalizzato (vedi [Un tema personalizzato](#un-tema-personalizzato)). |
+| `storageKey`           | `string`                        | `"vesuvius-ui-theme"`       | Chiave `localStorage` per la scelta della modalità.                                                                                                                                                                                                      |
+| `colorThemeStorageKey` | `string`                        | `"vesuvius-ui-color-theme"` | Chiave `localStorage` per la scelta del tema colore.                                                                                                                                                                                                     |
+
+**useTheme()**
+
+| Campo           | Tipo                                             | Descrizione                                                                                                    |
+| --------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| `theme`         | `"light" \| "dark" \| "system"`                  | Cosa ha scelto l'utente.                                                                                       |
+| `resolvedTheme` | `"light" \| "dark"`                              | `theme` con `"system"` risolto a un valore concreto — usalo per qualsiasi cosa richieda una modalità concreta. |
+| `colorTheme`    | `ColorTheme`                                     | Il nome della palette attiva.                                                                                  |
+| `setTheme`      | `(theme: "light" \| "dark" \| "system") => void` |                                                                                                                |
+| `setColorTheme` | `(theme: ColorTheme) => void`                    |                                                                                                                |
+
+Lancia un errore se chiamato fuori da un `ThemeProvider` — non fallisce silenziosamente con valori `undefined`.
+
+La modalità viene applicata come classe `.dark` su `<html>`; il tema colore come attributo `data-theme="<nome>"`, anch'esso su `<html>`. Entrambi persistono su `localStorage` e restano completamente indipendenti — attivare la modalità scura non cambia mai il tema colore, e viceversa, quindi una combinazione come "supabase, dark" o "vercel, light" sopravvive a un reload.
+
+## Theme tokens
+
+Ogni colore usato dai componenti è una custom property CSS, mai un colore Tailwind hardcoded — quindi ri-tematizzare il kit è interamente un esercizio sulle variabili CSS, senza toccare codice dei componenti. Questa è esattamente la convenzione usata da [shadcn/ui](https://ui.shadcn.com/docs/theming), e Vesuvius la segue deliberatamente: ogni token grezzo (`--primary`, `--background`, ...) viene impostato una volta sotto `:root`/`.dark`, poi ri-esposto a Tailwind v4 tramite un blocco `@theme inline`:
+
+```css
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  /* ...una riga per token, stesso pattern per tutti */
+}
+```
+
+Quella indirezione `--color-*` è ciò che fa esistere `bg-primary`, `text-primary-foreground`, `border-border`, `ring-ring` e ogni altra utility class tematizzata — i componenti scrivono usando quelle utility e non vedono mai direttamente il valore grezzo di `--primary`, quindi sovrascrivere un token ri-tematizza istantaneamente ogni componente che lo usa, senza alcuna modifica a livello di componente.
+
+### Token di base
+
+| Token                      | Utility class                 | Usato per                                                                          |
+| -------------------------- | ----------------------------- | ---------------------------------------------------------------------------------- |
+| `--background`             | `bg-background`               | Sfondo della pagina, dietro ogni superficie.                                       |
+| `--foreground`             | `text-foreground`             | Colore di testo predefinito del corpo.                                             |
+| `--card`                   | `bg-card`                     | Sfondo della superficie card/pannello.                                             |
+| `--card-foreground`        | `text-card-foreground`        | Testo sopra una superficie card.                                                   |
+| `--popover`                | `bg-popover`                  | Sfondo della superficie dropdown/popover/tooltip.                                  |
+| `--popover-foreground`     | `text-popover-foreground`     | Testo sopra una superficie popover.                                                |
+| `--primary`                | `bg-primary`                  | Colore dell'azione primaria — Button di default, stati attivi, accento del brand.  |
+| `--primary-foreground`     | `text-primary-foreground`     | Colore di testo/icona sopra `--primary`.                                           |
+| `--primary-emphasis`       | `text-primary-emphasis`       | Testo/icone primari accessibili su superfici chiare.                               |
+| `--secondary`              | `bg-secondary`                | Superfici secondarie — la variante `secondary` di Button, riempimenti tenui.       |
+| `--secondary-foreground`   | `text-secondary-foreground`   | Testo sopra `--secondary`.                                                         |
+| `--muted`                  | `bg-muted`                    | Sfondi a bassa enfasi — stati disabilitati, righe tenui.                           |
+| `--muted-foreground`       | `text-muted-foreground`       | Testo a bassa enfasi — didascalie, placeholder, testo di aiuto.                    |
+| `--accent`                 | `bg-accent`                   | Sfondo hover/highlight — voci di menu, righe selezionate.                          |
+| `--accent-foreground`      | `text-accent-foreground`      | Testo sopra `--accent`.                                                            |
+| `--destructive`            | `bg-destructive`              | Azioni distruttive e stati di errore.                                              |
+| `--destructive-foreground` | `text-destructive-foreground` | Colore di testo/icona sopra `--destructive`.                                       |
+| `--border`                 | `border-border`               | Colore del bordo predefinito, usato ovunque (card, input, divisori).               |
+| `--input`                  | `border-input`                | Colore del bordo specifico per i controlli di form (Input, Select, Textarea, ...). |
+| `--ring`                   | `ring-ring`                   | Colore del focus ring su ogni elemento focalizzabile.                              |
+
+### Token di stato semantico
+
+Oltre alla convenzione di shadcn, Vesuvius aggiunge quattro coppie dedicate di stato semantico — usate da `Alert`, `Badge`, `Toast` e ovunque uno stato debba avere un significato fisso indipendentemente dal `--primary` del tema colore attivo:
+
+| Token                                    | Utility class                                | Usato per                                                   |
+| ---------------------------------------- | -------------------------------------------- | ----------------------------------------------------------- |
+| `--success` / `--success-foreground`     | `bg-success` / `text-success-foreground`     | Conferme, stati completati.                                 |
+| `--success-emphasis`                     | `text-success-emphasis`                      | Testo/icone di successo accessibili su superfici chiare.    |
+| `--warning` / `--warning-foreground`     | `bg-warning` / `text-warning-foreground`     | Cautela, stati vicini al limite.                            |
+| `--warning-emphasis`                     | `text-warning-emphasis`                      | Testo/icone di avviso accessibili su superfici chiare.      |
+| `--info` / `--info-foreground`           | `bg-info` / `text-info-foreground`           | Callout informativi neutri.                                 |
+| `--info-emphasis`                        | `text-info-emphasis`                         | Testo/icone informativi accessibili su superfici chiare.    |
+| `--highlight` / `--highlight-foreground` | `bg-highlight` / `text-highlight-foreground` | Enfasi in stile "novità"/annuncio, distinta da `--primary`. |
+| `--highlight-emphasis`                   | `text-highlight-emphasis`                    | Testo/icone di enfasi accessibili su superfici chiare.      |
+
+### Token dei grafici
+
+| Token                     | Utility class                         | Usato per                                                                                                                                                  |
+| ------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--chart-1` … `--chart-5` | `fill-chart-1` … `fill-chart-5`, ecc. | Una scala di colori categorica a 5 passi per `Charts`, `SimpleRadarChart`, `Sparkline`, `ChartCard` — usata ciclicamente man mano che si aggiungono serie. |
+
+### Token della sidebar
+
+Il componente `Sidebar` ha una propria palette dedicata invece di riusare i token di base, così una sidebar può intenzionalmente leggersi come una regione di "chrome" distinta (più scura, o tinta diversamente) rispetto all'area di contenuto principale:
+
+| Token                                                | Utility class                                            | Usato per                                                           |
+| ---------------------------------------------------- | -------------------------------------------------------- | ------------------------------------------------------------------- |
+| `--sidebar`                                          | `bg-sidebar`                                             | Sfondo della sidebar.                                               |
+| `--sidebar-foreground`                               | `text-sidebar-foreground`                                | Testo predefinito della sidebar.                                    |
+| `--sidebar-primary` / `--sidebar-primary-foreground` | `bg-sidebar-primary` / `text-sidebar-primary-foreground` | Voce attiva/selezionata della sidebar.                              |
+| `--sidebar-accent` / `--sidebar-accent-foreground`   | `bg-sidebar-accent` / `text-sidebar-accent-foreground`   | Voce della sidebar in hover.                                        |
+| `--sidebar-border`                                   | `border-sidebar-border`                                  | Bordi all'interno della sidebar (incluso il proprio bordo esterno). |
+| `--sidebar-ring`                                     | `ring-sidebar-ring`                                      | Focus ring sulle voci della sidebar.                                |
+
+### Radius e tipografia
+
+| Token            | Descrizione                                                                                                                                                                                                                                                       |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--radius`       | Il raggio d'angolo di base. Ogni raggio dei componenti (`--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`) è derivato da questo unico valore tramite `calc()`, quindi cambiare solo `--radius` riscala in modo coerente ogni angolo arrotondato del kit. |
+| `--font-heading` | Font applicato a `<h1>`–`<h6>` e a qualsiasi componente che aderisca allo stile di testo "heading". Il testo del corpo usa lo stack `font-sans` predefinito di Tailwind, non influenzato da questo token.                                                         |
+
+Sovrascrivi uno qualsiasi di questi token su `:root` (e `.dark` per il valore in modalità scura) nel CSS della tua app, dopo il foglio di stile di Vesuvius, per ri-brandizzare senza forkare il package:
+
+```css
+:root {
+  --radius: 0.5rem;
+  --font-heading: "Il Tuo Font Brand", sans-serif;
+}
+```
+
+## I 10 temi predefiniti
+
+Il catalogo visuale è disponibile su [/themes](/themes), con una pagina di dettaglio dedicata a ogni palette. Ogni tema è anche il proprio `exports` subpath sotto `themes/` — importa solo quelli che offri, per uno stile CSS più leggero:
+
+```css
+/* Tutti i temi insieme */
+@import "@pompeitech/vesuvius-ui/styles.css";
+
+/* Oppure solo quello che serve */
+@import "@pompeitech/vesuvius-ui/base.css";
+@import "@pompeitech/vesuvius-ui/themes/lava.css";
+```
+
+### lava
+
+Il tema di punta del kit e default di `ThemeProvider` — ri-tinteggia ogni superficie (non solo l'accento), con una calda palette "pietra vulcanica": inchiostro scuro su superfici crema in modalità chiara, inchiostro crema su ossidiana quasi nera in modalità scura, entrambi ancorati a un primary arancio bruciato.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/lava.css";
+```
+
+### stripe
+
+Una palette fintech-editoriale ispirata a Stripe: canvas bianco, inchiostro blu navy profondo e un accento operativo violetto-blurple.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/stripe.css";
+```
+
+### vercel
+
+Una palette netta bianca e nera ispirata alle superfici minimali di Vercel.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/vercel.css";
+```
+
+### supabase
+
+Una palette emerald-mint ispirata a Supabase: brillante, tecnica e amichevole.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/supabase.css";
+```
+
+### linear
+
+Una palette fredda e contenuta con il primary violet-indigo morbido associato a Linear.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/linear.css";
+```
+
+### claude
+
+Una palette calda parchment e terracotta ispirata all'atmosfera di Claude.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/claude.css";
+```
+
+### amber-minimal
+
+Una palette bianca pulita con un primary ambra-dorato concentrato.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/amber-minimal.css";
+```
+
+### claymorphism
+
+Una palette morbida e dimensionale costruita su un canvas clay di tono medio (`#e0e0e0`), superfici quasi bianche e un primary viola deciso. I token di contrasto e semantici restano compatibili con il contratto shadcn standard in entrambe le modalità.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/claymorphism.css";
+```
+
+### alpine
+
+Una palette SaaS premium ispirata ad Alpine: inchiostro alpine-night profondo, struttura cobalt decisa, calore corallo e un canvas blush morbido (`#fcf5f7`).
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/alpine.css";
+```
+
+### aubergine
+
+Una palette ispirata a Slack, con sidebar aubergine, superfici viola espressive e azioni blu brillanti.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/aubergine.css";
+```
+
+## Cosa sovrascrive davvero un tema
+
+Un file di tema è composto da custom property CSS sotto `[data-theme="<nome>"]` (e `[data-theme="<nome>"].dark` per la sua variante scura). Tutti e dieci i temi predefiniti forniscono una palette completa chiara/scura: superfici, testi, azioni, stati semantici, grafici e sidebar.
+
+Ogni componente legge questi valori come utility Tailwind (`bg-primary`, `text-muted-foreground`, `border-border`, …) generate dal blocco `@theme inline` in `base.css` — i componenti non hardcodano mai un colore, quindi un cambio di tema non richiede alcuna modifica a livello di componente.
+
+## Far scegliere il tema agli utenti
+
+Tre controlli già pronti leggono/scrivono lo stesso contesto di `ThemeProvider`:
+
+```tsx
+import { ThemeModeToggle, ThemePalettePicker, ThemeSwitcher } from "@pompeitech/vesuvius-ui";
+
+// Un singolo pulsante icona che inverte chiaro/scuro.
+<ThemeModeToggle />
+
+// Una command palette ricercabile di temi colore.
+<ThemePalettePicker />
+
+// Sia modalità che tema colore in un unico dropdown.
+<ThemeSwitcher />
+```
+
+Tutti e tre chiamano internamente `useTheme()`, quindi funzionano solo dentro un `ThemeProvider`.
+
+## Un tema personalizzato
+
+Un tema è semplicemente custom property CSS sotto `[data-theme="<nome>"]` (e `[data-theme="<nome>"].dark` per la sua variante scura) — aggiungi il tuo senza toccare questo package. Sovrascrivi i token di superficie oltre a quelli di accento se vuoi lo stesso trattamento completo chiaro/scuro dei temi predefiniti.
+
+```css
+[data-theme="acme"] {
+  --primary: oklch(0.55 0.2 145);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.55 0.2 145);
+
+  --chart-1: oklch(0.55 0.2 145);
+  --chart-2: oklch(0.62 0.18 170);
+  --chart-3: oklch(0.5 0.19 120);
+  --chart-4: oklch(0.68 0.16 90);
+  --chart-5: oklch(0.45 0.18 160);
+
+  --sidebar-primary: oklch(0.55 0.2 145);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-ring: oklch(0.55 0.2 145);
+}
+[data-theme="acme"].dark {
+  --primary: oklch(0.7 0.17 145);
+  --primary-foreground: oklch(0.145 0 0);
+  --ring: oklch(0.7 0.17 145);
+
+  --chart-1: oklch(0.7 0.17 145);
+  --chart-2: oklch(0.75 0.15 170);
+  --chart-3: oklch(0.65 0.16 120);
+  --chart-4: oklch(0.8 0.14 90);
+  --chart-5: oklch(0.6 0.15 160);
+
+  --sidebar-primary: oklch(0.7 0.17 145);
+  --sidebar-primary-foreground: oklch(0.145 0 0);
+  --sidebar-ring: oklch(0.7 0.17 145);
+}
+```
+
+Poi passa il suo nome tramite `colorThemes` così i picker predefiniti lo elencano anche loro:
+
+```tsx
+import { ThemeProvider, COLOR_THEMES } from "@pompeitech/vesuvius-ui";
+
+<ThemeProvider colorThemes={[...COLOR_THEMES, "acme"]} defaultColorTheme="acme">
+  <App />
+</ThemeProvider>;
+```
+
+Il tipo di `colorTheme` (`ColorTheme`) è formato dai 10 nomi predefiniti allargati con `string & {}` proprio perché un nome personalizzato come `"acme"` passi il type-check senza dover forkare o estendere i tipi del package.
+
+Preferisci `oklch()` a `hsl()`/`rgb()` quando scrivi nuovi valori di token — ogni tema predefinito è scritto in `oklch()` proprio perché mantiene coerente la luminosità percepita tra le tonalità, ed è ciò che fa sì che una coppia chiaro/scuro dello stesso tema sembri un abbinamento coerente invece di due colori scollegati.
+
+## Difendere i componenti renderizzati dentro il CSS di un altro host
+
+Se i componenti di questo kit vengono renderizzati dentro una pagina che ha un proprio CSS globale (un sito di documentazione, un tema CMS, un altro design system nella stessa pagina) — non solo dentro la tua app — quel CSS host può infiltrarsi in qualsiasi cosa il kit renderizzi come elemento nativo grezzo, specialmente `<table>` (`Calendar`, `Table`/`DataTable`), dato che un numero sorprendente di CSS reset distribuisce una regola globale non scoperta `table { ... }`.
+
+Il kit si difende da solo, nel `@layer base` di `base.css`, invece di lasciarlo ai consumatori: `[data-slot="table"]` e `.group\/calendar table` ricevono reset protetti da `!important` per `display`, `border-collapse` e bordi/padding/sfondo delle celle. `!important` è necessario proprio per come funzionano i cascade layer CSS — le utility di Tailwind vivono in `@layer utilities`, e _qualsiasi_ CSS host non scoperto (anche un singolo selettore a bassa specificità) supera sempre _qualunque cosa_ si trovi in un layer, indipendentemente dalla specificità; solo `!important` inverte questo comportamento. Se incontri lo stesso tipo di bug con un componente che questo kit non protegge ancora, la correzione ha la stessa forma: una regola non scoperta (o `!important`) scoperta sul `data-slot` di quel componente.

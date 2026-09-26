@@ -1,0 +1,46 @@
+---
+title: Combobox
+---
+
+# Combobox
+
+Searchable single-value selection for teams, customers, projects and other large option sets. For selecting several values, use [`MultiSelect`](/docs/components/organisms/multi-select).
+
+```tsx
+import { Combobox } from "@pompeitech/vesuvius-ui";
+
+<Combobox
+  aria-label="Team"
+  options={[
+    { value: "engineering", label: "Engineering", description: "12 members" },
+    { value: "design", label: "Design", description: "8 members" },
+  ]}
+  placeholder="Select a team..."
+  searchPlaceholder="Search teams..."
+/>;
+```
+
+## Controlled
+
+```tsx
+const [team, setTeam] = useState<string>();
+
+<Combobox options={teams} value={team} onValueChange={setTeam} clearable />;
+```
+
+## Sizes
+
+`Combobox` follows the shared 28 / 32 / 36 / 40 px control height scale through `xs`, `sm`, `default` and `lg`.
+
+## API
+
+| Prop                              | Type                                   | Default     | Description                                                           |
+| --------------------------------- | -------------------------------------- | ----------- | --------------------------------------------------------------------- |
+| `options`                         | `ComboboxOption[]`                     | —           | Options with `value`, `label`, optional `description` and `disabled`. |
+| `value` / `defaultValue`          | `string`                               | —           | Controlled or initial selected value.                                 |
+| `onValueChange`                   | `(value: string \| undefined) => void` | —           | Called after selecting or clearing an option.                         |
+| `clearable`                       | `boolean`                              | `false`     | Adds a clear action inside the menu.                                  |
+| `size`                            | `"xs" \| "sm" \| "default" \| "lg"`    | `"default"` | Shared control height.                                                |
+| `searchPlaceholder` / `emptyText` | `string`                               | —           | Search input and no-results copy.                                     |
+
+The trigger also accepts `aria-label`, `aria-labelledby`, `disabled` and `className`.

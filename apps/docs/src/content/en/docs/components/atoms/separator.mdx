@@ -1,0 +1,58 @@
+---
+title: Separator
+---
+
+# Separator
+
+A Radix `Separator.Root` — a thin rule, horizontal or vertical.
+
+```tsx
+import { Separator } from "@pompeitech/vesuvius-ui";
+```
+
+## Horizontal
+
+<ComponentPreview code={`<div className="w-64">
+  <div className="text-sm">Vesuvius UI</div>
+  <Separator className="my-4" />
+  <div className="text-sm text-muted-foreground">A personal design system</div>
+</div>`}>
+  <div className="w-64">
+    <div className="text-sm">Vesuvius UI</div>
+    <Separator className="my-4" />
+    <div className="text-sm text-muted-foreground">A personal design system</div>
+  </div>
+</ComponentPreview>
+
+## Vertical
+
+<ComponentPreview code={`<div className="flex h-8 items-center gap-4 text-sm">
+  <span>Blog</span>
+  <Separator orientation="vertical" />
+  <span>Docs</span>
+  <Separator orientation="vertical" />
+  <span>Source</span>
+</div>`}>
+  <div className="flex h-8 items-center gap-4 text-sm">
+    <span>Blog</span>
+    <Separator orientation="vertical" />
+    <span>Docs</span>
+    <Separator orientation="vertical" />
+    <span>Source</span>
+  </div>
+</ComponentPreview>
+
+## API
+
+**Separator**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Vertical needs a defined height from its container (`flex` + `items-center` with a fixed-height row, as in the example above) — it has no intrinsic height of its own. |
+| `decorative` | `boolean` | `true` | `true` hides it from assistive tech (it's purely visual, not semantic content) by rendering `role="none"`. Set `false` only if the separator genuinely marks a thematic break in content (Radix then renders `role="separator"` with the correct `aria-orientation`). |
+
+Plus every native `<div>` prop.
+
+### Accessibility
+
+Leave `decorative` at its default `true` for purely visual dividers — the common case. Only set it `false` when the separator itself carries meaning (separating unrelated sections of content a screen reader user should be told about), not just visual rhythm between elements that are already grouped some other way.

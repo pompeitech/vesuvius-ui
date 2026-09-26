@@ -1,0 +1,106 @@
+---
+title: Form
+---
+
+# Form
+
+A thin binding between [react-hook-form](https://react-hook-form.com/) and the kit's own field components — label/control/error message wired together and announced correctly to assistive tech. Pairs with `useZodForm` (also exported by the package) for schema-driven Zod validation.
+
+```tsx
+import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage, useZodForm } from "@pompeitech/vesuvius-ui";
+```
+
+## Example
+
+Try submitting empty, or with a 1-character username — the errors come straight from the Zod schema, announced via `FormMessage`:
+
+<ComponentPreview code={`const schema = z.object({
+  username: z.string().min(2, "Username must be at least 2 characters."),
+  email: z.email("Enter a valid email address."),
+});
+
+function ProfileForm() {
+  const form = useZodForm(schema, { defaultValues: { username: "", email: "" } });
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit((values) => console.log(values))} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="admin" {...field} />
+              </FormControl>
+              <FormDescription>Your public display name.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="you@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  );
+}`} className="w-full">
+  <Demo name="form-profile" />
+</ComponentPreview>
+
+## Number input
+
+`FieldNumberInput` connects a numeric input to react-hook-form's value and validation state:
+
+<ComponentPreview code={`<FieldNumberInput name="amount" label="Amount" description="Enter an amount in euros." />`}>
+  <Demo name="form-number-input" />
+</ComponentPreview>
+
+`FormMessage` renders the field's actual react-hook-form validation error automatically — no manual wiring. Need a success/info/warning state instead, or a helper text outside RHF entirely? Use `FormHelperText`.
+
+## API
+
+**Form** — `react-hook-form`'s own `FormProvider`, re-exported under this name. Spread `{...form}` from `useZodForm()` (or a plain `useForm()`) onto it.
+
+**useZodForm**
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| `schema` | `ZodType` | The Zod schema — its inferred type drives every field's type-checking. |
+| `options` | `UseFormProps` (minus `resolver`) | Any other `react-hook-form` option (`defaultValues`, `mode`, ...) — `mode` defaults to `"onTouched"` here instead of `react-hook-form`'s own `"onSubmit"` default. |
+
+Returns the same `UseFormReturn` object plain `useForm` does, with `resolver` already wired to `zodResolver(schema)`.
+
+**FormField**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `control` | from `form.control` | |
+| `name` | keyof your schema's fields | Type-checked against the schema when using `useZodForm`. |
+| `render` | `({ field }) => ReactNode` | `field` carries `value`, `onChange`, `onBlur`, `ref`, `name` — spread it onto your input (`<Input {...field} />`). |
+
+**FormItem** — plain layout wrapper (`<div className="space-y-2">`); generates the `id` that links `FormLabel`/`FormControl`/`FormMessage` together via context, no manual `id`/`htmlFor`/`aria-describedby` needed.
+
+**FormLabel** — every native `<label>` prop; automatically turns red when the field has a validation error.
+
+**FormControl** — a `Slot` (renders no element of its own) that forwards the right `id`/`aria-invalid`/`aria-describedby` onto its single child — always the actual input/select/etc.
+
+**FormDescription** — every native `<p>` prop; static helper text, unaffected by validation state.
+
+**FormMessage** — every native `<p>` prop; renders the field's current react-hook-form error message, or nothing at all when there isn't one (not even an empty element).
+
+### Accessibility
+
+`FormItem`'s generated id wires `FormLabel`'s `htmlFor`, the control's `id`, and `aria-describedby` pointing at both `FormDescription` and `FormMessage` (when present) — all of it automatic, so a correctly-composed `FormField` is fully accessible without any manual ARIA attributes from you.

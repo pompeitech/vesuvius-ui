@@ -1,0 +1,68 @@
+---
+title: List
+---
+
+# List
+
+`List` e `ListItem` offrono un layout coerente per impostazioni, navigazione, attività e righe operative. Ogni item può mostrare un contenuto prima della scritta tramite `leading`, dopo tramite `trailing`, oppure entrambi. Usa `dense` quando lo spazio verticale è importante.
+
+```tsx
+import { Badge, List, ListItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Contenuto prima e dopo
+
+<ComponentPreview code={`<List>
+  <ListItem leading={<span>●</span>} trailing={<Badge>3</Badge>}>
+    Notifiche
+  </ListItem>
+  <ListItem trailing={<span>›</span>}>
+    Impostazioni account
+  </ListItem>
+</List>`}>
+  <List className="max-w-md rounded-lg border">
+    <ListItem leading={<span className="size-2 rounded-full bg-green-500" />} trailing={<Badge>3</Badge>}>
+      <span className="font-medium">Notifiche</span>
+      <span className="text-muted-foreground mt-0.5 block text-xs">Hai nuove attività</span>
+    </ListItem>
+    <ListItem trailing={<span className="text-muted-foreground text-lg">›</span>}>
+      <span className="font-medium">Impostazioni account</span>
+    </ListItem>
+  </List>
+</ComponentPreview>
+
+## Dense
+
+Usa `dense` sull’item per ridurre padding e spaziatura in tabelle, menu o liste di stato compatte.
+
+<ComponentPreview code={`<List dividers>
+  <ListItem dense leading={<span>●</span>} trailing="Online">Maya Chen</ListItem>
+  <ListItem dense leading={<span>●</span>} trailing="Assente">Noah Williams</ListItem>
+</List>`}>
+  <List dividers className="max-w-md rounded-lg border">
+    <ListItem dense leading={<span className="size-2 rounded-full bg-green-500" />} trailing="Online">
+      Maya Chen
+    </ListItem>
+    <ListItem dense leading={<span className="size-2 rounded-full bg-yellow-500" />} trailing="Assente">
+      Noah Williams
+    </ListItem>
+  </List>
+</ComponentPreview>
+
+## API
+
+**List** — renderizza un `<ul>` e inoltra le prop native della lista.
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `dividers` | `boolean` | `false` | Aggiunge separatori tra gli item adiacenti. |
+
+**ListItem** — renderizza un `<li>` e inoltra le prop native dell’item.
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `leading` | `ReactNode` | | Contenuto prima del contenuto principale. |
+| `trailing` | `ReactNode` | | Contenuto dopo il contenuto principale. |
+| `dense` | `boolean` | `false` | Usa un layout più compatto con padding e gap ridotti. |
+
+Il contenuto dell’item può essere qualsiasi nodo React, incluso un titolo con descrizione secondaria. `leading` e `trailing` sono slot di layout: il componente mantiene dimensioni e allineamento coerenti senza richiedere utility class sull’item.

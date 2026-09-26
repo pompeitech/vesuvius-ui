@@ -1,0 +1,89 @@
+---
+title: Typography
+---
+
+# Typography
+
+The kit's type scale — one component instead of hand-picking Tailwind classes per page. Each variant renders its semantically correct element by default (`h1` → `<h1>`, `lead` → `<p>`, ...); override with `as` when you need different semantics than styling (e.g. an `<h3>`-*styled* `<div>` inside a card header).
+
+```tsx
+import { Typography } from "@pompeitech/vesuvius-ui";
+```
+
+## Variants
+
+<ComponentPreview code={`<Typography variant="h1">Heading 1</Typography>
+<Typography variant="lead">A lead paragraph.</Typography>
+<Typography variant="p">A regular paragraph.</Typography>
+<Typography variant="muted">Muted text — timestamps, hints.</Typography>
+<Typography variant="code">pnpm add @pompeitech/vesuvius-ui</Typography>`} className="flex-col items-start">
+  <Typography variant="h1">Heading 1</Typography>
+  <Typography variant="lead">A lead paragraph.</Typography>
+  <Typography variant="p">A regular paragraph.</Typography>
+  <Typography variant="muted">Muted text — timestamps, hints.</Typography>
+  <Typography variant="code">pnpm add @pompeitech/vesuvius-ui</Typography>
+</ComponentPreview>
+
+## Every variant
+
+<ComponentPreview code={`<Typography variant="h2">Heading 2</Typography>
+<Typography variant="h3">Heading 3</Typography>
+<Typography variant="large">Large text</Typography>
+<Typography variant="small">Small text</Typography>
+<Typography variant="blockquote">"A well-designed system disappears."</Typography>
+<Typography variant="list">
+  <li>First item</li>
+  <li>Second item</li>
+</Typography>`} className="flex-col items-start">
+  <Typography variant="h2">Heading 2</Typography>
+  <Typography variant="h3">Heading 3</Typography>
+  <Typography variant="large">Large text</Typography>
+  <Typography variant="small">Small text</Typography>
+  <Typography variant="blockquote">&quot;A well-designed system disappears.&quot;</Typography>
+  <Typography variant="list"><li>First item</li><li>Second item</li></Typography>
+</ComponentPreview>
+
+## Styling without the semantics
+
+Override the rendered tag with `as` when you need this variant's *styling* somewhere its semantic element wouldn't be valid HTML — a heading-styled label inside a `CardTitle` (already a heading itself), for instance:
+
+<ComponentPreview code={`<Typography variant="h3" as="div">Card title</Typography>`}>
+  <Typography variant="h3" as="div">Card title</Typography>
+</ComponentPreview>
+
+## Customizing the heading font
+
+Headings (`h1`–`h6`) use a separate `font-heading` token from body text, defined once in `base.css` as `--font-heading` (defaults to the same stack as body text, so nothing changes until you override it) — see [Theming](/docs/theming#radius-and-typography) for the full token reference:
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+
+:root {
+  --font-heading: "Cal Sans", var(--font-sans);
+}
+```
+
+## API
+
+**Typography**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "lead" \| "large" \| "small" \| "muted" \| "blockquote" \| "code" \| "list"` | `"p"` | Selects both the styling and (unless overridden by `as`) the rendered element. |
+| `as` | any element or component | the variant's default tag | Overrides the rendered element while keeping the variant's styling. |
+
+Plus every native prop of whichever element ends up rendered (a `Typography variant="p"` forwards `<p>` props, `as="div"` forwards `<div>` props, and so on).
+
+### Default tag per variant
+
+| Variant | Tag |
+| --- | --- |
+| `h1`–`h6` | `<h1>`–`<h6>` |
+| `p` | `<p>` |
+| `lead` | `<p>` |
+| `large` | `<div>` |
+| `small` | `<small>` |
+| `muted` | `<p>` |
+| `blockquote` | `<blockquote>` |
+| `code` | `<code>` |
+| `list` | `<ul>` |

@@ -1,0 +1,11 @@
+{
+  "extends": "@pompeitech/config-typescript/vite-app.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@admin/form": ["./src/components/form/index.ts"],
+      "@pompeitech/vesuvius-ui": ["../../packages/ui/src/index.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

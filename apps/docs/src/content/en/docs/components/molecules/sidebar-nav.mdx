@@ -1,0 +1,78 @@
+---
+title: Sidebar Nav
+---
+
+# Sidebar Nav
+
+Renders a [`Sidebar`](/docs/components/molecules/sidebar)'s `SidebarMenu` tree from plain data instead of hand-nesting `SidebarMenuItem`/`SidebarMenuSub` — icon + label (+ description, + badge), with submenus as collapsible sections. Framework-agnostic on purpose: give it `onNavigate` and call your router from there instead of rendering `<a>`/`<Link>` directly.
+
+```tsx
+import { SidebarNav, type SidebarNavItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+Shown here inside [`Sidebar`](/docs/components/molecules/sidebar)'s `collapsible="none"` mode, which renders inline instead of `position: fixed` — the only mode embeddable in a bounded box like this preview (see `Sidebar` for the full, real app-shell version):
+
+<ComponentPreview code={`const items: SidebarNavItem[] = [
+  { id: "overview", label: "Overview", icon: LayoutDashboardIcon, active: true },
+  {
+    id: "orders",
+    label: "Orders",
+    icon: ShoppingCartIcon,
+    badge: 12,
+    items: [
+      { id: "orders-all", label: "All orders" },
+      { id: "orders-returns", label: "Returns" },
+    ],
+  },
+];
+
+<SidebarProvider className="h-full min-h-0 w-auto">
+  <Sidebar collapsible="none" className="h-full">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarNav
+            items={items}
+            defaultOpenIds={["orders"]}
+            onNavigate={(item) => navigate(item.href!)}
+          />
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+</SidebarProvider>`}>
+  <Demo name="sidebar-nav" />
+</ComponentPreview>
+
+Used inside a [`Sidebar`](/docs/components/molecules/sidebar)'s `SidebarGroupContent`, same as any hand-built `SidebarMenu` — see `Sidebar` for the full shell.
+
+## API
+
+**SidebarNav**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `SidebarNavItem[]` | | The tree to render — required. |
+| `onNavigate` | `(item: SidebarNavItem) => void` | | Called when a leaf item (one with no `items`) is activated — call your router from here (`navigate(item.href)`, `router.push(item.href)`, ...) since this component renders no `<a>`/`<Link>` itself. |
+| `defaultOpenIds` | `string[]` | `[]` | Submenu item `id`s expanded on first render. |
+
+**SidebarNavItem**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Required — unique within its siblings; used by `defaultOpenIds`. |
+| `label` | `string` | Required. |
+| `description` | `string` | Optional second line under the label (hidden when the sidebar is collapsed to icon-only). |
+| `icon` | `LucideIcon` | Optional leading icon. |
+| `href` | `string` | Not used internally — read it yourself in `onNavigate`. |
+| `badge` | `ReactNode` | Trailing badge/count. |
+| `active` | `boolean` | Highlights the item as the current page. |
+| `disabled` | `boolean` | |
+| `items` | `SidebarNavItem[]` | Nested children — presence of this field (even an empty array) turns the item into a collapsible submenu trigger instead of a leaf link. |
+
+### Accessibility
+
+Renders real `SidebarMenuButton`/`SidebarMenuSub` primitives underneath, so keyboard navigation and focus styling are inherited automatically — see `Sidebar`'s own accessibility notes for the underlying primitives.

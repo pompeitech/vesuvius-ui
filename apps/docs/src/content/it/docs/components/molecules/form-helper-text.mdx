@@ -1,0 +1,54 @@
+---
+title: Form Helper Text
+---
+
+# Form Helper Text
+
+Testo di aiuto a livello di campo con uno stato — info/success/warning/error, non solo neutro-o-errore come le semplici descrizioni di form. Dentro un `FormField` gestito da RHF, preferisci [`FormMessage`](/docs/components/molecules/form) (renderizza automaticamente l'errore di validazione effettivo); usa questo quando ti servono stati di successo/info, o un testo di aiuto fuori da quel contesto.
+
+```tsx
+import { FormHelperText } from "@pompeitech/vesuvius-ui";
+```
+
+## Varianti
+
+<ComponentPreview code={`<FormHelperText variant="default">We'll never share your email.</FormHelperText>
+<FormHelperText variant="info">Your plan renews on the 1st.</FormHelperText>
+<FormHelperText variant="success">Username is available.</FormHelperText>
+<FormHelperText variant="warning">This action can't be easily undone.</FormHelperText>
+<FormHelperText variant="error">Password must be at least 8 characters.</FormHelperText>`} className="w-80 flex-col items-start">
+  <FormHelperText variant="default">Non condivideremo mai la tua email.</FormHelperText>
+  <FormHelperText variant="info">Il tuo piano si rinnova il 1° del mese.</FormHelperText>
+  <FormHelperText variant="success">Username disponibile.</FormHelperText>
+  <FormHelperText variant="warning">Questa azione non può essere annullata facilmente.</FormHelperText>
+  <FormHelperText variant="error">La password deve avere almeno 8 caratteri.</FormHelperText>
+</ComponentPreview>
+
+## Abbinato a un campo
+
+<ComponentPreview code={`<div className="grid gap-1.5">
+  <Label htmlFor="username">Username</Label>
+  <Input id="username" defaultValue="ada_lovelace" />
+  <FormHelperText variant="success">Username is available.</FormHelperText>
+</div>`}>
+  <div className="grid w-80 gap-1.5">
+    <Label htmlFor="docs-username-it">Username</Label>
+    <Input id="docs-username-it" defaultValue="ada_lovelace" />
+    <FormHelperText variant="success">Username disponibile.</FormHelperText>
+  </div>
+</ComponentPreview>
+
+## API
+
+**FormHelperText**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "info" \| "success" \| "warning" \| "error"` | `"default"` | Imposta sia il colore del testo che l'icona iniziale. |
+| `showIcon` | `boolean` | `true` | Ignorato per `"default"`, che non ha comunque icona. |
+
+Più ogni prop nativa di `<p>`.
+
+### Accessibilità
+
+Colorazione/iconografia puramente visiva — non porta un proprio ruolo ARIA. Quando abbinato a un campo fuori da RHF, associalo tramite `aria-describedby` che punta al suo `id` così la tecnologia assistiva lo legge insieme al campo; dentro un `FormField` di RHF, preferisci `FormMessage`/`FormDescription`, che collegano tutto questo automaticamente.

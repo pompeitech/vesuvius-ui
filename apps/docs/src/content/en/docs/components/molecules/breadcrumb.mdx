@@ -1,0 +1,117 @@
+---
+title: Breadcrumb
+---
+
+# Breadcrumb
+
+A `nav[aria-label="breadcrumb"]` — the current page renders as text with `aria-current="page"`, not a link.
+
+```tsx
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Ecommerce</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Edit product</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`}>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Ecommerce</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Products</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Edit product</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+
+## Collapsed with an ellipsis
+
+`BreadcrumbEllipsis` is a visual-only "…" marker for a trail too long to show in full — it doesn't collapse anything automatically, you decide which items to hide:
+
+<ComponentPreview code={`<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbEllipsis />
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbLink href="#">Products</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Edit product</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`}>
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbEllipsis />
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">Products</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>Edit product</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+</ComponentPreview>
+
+## With a router link
+
+`BreadcrumbLink`'s `asChild` renders its styling on a single child instead of a plain `<a>` — the usual way to swap in a router's own link component (React Router's `Link`, Next's `Link`, …) without losing the breadcrumb styling:
+
+```tsx
+<BreadcrumbLink asChild>
+  <Link to="/products">Products</Link>
+</BreadcrumbLink>
+```
+
+## API
+
+| Component | Renders | Props |
+| --- | --- | --- |
+| `Breadcrumb` | `<nav aria-label="breadcrumb">` | Every native `<nav>` prop. |
+| `BreadcrumbList` | `<ol>` wrapping every item | Every native `<ol>` prop. |
+| `BreadcrumbItem` | `<li>` | Every native `<li>` prop. |
+| `BreadcrumbLink` | `<a>` (or its `asChild` child) | `href`, `asChild` (`boolean`, default `false`), plus every native `<a>` prop. |
+| `BreadcrumbPage` | `<span>` | The current, non-link entry — sets `aria-current="page"` and `aria-disabled` automatically; every native `<span>` prop. |
+| `BreadcrumbSeparator` | `<li>` with `role="presentation"` | `children` (default: a chevron icon) — pass different children (e.g. `"/"`) to override. |
+| `BreadcrumbEllipsis` | `<span>` | A visual "…" for a collapsed trail, with a `sr-only "More"` label for screen readers; no custom props. |
+
+All accept the props of their underlying native element, plus `className`.
+
+### Accessibility
+
+The root's `aria-label="breadcrumb"` and `BreadcrumbPage`'s `aria-current="page"` are set automatically — the only thing you're responsible for is not making the current page a `BreadcrumbLink` (it should always be a `BreadcrumbPage`, since it isn't a navigable link).

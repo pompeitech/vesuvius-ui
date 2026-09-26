@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "docs": "Docs",
+    "themes": "Themes",
+    "liveDemo": "Live Demo",
+    "github": "GitHub"
+  },
+  "search": {
+    "placeholder": "Search documentation...",
+    "trigger": "Search...",
+    "empty": "No results found.",
+    "shortcutHint": "to search"
+  },
+  "sidebar": {
+    "gettingStarted": "Getting Started",
+    "introduction": "Introduction",
+    "installation": "Installation",
+    "theming": "Theming",
+    "layout": "Layout & Responsive",
+    "creatingComponents": "Creating Components",
+    "components": "Components",
+    "atoms": "Atoms",
+    "molecules": "Molecules",
+    "organisms": "Organisms"
+  },
+  "toc": {
+    "onThisPage": "On this page"
+  },
+  "page": {
+    "editOnGitHub": "Edit this page on GitHub",
+    "previous": "Previous",
+    "next": "Next",
+    "lastUpdated": "Last updated"
+  },
+  "theme": {
+    "toggleLight": "Switch to light mode",
+    "toggleDark": "Switch to dark mode",
+    "toggleSystem": "Switch to system preference"
+  },
+  "themePages": {
+    "listTitle": "Themes with a point of view.",
+    "listDescription": "Choose a complete visual language for your product. Every Vesuvius theme ships with light and dark tokens, semantic status colors and matching UI chrome.",
+    "badge": "10 built-in themes · light + dark",
+    "builtIn": "Built-in theme",
+    "detailDescription": "A complete visual language for product surfaces, interaction states and interface chrome.",
+    "viewSource": "View source",
+    "viewAll": "View all themes",
+    "palette": "Palette",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "colorSystem": "Color system",
+    "liveTokens": "Live tokens",
+    "typography": "Typography",
+    "display": "Display",
+    "body": "Body",
+    "code": "Code",
+    "shapeDepth": "Shape & depth",
+    "shapeDescription": "Soft radii, quiet shadows and layered surfaces keep the system cohesive.",
+    "install": "Install",
+    "showcase": "Theme showcase",
+    "showcaseTitle": "Components, charts, bento and marketing on the same tokens.",
+    "livePreview": "Live preview"
+  },
+  "themeCatalog": {
+    "lava": {
+      "mood": "The flagship Vesuvius palette",
+      "description": "Warm volcanic stone, cream surfaces and a burnt-orange action color."
+    },
+    "stripe": {
+      "mood": "Financial infrastructure turned product UI",
+      "description": "A white canvas, deep navy ink and a focused violet-blurple action color."
+    },
+    "vercel": {
+      "mood": "Aggressively minimal",
+      "description": "Pure black, airy white surfaces and sharp developer-product chrome."
+    },
+    "supabase": {
+      "mood": "Open-source infrastructure with warmth",
+      "description": "Bright emerald-mint energy with friendly technical surfaces."
+    },
+    "linear": {
+      "mood": "Polished issue-tracker calm",
+      "description": "Restrained cool surfaces with a soft violet-indigo primary."
+    },
+    "claude": {
+      "mood": "A reading-room glow for thoughtful products",
+      "description": "Warm parchment, terracotta heat and scholarly product chrome."
+    },
+    "amber-minimal": {
+      "mood": "Quiet surfaces, clear action",
+      "description": "A clean white palette with a focused amber-gold primary."
+    },
+    "claymorphism": {
+      "mood": "Friendly depth without visual noise",
+      "description": "Soft dimensional clay surfaces with a bold violet action color."
+    },
+    "alpine": {
+      "mood": "A premium SaaS palette with a pulse",
+      "description": "Deep alpine-night ink, confident cobalt structure and coral warmth on a blush canvas."
+    },
+    "aubergine": {
+      "mood": "Collaborative energy with a friendly edge",
+      "description": "Slack-inspired aubergine navigation, expressive violet surfaces and bright blue actions."
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has moved.",
+    "backHome": "Back to docs"
+  },
+  "fallback": {
+    "notice": "This page isn't translated yet — showing the English version."
+  },
+  "home": {
+    "hero": {
+      "title": "A complete React + TypeScript component kit — Radix UI underneath, Tailwind CSS on top, ten color themes out of the box.",
+      "description": "65 components, live previews, and full documentation — built entirely with Vesuvius UI."
+    },
+    "tabs": {
+      "atoms": "Atoms",
+      "molecules": "Molecules",
+      "organisms": "Organisms",
+      "templates": "Templates",
+      "pages": "Pages"
+    },
+    "tabsHint": {
+      "atoms": "The smallest building blocks — a single element, styled and accessible on its own.",
+      "molecules": "A few atoms combined into one reusable unit with its own behavior.",
+      "organisms": "Complete, self-contained sections built from molecules and atoms.",
+      "templates": "Layout patterns that arrange organisms into a page skeleton — the shape, not the content.",
+      "pages": "Real screens from a full product built entirely with Vesuvius UI, populated with real content."
+    },
+    "templates": [
+      {
+        "icon": "LayoutDashboard",
+        "title": "Dashboard Shell",
+        "description": "Sidebar navigation, a sticky header, and a content well of stat cards and charts."
+      },
+      {
+        "icon": "PanelsTopLeft",
+        "title": "Auth Split Screen",
+        "description": "A branded panel beside a centered form — sign in, sign up, password reset."
+      },
+      {
+        "icon": "Rows3",
+        "title": "List + Detail",
+        "description": "A DataTable driving a detail page or side panel for the selected row."
+      },
+      {
+        "icon": "Settings",
+        "title": "Settings Page",
+        "description": "Tabs or a side nav splitting a form into sections — profile, security, notifications."
+      },
+      {
+        "icon": "Kanban",
+        "title": "Board Layout",
+        "description": "A SidebarNav plus a multi-column, drag-to-reorder board of cards."
+      },
+      {
+        "icon": "CalendarDays",
+        "title": "Calendar & Scheduling",
+        "description": "A header toolbar, a month/week/day grid, and a side panel of unscheduled items."
+      }
+    ],
+    "pages": [
+      {
+        "title": "Ecommerce Dashboard",
+        "description": "Revenue, orders, and channel breakdown — charts, stat cards, a data table.",
+        "image": "/img/showcase/ecommerce-dashboard.jpg"
+      },
+      {
+        "title": "POS App",
+        "description": "A register/checkout screen — product grid, cart, location switcher.",
+        "image": "/img/showcase/pos-app.jpg"
+      },
+      {
+        "title": "Project Kanban",
+        "description": "A cross-project board — drag-to-reorder columns, filters, assignees.",
+        "image": "/img/showcase/kanban.jpg"
+      },
+      {
+        "title": "Org Chart",
+        "description": "A drag-to-reparent org chart built on the same kit's cards and avatars.",
+        "image": "/img/showcase/org-chart.jpg"
+      },
+      {
+        "title": "Team Calendar",
+        "description": "A Google-Calendar-style month view with an unscheduled-items side panel.",
+        "image": "/img/showcase/calendar.jpg"
+      },
+      {
+        "title": "Team Inbox",
+        "description": "A three-column, Gmail-style inbox with compose, reply, and folders.",
+        "image": "/img/showcase/inbox.jpg"
+      }
+    ]
+  }
+}

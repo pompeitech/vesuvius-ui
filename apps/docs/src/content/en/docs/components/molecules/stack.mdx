@@ -1,0 +1,71 @@
+---
+title: Stack
+---
+
+# Stack
+
+A flexbox layout primitive with first-class responsive props — "give me a row that stacks to a column on mobile." Pairs with [`Grid`](/docs/components/molecules/grid).
+
+```tsx
+import { Stack } from "@pompeitech/vesuvius-ui";
+```
+
+## Column (default)
+
+<ComponentPreview code={`<Stack gap={3}>
+  <Box>1</Box>
+  <Box>2</Box>
+  <Box>3</Box>
+</Stack>`}>
+  <Stack gap={3}>
+    {[1, 2, 3].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Row
+
+<ComponentPreview code={`<Stack direction="row" gap={3} align="center">
+  <Box>1</Box>
+  <Box>2</Box>
+  <Box>3</Box>
+</Stack>`}>
+  <Stack direction="row" gap={3} align="center">
+    {[1, 2, 3].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Responsive direction
+
+<ComponentPreview code={`<Stack direction={{ base: "column", md: "row" }} gap={{ base: 2, md: 6 }}>
+  <Box>1</Box>
+  <Box>2</Box>
+</Stack>`}>
+  <Stack direction={{ base: "column", md: "row" }} gap={{ base: 2, md: 6 }}>
+    {[1, 2].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Space between
+
+<ComponentPreview code={`<Stack direction="row" justify="between" className="w-96">
+  <Box>1</Box>
+  <Box>2</Box>
+</Stack>`} className="w-full">
+  <Stack direction="row" justify="between" className="w-96">
+    {[1, 2].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## API
+
+**Stack**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `direction` | `"row" \| "column" \| "row-reverse" \| "column-reverse"`, or `{ base?, sm?, md?, lg?, xl? }` of those | `"column"` | Responsive when given the breakpoint-object form. |
+| `align` | `"start" \| "center" \| "end" \| "stretch" \| "baseline"` | | Maps to `align-items`. |
+| `justify` | `"start" \| "center" \| "end" \| "between" \| "around" \| "evenly"` | | Maps to `justify-content`. |
+| `gap` | Tailwind spacing scale number, or `{ base?, sm?, md?, lg?, xl? }` of those | `0` | Responsive the same way as `direction`. |
+| `wrap` | `boolean` | `false` | Maps to `flex-wrap: wrap`. |
+
+Plus every native `<div>` prop.

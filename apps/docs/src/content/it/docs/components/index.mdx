@@ -1,0 +1,17 @@
+---
+title: Componenti
+---
+
+# Componenti
+
+Vesuvius UI distribuisce tre livelli di componenti, seguendo il modello [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/), dal più piccolo al più completo:
+
+- **[Atomi](/docs/components/atoms)** — un singolo elemento HTML o primitivo Radix con lo stile del kit, senza ulteriore composizione ([`Button`](/docs/components/atoms/button), [`Input`](/docs/components/atoms/input), [`Badge`](/docs/components/atoms/badge), ...).
+- **[Molecole](/docs/components/molecules)** — pattern composti da più parti e assemblati a partire dagli atomi ([`Dialog`](/docs/components/molecules/dialog), [`Select`](/docs/components/molecules/select), `DropdownMenu`, [`Table`](/docs/components/molecules/table), ...).
+- **[Organismi](/docs/components/organisms)** — funzionalità complete con stato e comportamento propri (`DataTable`, `DateTimePicker`, la famiglia di grafici, `RichTextEditor`, ...).
+
+Ogni componente è un export nominato di `@pompeitech/vesuvius-ui`:
+
+```tsx
+import { Button } from "@pompeitech/vesuvius-ui";
+```

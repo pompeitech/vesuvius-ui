@@ -1,0 +1,89 @@
+---
+title: Typography
+---
+
+# Typography
+
+La scala tipografica del kit — un componente invece di scegliere a mano le classi Tailwind pagina per pagina. Ogni variante renderizza per default il proprio elemento semanticamente corretto (`h1` → `<h1>`, `lead` → `<p>`, ...); sovrascrivi con `as` quando serve una semantica diversa dallo stile (ad es. un `<div>` *stilizzato* come `<h3>` dentro l'header di una card).
+
+```tsx
+import { Typography } from "@pompeitech/vesuvius-ui";
+```
+
+## Varianti
+
+<ComponentPreview code={`<Typography variant="h1">Heading 1</Typography>
+<Typography variant="lead">A lead paragraph.</Typography>
+<Typography variant="p">A regular paragraph.</Typography>
+<Typography variant="muted">Muted text — timestamps, hints.</Typography>
+<Typography variant="code">pnpm add @pompeitech/vesuvius-ui</Typography>`} className="flex-col items-start">
+  <Typography variant="h1">Titolo 1</Typography>
+  <Typography variant="lead">Un paragrafo introduttivo.</Typography>
+  <Typography variant="p">Un paragrafo normale.</Typography>
+  <Typography variant="muted">Testo attenuato — timestamp, suggerimenti.</Typography>
+  <Typography variant="code">pnpm add @pompeitech/vesuvius-ui</Typography>
+</ComponentPreview>
+
+## Ogni variante
+
+<ComponentPreview code={`<Typography variant="h2">Heading 2</Typography>
+<Typography variant="h3">Heading 3</Typography>
+<Typography variant="large">Large text</Typography>
+<Typography variant="small">Small text</Typography>
+<Typography variant="blockquote">"A well-designed system disappears."</Typography>
+<Typography variant="list">
+  <li>First item</li>
+  <li>Second item</li>
+</Typography>`} className="flex-col items-start">
+  <Typography variant="h2">Titolo 2</Typography>
+  <Typography variant="h3">Titolo 3</Typography>
+  <Typography variant="large">Testo grande</Typography>
+  <Typography variant="small">Testo piccolo</Typography>
+  <Typography variant="blockquote">&quot;Un sistema ben progettato scompare.&quot;</Typography>
+  <Typography variant="list"><li>Primo elemento</li><li>Secondo elemento</li></Typography>
+</ComponentPreview>
+
+## Stile senza semantica
+
+Sovrascrivi il tag renderizzato con `as` quando ti serve lo *stile* di questa variante in un punto dove il suo elemento semantico non sarebbe HTML valido — un'etichetta con stile heading dentro un `CardTitle` (già di per sé un heading), per esempio:
+
+<ComponentPreview code={`<Typography variant="h3" as="div">Card title</Typography>`}>
+  <Typography variant="h3" as="div">Titolo della card</Typography>
+</ComponentPreview>
+
+## Personalizzare il font degli heading
+
+Gli heading (`h1`–`h6`) usano un token `font-heading` separato dal testo del corpo, definito una volta in `base.css` come `--font-heading` (di default è lo stesso stack del testo del corpo, quindi nulla cambia finché non lo sovrascrivi) — vedi [Theming](/docs/theming#radius-e-tipografia) per il riferimento completo dei token:
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap");
+
+:root {
+  --font-heading: "Cal Sans", var(--font-sans);
+}
+```
+
+## API
+
+**Typography**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"h1" \| "h2" \| "h3" \| "h4" \| "h5" \| "h6" \| "p" \| "lead" \| "large" \| "small" \| "muted" \| "blockquote" \| "code" \| "list"` | `"p"` | Seleziona sia lo stile che (a meno di override tramite `as`) l'elemento renderizzato. |
+| `as` | qualsiasi elemento o componente | il tag di default della variante | Sovrascrive l'elemento renderizzato mantenendo lo stile della variante. |
+
+Più ogni prop nativa dell'elemento effettivamente renderizzato (un `Typography variant="p"` inoltra le prop di `<p>`, `as="div"` inoltra quelle di `<div>`, e così via).
+
+### Tag di default per variante
+
+| Variante | Tag |
+| --- | --- |
+| `h1`–`h6` | `<h1>`–`<h6>` |
+| `p` | `<p>` |
+| `lead` | `<p>` |
+| `large` | `<div>` |
+| `small` | `<small>` |
+| `muted` | `<p>` |
+| `blockquote` | `<blockquote>` |
+| `code` | `<code>` |
+| `list` | `<ul>` |

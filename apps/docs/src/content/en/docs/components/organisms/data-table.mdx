@@ -1,0 +1,85 @@
+---
+title: Data Table
+---
+
+# Data Table
+
+A [TanStack Table](https://tanstack.com/table) wrapper — sorting, column filters, global search, column visibility, pinning, drag-to-reorder, drag-to-resize, row selection, and pagination, all controllable or left uncontrolled. `columns` uses TanStack's own `ColumnDef` shape.
+
+```tsx
+import {
+  DataTable,
+  DataTableColumnHeader,
+  type ColumnDef,
+} from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const columns: ColumnDef<Order>[] = [
+  {
+    accessorKey: "id",
+    header: ({ header }) => <DataTableColumnHeader header={header} title="Order" />,
+  },
+  {
+    accessorKey: "status",
+    header: ({ header }) => <DataTableColumnHeader header={header} title="Status" />,
+    cell: ({ getValue }) => <Badge variant={statusVariant[getValue()]}>{getValue()}</Badge>,
+  },
+  // ...
+];
+
+<DataTable columns={columns} data={orders} />`} className="w-full items-start">
+  <Demo name="data-table" />
+</ComponentPreview>
+
+Click a column header to sort — it cycles ascending → descending → unsorted.
+
+## Building on it
+
+| Piece                     | Adds                                                                                                                                                                                     |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `createSelectionColumn()` | A checkbox column for row selection — prepend it to `columns`.                                                                                                                           |
+| `DataTableToolbar`        | Global search input + a "Columns" visibility menu, above the table.                                                                                                                      |
+| `DataTableFacetedFilter`  | A faceted multi-select filter for one column, dropped into the toolbar.                                                                                                                  |
+| `DataTableColumnHeader`   | Sortable header cell — click to sort, includes the sort direction icon.                                                                                                                  |
+| `DataTablePagination`     | Page size + prev/next controls, below the table.                                                                                                                                         |
+| `useDataTable(props)`     | The hook `DataTable` itself uses — call it directly for full control over the `table` instance (e.g. to drive `DataTableToolbar`/`DataTablePagination` yourself around a custom layout). |
+
+## API
+
+**DataTable**
+
+| Prop                                | Type                                          | Description                                                                                                                                                     |
+| ----------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns`                           | `ColumnDef<TData>[]`                          | Required — TanStack's own column definition shape.                                                                                                              |
+| `data`                              | `TData[]`                                     | Required.                                                                                                                                                       |
+| `getRowId`                          | `(row: TData) => string`                      | Stable row identity across re-sorts/re-filters — without it, TanStack falls back to row index, which breaks selection/pinning state when the row order changes. |
+| `enableRowSelection`                | `boolean`                                     | Required alongside `createSelectionColumn()` for checkboxes to actually toggle.                                                                                 |
+| `enableColumnPinning`               | `boolean`                                     |                                                                                                                                                                 |
+| `enableColumnResizing`              | `boolean`                                     | Turns on the drag-to-resize handle on column borders.                                                                                                           |
+| `manualSorting` / `manualFiltering` | `boolean`                                     | Set when sorting/filtering happens server-side — TanStack then stops sorting/filtering `data` itself and just tracks the requested state for you to act on.     |
+| `enableExport`                      | `boolean`                                     | Adds an Export CSV action for the visible, filtered rows.                                                                                                       |
+| `exportFilename`                    | `string`                                      | Filename used by the CSV download. Defaults to `export.csv`.                                                                                                    |
+| `exportSelectedOnly`                | `boolean`                                     | Exports selected rows instead of all filtered rows.                                                                                                             |
+| `bulkActions`                       | `ReactNode \| ({ rows, table }) => ReactNode` | Actions shown when one or more rows are selected.                                                                                                               |
+
+Each of the following follows the same uncontrolled/controlled pair shape — a `default*` prop for the initial value, plus `*`/`on*Change` for a fully controlled version (same pattern as [`Select`](/docs/components/molecules/select)'s `defaultValue`/`value`/`onValueChange`):
+
+The table always fills the width of its parent. If the sum of the column widths is larger than the available space, only the table viewport scrolls horizontally; the surrounding page keeps its layout.
+
+| State             | Uncontrolled prop         | Controlled prop    | Change handler             |
+| ----------------- | ------------------------- | ------------------ | -------------------------- |
+| Sorting           | `defaultSorting`          | `sorting`          | `onSortingChange`          |
+| Column filters    | `defaultColumnFilters`    | `columnFilters`    | `onColumnFiltersChange`    |
+| Global search     | `defaultGlobalFilter`     | `globalFilter`     | `onGlobalFilterChange`     |
+| Column visibility | `defaultColumnVisibility` | `columnVisibility` | `onColumnVisibilityChange` |
+| Column pinning    | `defaultColumnPinning`    | `columnPinning`    | `onColumnPinningChange`    |
+| Column order      | `defaultColumnOrder`      | `columnOrder`      | `onColumnOrderChange`      |
+| Column sizing     | `defaultColumnSizing`     | `columnSizing`     | `onColumnSizingChange`     |
+| Row selection     | `defaultRowSelection`     | `rowSelection`     | `onRowSelectionChange`     |
+| Pagination        | `defaultPagination`       | `pagination`       | `onPaginationChange`       |
+
+### Accessibility
+
+Renders a real `<table>` underneath (same semantics as [`Table`](/docs/components/molecules/table)). The resize handle on each column border is a genuine `role="slider"` element with `aria-valuenow`/`aria-valuemin`/`aria-valuemax` and a descriptive `aria-label` — column resizing isn't pointer-only, unlike drag-to-reorder, which currently has no keyboard equivalent; column order is just state though, not the only way to reach a column's data, so a fixed order remains fully usable.

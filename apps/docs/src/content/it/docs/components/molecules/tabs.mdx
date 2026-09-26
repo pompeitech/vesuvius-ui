@@ -1,0 +1,82 @@
+---
+title: Tabs
+---
+
+# Tabs
+
+Un `Tabs` di Radix — passa tra i pannelli, uno visibile alla volta.
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Tabs defaultValue="account" className="w-96">
+  <TabsList className="w-full">
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+    <Card>
+      <CardHeader><CardTitle>Account</CardTitle></CardHeader>
+      <CardContent className="text-sm text-muted-foreground">Make changes to your account here.</CardContent>
+    </Card>
+  </TabsContent>
+  <TabsContent value="password">
+    <Card>
+      <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+      <CardContent className="text-sm text-muted-foreground">Change your password here.</CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>`}>
+  <Tabs defaultValue="account" className="w-96">
+    <TabsList className="w-full">
+      <TabsTrigger value="account">Account</TabsTrigger>
+      <TabsTrigger value="password">Password</TabsTrigger>
+    </TabsList>
+    <TabsContent value="account">
+      <Card>
+        <CardHeader><CardTitle>Account</CardTitle></CardHeader>
+        <CardContent className="text-sm text-muted-foreground">Apporta qui le modifiche al tuo account.</CardContent>
+      </Card>
+    </TabsContent>
+    <TabsContent value="password">
+      <Card>
+        <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+        <CardContent className="text-sm text-muted-foreground">Cambia qui la tua password.</CardContent>
+      </Card>
+    </TabsContent>
+  </Tabs>
+</ComponentPreview>
+
+## API
+
+**Tabs**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `string` | | Scheda attiva, controllata o non controllata. |
+| `onValueChange` | `(value: string) => void` | | |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Cambia anche la direzione di navigazione con le frecce. |
+| `activationMode` | `"automatic" \| "manual"` | `"automatic"` | `"automatic"`: le frecce cambiano immediatamente la scheda attiva. `"manual"`: le frecce spostano solo il focus, l'attivazione richiede un esplicito <kbd>Invio</kbd>/<kbd>Spazio</kbd> — usalo quando cambiare scheda è costoso (una richiesta di rete per scheda). |
+
+**TabsList** — ogni prop nativa di `<div>`; contenitore `role="tablist"` per i trigger.
+
+**TabsTrigger**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Obbligatorio — corrisponde al `value` di un `TabsContent`. |
+| `disabled` | `boolean` | |
+
+**TabsContent**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Obbligatorio — corrisponde al `TabsTrigger` che lo rivela. |
+| `forceMount` | `boolean` | Mantiene montati (nascosti) i pannelli inattivi invece di smontarli — necessario se un pannello conserva stato che non dovrebbe azzerarsi quando nascosto. |
+
+### Accessibilità
+
+Implementa automaticamente il pattern ARIA `tablist`/`tab`/`tabpanel` — <kbd>←</kbd>/<kbd>→</kbd> (o <kbd>↑</kbd>/<kbd>↓</kbd> quando `orientation="vertical"`) si spostano tra i trigger, `aria-selected`/`aria-controls`/`aria-labelledby` sono collegati automaticamente.

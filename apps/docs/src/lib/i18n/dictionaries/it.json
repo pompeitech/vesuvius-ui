@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "docs": "Documentazione",
+    "themes": "Temi",
+    "liveDemo": "Demo live",
+    "github": "GitHub"
+  },
+  "search": {
+    "placeholder": "Cerca nella documentazione...",
+    "trigger": "Cerca...",
+    "empty": "Nessun risultato.",
+    "shortcutHint": "per cercare"
+  },
+  "sidebar": {
+    "gettingStarted": "Per iniziare",
+    "introduction": "Introduzione",
+    "installation": "Installazione",
+    "theming": "Temi",
+    "layout": "Layout e Responsive",
+    "creatingComponents": "Creare Componenti",
+    "components": "Componenti",
+    "atoms": "Atomi",
+    "molecules": "Molecole",
+    "organisms": "Organismi"
+  },
+  "toc": {
+    "onThisPage": "In questa pagina"
+  },
+  "page": {
+    "editOnGitHub": "Modifica questa pagina su GitHub",
+    "previous": "Precedente",
+    "next": "Successivo",
+    "lastUpdated": "Ultimo aggiornamento"
+  },
+  "theme": {
+    "toggleLight": "Passa alla modalità chiara",
+    "toggleDark": "Passa alla modalità scura",
+    "toggleSystem": "Passa alla preferenza di sistema"
+  },
+  "themePages": {
+    "listTitle": "Temi con una personalità.",
+    "listDescription": "Scegli un linguaggio visivo completo per il tuo prodotto. Ogni tema Vesuvius include token chiari e scuri, colori semantici per gli stati e un'interfaccia coordinata.",
+    "badge": "10 temi integrati · chiaro + scuro",
+    "builtIn": "Tema integrato",
+    "detailDescription": "Un linguaggio visivo completo per superfici di prodotto, stati di interazione e chrome dell'interfaccia.",
+    "viewSource": "Vedi il sorgente",
+    "viewAll": "Vedi tutti i temi",
+    "palette": "Palette",
+    "primary": "Primario",
+    "secondary": "Secondario",
+    "colorSystem": "Sistema colori",
+    "liveTokens": "Token live",
+    "typography": "Tipografia",
+    "display": "Display",
+    "body": "Corpo",
+    "code": "Codice",
+    "shapeDepth": "Forma e profondità",
+    "shapeDescription": "Raggi morbidi, ombre discrete e superfici stratificate mantengono il sistema coerente.",
+    "install": "Installa",
+    "showcase": "Showcase del tema",
+    "showcaseTitle": "Componenti, grafici, bento e marketing sugli stessi token.",
+    "livePreview": "Anteprima live"
+  },
+  "themeCatalog": {
+    "lava": {
+      "mood": "La palette simbolo di Vesuvius",
+      "description": "Pietra vulcanica calda, superfici crema e un arancione bruciato per le azioni."
+    },
+    "stripe": {
+      "mood": "Infrastruttura finanziaria trasformata in UI di prodotto",
+      "description": "Una tela bianca, inchiostro blu navy e un'azione violetto-blu focalizzata."
+    },
+    "vercel": {
+      "mood": "Minimalismo deciso",
+      "description": "Nero puro, superfici bianche ariose e chrome netto da prodotto developer."
+    },
+    "supabase": {
+      "mood": "Infrastruttura open source con calore",
+      "description": "Energia smeraldo-menta brillante con superfici tecniche e amichevoli."
+    },
+    "linear": {
+      "mood": "La calma raffinata di un issue tracker",
+      "description": "Superfici fredde e misurate con un primario violetto-indaco delicato."
+    },
+    "claude": {
+      "mood": "Il calore di una sala di lettura",
+      "description": "Pergamena calda, terracotta e chrome di prodotto dal tono colto."
+    },
+    "amber-minimal": {
+      "mood": "Superfici discrete, azioni chiare",
+      "description": "Una palette bianca pulita con un primario ambra dorato."
+    },
+    "claymorphism": {
+      "mood": "Profondità amichevole senza rumore visivo",
+      "description": "Superfici morbide e dimensionali in argilla con un'azione viola decisa."
+    },
+    "alpine": {
+      "mood": "Una palette SaaS premium con ritmo",
+      "description": "Inchiostro alpino notturno, struttura cobalto e calore corallo su una tela blush."
+    },
+    "aubergine": {
+      "mood": "Energia collaborativa e accogliente",
+      "description": "Navigazione ispirata all'aubergine di Slack, superfici viola espressive e azioni blu brillanti."
+    }
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che cerchi non esiste o è stata spostata.",
+    "backHome": "Torna alla documentazione"
+  },
+  "fallback": {
+    "notice": "Questa pagina non è ancora tradotta — viene mostrata la versione inglese."
+  },
+  "home": {
+    "hero": {
+      "title": "Un kit completo di componenti React + TypeScript — Radix UI sotto, Tailwind CSS sopra, dieci temi colore pronti all'uso.",
+      "description": "65 componenti, anteprime live e documentazione completa — costruiti interamente con Vesuvius UI."
+    },
+    "tabs": {
+      "atoms": "Atomi",
+      "molecules": "Molecole",
+      "organisms": "Organismi",
+      "templates": "Template",
+      "pages": "Pagine"
+    },
+    "tabsHint": {
+      "atoms": "I mattoncini più piccoli — un singolo elemento, stilizzato e accessibile da solo.",
+      "molecules": "Pochi atomi combinati in un'unica unità riutilizzabile con un proprio comportamento.",
+      "organisms": "Sezioni complete e autonome costruite da molecole e atomi.",
+      "templates": "Pattern di layout che dispongono gli organismi in uno scheletro di pagina — la forma, non il contenuto.",
+      "pages": "Schermate reali di un prodotto completo costruito interamente con Vesuvius UI, popolate con contenuti reali."
+    },
+    "templates": [
+      {
+        "icon": "LayoutDashboard",
+        "title": "Dashboard Shell",
+        "description": "Navigazione laterale, header fisso, e un'area di contenuto con stat card e grafici."
+      },
+      {
+        "icon": "PanelsTopLeft",
+        "title": "Auth Split Screen",
+        "description": "Un pannello brandizzato accanto a un form centrato — login, registrazione, recupero password."
+      },
+      {
+        "icon": "Rows3",
+        "title": "Lista + Dettaglio",
+        "description": "Una DataTable che guida una pagina di dettaglio o un pannello laterale per la riga selezionata."
+      },
+      {
+        "icon": "Settings",
+        "title": "Pagina Impostazioni",
+        "description": "Tab o una nav laterale che dividono un form in sezioni — profilo, sicurezza, notifiche."
+      },
+      {
+        "icon": "Kanban",
+        "title": "Layout a Board",
+        "description": "Una SidebarNav più una board multi-colonna con card riordinabili tramite drag."
+      },
+      {
+        "icon": "CalendarDays",
+        "title": "Calendario e Pianificazione",
+        "description": "Una toolbar in header, una griglia mese/settimana/giorno, e un pannello laterale di elementi non pianificati."
+      }
+    ],
+    "pages": [
+      {
+        "title": "Dashboard Ecommerce",
+        "description": "Ricavi, ordini e ripartizione per canale — grafici, stat card, una tabella dati.",
+        "image": "/img/showcase/ecommerce-dashboard.jpg"
+      },
+      {
+        "title": "POS App",
+        "description": "Una schermata di cassa — griglia prodotti, carrello, selettore sede.",
+        "image": "/img/showcase/pos-app.jpg"
+      },
+      {
+        "title": "Kanban di Progetto",
+        "description": "Una board cross-progetto — colonne riordinabili, filtri, assegnatari.",
+        "image": "/img/showcase/kanban.jpg"
+      },
+      {
+        "title": "Organigramma",
+        "description": "Un organigramma con drag-to-reparent, costruito sulle stesse card e avatar del kit.",
+        "image": "/img/showcase/org-chart.jpg"
+      },
+      {
+        "title": "Calendario di Team",
+        "description": "Una vista mensile in stile Google Calendar con pannello laterale degli elementi non pianificati.",
+        "image": "/img/showcase/calendar.jpg"
+      },
+      {
+        "title": "Posta di Team",
+        "description": "Una inbox a tre colonne in stile Gmail con composizione, risposta e cartelle.",
+        "image": "/img/showcase/inbox.jpg"
+      }
+    ]
+  }
+}

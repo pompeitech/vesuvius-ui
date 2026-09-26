@@ -1,0 +1,70 @@
+---
+title: Switch
+---
+
+# Switch
+
+Uno `Switch.Root` di Radix — un interruttore on/off, stilizzato come quello di iOS.
+
+```tsx
+import { Switch } from "@pompeitech/vesuvius-ui";
+```
+
+## Con un'etichetta
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Switch id="airplane-mode" />
+  <Label htmlFor="airplane-mode">Airplane mode</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Switch id="docs-airplane-mode-it" />
+    <Label htmlFor="docs-airplane-mode-it">Modalità aereo</Label>
+  </div>
+</ComponentPreview>
+
+## Selezionato / disabilitato
+
+<ComponentPreview code={`<Switch defaultChecked aria-label="Checked" />
+<Switch disabled aria-label="Disabled" />`}>
+  <Switch defaultChecked aria-label="Selezionato" />
+  <Switch disabled aria-label="Disabilitato" />
+</ComponentPreview>
+
+## In una riga di impostazioni
+
+Il posizionamento più comune nel mondo reale — etichetta e descrizione a sinistra, switch ancorato a destra:
+
+<ComponentPreview code={`<div className="flex w-80 items-center justify-between">
+  <div>
+    <p className="text-sm font-medium">Email notifications</p>
+    <p className="text-sm text-muted-foreground">Get notified about account activity.</p>
+  </div>
+  <Switch defaultChecked aria-label="Email notifications" />
+</div>`}>
+  <div className="flex w-80 items-center justify-between">
+    <div>
+      <p className="text-sm font-medium">Notifiche email</p>
+      <p className="text-sm text-muted-foreground">Ricevi notifiche sull'attività dell'account.</p>
+    </div>
+    <Switch defaultChecked aria-label="Notifiche email" />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Switch**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | | Stato controllato. |
+| `defaultChecked` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onCheckedChange` | `(checked: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+| `required` | `boolean` | `false` | Segna il campo come obbligatorio per la validazione nativa del form. |
+| `name` / `value` | `string` | | Per l'invio nativo del form senza JS — renderizza un checkbox nativo nascosto accanto al pulsante stilizzato. |
+
+Più ogni altra prop nativa di `<button>` (lo `Switch.Root` di Radix renderizza un `<button role="switch">`).
+
+### Accessibilità
+
+<kbd>Tab</kbd> per il focus, <kbd>Spazio</kbd> per attivare/disattivare — come [`Checkbox`](/docs/components/atoms/checkbox), l'elemento renderizzato è un `<button>`, quindi necessita di una propria `<Label htmlFor>` o `aria-label` invece di affidarsi a un'associazione nativa implicita.

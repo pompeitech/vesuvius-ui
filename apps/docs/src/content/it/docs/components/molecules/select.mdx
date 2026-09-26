@@ -1,0 +1,199 @@
+---
+title: Select
+---
+
+# Select
+
+Un `Select` di Radix — dropdown a valore singolo, `SelectValue` tronca un'etichetta scelta lunga invece di traboccare dal trigger. Per scegliere più valori, vedi `MultiSelect`.
+
+```tsx
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview
+  code={`<Select>
+  <SelectTrigger className="w-56" aria-label="Fruit">
+    <SelectValue placeholder="Select a fruit" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Fruits</SelectLabel>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+      <SelectItem value="blueberry">Blueberry</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>`}
+>
+  <Select>
+    <SelectTrigger className="w-56" aria-label="Frutto">
+      <SelectValue placeholder="Seleziona un frutto" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Frutti</SelectLabel>
+        <SelectItem value="apple">Mela</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="blueberry">Mirtillo</SelectItem>
+        <SelectItem value="grapes">Uva</SelectItem>
+        <SelectItem value="pineapple">Ananas</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+
+## Controllato, con un'etichetta
+
+<ComponentPreview code={`const [value, setValue] = useState("banana");
+
+<div className="grid gap-1.5">
+  <Label htmlFor="fruit">Fruit</Label>
+  <Select value={value} onValueChange={setValue}>
+    <SelectTrigger id="fruit" className="w-56">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="apple">Apple</SelectItem>
+      <SelectItem value="banana">Banana</SelectItem>
+      <SelectItem value="blueberry">Blueberry</SelectItem>
+    </SelectContent>
+  </Select>
+</div>`}>
+  <Demo name="select-fruit" label="Frutto" appleLabel="Mela" bananaLabel="Banana" blueberryLabel="Mirtillo" />
+</ComponentPreview>
+
+## Raggruppato, con un separatore ed elementi disabilitati
+
+<ComponentPreview
+  code={`<Select>
+  <SelectTrigger className="w-56" aria-label="Timezone">
+    <SelectValue placeholder="Select a timezone" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectGroup>
+      <SelectLabel>Americas</SelectLabel>
+      <SelectItem value="est">Eastern (EST)</SelectItem>
+      <SelectItem value="pst">Pacific (PST)</SelectItem>
+    </SelectGroup>
+    <SelectSeparator />
+    <SelectGroup>
+      <SelectLabel>Europe</SelectLabel>
+      <SelectItem value="cet">Central European (CET)</SelectItem>
+      <SelectItem value="gmt" disabled>Greenwich Mean Time (waitlisted)</SelectItem>
+    </SelectGroup>
+  </SelectContent>
+</Select>`}
+>
+  <Select>
+    <SelectTrigger className="w-56" aria-label="Fuso orario">
+      <SelectValue placeholder="Seleziona un fuso orario" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Americhe</SelectLabel>
+        <SelectItem value="est">Orientale (EST)</SelectItem>
+        <SelectItem value="pst">Pacifico (PST)</SelectItem>
+      </SelectGroup>
+      <SelectSeparator />
+      <SelectGroup>
+        <SelectLabel>Europa</SelectLabel>
+        <SelectItem value="cet">Europa Centrale (CET)</SelectItem>
+        <SelectItem value="gmt" disabled>
+          Ora di Greenwich (in lista d'attesa)
+        </SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</ComponentPreview>
+
+## Dimensioni
+
+SelectTrigger segue la scala condivisa delle altezze: 28, 32, 36 e 40 px.
+
+<ComponentPreview
+  code={`<SelectTrigger size="xs">...</SelectTrigger>
+<SelectTrigger size="sm">...</SelectTrigger>
+<SelectTrigger size="default">...</SelectTrigger>
+<SelectTrigger size="lg">...</SelectTrigger>`}
+>
+  <div className="flex flex-col gap-3">
+    {["xs", "sm", "default", "lg"].map((size) => (
+      <Select key={size}>
+        <SelectTrigger
+          size={size}
+          className="w-48"
+          aria-label={`Selezione ${size}`}
+        >
+          <SelectValue placeholder={`Select ${size}`} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="newest">Più recenti</SelectItem>
+          <SelectItem value="oldest">Meno recenti</SelectItem>
+        </SelectContent>
+      </Select>
+    ))}
+  </div>
+</ComponentPreview>
+
+## API
+
+**Select**
+
+| Prop                     | Tipo                      | Default | Descrizione                                        |
+| ------------------------ | ------------------------- | ------- | -------------------------------------------------- |
+| `value` / `defaultValue` | `string`                  |         | Valore selezionato, controllato o non controllato. |
+| `onValueChange`          | `(value: string) => void` |         |                                                    |
+| `disabled`               | `boolean`                 | `false` |                                                    |
+| `required`               | `boolean`                 | `false` | Per la validazione nativa del form.                |
+| `name`                   | `string`                  |         | Per l'invio nativo del form senza JS.              |
+
+**SelectTrigger**
+
+| Prop   | Tipo                                | Default     | Descrizione                                |
+| ------ | ----------------------------------- | ----------- | ------------------------------------------ |
+| `size` | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` | Altezza del controllo: 28, 32, 36 o 40 px. |
+
+Più ogni prop nativa di `<button>`.
+
+**SelectValue**
+
+| Prop          | Tipo        | Descrizione                          |
+| ------------- | ----------- | ------------------------------------ |
+| `placeholder` | `ReactNode` | Mostrato quando nulla è selezionato. |
+
+Mostra l'etichetta dell'elemento selezionato altrimenti. Tronca invece di traboccare dal trigger, indipendentemente da quanto sia lunga l'etichetta.
+
+**SelectContent**
+
+| Prop       | Tipo                         | Default    | Descrizione                                                                                                                                                                                    |
+| ---------- | ---------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `position` | `"popper" \| "item-aligned"` | `"popper"` | `"popper"` posiziona relativamente al trigger come un normale popover; `"item-aligned"` (il comportamento simile al `<select>` nativo) allinea l'elemento selezionato sopra il trigger invece. |
+
+Più ogni prop nativa di `<div>`; renderizzato in un Portal.
+
+**SelectGroup** — ogni prop nativa di `<div>`; raggruppa elementi correlati per la semantica `role="group"`.
+
+**SelectLabel** — ogni prop nativa di `<div>`; intestazione non interattiva per un `SelectGroup`.
+
+**SelectItem**
+
+| Prop       | Tipo      | Descrizione                                                |
+| ---------- | --------- | ---------------------------------------------------------- |
+| `value`    | `string`  | Obbligatorio — il valore rappresentato da questo elemento. |
+| `disabled` | `boolean` |                                                            |
+
+**SelectSeparator** — ogni prop nativa di `<div>`; una sottile linea tra i gruppi.
+
+### Accessibilità
+
+Un equivalente completamente operabile da tastiera del `<select>` nativo: <kbd>Spazio</kbd>/<kbd>Invio</kbd> lo apre, <kbd>↑</kbd>/<kbd>↓</kbd> si sposta tra le opzioni, digitare salta a un elemento corrispondente, <kbd>Esc</kbd> chiude senza modificare la selezione. Dai sempre a `SelectTrigger` un nome accessibile — o `id` + un `<Label htmlFor>` (come nell'esempio controllato sopra) o `aria-label` quando non c'è un'etichetta visibile, come negli esempi precedenti.

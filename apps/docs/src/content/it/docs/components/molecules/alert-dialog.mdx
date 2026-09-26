@@ -1,0 +1,77 @@
+---
+title: Alert Dialog
+---
+
+# Alert Dialog
+
+Un `AlertDialog` di Radix — per conferme che richiedono una scelta esplicita (eliminare, scartare, ...). A differenza di [`Dialog`](/docs/components/molecules/dialog), non può essere chiuso cliccando fuori o premendo <kbd>Esc</kbd>.
+
+```tsx
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete account</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`}>
+  <AlertDialog>
+    <AlertDialogTrigger asChild>
+      <Button variant="destructive">Elimina account</Button>
+    </AlertDialogTrigger>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Sei assolutamente sicuro?</AlertDialogTitle>
+        <AlertDialogDescription>
+          Questa azione non può essere annullata. Eliminerà permanentemente il tuo account.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Annulla</AlertDialogCancel>
+        <AlertDialogAction>Continua</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+</ComponentPreview>
+
+## API
+
+**AlertDialog**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `defaultOpen` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+
+**AlertDialogTrigger** — ogni prop nativa di `<button>`, più `asChild` (`boolean`, default `false`) per renderizzare su un singolo figlio invece che su un `<button>` (come con il [`Button`](/docs/components/atoms/button) distruttivo sopra).
+
+**AlertDialogContent** — ogni prop nativa di `<div>`. Renderizzato in un Portal; il focus resta intrappolato al suo interno mentre è aperto, e torna al trigger alla chiusura.
+
+**AlertDialogHeader** / **AlertDialogFooter** — semplici `<div>` di layout, nessuna prop personalizzata (l'header impila il testo dall'alto verso il basso, il footer allinea a destra i pulsanti su desktop e li impila a larghezza piena su mobile).
+
+**AlertDialogTitle** — ogni prop nativa adiacente a un heading; obbligatorio — fornisce il nome accessibile del dialog.
+
+**AlertDialogDescription** — ogni prop nativa di `<p>`; fornisce la descrizione accessibile del dialog.
+
+**AlertDialogCancel** — ogni prop nativa di `<button>`, più `asChild`. Chiude il dialog senza attivare alcuna logica di conferma.
+
+**AlertDialogAction** — ogni prop nativa di `<button>`, più `asChild`. **Non** chiude automaticamente il dialog — collega il tuo gestore di conferma (ad es. `onClick`) per eseguire l'azione e chiuderlo tu stesso, dato che un'azione asincrona (una richiesta di eliminazione) potrebbe dover restare aperta finché non si risolve.
+
+### Accessibilità
+
+Renderizza con `role="alertdialog"` (non `role="dialog"`) — gli screen reader lo annunciano in modo più assertivo, appropriato per una scelta che l'utente deve fare. Deliberatamente non si chiude al click esterno o con <kbd>Esc</kbd>, a differenza di [`Dialog`](/docs/components/molecules/dialog); usalo solo quando l'utente deve fare una scelta esplicita, non per contenuto che può essere semplicemente chiuso.

@@ -1,0 +1,79 @@
+---
+title: Toast
+---
+
+# Toast
+
+Un toast basato su [Sonner](https://sonner.emilkowal.ski/) — chiama `toast()` da qualsiasi punto, nessuno stato locale necessario. Monta un `<Toaster />` vicino alla radice della tua app (dentro `ThemeProvider`, dato che legge da lì la modalità chiara/scura) — questo sito lo fa già, quindi ogni pulsante sotto è una demo che funziona davvero.
+
+```tsx
+import { ThemeProvider, Toaster, toast, Button } from "@pompeitech/vesuvius-ui";
+
+function App() {
+  return (
+    <ThemeProvider>
+      {/* ... */}
+      <Toaster />
+    </ThemeProvider>
+  );
+}
+```
+
+## Default
+
+<ComponentPreview code={`<Button
+  onClick={() =>
+    toast("Event has been created", {
+      description: "Sunday, December 3rd at 9:00am",
+      action: { label: "Undo", onClick: () => {} },
+    })
+  }
+>
+  Show toast
+</Button>`}>
+  <Demo
+    name="toast-default"
+    buttonLabel="Mostra toast"
+    title="Evento creato"
+    description="Domenica 3 dicembre alle 9:00"
+    actionLabel="Annulla"
+  />
+</ComponentPreview>
+
+## Varianti
+
+<ComponentPreview code={`<Button variant="outline" onClick={() => toast.success("Saved successfully")}>Success</Button>
+<Button variant="outline" onClick={() => toast.error("Something went wrong")}>Error</Button>
+<Button variant="outline" onClick={() => toast.warning("Check your input")}>Warning</Button>
+<Button variant="outline" onClick={() => toast.info("New update available")}>Info</Button>`}>
+  <Demo
+    name="toast-variants"
+    successLabel="Successo"
+    errorLabel="Errore"
+    warningLabel="Attenzione"
+    infoLabel="Info"
+    successMsg="Salvato con successo"
+    errorMsg="Qualcosa è andato storto"
+    warningMsg="Controlla il tuo input"
+    infoMsg="Nuovo aggiornamento disponibile"
+  />
+</ComponentPreview>
+
+## API
+
+**toast(message, options)**
+
+| Argomento | Tipo | Descrizione |
+| --- | --- | --- |
+| `message` | `ReactNode` | |
+| `options.description` | `ReactNode` | |
+| `options.action` | `{ label: string, onClick: () => void }` | Renderizza un pulsante d'azione inline sul toast. |
+| ...resto | | Tutto ciò che accetta il `toast()` di Sonner stesso (`duration`, `id`, `onDismiss`, override di `position`, ...) — è una ri-esportazione diretta, non un wrapper che limita l'API. |
+
+**toast.success / toast.error / toast.warning / toast.info** — stessa firma di `toast()`, pre-stilizzati con il colore semantico e l'icona corrispondenti.
+
+**Toaster** — ogni prop accettata dal `<Toaster>` di Sonner stesso (`position`, `richColors`, `closeButton`, `duration`, ...), inoltrata direttamente; pre-collegata per leggere la modalità chiara/scura dal `ThemeProvider` antenato così i toast corrispondono sempre al tema attivo senza una tua prop `theme`.
+
+### Accessibilità
+
+Sonner renderizza i toast in una regione `aria-live`, quindi gli screen reader annunciano i nuovi senza che la pagina debba spostare il focus. Mantieni `message` conciso e metti tutto ciò che non è essenziale in `description` — uno screen reader annuncia entrambi, ma un `message` lungo da solo è più difficile da cogliere a colpo d'occhio anche per gli utenti vedenti.

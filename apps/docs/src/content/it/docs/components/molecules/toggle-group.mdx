@@ -1,0 +1,50 @@
+---
+title: Toggle Group
+---
+
+# Toggle Group
+
+Un `ToggleGroup` di Radix — una riga di pulsanti toggle, selezione singola (renderizza `role="radiogroup"`) o multipla (`role="group"`).
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Selezione singola
+
+<ComponentPreview code={`<ToggleGroup type="single" defaultValue="left" variant="outline">
+  <ToggleGroupItem value="left" aria-label="Align left"><AlignLeft /></ToggleGroupItem>
+  <ToggleGroupItem value="center" aria-label="Align center"><AlignCenter /></ToggleGroupItem>
+  <ToggleGroupItem value="right" aria-label="Align right"><AlignRight /></ToggleGroupItem>
+</ToggleGroup>`}>
+  <ToggleGroup type="single" defaultValue="left" variant="outline">
+    <ToggleGroupItem value="left" aria-label="Allinea a sinistra"><AlignLeft /></ToggleGroupItem>
+    <ToggleGroupItem value="center" aria-label="Allinea al centro"><AlignCenter /></ToggleGroupItem>
+    <ToggleGroupItem value="right" aria-label="Allinea a destra"><AlignRight /></ToggleGroupItem>
+  </ToggleGroup>
+</ComponentPreview>
+
+## API
+
+**ToggleGroup**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `type` | `"single" \| "multiple"` | | Obbligatorio. `"single"` permette al massimo un elemento premuto (`role="radiogroup"`); `"multiple"` ne permette qualsiasi numero (`role="group"`). |
+| `value` / `defaultValue` | `string` (single) o `string[]` (multiple) | | Deve corrispondere a `type`. |
+| `onValueChange` | `(value: string \| string[]) => void` | | |
+| `disabled` | `boolean` | `false` | Disabilita ogni elemento. |
+| `variant` | `"default" \| "outline"` | `"default"` | Condivisa da ogni elemento a meno che uno non la sovrascriva. |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | Condivisa da ogni elemento a meno che uno non la sovrascriva. |
+
+**ToggleGroupItem**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Obbligatorio — univoco all'interno del gruppo. |
+| `disabled` | `boolean` | Disabilita solo questo elemento. |
+| `variant` / `size` | Come per `ToggleGroup` | Sovrascrive il valore condiviso del gruppo per questo solo elemento. |
+
+### Accessibilità
+
+`type="single"` usa `tabIndex` roving come un vero gruppo radio nativo — le frecce si spostano tra gli elementi e selezionano immediatamente. Dai sempre a ogni `ToggleGroupItem` un `aria-label` quando contiene solo un'icona (come nell'esempio sopra), dato che l'elemento stesso non ha testo visibile.

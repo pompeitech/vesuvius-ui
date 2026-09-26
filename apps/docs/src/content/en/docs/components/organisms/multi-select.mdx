@@ -1,0 +1,59 @@
+---
+title: Multi Select
+---
+
+# Multi Select
+
+A searchable [`Command`](/docs/components/molecules/command) palette for choosing several values, shown as removable chips in the trigger. For a single value, see [`Select`](/docs/components/molecules/select).
+
+```tsx
+import { MultiSelect, type MultiSelectOption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const [values, setValues] = useState<string[]>(["sales", "engineering"]);
+
+<MultiSelect
+  options={departments}
+  value={values}
+  onValueChange={setValues}
+  placeholder="Select departments..."
+  aria-label="Departments"
+/>`}>
+  <Demo name="multi-select" />
+</ComponentPreview>
+
+## Overflow (+N more)
+
+<ComponentPreview
+  code={`<MultiSelect options={departments} value={values} onValueChange={setValues} maxDisplay={2} aria-label="Departments" />`}
+>
+  <Demo name="multi-select" maxDisplay={2} allSelected />
+</ComponentPreview>
+
+## API
+
+**MultiSelect**
+
+| Prop                     | Type                                | Default     | Description                                                 |
+| ------------------------ | ----------------------------------- | ----------- | ----------------------------------------------------------- |
+| `options`                | `MultiSelectOption[]`               |             | Required.                                                   |
+| `value` / `defaultValue` | `string[]`                          |             | Controlled/uncontrolled selected values.                    |
+| `onValueChange`          | `(values: string[]) => void`        |             | Called whenever the selection changes.                      |
+| `size`                   | `"xs" \| "sm" \| "default" \| "lg"` | `"default"` | Fixed trigger height: 28, 32, 36, or 40 px.                 |
+| `placeholder`            | `string`                            |             | Shown on the trigger when nothing's selected.               |
+| `maxDisplay`             | `number`                            |             | Chips shown before the rest collapse into a "+N more" chip. |
+| `disabled`               | `boolean`                           | `false`     |                                                             |
+
+**MultiSelectOption**
+
+| Field   | Type         | Description                                                                      |
+| ------- | ------------ | -------------------------------------------------------------------------------- |
+| `label` | `string`     | Required.                                                                        |
+| `value` | `string`     | Required — unique identifier.                                                    |
+| `icon`  | `LucideIcon` | Optional leading icon shown both in the dropdown list and on each selected chip. |
+
+### Accessibility
+
+Since the trigger renders removable chips rather than plain text, always pass `aria-label` on `MultiSelect` itself (as in every example above) — the trigger's visible content alone doesn't read as a clear field name to assistive tech. Each chip's remove button is independently focusable and labeled with the option it removes.

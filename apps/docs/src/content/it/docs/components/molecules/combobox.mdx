@@ -1,0 +1,46 @@
+---
+title: Combobox
+---
+
+# Combobox
+
+Selezione singola ricercabile per team, clienti, progetti e liste numerose. Per selezionare più valori usa [`MultiSelect`](/docs/components/organisms/multi-select).
+
+```tsx
+import { Combobox } from "@pompeitech/vesuvius-ui";
+
+<Combobox
+  aria-label="Team"
+  options={[
+    { value: "engineering", label: "Engineering", description: "12 membri" },
+    { value: "design", label: "Design", description: "8 membri" },
+  ]}
+  placeholder="Seleziona un team..."
+  searchPlaceholder="Cerca team..."
+/>;
+```
+
+## Controllato
+
+```tsx
+const [team, setTeam] = useState<string>();
+
+<Combobox options={teams} value={team} onValueChange={setTeam} clearable />;
+```
+
+## Dimensioni
+
+`Combobox` segue la scala condivisa delle altezze 28 / 32 / 36 / 40 px con `xs`, `sm`, `default` e `lg`.
+
+## API
+
+| Prop                              | Tipo                                   | Default     | Descrizione                                                         |
+| --------------------------------- | -------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `options`                         | `ComboboxOption[]`                     | —           | Opzioni con `value`, `label`, `description` opzionale e `disabled`. |
+| `value` / `defaultValue`          | `string`                               | —           | Valore selezionato controllato o iniziale.                          |
+| `onValueChange`                   | `(value: string \| undefined) => void` | —           | Chiamata dopo una selezione o cancellazione.                        |
+| `clearable`                       | `boolean`                              | `false`     | Aggiunge un’azione per cancellare il valore nel menu.               |
+| `size`                            | `"xs" \| "sm" \| "default" \| "lg"`    | `"default"` | Altezza condivisa del controllo.                                    |
+| `searchPlaceholder` / `emptyText` | `string`                               | —           | Testi del campo di ricerca e dello stato vuoto.                     |
+
+Il trigger accetta anche `aria-label`, `aria-labelledby`, `disabled` e `className`.

@@ -1,0 +1,65 @@
+---
+title: Label
+---
+
+# Label
+
+Un `Label.Root` di Radix — un `<label>` che resta associato al proprio controllo anche quando quel controllo è un elemento non nativo stilizzato (come Checkbox, che renderizza un `<button>`).
+
+```tsx
+import { Label } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-label-terms-it" />
+    <Label htmlFor="docs-label-terms-it">Accetta i termini e condizioni</Label>
+  </div>
+</ComponentPreview>
+
+## Con un indicatore di obbligatorietà
+
+Non esiste una prop `required` — aggiungi l'asterisco (o qualsiasi altro indicatore) tu stesso come parte dei children, stilizzato come serve al tuo form:
+
+<ComponentPreview code={`<Label htmlFor="email">
+  Email <span className="text-destructive">*</span>
+</Label>`}>
+  <Label htmlFor="docs-label-email-it">
+    Email <span className="text-destructive">*</span>
+  </Label>
+</ComponentPreview>
+
+## Stato disabilitato
+
+Il `Label` di Radix attenua automaticamente e disabilita la selezione del testo quando il controllo associato porta `data-disabled` o si trova dentro un `<fieldset disabled>` — nessuna prop da impostare sulla label stessa:
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="disabled-example" disabled />
+  <Label htmlFor="disabled-example">Disabled option</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-label-disabled-it" disabled />
+    <Label htmlFor="docs-label-disabled-it">Opzione disabilitata</Label>
+  </div>
+</ComponentPreview>
+
+## API
+
+**Label**
+
+Ogni prop nativa di `<label>`, la più importante:
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `htmlFor` | `string` | Corrisponde all'`id` del controllo associato — cliccare la label mette a fuoco/attiva quel controllo, esattamente come una coppia label/input nativa. |
+
+Nessuna prop personalizzata propria oltre agli aggancci di stile — il suo valore rispetto a una semplice `<label className="...">` è che il click/selezione del testo al suo interno viene correttamente soppresso quando il controllo associato è disabilitato, cosa che una label nativa semplice non fa automaticamente per controlli non nativi come [`Checkbox`](/docs/components/atoms/checkbox).
+
+### Accessibilità
+
+Preferisci l'associazione tramite `htmlFor`/`id` (come in ogni esempio sopra) invece di avvolgere il controllo come figlio — una corrispondenza esplicita di `id` è ciò che permette alla tecnologia assistiva di annunciare la label anche quando il controllo non è un discendente DOM diretto.

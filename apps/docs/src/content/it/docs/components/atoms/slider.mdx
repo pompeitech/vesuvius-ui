@@ -1,0 +1,61 @@
+---
+title: Slider
+---
+
+# Slider
+
+Uno `Slider.Root` di Radix — un cursore, o diversi per un intervallo (uno per ogni elemento in `value`/`defaultValue`).
+
+```tsx
+import { Slider } from "@pompeitech/vesuvius-ui";
+```
+
+## Valore singolo
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} step={1} aria-label="Volume" />`}>
+  <Slider defaultValue={[50]} max={100} step={1} aria-label="Volume" className="w-64" />
+</ComponentPreview>
+
+## Intervallo
+
+<ComponentPreview code={`<Slider defaultValue={[25, 75]} max={100} step={1} aria-label="Price range" />`}>
+  <Slider defaultValue={[25, 75]} max={100} step={1} aria-label="Fascia di prezzo" className="w-64" />
+</ComponentPreview>
+
+## Disabilitato
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} disabled aria-label="Volume" />`}>
+  <Slider defaultValue={[50]} max={100} disabled aria-label="Volume" className="w-64" />
+</ComponentPreview>
+
+## Step
+
+Uno `step` più grande fa scattare il cursore su meno posizioni — utile quando solo alcuni valori hanno un significato:
+
+<ComponentPreview code={`<Slider defaultValue={[20]} max={100} step={20} aria-label="Rating" />`}>
+  <Slider defaultValue={[20]} max={100} step={20} aria-label="Valutazione" className="w-64" />
+</ComponentPreview>
+
+## Verticale
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} orientation="vertical" aria-label="Volume" className="h-44" />`}>
+  <Slider defaultValue={[50]} max={100} orientation="vertical" aria-label="Volume" className="h-44" />
+</ComponentPreview>
+
+## API
+
+**Slider**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `number[]` | `[0]` | Un elemento per cursore — un array a due elementi renderizza uno slider a intervallo (vedi sopra). |
+| `min` / `max` | `number` | `0` / `100` | |
+| `step` | `number` | `1` | |
+| `onValueChange` | `(value: number[]) => void` | | Chiamata continuamente durante il trascinamento. |
+| `onValueCommit` | `(value: number[]) => void` | | Chiamata una sola volta, al rilascio — usala invece di `onValueChange` per qualsiasi cosa costosa (una chiamata API), stessa distinzione degli eventi `input`/`change`. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | La versione verticale necessita di un'altezza esplicita via `className` (`h-44` sopra) — non ha un'altezza intrinseca propria. |
+| `disabled` | `boolean` | `false` | |
+
+### Accessibilità
+
+Ogni cursore è un vero elemento focalizzabile con ruolo ARIA `slider`. <kbd>←</kbd>/<kbd>→</kbd> (o <kbd>↑</kbd>/<kbd>↓</kbd> in verticale) regolano di uno `step`, <kbd>Home</kbd>/<kbd>End</kbd> saltano a `min`/`max`. `aria-label` viene applicato automaticamente per cursore, con suffisso dell'indice (`"Fascia di prezzo 1"`, `"Fascia di prezzo 2"`) quando ce n'è più di uno — passa un singolo `aria-label` che copra lo scopo dell'intero slider, non uno per cursore.

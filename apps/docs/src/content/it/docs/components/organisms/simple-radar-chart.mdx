@@ -1,0 +1,53 @@
+---
+title: Simple Radar Chart
+---
+
+# Simple Radar Chart
+
+Un grafico radar [Recharts](https://recharts.org/) a partire da dati tabellari — nessun collegamento manuale di `ChartContainer`/config necessario, stessa forma condivisa del resto della famiglia di grafici.
+
+```tsx
+import { SimpleRadarChart } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<SimpleRadarChart
+  data={[
+    { category: "Electronics", sales: 86 },
+    { category: "Clothing", sales: 62 },
+    { category: "Home & Garden", sales: 48 },
+    { category: "Sports", sales: 34 },
+    { category: "Beauty", sales: 55 },
+  ]}
+  index="category"
+  categories={["sales"]}
+/>`} className="w-full">
+  <div className="h-80 w-full max-w-md">
+    <SimpleRadarChart
+      data={[
+        { category: "Elettronica", sales: 86 },
+        { category: "Abbigliamento", sales: 62 },
+        { category: "Casa e giardino", sales: 48 },
+        { category: "Sport", sales: 34 },
+        { category: "Bellezza", sales: 55 },
+      ]}
+      index="category"
+      categories={["sales"]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**SimpleRadarChart**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Obbligatorio. |
+| `index` | `string` | | Obbligatorio — la chiave che contiene l'etichetta di ogni raggio. |
+| `categories` | `string[]` | | Obbligatorio — chiavi tracciate come serie; più di una sovrappone più forme radar. |
+| `colors` | `string[]` | i token `--chart-1`…`--chart-5` del tema | Un colore per categoria, in ordine. |
+| `showLegend` | `boolean` | `true` | |
+
+Più ogni prop nativa di `<div>` sul wrapper radice.

@@ -1,0 +1,43 @@
+---
+title: Date Time Picker
+---
+
+# Date Time Picker
+
+Modeled after MUI X's `DateTimePicker`: a field trigger opens a popover with a Calendar on the left and scrollable Hour/Minute/(Second)/AM-PM columns on the right, Cancel/OK footer. Selections are staged in a local draft and only committed (`onChange`) on OK — Cancel discards them.
+
+```tsx
+import { DateTimePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateTimePicker label="Basic date time picker" defaultValue={new Date(2026, 8, 12, 17, 20)} />`}>
+  <DateTimePicker label="Basic date time picker" defaultValue={new Date(2026, 8, 12, 17, 20)} />
+</ComponentPreview>
+
+## 24-hour, with seconds
+
+<ComponentPreview code={`<DateTimePicker label="Date & time (24h)" hourFormat="24" showSeconds defaultValue={new Date(2026, 8, 12, 17, 20, 45)} />`}>
+  <DateTimePicker label="Date & time (24h)" hourFormat="24" showSeconds defaultValue={new Date(2026, 8, 12, 17, 20, 45)} />
+</ComponentPreview>
+
+## API
+
+**DateTimePicker**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `Date` | | Controlled/uncontrolled committed date+time. |
+| `onChange` | `(date: Date \| undefined) => void` | | Only called after OK, not on every draft edit inside the open popover. |
+| `label` | `string` | | Floating label on the field. |
+| `hourFormat` | `"12" \| "24"` | `"12"` | |
+| `minuteStep` | `number` | `5` | Granularity of the minute column. |
+| `showSeconds` | `boolean` | `false` | Adds a third scrollable Second column. |
+| `disabled` | `boolean` | `false` | |
+
+Plus every native prop of the underlying trigger button.
+
+### Accessibility
+
+The trigger is a real button that opens a [`Popover`](/docs/components/molecules/popover) — reachable and operable by keyboard like any button. Since selections stage in a draft until OK, a screen reader user can review the whole pending date+time before committing, rather than each column change announcing a final value change.

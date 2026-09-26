@@ -1,0 +1,62 @@
+---
+title: Date Range Picker
+---
+
+# Date Range Picker
+
+A "From — to" picker: a button trigger showing the formatted range, opening a [`Popover`](/docs/components/molecules/popover) with a two-month [`Calendar`](/docs/components/organisms/calendar) in range mode.
+
+```tsx
+import { DateRangePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateRangePicker />`}>
+  <DateRangePicker />
+</ComponentPreview>
+
+## With a default range
+
+<ComponentPreview code={`<DateRangePicker
+  defaultValue={{
+    from: new Date(new Date().setDate(new Date().getDate() - 7)),
+    to: new Date(),
+  }}
+/>`}>
+  <DateRangePicker
+    defaultValue={{
+      from: new Date(new Date().setDate(new Date().getDate() - 7)),
+      to: new Date(),
+    }}
+  />
+</ComponentPreview>
+
+## Single month
+
+<ComponentPreview code={`<DateRangePicker numberOfMonths={1} />`}>
+  <DateRangePicker numberOfMonths={1} />
+</ComponentPreview>
+
+**Note:** the first click sets only the start date and keeps the popover open; the second click completes the range, but the popover remains open until the confirmation button is pressed. (react-day-picker's own range selection resolves a single click straight to a one-day range by default — `DateRangePicker` passes `min={1}` internally specifically to prevent that.)
+
+## API
+
+**DateRangePicker**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `{ from?: Date; to?: Date }` | | Controlled/uncontrolled selected range. |
+| `onChange` | `(range: DateRange \| undefined) => void` | | |
+| `placeholder` | `string` | `"Pick a date range"` | Shown on the trigger when nothing's selected. |
+| `dateFormat` | `string` | `"LLL d, y"` | A date-fns format string, applied to each end of the range on the trigger. |
+| `numberOfMonths` | `number` | `2` | |
+| `disabled` | `boolean` | `false` | |
+| `fromYear` / `toYear` | `number` | | Bounds for the year dropdown. |
+| `confirmLabel` | `string` | `"Apply"` | Label for the button that confirms the selected range. |
+
+Plus every native prop of the underlying trigger button.
+
+### Accessibility
+
+Same keyboard model as [`Calendar`](/docs/components/organisms/calendar)'s range mode — arrow keys move the focused day, <kbd>Enter</kbd>/<kbd>Space</kbd> commits it as the range's start or end. The selection and `onChange` are committed only after the confirmation button is activated.

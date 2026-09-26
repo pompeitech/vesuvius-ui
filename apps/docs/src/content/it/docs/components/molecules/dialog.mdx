@@ -1,0 +1,78 @@
+---
+title: Dialog
+---
+
+# Dialog
+
+Un `Dialog` di Radix — un overlay modale, con focus intrappolato, si chiude con <kbd>Esc</kbd> o un click esterno.
+
+```tsx
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Dialog>
+  <DialogTrigger asChild>
+    <Button variant="outline">Edit profile</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit profile</DialogTitle>
+      <DialogDescription>Make changes to your profile here.</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="outline">Cancel</Button>
+      </DialogClose>
+      <Button>Save changes</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`}>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button variant="outline">Modifica profilo</Button>
+    </DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Modifica profilo</DialogTitle>
+        <DialogDescription>Apporta qui le modifiche al tuo profilo.</DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant="outline">Annulla</Button>
+        </DialogClose>
+        <Button>Salva modifiche</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>
+</ComponentPreview>
+
+## API
+
+**Dialog**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `defaultOpen` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `modal` | `boolean` | `true` | Se l'interazione fuori dal dialog è bloccata mentre è aperto. |
+
+**DialogTrigger** — ogni prop nativa di `<button>`, più `asChild` (`boolean`, default `false`).
+
+**DialogContent** — ogni prop nativa di `<div>`. Renderizzato in un Portal, con focus intrappolato, si chiude con <kbd>Esc</kbd> o click esterno per default.
+
+**DialogHeader** / **DialogFooter** — semplici `<div>` di layout, nessuna prop personalizzata.
+
+**DialogTitle** — obbligatorio per l'accessibilità (vedi sotto); ogni prop nativa adiacente a un heading.
+
+**DialogDescription** — ogni prop nativa di `<p>`; opzionale ma consigliato per l'accessibilità.
+
+**DialogClose** — ogni prop nativa di `<button>`, più `asChild`. Chiude il dialog quando attivato — nessun collegamento a `onOpenChange` necessario per un semplice pulsante di annullamento.
+
+Vedi anche `AlertDialog` per una variante conferma/annulla che non può essere chiusa cliccando fuori, e [`Sheet`](/docs/components/molecules/sheet) per lo stesso pattern che scorre da un bordo.
+
+### Accessibilità
+
+Renderizza `role="dialog"` con `aria-modal="true"`, con focus intrappolato mentre è aperto e restituito al trigger alla chiusura. `DialogTitle` è obbligatorio — Radix avvisa in sviluppo se manca, dato che è ciò che dà al dialog il suo nome accessibile; usa `DialogDescription` (o `aria-describedby`) per la descrizione accessibile. Se ti serve davvero un dialog senza titolo visibile, dai a `DialogTitle` una `className="sr-only"` invece di ometterlo del tutto.

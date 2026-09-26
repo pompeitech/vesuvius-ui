@@ -1,0 +1,53 @@
+---
+title: Simple Radar Chart
+---
+
+# Simple Radar Chart
+
+A [Recharts](https://recharts.org/) radar chart from tabular data — no manual `ChartContainer`/config wiring needed, same shared shape as the rest of the chart family.
+
+```tsx
+import { SimpleRadarChart } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<SimpleRadarChart
+  data={[
+    { category: "Electronics", sales: 86 },
+    { category: "Clothing", sales: 62 },
+    { category: "Home & Garden", sales: 48 },
+    { category: "Sports", sales: 34 },
+    { category: "Beauty", sales: 55 },
+  ]}
+  index="category"
+  categories={["sales"]}
+/>`} className="w-full">
+  <div className="h-80 w-full max-w-md">
+    <SimpleRadarChart
+      data={[
+        { category: "Electronics", sales: 86 },
+        { category: "Clothing", sales: 62 },
+        { category: "Home & Garden", sales: 48 },
+        { category: "Sports", sales: 34 },
+        { category: "Beauty", sales: 55 },
+      ]}
+      index="category"
+      categories={["sales"]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**SimpleRadarChart**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Required. |
+| `index` | `string` | | Required — the key holding each spoke's label. |
+| `categories` | `string[]` | | Required — keys plotted as series; more than one overlays multiple radar shapes. |
+| `colors` | `string[]` | the theme's `--chart-1`…`--chart-5` tokens | One color per category, in order. |
+| `showLegend` | `boolean` | `true` | |
+
+Plus every native `<div>` prop on the root wrapper.

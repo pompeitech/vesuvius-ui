@@ -1,0 +1,57 @@
+---
+title: Tree View
+---
+
+# Tree View
+
+A file-explorer-style tree — expandable folders, optional multi-select with checkboxes, keyboard navigation.
+
+```tsx
+import { TreeView, type TreeNode } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const data: TreeNode[] = [
+  {
+    id: "src", label: "src", icon: FolderIcon,
+    children: [
+      { id: "components", label: "components", icon: FolderIcon, children: [
+        { id: "button.tsx", label: "button.tsx", icon: FileIcon },
+      ] },
+      { id: "index.ts", label: "index.ts", icon: FileIcon },
+    ],
+  },
+  { id: "package.json", label: "package.json", icon: FileIcon },
+];
+
+<TreeView data={data} defaultExpanded={["src", "components"]} />`}>
+  <Demo name="tree-view-file-explorer" />
+</ComponentPreview>
+
+## API
+
+**TreeView**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `data` | `TreeNode[]` | Required — the tree to render. |
+| `defaultExpanded` | `string[]` | Node `id`s open on first render. |
+| `multiSelect` | `boolean` | Adds a checkbox per node instead of single-select highlighting. |
+| `onSelect` | `(ids: string[]) => void` | Fires with the current selection — a one-entry array in single-select mode, any number in `multiSelect` mode. |
+
+Plus every native `<div>` prop.
+
+**TreeNode**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Required — unique within the tree. |
+| `label` | `string` | Required. |
+| `icon` | `LucideIcon` | Optional leading icon. |
+| `children` | `TreeNode[]` | Nested nodes — presence of this field (even empty) makes the node an expandable folder rather than a leaf file. |
+| `disabled` | `boolean` | Excludes the node from selection and keyboard navigation. |
+
+### Accessibility
+
+Implements the ARIA `tree`/`treeitem` pattern — arrow keys navigate (<kbd>↑</kbd>/<kbd>↓</kbd> between visible nodes, <kbd>→</kbd> expands or moves into a folder, <kbd>←</kbd> collapses or moves to the parent), <kbd>Enter</kbd>/<kbd>Space</kbd> selects, and `aria-expanded`/`aria-selected` are kept in sync automatically.

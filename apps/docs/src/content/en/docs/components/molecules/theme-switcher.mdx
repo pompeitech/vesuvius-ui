@@ -1,0 +1,85 @@
+---
+title: Theme Switcher
+---
+
+# Theme Switcher
+
+Three ready-made controls, all reading/writing the same `ThemeProvider` context via `useTheme()`. This site's own chrome is dogfooded on Vesuvius's real `ThemeProvider`, so every preview below is live and genuinely changes this page's theme — try them.
+
+```tsx
+import {
+  ThemeModeToggle,
+  ThemePalettePicker,
+  ThemeSwitcher,
+} from "@pompeitech/vesuvius-ui";
+```
+
+## ThemeModeToggle
+
+A single icon button that flips light/dark.
+
+<ComponentPreview code={`<ThemeModeToggle />`}>
+  <ThemeModeToggle />
+</ComponentPreview>
+
+## ThemePalettePicker
+
+A searchable [`Command`](/docs/components/molecules/command) palette of color themes, with a shuffle button and a swatch preview per theme.
+
+<ComponentPreview code={`<ThemePalettePicker />
+
+// Custom themes need their own swatch entry (falls back to gray otherwise):
+
+<ThemePalettePicker swatches={{ acme: ["#16a34a", "#22c55e", "#15803d", "#166534"] }} />`}>
+  <ThemePalettePicker />
+</ComponentPreview>
+
+## ThemeSwitcher
+
+Both mode and color theme in one dropdown — the common "topbar" pattern.
+
+<ComponentPreview code={`<ThemeSwitcher />
+
+// A theme not in the built-in palette needs its own swatch color:
+
+<ThemeSwitcher swatchColors={{ acme: "#16a34a" }} />`}>
+  <ThemeSwitcher />
+</ComponentPreview>
+
+## Typical placement
+
+```tsx
+<Header>
+  <HeaderStart>{/* ... */}</HeaderStart>
+  <HeaderEnd>
+    <ThemeSwitcher />
+  </HeaderEnd>
+</Header>
+```
+
+## API
+
+**ThemeModeToggle**
+
+| Prop        | Type     | Description |
+| ----------- | -------- | ----------- |
+| `className` | `string` |             |
+
+Reads `resolvedTheme` from `useTheme()` (so `"system"` is already resolved to a concrete value) and flips straight between `"light"`/`"dark"` on click — it never sets `"system"` itself, so once clicked the theme stays pinned to an explicit choice instead of following the OS again.
+
+**ThemePalettePicker**
+
+| Prop       | Type                                               | Description                                                                                                                                                                            |
+| ---------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `swatches` | `Record<string, [string, string, string, string]>` | Maps a color theme name to 4 hex swatch colors shown in its list row. Built-in themes already have entries; add your own custom theme names here or they render as a gray placeholder. |
+
+Every other prop is forwarded to the underlying [`Command`](/docs/components/molecules/command) palette.
+
+**ThemeSwitcher**
+
+| Prop           | Type                     | Description                                                                                                                                                            |
+| -------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `swatchColors` | `Record<string, string>` | Maps a color theme name to a single hex color for its dropdown swatch dot. Same fallback-to-gray behavior as `ThemePalettePicker.swatches` for unlisted custom themes. |
+| `className`    | `string`                 |                                                                                                                                                                        |
+
+All three require a `ThemeProvider` ancestor (they throw via `useTheme()` otherwise) — mount it once near your app's root; see [Theming](/docs/theming) for `ThemeProvider` itself and the [visual theme catalog](/themes).

@@ -1,0 +1,71 @@
+---
+title: Grid
+---
+
+# Grid
+
+Un primitivo di layout CSS grid con conteggio di colonne responsive di prima classe — si abbina a Stack per i layout flex.
+
+```tsx
+import { Grid, GridItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Base
+
+<ComponentPreview code={`<Grid cols={4} gap={3}>
+  {items.map((i) => <Cell key={i}>{i}</Cell>)}
+</Grid>`} className="w-full">
+  <Grid cols={4} gap={3} className="w-full">
+    {Array.from({ length: 8 }, (_, i) => (
+      <div key={i} className="flex h-16 items-center justify-center rounded-md bg-accent text-sm">{i + 1}</div>
+    ))}
+  </Grid>
+</ComponentPreview>
+
+## Colonne responsive
+
+`cols` (e `gap`) accettano un semplice numero, oppure un oggetto `{ base, sm, md, lg, xl }` per valori per-breakpoint.
+
+<ComponentPreview code={`<Grid cols={{ base: 1, sm: 2, lg: 4 }} gap={{ base: 2, lg: 4 }}>
+  {items.map((i) => <Cell key={i}>{i}</Cell>)}
+</Grid>`} className="w-full">
+  <Grid cols={{ base: 1, sm: 2, lg: 4 }} gap={{ base: 2, lg: 4 }} className="w-full">
+    {Array.from({ length: 8 }, (_, i) => (
+      <div key={i} className="flex h-16 items-center justify-center rounded-md bg-accent text-sm">{i + 1}</div>
+    ))}
+  </Grid>
+</ComponentPreview>
+
+## Span di GridItem
+
+<ComponentPreview code={`<Grid cols={4} gap={3}>
+  <GridItem colSpan={4}><Cell>full width</Cell></GridItem>
+  <GridItem colSpan={2}><Cell>span 2</Cell></GridItem>
+  <GridItem colSpan={2}><Cell>span 2</Cell></GridItem>
+</Grid>`} className="w-full">
+  <Grid cols={4} gap={3} className="w-full">
+    <GridItem colSpan={4}><div className="flex h-16 items-center justify-center rounded-md bg-accent text-sm">larghezza piena</div></GridItem>
+    <GridItem colSpan={2}><div className="flex h-16 items-center justify-center rounded-md bg-accent text-sm">span 2</div></GridItem>
+    <GridItem colSpan={2}><div className="flex h-16 items-center justify-center rounded-md bg-accent text-sm">span 2</div></GridItem>
+  </Grid>
+</ComponentPreview>
+
+## API
+
+**Grid**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `cols` | `1`–`12`, o `{ base?, sm?, md?, lg?, xl? }` di questi | `1` | Numero di colonne, responsive quando fornito nella forma a oggetto per breakpoint. |
+| `gap` | numero della scala di spaziatura Tailwind, o `{ base?, sm?, md?, lg?, xl? }` di questi | `0` | Gap della griglia, responsive allo stesso modo di `cols`. |
+
+Più ogni prop nativa di `<div>`.
+
+**GridItem**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `colSpan` | `1`–`12`, o `{ base?, sm?, md?, lg?, xl? }` di questi | Quante colonne occupa questo elemento — responsive, stessa forma a oggetto per breakpoint di `Grid`. |
+| `rowSpan` | `1`–`6` | Quante righe occupa questo elemento — non responsive. |
+
+Più ogni prop nativa di `<div>`.

@@ -1,0 +1,68 @@
+---
+title: Avatar Group
+---
+
+# Avatar Group
+
+Una pila di avatar sovrapposti (assegnatari, partecipanti, collaboratori) che si allarga al passaggio del mouse, con l'overflow raccolto in un badge "+N".
+
+```tsx
+import { AvatarGroup, UserAvatar } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<AvatarGroup max={4}>
+  {team.map((name) => <UserAvatar key={name} name={name} />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4}>
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton", "Barbara Liskov", "Katherine Johnson"].map((name) => (
+      <UserAvatar key={name} name={name} />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## Quadrato, grande
+
+<ComponentPreview code={`<AvatarGroup max={4} shape="square" size="lg">
+  {team.map((name) => <UserAvatar key={name} name={name} shape="square" size="lg" />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4} shape="square" size="lg">
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton", "Barbara Liskov"].map((name) => (
+      <UserAvatar key={name} name={name} shape="square" size="lg" />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## Spaziatura personalizzata
+
+Sia la sovrapposizione a riposo che la quantità di apertura al passaggio del mouse sono regolabili — un gruppo più compatto e non espandibile per una riga di tabella compatta:
+
+<ComponentPreview code={`<AvatarGroup max={4} spacing={-8} expandedSpacing={-8}>
+  {team.map((name) => <UserAvatar key={name} name={name} size="sm" />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4} spacing={-8} expandedSpacing={-8}>
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton"].map((name) => (
+      <UserAvatar key={name} name={name} size="sm" />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## API
+
+**AvatarGroup**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `max` | `number` | `5` | Avatar mostrati prima che il resto si raccolga in un badge "+N". |
+| `size` | corrisponde a `size` di `UserAvatar` | `"default"` | Dimensiona solo il badge overflow "+N" — passa tu stesso la stessa dimensione a ogni avatar figlio, così corrispondono visivamente. |
+| `shape` | `"circle" \| "square"` | `"circle"` | Stessa avvertenza — dimensiona solo il badge overflow, fai corrispondere anche i tuoi figli. |
+| `spacing` | `number` | `-12` | Sovrapposizione a riposo, in px (negativo = sovrapposto). |
+| `expandedSpacing` | `number` | `4` | Spaziatura una volta passato il mouse — l'intero gruppo ascolta `onMouseEnter`/`onMouseLeave` sulla propria radice. |
+| `children` | `ReactNode` | | I singoli avatar — tipicamente `UserAvatar`, ma funziona qualsiasi elemento a forma di avatar. |
+
+Più ogni prop nativa di `<div>`.
+
+### Accessibilità
+
+Il badge overflow "+N" è un elemento puramente visivo senza alcuna interattività per default — se deve essere azionabile (ad es. aprire un elenco completo dei membri), avvolgilo tu stesso in un elemento focalizzabile invece di affidarti solo all'hover, dato che l'apertura al passaggio del mouse non è raggiungibile da tastiera.

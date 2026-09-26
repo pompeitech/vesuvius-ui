@@ -1,0 +1,74 @@
+---
+title: Calendar
+---
+
+# Calendar
+
+A [react-day-picker](https://daypicker.dev/) v10 calendar grid, restyled to match the kit — single date, a range, or multiple. The base for `DatePicker`, `DateRangePicker`, and `DateTimePicker`, which each wrap it in a trigger + popover.
+
+```tsx
+import { Calendar } from "@pompeitech/vesuvius-ui";
+```
+
+## Single date
+
+<ComponentPreview code={`const [date, setDate] = useState<Date | undefined>(new Date());
+
+<Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />`}>
+  <Demo name="calendar-single" />
+</ComponentPreview>
+
+## Month/year dropdown navigation
+
+<ComponentPreview code={`<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  captionLayout="dropdown"
+  startMonth={new Date(1950, 0)}
+  endMonth={new Date(2050, 11)}
+  className="rounded-md border"
+/>`}>
+  <Calendar
+    mode="single"
+    selected={new Date()}
+    captionLayout="dropdown"
+    startMonth={new Date(1950, 0)}
+    endMonth={new Date(2050, 11)}
+    className="rounded-md border"
+  />
+</ComponentPreview>
+
+## Range
+
+<ComponentPreview code={`<Calendar mode="range" selected={range} onSelect={setRange} numberOfMonths={2} className="rounded-md border" />`} className="overflow-x-auto">
+  <Calendar mode="range" numberOfMonths={2} captionLayout="dropdown" className="rounded-md border" />
+</ComponentPreview>
+
+## API
+
+**Calendar** accepts every prop react-day-picker's own `DayPicker` does, plus one addition:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `buttonVariant` | `"ghost" \| "outline"` | `"ghost"` | Style of the prev/next month nav buttons and, with `captionLayout="dropdown"`, the month/year dropdown triggers. |
+
+The most commonly used `DayPicker` props:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `mode` | `"single" \| "range" \| "multiple"` | | Selection mode — changes the shape `selected`/`onSelect` expect. |
+| `selected` | `Date` (single) / `DateRange` (range) / `Date[]` (multiple) | | Shape depends on `mode`. |
+| `onSelect` | matches `selected`'s shape | | |
+| `numberOfMonths` | `number` | `1` | How many months render side by side. |
+| `captionLayout` | `"label" \| "dropdown"` | `"label"` | `"label"` shows plain "Month Year" text; `"dropdown"` swaps it for two [`Select`](/docs/components/molecules/select)-like dropdowns, bounded by `startMonth`/`endMonth`. |
+| `startMonth` / `endMonth` | `Date` | | Bounds for navigation and the `captionLayout="dropdown"` year list. |
+| `showOutsideDays` | `boolean` | `true` | Shows the leading/trailing days of adjacent months, dimmed. |
+| `disabled` | `Date \| Date[] \| DateRange \| Matcher \| Matcher[]` | | Dates that can't be selected. |
+| `min` / `max` | `number` | | For `mode="range"`: minimum/maximum number of days the range must span. |
+
+See [react-day-picker's own docs](https://daypicker.dev/) for the complete reference — every prop it accepts (formatters, modifiers, locale, week numbers, and more) passes straight through.
+
+### Accessibility
+
+Built on react-day-picker's own `role="grid"` implementation — arrow keys move focus by day, <kbd>PageUp</kbd>/<kbd>PageDown</kbd> jump by month, <kbd>Home</kbd>/<kbd>End</kbd> jump to the start/end of the week, and <kbd>Enter</kbd>/<kbd>Space</kbd> selects the focused day. The current day and the selected day(s) are announced via `aria-current`/`aria-selected` automatically.

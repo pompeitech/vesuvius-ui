@@ -1,0 +1,54 @@
+---
+title: Stat Card
+---
+
+# Stat Card
+
+Il pattern a piastrella KPI — icona in un box + etichetta, un numero grande in grassetto, una linea di tendenza colorata su/giù sotto. `changePct` guida automaticamente il colore/l'icona della tendenza: verde+su per positivo, rosso+giù per negativo.
+
+```tsx
+import { StatCard } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<StatCard label="Total Revenue" value="$45,231.89" icon={DollarSignIcon} changePct={12.4} />
+<StatCard label="Avg. Order Value" value="$68.20" icon={CreditCardIcon} changePct={-1.8} />`}>
+  <Demo name="stat-card-row" revenueLabel="Ricavi totali" avgOrderLabel="Valore medio ordine" />
+</ComponentPreview>
+
+## Con un elemento visivo di tendenza
+
+`trend` accetta qualsiasi `ReactNode` — tipicamente una [`Sparkline`](/docs/components/organisms/sparkline) — così `StatCard` non deve dipendere dal modulo dei grafici stesso.
+
+<ComponentPreview code={`<StatCard
+  label="Average Sales"
+  value="837"
+  changePct={1.3}
+  changeLabel="vs last month"
+  trend={<Sparkline data={[18, 21, 14, 7, 11, 16, 17, 10]} filled />}
+/>`}>
+  <StatCard
+    label="Vendite medie"
+    value="837"
+    changePct={1.3}
+    changeLabel="rispetto al mese scorso"
+    trend={<Sparkline data={[18, 21, 14, 7, 11, 16, 17, 10]} filled />}
+    className="w-64"
+  />
+</ComponentPreview>
+
+## API
+
+**StatCard**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `label` | `string` | | |
+| `value` | `ReactNode` | | La cifra in evidenza. |
+| `icon` | `LucideIcon` | | Icona in un box opzionale accanto all'etichetta. |
+| `changePct` | `number` | | ad es. `12.4` o `-3.2` — guida automaticamente il colore e la freccia su/giù del badge di tendenza. |
+| `changeLabel` | `string` | `"vs last month"` | Testo dopo la percentuale. |
+| `trend` | `ReactNode` | | Un elemento visivo inline, ad es. uno [`Sparkline`](/docs/components/organisms/sparkline). |
+
+Più ogni prop nativa di `<div>` sulla radice.

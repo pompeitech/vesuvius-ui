@@ -1,0 +1,79 @@
+---
+title: Stepper
+---
+
+# Stepper
+
+Un indicatore di avanzamento passo-passo — orizzontale o verticale, opzionalmente cliccabile per saltare tra i passi già visitati. Si abbina a [`Wizard`](/docs/components/organisms/wizard) per il flusso completo (contenuto + navigazione Indietro/Avanti), oppure usalo in autonomia come visualizzazione di stato.
+
+```tsx
+import { Stepper, type StepperStep } from "@pompeitech/vesuvius-ui";
+```
+
+## Orizzontale
+
+<ComponentPreview code={`const steps: StepperStep[] = [
+  { title: "Account", description: "Create your account" },
+  { title: "Profile", description: "Tell us about yourself" },
+  { title: "Payment", description: "Add a payment method" },
+  { title: "Review", description: "Confirm and finish" },
+];
+
+<Stepper steps={steps} activeStep={1} />`}>
+  <div className="w-full">
+    <Stepper
+      steps={[
+        { title: "Account", description: "Crea il tuo account" },
+        { title: "Profilo", description: "Parlaci di te" },
+        { title: "Pagamento", description: "Aggiungi un metodo di pagamento" },
+        { title: "Riepilogo", description: "Conferma e concludi" },
+      ]}
+      activeStep={1}
+    />
+  </div>
+</ComponentPreview>
+
+## Cliccabile (non lineare)
+
+<ComponentPreview code={`<Stepper steps={steps} activeStep={active} onStepClick={setActive} />`}>
+  <Demo name="stepper-clickable" step2="Profilo" step3="Pagamento" step4="Riepilogo" />
+</ComponentPreview>
+
+## Con un errore
+
+<ComponentPreview code={`<Stepper
+  steps={[{ title: "Account" }, { title: "Profile", status: "error" }, { title: "Payment" }, { title: "Review" }]}
+  activeStep={1}
+/>`}>
+  <div className="w-full">
+    <Stepper
+      steps={[{ title: "Account" }, { title: "Profilo", status: "error" }, { title: "Pagamento" }, { title: "Riepilogo" }]}
+      activeStep={1}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Stepper**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `steps` | `StepperStep[]` | | Obbligatorio. |
+| `activeStep` | `number` | | Obbligatorio — l'indice del passo corrente. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | |
+| `onStepClick` | `(index: number) => void` | | Omettila per renderla una visualizzazione di stato di sola lettura — i passi allora non sono affatto focalizzabili/cliccabili. |
+
+Più ogni prop nativa di `<div>`.
+
+**StepperStep**
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `title` | `string` | Obbligatorio. |
+| `description` | `string` | Riga opzionale sotto il titolo. |
+| `status` | `"upcoming" \| "active" \| "completed" \| "error"` | Sovrascrive lo stato che questo passo otterrebbe altrimenti confrontando il suo indice con `activeStep` — usa `"error"` per segnalare un passo che ha fallito la validazione, indipendentemente da dove si trovi attualmente l'utente. Se omesso, lo stato viene derivato automaticamente: i passi prima di `activeStep` sono `"completed"`, quello ad `activeStep` è `"active"`, e il resto è `"upcoming"`. |
+
+### Accessibilità
+
+Ogni passo viene renderizzato con `role="tab"` e `aria-selected` che riflette se è quello attivo. Quando viene fornito `onStepClick`, i passi diventano veri controlli interattivi raggiungibili da tastiera; senza, sono puramente una visualizzazione di stato e non fanno parte dell'ordine di tabulazione — non passare un `onStepClick` no-op solo per far sembrare cliccabili i passi quando non dovrebbero esserlo.

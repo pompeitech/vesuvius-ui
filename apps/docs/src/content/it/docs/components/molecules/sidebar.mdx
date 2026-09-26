@@ -1,0 +1,217 @@
+---
+title: Sidebar
+---
+
+# Sidebar
+
+La navigazione laterale comprimibile del guscio dell'app — collasso a sola icona, un [`Sheet`](/docs/components/molecules/sheet) mobile offcanvas, e tooltip quando è compressa a icone. Nell'uso reale `Sidebar` è `position: fixed` rispetto al viewport per design (`collapsible="icon"` o `"offcanvas"`, come nello snippet del vero guscio d'app sotto) — l'anteprima live qui usa invece `collapsible="none"` (un semplice `<div>` non fixed) solo per poter essere renderizzata contenuta in questo riquadro delimitato; è la stessa tecnica che usa la sidebar di questo stesso sito.
+
+```tsx
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTooltipProvider, SidebarTrigger } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<SidebarProvider className="h-full min-h-0 w-full">
+  <Sidebar collapsible="none" className="h-full">
+    <SidebarHeader>
+      <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive>
+                <HomeIcon />
+                <span>Dashboard</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <PackageIcon />
+                <span>Products</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <SettingsIcon />
+                <span>Settings</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>
+    <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+      <SidebarTrigger />
+      <span className="text-sm font-medium">Dashboard</span>
+    </header>
+    <div className="p-4 text-sm text-muted-foreground">Page content</div>
+  </SidebarInset>
+</SidebarProvider>`} className="w-full p-0">
+  <div className="h-96 w-full overflow-hidden rounded-lg border border-border">
+    <SidebarTooltipProvider>
+      <SidebarProvider className="h-full min-h-0 w-full">
+        <Sidebar collapsible="none" className="h-full">
+          <SidebarHeader>
+            <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarGroup>
+              <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton isActive>
+                      <HomeIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <PackageIcon />
+                      <span>Products</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton>
+                      <SettingsIcon />
+                      <span>Settings</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+        <SidebarInset>
+          <header className="flex h-14 shrink-0 items-center gap-2 border-b px-4">
+            <SidebarTrigger />
+            <span className="text-sm font-medium">Dashboard</span>
+          </header>
+          <div className="p-4 text-sm text-muted-foreground">Page content</div>
+        </SidebarInset>
+      </SidebarProvider>
+    </SidebarTooltipProvider>
+  </div>
+</ComponentPreview>
+
+`SidebarTrigger` funziona comunque in questa anteprima (attiva/disattiva lo stato `open` di `SidebarProvider`), ma con `collapsible="none"` la `Sidebar` stessa non si comprime davvero — quel comportamento richiede `collapsible="icon"` o `"offcanvas"`, che a loro volta richiedono `position: fixed`. La forma reale del guscio d'app:
+
+```tsx
+function AppShell() {
+  return (
+    <SidebarTooltipProvider>
+      <SidebarProvider>
+        <Sidebar collapsible="icon">
+          <SidebarHeader>
+            <div className="px-2 py-1.5 text-sm font-semibold">Vesuvius UI</div>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarGroup>
+              <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton tooltip="Dashboard">
+                      <HomeIcon />
+                      <span>Dashboard</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+        <SidebarInset>
+          <header className="flex h-14 items-center gap-2 border-b px-4">
+            <SidebarTrigger />
+            <span className="text-sm font-medium">Dashboard</span>
+          </header>
+          <div className="p-4">Page content</div>
+        </SidebarInset>
+      </SidebarProvider>
+    </SidebarTooltipProvider>
+  );
+}
+```
+
+Per renderizzare l'albero del menu stesso a partire dai dati invece di annidare a mano i `SidebarMenuItem`, vedi `SidebarNav`.
+
+## API
+
+**SidebarProvider**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato espanso controllato (desktop). |
+| `defaultOpen` | `boolean` | `true` | Stato iniziale, non controllato — persistito su `localStorage` tra i reload in entrambi i casi. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+
+Registra anche la scorciatoia da tastiera <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>B</kbd> per attivare/disattivare la sidebar globalmente mentre è montata.
+
+**useSidebar()** — l'hook da cui legge ogni parte sottostante; lancia un errore fuori da un `SidebarProvider`.
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `state` | `"expanded" \| "collapsed"` | Derivato da `open`. |
+| `open` / `setOpen` | `boolean` / `(open: boolean) => void` | Stato espanso desktop. |
+| `openMobile` / `setOpenMobile` | `boolean` / `(open: boolean) => void` | Stato dello [`Sheet`](/docs/components/molecules/sheet) offcanvas mobile. |
+| `isMobile` | `boolean` | |
+| `toggleSidebar` | `() => void` | Attiva/disattiva `open` (desktop) o `openMobile` (mobile) a seconda di `isMobile`. |
+
+**SidebarTooltipProvider** — avvolge il `TooltipProvider` di Radix; obbligatorio come antenato perché funzionino i tooltip dello stato compresso a icone. Ogni prop accettata da `TooltipProvider`.
+
+**Sidebar**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `side` | `"left" \| "right"` | `"left"` | |
+| `variant` | `"sidebar" \| "floating" \| "inset"` | `"sidebar"` | `"floating"`/`"inset"` aggiungono un bordo/ombra e un margine interno invece di un pannello a filo bordo-a-bordo. |
+| `collapsible` | `"offcanvas" \| "icon" \| "none"` | `"offcanvas"` | `"offcanvas"` nasconde completamente e scorre dentro; `"icon"` si restringe a larghezza sola-icona; `"none"` renderizza come un semplice `<div>` non fixed che non si comprime mai — l'unica modalità incorporabile in un contenitore delimitato, come nell'anteprima sopra. |
+
+**SidebarTrigger** — ogni prop di [`Button`](/docs/components/atoms/button); chiama `toggleSidebar()` al click.
+
+**SidebarInset** — il `<main>` accanto alla sidebar. Ogni prop nativa di `<main>`.
+
+**SidebarHeader** / **SidebarFooter** / **SidebarContent** — semplici `<div>` di layout, nessuna prop personalizzata.
+
+**SidebarGroup** / **SidebarGroupLabel** / **SidebarGroupContent** — una sezione etichettata dentro `SidebarContent`; `SidebarGroupLabel` accetta `asChild` (`boolean`, default `false`).
+
+**SidebarGroupAction** — un pulsante d'azione opzionale ancorato in alto a destra di un gruppo (ad es. un'icona "aggiungi" accanto all'etichetta del gruppo); ogni prop nativa di `<button>` più `asChild`.
+
+**SidebarMenu** / **SidebarMenuItem** — il `<ul>`/`<li>` che avvolge ogni voce; ogni prop nativa del rispettivo elemento.
+
+**SidebarMenuButton**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `isActive` | `boolean` | `false` | Evidenzia l'elemento come pagina corrente. |
+| `tooltip` | `string \| ComponentProps<typeof TooltipContent>` | | Mostrato quando la sidebar è compressa a sola icona, dato che il testo dell'etichetta è nascosto allora — una semplice stringa, o un intero oggetto di prop `TooltipContent` per maggiore controllo. |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | |
+| `variant` | `"default" \| "outline"` | `"default"` | |
+| `asChild` | `boolean` | `false` | |
+
+Più ogni prop nativa di `<button>`.
+
+**SidebarMenuAction** — un pulsante d'azione secondario ancorato al bordo destro di una voce di menu (un trigger menu "...", un'azione rapida); ogni prop nativa di `<button>` più `asChild`, e `showOnHover` (`boolean`, default `false`) per tenerlo nascosto finché la riga non è in hover/focus.
+
+**SidebarMenuBadge** — ogni prop nativa di `<div>`; un conteggio/badge finale su una voce di menu.
+
+**SidebarMenuSkeleton** — placeholder di caricamento che corrisponde alla forma di un `SidebarMenuItem`; `showIcon` (`boolean`, default `false`).
+
+**SidebarMenuSub** / **SidebarMenuSubItem** / **SidebarMenuSubButton** — un livello di elementi annidati sotto un `SidebarMenuItem`; `SidebarMenuSubButton` accetta inoltre `isActive` e `size` (`"sm" \| "md"`, default `"md"`).
+
+**SidebarSeparator** — ogni prop di [`Separator`](/docs/components/atoms/separator); un divisore tra gruppi.
+
+**SidebarInput** — ogni prop di [`Input`](/docs/components/atoms/input), pre-stilizzato per stare dentro la sidebar (tipicamente in `SidebarHeader`, per un box di ricerca).
+
+**SidebarRail** — una sottile striscia trascinabile al bordo della sidebar che la attiva/disattiva al click, per un'affordance desktop oltre a `SidebarTrigger`; ogni prop nativa di `<button>`.
+
+### Accessibilità
+
+`SidebarMenuButton` renderizza un vero `<button>` (o l'elemento di `asChild`), raggiungibile e operabile con <kbd>Tab</kbd>/<kbd>Invio</kbd>/<kbd>Spazio</kbd> come qualsiasi pulsante. Quando `collapsible="icon"` nasconde l'etichetta testuale, passa sempre `tooltip` — altrimenti il pulsante compresso non ha un nome scopribile per gli utenti mouse vedenti che ci passano sopra, anche se l'`aria-label`/testo sottostante è comunque presente per gli screen reader tramite lo `<span>` nascosto.

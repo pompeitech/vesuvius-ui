@@ -1,0 +1,82 @@
+---
+title: Tabs
+---
+
+# Tabs
+
+A Radix `Tabs` — switch between panels, one visible at a time.
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Tabs defaultValue="account" className="w-96">
+  <TabsList className="w-full">
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">
+    <Card>
+      <CardHeader><CardTitle>Account</CardTitle></CardHeader>
+      <CardContent className="text-sm text-muted-foreground">Make changes to your account here.</CardContent>
+    </Card>
+  </TabsContent>
+  <TabsContent value="password">
+    <Card>
+      <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+      <CardContent className="text-sm text-muted-foreground">Change your password here.</CardContent>
+    </Card>
+  </TabsContent>
+</Tabs>`}>
+  <Tabs defaultValue="account" className="w-96">
+    <TabsList className="w-full">
+      <TabsTrigger value="account">Account</TabsTrigger>
+      <TabsTrigger value="password">Password</TabsTrigger>
+    </TabsList>
+    <TabsContent value="account">
+      <Card>
+        <CardHeader><CardTitle>Account</CardTitle></CardHeader>
+        <CardContent className="text-sm text-muted-foreground">Make changes to your account here.</CardContent>
+      </Card>
+    </TabsContent>
+    <TabsContent value="password">
+      <Card>
+        <CardHeader><CardTitle>Password</CardTitle></CardHeader>
+        <CardContent className="text-sm text-muted-foreground">Change your password here.</CardContent>
+      </Card>
+    </TabsContent>
+  </Tabs>
+</ComponentPreview>
+
+## API
+
+**Tabs**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `string` | | Controlled/uncontrolled active tab. |
+| `onValueChange` | `(value: string) => void` | | |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Also changes arrow-key navigation direction. |
+| `activationMode` | `"automatic" \| "manual"` | `"automatic"` | `"automatic"`: arrow keys switch the active tab immediately. `"manual"`: arrow keys move focus only, activation needs an explicit <kbd>Enter</kbd>/<kbd>Space</kbd> — use this when switching tabs is expensive (a network fetch per tab). |
+
+**TabsList** — every native `<div>` prop; `role="tablist"` container for the triggers.
+
+**TabsTrigger**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | Required — matches a `TabsContent`'s `value`. |
+| `disabled` | `boolean` | |
+
+**TabsContent**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | Required — matches the `TabsTrigger` that reveals it. |
+| `forceMount` | `boolean` | Keeps inactive panels mounted (hidden) instead of unmounting them — needed if a panel holds state that shouldn't reset when hidden. |
+
+### Accessibility
+
+Implements the ARIA `tablist`/`tab`/`tabpanel` pattern automatically — <kbd>←</kbd>/<kbd>→</kbd> (or <kbd>↑</kbd>/<kbd>↓</kbd> when `orientation="vertical"`) move between triggers, `aria-selected`/`aria-controls`/`aria-labelledby` are wired for you.

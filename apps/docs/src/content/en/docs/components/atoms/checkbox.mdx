@@ -1,0 +1,85 @@
+---
+title: Checkbox
+---
+
+# Checkbox
+
+A Radix `Checkbox.Root` — controlled or uncontrolled, three-state capable (`checked`, `unchecked`, `"indeterminate"`).
+
+```tsx
+import { Checkbox } from "@pompeitech/vesuvius-ui";
+```
+
+## With a label
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-terms" />
+    <Label htmlFor="docs-terms">Accept terms and conditions</Label>
+  </div>
+</ComponentPreview>
+
+## Checked / disabled / indeterminate
+
+`"indeterminate"` is a real third state, not just a visual — it's what a "select all" checkbox shows when only some of its children are checked:
+
+<ComponentPreview code={`<Checkbox defaultChecked aria-label="Checked" />
+<Checkbox checked="indeterminate" aria-label="Some selected" />
+<Checkbox disabled aria-label="Disabled" />
+<Checkbox disabled defaultChecked aria-label="Disabled, checked" />`}>
+  <Checkbox defaultChecked aria-label="Checked" />
+  <Checkbox checked="indeterminate" aria-label="Some selected" />
+  <Checkbox disabled aria-label="Disabled" />
+  <Checkbox disabled defaultChecked aria-label="Disabled, checked" />
+</ComponentPreview>
+
+## Controlled, with a "select all"
+
+The classic pattern this state exists for — a parent checkbox reflecting the union of several children:
+
+<ComponentPreview code={`const [items, setItems] = useState(() => [true, false, false]);
+const allChecked = items.every(Boolean);
+const someChecked = items.some(Boolean) && !allChecked;
+
+<div className="flex flex-col gap-2">
+  <div className="flex items-center gap-2 border-b pb-2">
+    <Checkbox
+      checked={someChecked ? "indeterminate" : allChecked}
+      onCheckedChange={(v) => setItems(items.map(() => v === true))}
+    />
+    <Label>Select all</Label>
+  </div>
+  {items.map((checked, i) => (
+    <div key={i} className="flex items-center gap-2">
+      <Checkbox
+        checked={checked}
+        onCheckedChange={(v) => setItems(items.map((it, idx) => idx === i ? v === true : it))}
+      />
+      <Label>Item {i + 1}</Label>
+    </div>
+  ))}
+</div>`}>
+  <Demo name="checkbox-select-all" />
+</ComponentPreview>
+
+## API
+
+**Checkbox**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `checked` | `boolean \| "indeterminate"` | | Controlled checked state. |
+| `defaultChecked` | `boolean \| "indeterminate"` | `false` | Initial state, uncontrolled. |
+| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | | Fires with the *new* state on every click/keyboard toggle. |
+| `disabled` | `boolean` | `false` | |
+| `required` | `boolean` | `false` | Marks the field required for native form validation. |
+| `name` / `value` | `string` | | For plain (non-JS) form submission — renders a hidden native input alongside the styled button. |
+
+Plus every other native `<button>` prop (Radix's `Checkbox.Root` renders a `<button role="checkbox">`, not a native `<input type="checkbox">`).
+
+### Accessibility
+
+Fully keyboard operable out of the box: <kbd>Tab</kbd> to focus, <kbd>Space</kbd> to toggle. Always pair it with a `<Label htmlFor>` (as in every example above) or an explicit `aria-label` on the checkbox itself — the rendered element is a `<button>`, not an `<input>`, so it has no implicit accessible name of its own the way a native checkbox+label association gets for free.

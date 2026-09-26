@@ -1,0 +1,71 @@
+---
+title: Stack
+---
+
+# Stack
+
+Un primitivo di layout flexbox con prop responsive di prima classe — "dammi una riga che si impila in una colonna su mobile." Si abbina a [`Grid`](/docs/components/molecules/grid).
+
+```tsx
+import { Stack } from "@pompeitech/vesuvius-ui";
+```
+
+## Colonna (default)
+
+<ComponentPreview code={`<Stack gap={3}>
+  <Box>1</Box>
+  <Box>2</Box>
+  <Box>3</Box>
+</Stack>`}>
+  <Stack gap={3}>
+    {[1, 2, 3].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Riga
+
+<ComponentPreview code={`<Stack direction="row" gap={3} align="center">
+  <Box>1</Box>
+  <Box>2</Box>
+  <Box>3</Box>
+</Stack>`}>
+  <Stack direction="row" gap={3} align="center">
+    {[1, 2, 3].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Direzione responsive
+
+<ComponentPreview code={`<Stack direction={{ base: "column", md: "row" }} gap={{ base: 2, md: 6 }}>
+  <Box>1</Box>
+  <Box>2</Box>
+</Stack>`}>
+  <Stack direction={{ base: "column", md: "row" }} gap={{ base: 2, md: 6 }}>
+    {[1, 2].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## Spazio tra gli elementi
+
+<ComponentPreview code={`<Stack direction="row" justify="between" className="w-96">
+  <Box>1</Box>
+  <Box>2</Box>
+</Stack>`} className="w-full">
+  <Stack direction="row" justify="between" className="w-96">
+    {[1, 2].map((i) => <div key={i} className="flex size-16 items-center justify-center rounded-md bg-accent text-sm">{i}</div>)}
+  </Stack>
+</ComponentPreview>
+
+## API
+
+**Stack**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `direction` | `"row" \| "column" \| "row-reverse" \| "column-reverse"`, o `{ base?, sm?, md?, lg?, xl? }` di questi | `"column"` | Responsive quando fornito nella forma a oggetto per breakpoint. |
+| `align` | `"start" \| "center" \| "end" \| "stretch" \| "baseline"` | | Corrisponde ad `align-items`. |
+| `justify` | `"start" \| "center" \| "end" \| "between" \| "around" \| "evenly"` | | Corrisponde a `justify-content`. |
+| `gap` | numero della scala di spaziatura Tailwind, o `{ base?, sm?, md?, lg?, xl? }` di questi | `0` | Responsive allo stesso modo di `direction`. |
+| `wrap` | `boolean` | `false` | Corrisponde a `flex-wrap: wrap`. |
+
+Più ogni prop nativa di `<div>`.

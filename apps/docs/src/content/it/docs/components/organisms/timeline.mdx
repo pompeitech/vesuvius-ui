@@ -1,0 +1,81 @@
+---
+title: Timeline
+---
+
+# Timeline
+
+Una sequenza verticale per roadmap, attività di progetto, rilasci e altri eventi ordinati. Usa `variant="roadmap"` quando ogni tappa deve avere una card più evidente e una colonna separata per il periodo.
+
+```tsx
+import { Timeline } from "@pompeitech/vesuvius-ui";
+```
+
+## Roadmap
+
+<ComponentPreview code={`<Timeline
+  variant="roadmap"
+  items={[
+    { id: "one", date: "Q1", title: "Fondamenta", status: "success" },
+    { id: "two", date: "Q2", title: "Composizioni", status: "active" },
+    { id: "three", date: "Q3", title: "Admin Kit" },
+  ]}
+/>`}>
+  <div className="max-w-2xl">
+    <Timeline
+      variant="roadmap"
+      items={[
+        { id: 'one', date: 'Q1', title: 'Fondamenta', description: 'Token, accessibilità e primitive.', status: 'success' },
+        { id: 'two', date: 'Q2', title: 'Composizioni', description: 'Organismi pronti per le dashboard.', status: 'active' },
+        { id: 'three', date: 'Q3', title: 'Admin Kit', description: 'Un guscio completo per prodotti.' }
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## Attività
+
+<ComponentPreview code={`<Timeline
+  items={[
+    { id: "one", title: "Progetto creato", date: "10:42", status: "success" },
+    { id: "two", title: "Review richiesta", date: "Ieri", status: "active" },
+    { id: "three", title: "Deploy programmato", date: "Domani", status: "muted" },
+  ]}
+/>`}>
+  <div className="max-w-xl">
+    <Timeline
+      items={[
+        { id: 'one', title: 'Progetto creato', date: '10:42', description: 'Workspace inizializzato.', status: 'success' },
+        { id: 'two', title: 'Review richiesta', date: 'Ieri', description: 'In attesa di feedback.', status: 'active' },
+        { id: 'three', title: 'Deploy programmato', date: 'Domani', status: 'muted' }
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Timeline**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `items` | `TimelineItem[]` | | Eventi ordinati da visualizzare. |
+| `variant` | `"default" \| "roadmap"` | `"default"` | Usa lo stile compatto per le attività o le card milestone con colonna del periodo. |
+| `className` | `string` | | Classi aggiuntive per la lista radice. |
+| `aria-label` | `string` | `"Timeline"` | Nome accessibile della lista ordinata. |
+
+**TimelineItem**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `id` | `string` | Chiave stabile dell'elemento. |
+| `title` | `string` | Etichetta principale dell'evento. |
+| `description` | `ReactNode` | Contenuto di supporto. |
+| `date` | `ReactNode` | Data, ora o periodo. Nella modalità roadmap appare nella colonna del periodo. |
+| `meta` | `ReactNode` | Metadati secondari opzionali. |
+| `icon` | `ReactNode` | Contenuto opzionale dentro il marker. |
+| `status` | `"default" \| "active" \| "success" \| "warning" \| "destructive" \| "muted"` | Stato semantico del marker. |
+| `onClick` | `() => void` | Rende il contenuto dell'evento un button accessibile. |
+
+### Accessibilità
+
+Il componente usa una lista ordinata, mantiene il connettore decorativo e comunica il nome della timeline tramite `aria-label`. Usa `onClick` solo quando un evento è azionabile; altrimenti lascia gli elementi informativi. Lo status è un'informazione visiva, quindi quando è importante riportalo anche nel titolo o nella descrizione.

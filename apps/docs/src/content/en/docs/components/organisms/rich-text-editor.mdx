@@ -1,0 +1,49 @@
+---
+title: Rich Text Editor
+---
+
+# Rich Text Editor
+
+A [Tiptap](https://tiptap.dev/)-based editor with a fixed toolbar — bold/italic/strikethrough, headings, lists, blockquote, undo/redo. Stores and emits plain HTML via `value`/`onChange`, so it drops straight into a [`Form`](/docs/components/molecules/form) field. `RichTextViewer` renders that same HTML read-only, with matching typography.
+
+```tsx
+import { RichTextEditor, RichTextViewer } from "@pompeitech/vesuvius-ui";
+```
+
+## Editor
+
+<ComponentPreview code={`const [value, setValue] = useState("<p>Write something...</p>");
+
+<RichTextEditor value={value} onChange={setValue} />`} className="w-full">
+  <Demo name="rich-text-editor" />
+</ComponentPreview>
+
+## Viewer (read-only)
+
+<ComponentPreview code={`<RichTextViewer html="<p>Rendered <strong>read-only</strong>, matching typography.</p>" />`} className="w-full">
+  <RichTextViewer html="<p>Rendered <strong>read-only</strong>, matching typography.</p>" />
+</ComponentPreview>
+
+## API
+
+**RichTextEditor**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | | The editor's content as an HTML string. |
+| `onChange` | `(html: string) => void` | | Fires with the new HTML on every edit. |
+| `placeholder` | `string` | | Shown in the empty editor. |
+| `editable` | `boolean` | `true` | Set `false` to lock editing while keeping the toolbar mounted (rare — prefer `RichTextViewer` for a genuinely read-only display). |
+
+Plus every native `<div>` prop on the root wrapper.
+
+**RichTextViewer**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `html` | `string` | Required — the HTML to render read-only. |
+| `className` | `string` | |
+
+### Accessibility
+
+The toolbar's buttons carry accessible labels and reflect the active formatting state (`aria-pressed`) for the current selection, same as [`Toggle`](/docs/components/molecules/toggle). Since the stored value is raw HTML, sanitize or trust its source appropriately before rendering it elsewhere (e.g. with `RichTextViewer`) — this component doesn't sanitize on your behalf.

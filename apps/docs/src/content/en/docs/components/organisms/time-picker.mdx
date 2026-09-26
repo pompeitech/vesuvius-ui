@@ -1,0 +1,43 @@
+---
+title: Time Picker
+---
+
+# Time Picker
+
+An HH:MM(:SS)[ AM/PM] segmented time input, operating directly on a `Date` — type digits (auto-advances after 2), Up/Down to step, Left/Right to move between segments. Pairs with [`Calendar`](/docs/components/organisms/calendar)/`DatePicker` to build a full date+time picker (see `DateTimePicker`), or stands alone for a time-only field.
+
+```tsx
+import { TimePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## 24-hour
+
+<ComponentPreview code={`const [date, setDate] = useState(() => new Date());
+
+<TimePicker date={date} onChange={setDate} />`}>
+  <Demo name="time-picker" />
+</ComponentPreview>
+
+## 12-hour, with seconds
+
+<ComponentPreview code={`<TimePicker date={date} onChange={setDate} hourFormat="12" showSeconds />`}>
+  <Demo name="time-picker" hourFormat="12" showSeconds />
+</ComponentPreview>
+
+## API
+
+**TimePicker**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `date` | `Date \| undefined` | | The full date whose time-of-day portion this component edits — only the hour/minute/second fields change, the date portion passes through untouched. |
+| `onChange` | `(date: Date) => void` | | Fires with the updated `Date` on every segment edit. |
+| `hourFormat` | `"12" \| "24"` | `"24"` | `"12"` adds an AM/PM segment. |
+| `showSeconds` | `boolean` | `false` | Adds a Seconds segment. |
+| `disabled` | `boolean` | `false` | |
+
+Plus every native `<div>` prop on the root wrapper.
+
+### Accessibility
+
+Each segment is a real native `<input>`, so it's focusable and reachable by <kbd>Tab</kbd> like any text field. Within a segment, <kbd>←</kbd>/<kbd>→</kbd> move to the adjacent segment, <kbd>↑</kbd>/<kbd>↓</kbd> step its value, and typing digits fills it directly (auto-advancing after two digits) — all via a manual `onKeyDown` handler rather than native spinbutton semantics, so pair each `TimePicker` with a visible or `aria-label`ed caption of its own (as `DateTimePicker` does) describing what the time represents.

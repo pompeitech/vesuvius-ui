@@ -1,0 +1,51 @@
+---
+title: People Select
+---
+
+# People Select
+
+Un selettore di una singola persona — un combobox ricercabile che mostra il `UserAvatar`, il nome e una descrizione opzionale (un ruolo, un team) di ogni opzione. Costruito per campi assegnatario ("Assigned to", "Reviewer").
+
+```tsx
+import { PeopleSelect, type PeopleSelectOption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const [value, setValue] = useState<string | undefined>("ada");
+
+<PeopleSelect options={people} value={value} onChange={setValue} />`}>
+  <Demo name="people-select" />
+</ComponentPreview>
+
+## Azzerabile ("Non assegnato")
+
+<ComponentPreview code={`<PeopleSelect options={people} value={value} onChange={setValue} clearable />`}>
+  <Demo name="people-select" clearable />
+</ComponentPreview>
+
+## API
+
+**PeopleSelect**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `options` | `PeopleSelectOption[]` | | Obbligatorio. |
+| `value` / `defaultValue` | `string` | | `value` selezionato, controllato o non controllato. |
+| `onChange` | `(value: string \| undefined) => void` | | |
+| `clearable` | `boolean` | `false` | Aggiunge un'opzione "Unassigned" che azzera la selezione. |
+| `unassignedLabel` | `string` | `"Unassigned"` | |
+| `disabled` | `boolean` | `false` | |
+
+**PeopleSelectOption**
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Obbligatorio — identificatore univoco. |
+| `label` | `string` | Obbligatorio — il nome visualizzato della persona. |
+| `description` | `string` | Seconda riga opzionale (ruolo, team). |
+| `avatarSrc` | `string` | URL immagine opzionale — ripiega sulle iniziali tramite `UserAvatar` quando assente o in caso di errore di caricamento. |
+
+### Accessibilità
+
+Costruito sullo stesso pattern combobox di [`Select`](/docs/components/molecules/select)/[`Command`](/docs/components/molecules/command) — digita per filtrare, le frecce spostano l'evidenziazione, <kbd>Invio</kbd> seleziona, <kbd>Esc</kbd> chiude senza modificare la selezione. Ogni opzione non ha un `aria-label` separato, quindi il suo nome accessibile viene calcolato dal contenuto testuale visibile — etichetta e descrizione insieme (ad es. "Ada Lovelace Engineering") — mentre il filtro stesso confronta solo su `label`, non sulla descrizione.

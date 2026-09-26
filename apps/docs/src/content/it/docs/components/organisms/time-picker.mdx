@@ -1,0 +1,43 @@
+---
+title: Time Picker
+---
+
+# Time Picker
+
+Un input orario segmentato HH:MM(:SS)[ AM/PM], che opera direttamente su un `Date` — digita cifre (avanza automaticamente dopo 2), Su/Giù per incrementare, Sinistra/Destra per spostarsi tra i segmenti. Si abbina a [`Calendar`](/docs/components/organisms/calendar)/`DatePicker` per costruire un selettore data+ora completo (vedi `DateTimePicker`), oppure si usa da solo per un campo di sola ora.
+
+```tsx
+import { TimePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## 24 ore
+
+<ComponentPreview code={`const [date, setDate] = useState(() => new Date());
+
+<TimePicker date={date} onChange={setDate} />`}>
+  <Demo name="time-picker" />
+</ComponentPreview>
+
+## 12 ore, con i secondi
+
+<ComponentPreview code={`<TimePicker date={date} onChange={setDate} hourFormat="12" showSeconds />`}>
+  <Demo name="time-picker" hourFormat="12" showSeconds />
+</ComponentPreview>
+
+## API
+
+**TimePicker**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `date` | `Date \| undefined` | | La data completa di cui questo componente modifica la porzione oraria — solo i campi ora/minuto/secondo cambiano, la porzione data passa invariata. |
+| `onChange` | `(date: Date) => void` | | Chiamata con il `Date` aggiornato a ogni modifica di segmento. |
+| `hourFormat` | `"12" \| "24"` | `"24"` | `"12"` aggiunge un segmento AM/PM. |
+| `showSeconds` | `boolean` | `false` | Aggiunge un segmento Secondi. |
+| `disabled` | `boolean` | `false` | |
+
+Più ogni prop nativa di `<div>` sul wrapper radice.
+
+### Accessibilità
+
+Ogni segmento è un vero `<input>` nativo, quindi è focalizzabile e raggiungibile con <kbd>Tab</kbd> come qualsiasi campo di testo. All'interno di un segmento, <kbd>←</kbd>/<kbd>→</kbd> si spostano al segmento adiacente, <kbd>↑</kbd>/<kbd>↓</kbd> incrementano il suo valore, e digitare cifre lo riempie direttamente (avanzando automaticamente dopo due cifre) — tutto tramite un gestore `onKeyDown` manuale invece della semantica nativa spinbutton, quindi abbina ogni `TimePicker` a una propria didascalia visibile o con `aria-label` (come fa `DateTimePicker`) che descriva cosa rappresenta l'orario.

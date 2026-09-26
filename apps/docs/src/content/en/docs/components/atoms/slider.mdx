@@ -1,0 +1,61 @@
+---
+title: Slider
+---
+
+# Slider
+
+A Radix `Slider.Root` — one thumb, or several for a range (one per entry in `value`/`defaultValue`).
+
+```tsx
+import { Slider } from "@pompeitech/vesuvius-ui";
+```
+
+## Single value
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} step={1} aria-label="Volume" />`}>
+  <Slider defaultValue={[50]} max={100} step={1} aria-label="Volume" className="w-64" />
+</ComponentPreview>
+
+## Range
+
+<ComponentPreview code={`<Slider defaultValue={[25, 75]} max={100} step={1} aria-label="Price range" />`}>
+  <Slider defaultValue={[25, 75]} max={100} step={1} aria-label="Price range" className="w-64" />
+</ComponentPreview>
+
+## Disabled
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} disabled aria-label="Volume" />`}>
+  <Slider defaultValue={[50]} max={100} disabled aria-label="Volume" className="w-64" />
+</ComponentPreview>
+
+## Steps
+
+A larger `step` snaps the thumb to fewer positions — useful when only certain values are meaningful:
+
+<ComponentPreview code={`<Slider defaultValue={[20]} max={100} step={20} aria-label="Rating" />`}>
+  <Slider defaultValue={[20]} max={100} step={20} aria-label="Rating" className="w-64" />
+</ComponentPreview>
+
+## Vertical
+
+<ComponentPreview code={`<Slider defaultValue={[50]} max={100} orientation="vertical" aria-label="Volume" className="h-44" />`}>
+  <Slider defaultValue={[50]} max={100} orientation="vertical" aria-label="Volume" className="h-44" />
+</ComponentPreview>
+
+## API
+
+**Slider**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `number[]` | `[0]` | One entry per thumb — a two-entry array renders a range slider (see above). |
+| `min` / `max` | `number` | `0` / `100` | |
+| `step` | `number` | `1` | |
+| `onValueChange` | `(value: number[]) => void` | | Fires continuously while dragging. |
+| `onValueCommit` | `(value: number[]) => void` | | Fires once, on release — use this instead of `onValueChange` for anything expensive (an API call), same distinction as `input`/`change` events. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Vertical needs an explicit height via `className` (`h-44` above) — it has no intrinsic height of its own. |
+| `disabled` | `boolean` | `false` | |
+
+### Accessibility
+
+Each thumb is a real, focusable, ARIA `slider` role element. <kbd>←</kbd>/<kbd>→</kbd> (or <kbd>↑</kbd>/<kbd>↓</kbd> when vertical) adjust by one `step`, <kbd>Home</kbd>/<kbd>End</kbd> jump to `min`/`max`. `aria-label` is applied per-thumb automatically, suffixed with its index (`"Price range 1"`, `"Price range 2"`) when there's more than one — pass a single `aria-label` covering the whole slider's purpose, not one per thumb yourself.

@@ -1,0 +1,100 @@
+@import "@pompeitech/vesuvius-ui/base.css";
+@import "@pompeitech/vesuvius-ui/themes.css";
+@plugin "@tailwindcss/typography";
+
+@source "../../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../**/*.{ts,tsx}";
+@source "../content/**/*.mdx";
+
+/* Maps `prose` (long-form MDX content) onto our own design tokens instead
+   of Typography's own gray defaults, so doc pages inherit theme/dark-mode
+   changes automatically instead of drifting from the rest of the site. */
+.prose {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--muted-foreground);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--border);
+  --tw-prose-captions: var(--muted-foreground);
+  --tw-prose-code: var(--foreground);
+  --tw-prose-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+  --tw-prose-th-borders: var(--border);
+}
+.prose :where(code):not(:where([class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+.prose :where(code):not(:where(pre code)):not(:where([class~="not-prose"] *)) {
+  @apply bg-muted rounded px-1.5 py-0.5 text-[0.875em] font-medium;
+}
+.prose a {
+  @apply font-medium underline-offset-4;
+}
+
+/* Give the docs chrome a distinct surface in dark mode. The active item is
+   intentionally quieter than the primary buttons, with a narrow lava rail
+   providing orientation without turning the whole navigation into a solid
+   orange block. */
+.dark [data-slot="sidebar-inner"] {
+  box-shadow:
+    inset -1px 0 0 var(--sidebar-border),
+    8px 0 24px rgb(0 0 0 / 12%);
+}
+.dark [data-sidebar="group-label"] {
+  color: var(--sidebar-foreground);
+  opacity: 0.58;
+}
+.dark [data-sidebar="menu-sub"] {
+  border-color: color-mix(in oklch, var(--sidebar-border) 80%, var(--primary));
+}
+
+/* This is a real Next.js app with no third-party CSS framework mixed in —
+   the whole reason it exists instead of apps/docs (Docusaurus's Infima
+   shipped unlayered global CSS that keeps winning cascade fights against
+   Tailwind's own layered utilities, see apps/docs's src/css/custom.css for
+   the running list). Nothing to fight here, so nothing to override. */
+
+/* rehype-pretty-code annotates code blocks with data-* attributes instead
+   of wrapping classes — style hooks for line highlighting/diffs. */
+[data-rehype-pretty-code-fragment] pre {
+  @apply border-border bg-muted/40 overflow-x-auto rounded-lg border py-4 text-sm;
+}
+[data-rehype-pretty-code-fragment] code {
+  @apply grid;
+}
+[data-line] {
+  @apply border-l-2 border-transparent px-4;
+}
+[data-highlighted-line] {
+  @apply border-l-primary bg-primary/10;
+}
+[data-highlighted-chars] {
+  @apply bg-primary/15 rounded px-0.5;
+}
+
+/* ComponentPreview uses Shiki directly (rather than rehype-pretty-code), so
+   these blocks need their own light/dark variable switch and a little more
+   editor-like breathing room. */
+[data-component-preview-code] .shiki,
+[data-component-preview-code] pre {
+  @apply rounded-lg;
+}
+[data-component-preview-code] .shiki span {
+  color: var(--shiki-light);
+}
+[data-component-preview-code] pre {
+  counter-reset: line;
+}
+[data-component-preview-code] .line::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply text-muted-foreground/50 mr-6 inline-block w-5 text-right;
+}
+.dark [data-component-preview-code] .shiki span {
+  color: var(--shiki-dark);
+}

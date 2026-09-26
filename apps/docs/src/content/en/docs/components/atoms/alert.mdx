@@ -1,0 +1,122 @@
+---
+title: Alert
+---
+
+# Alert
+
+A `role="alert"` callout box — an icon, a title, a description.
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Alert>
+  <Terminal />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components and dependencies to your app using the CLI.</AlertDescription>
+</Alert>`}>
+  <Alert className="w-96">
+    <Terminal />
+    <AlertTitle>Heads up!</AlertTitle>
+    <AlertDescription>You can add components and dependencies to your app using the CLI.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Variants
+
+<ComponentPreview code={`<Alert variant="success">
+  <CheckCircle2 />
+  <AlertTitle>Order confirmed</AlertTitle>
+  <AlertDescription>Your order has been placed successfully.</AlertDescription>
+</Alert>
+<Alert variant="destructive">
+  <AlertTriangle />
+  <AlertTitle>Something went wrong</AlertTitle>
+  <AlertDescription>Your payment could not be processed.</AlertDescription>
+</Alert>`} className="flex-col items-stretch">
+  <Alert variant="success" className="w-96">
+    <CheckCircle2 />
+    <AlertTitle>Order confirmed</AlertTitle>
+    <AlertDescription>Your order has been placed successfully.</AlertDescription>
+  </Alert>
+  <Alert variant="destructive" className="w-96">
+    <AlertTriangle />
+    <AlertTitle>Something went wrong</AlertTitle>
+    <AlertDescription>Your payment could not be processed.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## All variants
+
+Beyond `default`/`destructive`/`success`/`warning`, `info` and `highlight` cover the two remaining semantic tones:
+
+<ComponentPreview code={`<Alert variant="info">
+  <InfoIcon />
+  <AlertTitle>Maintenance scheduled</AlertTitle>
+  <AlertDescription>The API will be briefly unavailable Sunday at 2am UTC.</AlertDescription>
+</Alert>
+<Alert variant="highlight">
+  <SparklesIcon />
+  <AlertTitle>New: dark mode</AlertTitle>
+  <AlertDescription>Switch themes from the settings menu.</AlertDescription>
+</Alert>`} className="flex-col items-stretch">
+  <Alert variant="info" className="w-96">
+    <InfoIcon />
+    <AlertTitle>Maintenance scheduled</AlertTitle>
+    <AlertDescription>The API will be briefly unavailable Sunday at 2am UTC.</AlertDescription>
+  </Alert>
+  <Alert variant="highlight" className="w-96">
+    <SparklesIcon />
+    <AlertTitle>New: dark mode</AlertTitle>
+    <AlertDescription>Switch themes from the settings menu.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Soft appearance
+
+`appearance="soft"` swaps the outlined variant color for a tinted background — a dashboard-style callout instead of a warning banner. Every variant above supports it.
+
+<ComponentPreview code={`<Alert variant="warning" appearance="soft">
+  <AlertTriangle />
+  <AlertTitle>Usage approaching limit</AlertTitle>
+  <AlertDescription>85% of your monthly quota has been used.</AlertDescription>
+</Alert>`}>
+  <Alert variant="warning" appearance="soft" className="w-96">
+    <AlertTriangle />
+    <AlertTitle>Usage approaching limit</AlertTitle>
+    <AlertDescription>85% of your monthly quota has been used.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## No icon
+
+The icon isn't required — `AlertTitle`/`AlertDescription` shift left to fill the space when there's no `<svg>` child (the layout is driven by a `has-[>svg]` selector, not a prop):
+
+<ComponentPreview code={`<Alert variant="destructive">
+  <AlertTitle>Session expired</AlertTitle>
+  <AlertDescription>Sign in again to continue.</AlertDescription>
+</Alert>`}>
+  <Alert variant="destructive" className="w-96">
+    <AlertTitle>Session expired</AlertTitle>
+    <AlertDescription>Sign in again to continue.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## API
+
+**Alert**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "destructive" \| "success" \| "warning" \| "info" \| "highlight"` | `"default"` | Semantic tone — colors the icon and `AlertTitle`. |
+| `appearance` | `"outline" \| "soft"` | `"outline"` | `"outline"`: a bordered card on `bg-card`. `"soft"`: no border, a tinted background matching the variant. |
+
+Plus every native `<div>` prop (`role="alert"` is already set).
+
+**AlertTitle** / **AlertDescription** — every native `<div>` prop; no custom props of their own beyond styling hooks.
+
+### Accessibility
+
+The root carries `role="alert"`, so screen readers announce it as soon as it mounts (an [ARIA live region](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role), assertive priority) — reserve it for messages the user genuinely needs interrupted for. For a message that doesn't need to interrupt (a static inline note, not a live status change), consider a plain styled `<div>` instead and reach for `Alert` specifically when the content appears dynamically in response to something the user just did.

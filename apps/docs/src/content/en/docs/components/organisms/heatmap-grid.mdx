@@ -1,0 +1,71 @@
+---
+title: Heatmap Grid
+---
+
+# Heatmap Grid
+
+A calendar/activity-style intensity grid — for a value varying across two discrete dimensions (day × week, hour × weekday, ...) shown as cell color instead of bar/line height. Plain CSS grid, not a chart library: there's no axis/tooltip machinery a fixed grid of colored cells actually needs.
+
+```tsx
+import { HeatmapGrid } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<HeatmapGrid
+  rows={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+  columns={["Week 1", "Week 2", "Week 3", "Week 4"]}
+  cells={[
+    [0.3, 0.6, 0.4, 0.8],
+    [0.5, 0.7, 0.6, 0.9],
+    [0.6, 0.5, 0.7, 0.6],
+    [0.2, 0.4, 0.3, 0.5],
+    [0.9, 1, 0.8, 0.95],
+    [0.4, 0.3, 0.5, 0.4],
+    [0.1, 0.2, 0.15, 0.25],
+  ]}
+  legend={[
+    { label: "Low", value: 0.2 },
+    { label: "Medium", value: 0.55 },
+    { label: "High", value: 0.95 },
+  ]}
+/>`} className="w-full">
+  <div className="w-full max-w-sm">
+    <HeatmapGrid
+      rows={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+      columns={["Week 1", "Week 2", "Week 3", "Week 4"]}
+      cells={[
+        [0.3, 0.6, 0.4, 0.8],
+        [0.5, 0.7, 0.6, 0.9],
+        [0.6, 0.5, 0.7, 0.6],
+        [0.2, 0.4, 0.3, 0.5],
+        [0.9, 1, 0.8, 0.95],
+        [0.4, 0.3, 0.5, 0.4],
+        [0.1, 0.2, 0.15, 0.25],
+      ]}
+      legend={[
+        { label: "Low", value: 0.2 },
+        { label: "Medium", value: 0.55 },
+        { label: "High", value: 0.95 },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**HeatmapGrid**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `rows` | `string[]` | | Required — row labels, top to bottom. |
+| `columns` | `string[]` | | Required — column labels, left to right. |
+| `cells` | `number[][]` | | Required — `cells[rowIndex][columnIndex]`, each `0`–`1`, used directly as the cell's fill opacity. |
+| `color` | `string` | `"var(--primary)"` | Base color every cell tints, at the intensity `cells` specifies. |
+| `legend` | `{ label: string; value: number }[]` | | Shown below the grid as a labeled color-intensity key. |
+
+Plus every native `<div>` prop on the root wrapper.
+
+### Accessibility
+
+A visual intensity grid has no inherent text alternative — if the underlying data matters beyond a glance (not just a decorative trend indicator), pair it with a [`Table`](/docs/components/molecules/table)/`DataTable` presenting the same values as text, or at minimum give the wrapper an `aria-label` summarizing what the grid shows.

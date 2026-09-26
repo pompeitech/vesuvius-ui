@@ -1,0 +1,63 @@
+---
+title: Date Time Range Picker
+---
+
+# Date Time Range Picker
+
+Un selettore di intervalli per appuntamenti, filtri e periodi di report. Combina un calendario a intervallo con colonne orarie indipendenti per inizio e fine. Le modifiche restano in bozza e vengono confermate solo con **Applica**; **Annulla** le scarta.
+
+```tsx
+import { DateTimeRangePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateTimeRangePicker />`}>
+  <DateTimeRangePicker />
+</ComponentPreview>
+
+## Con un intervallo predefinito
+
+<ComponentPreview
+  code={`<DateTimeRangePicker
+  defaultValue={{
+    from: new Date(2026, 8, 12, 9, 30),
+    to: new Date(2026, 8, 15, 17, 0),
+  }}
+/>`}
+>
+  <DateTimeRangePicker
+    defaultValue={{
+      from: new Date(2026, 8, 12, 9, 30),
+      to: new Date(2026, 8, 15, 17, 0),
+    }}
+  />
+</ComponentPreview>
+
+## Formato 24 ore con secondi
+
+<ComponentPreview code={`<DateTimeRangePicker hourFormat="24" showSeconds />`}>
+  <DateTimeRangePicker hourFormat="24" showSeconds />
+</ComponentPreview>
+
+## API
+
+**DateTimeRangePicker**
+
+| Prop                           | Tipo                                      | Default                        | Descrizione                                                               |
+| ------------------------------ | ----------------------------------------- | ------------------------------ | ------------------------------------------------------------------------- |
+| `value` / `defaultValue`       | `{ from?: Date; to?: Date }`              |                                | Intervallo controllato/non controllato, inclusa l'ora di ciascun estremo. |
+| `onChange`                     | `(range: DateRange \| undefined) => void` |                                | Chiamato solo dopo **Applica**.                                           |
+| `placeholder`                  | `string`                                  | `"Pick a date and time range"` | Testo del trigger quando non c'è un intervallo.                           |
+| `dateFormat`                   | `string`                                  |                                | Formato date-fns usato per entrambi gli estremi.                          |
+| `hourFormat`                   | `"12" \| "24"`                            | `"12"`                         | Formato della colonna delle ore.                                          |
+| `minuteStep`                   | `number`                                  | `5`                            | Granularità della colonna dei minuti.                                     |
+| `showSeconds`                  | `boolean`                                 | `false`                        | Aggiunge i secondi a entrambi gli estremi.                                |
+| `numberOfMonths`               | `number`                                  | `2`                            | Numero di mesi mostrati nel calendario.                                   |
+| `disabled`                     | `boolean`                                 | `false`                        | Disabilita il trigger.                                                    |
+| `fromYear` / `toYear`          | `number`                                  |                                | Limiti per il dropdown dell'anno.                                         |
+| `confirmLabel` / `cancelLabel` | `string`                                  | `"Apply"` / `"Cancel"`         | Etichette delle azioni nel footer.                                        |
+
+### Accessibilità
+
+Il trigger è un vero pulsante. Il calendario mantiene il comportamento da tastiera di `react-day-picker`, mentre ogni colonna oraria espone una listbox con etichetta e opzioni raggiungibili da tastiera. Il valore confermato non cambia finché non viene attivato **Applica**.

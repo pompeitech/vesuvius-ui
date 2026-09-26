@@ -1,0 +1,60 @@
+---
+title: Sheet
+---
+
+# Sheet
+
+A Radix [`Dialog`](/docs/components/molecules/dialog) under the hood, styled to slide in from an edge instead of appearing centered — a mobile nav drawer, a filter panel, a details pane.
+
+```tsx
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter, SheetClose } from "@pompeitech/vesuvius-ui";
+```
+
+## From the right (default)
+
+<ComponentPreview code={`<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="outline">Open</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Edit profile</SheetTitle>
+      <SheetDescription>Make changes to your profile here.</SheetDescription>
+    </SheetHeader>
+    <div className="grid gap-4 px-4">
+      <div className="grid gap-1.5">
+        <Label htmlFor="sheet-name">Name</Label>
+        <Input id="sheet-name" defaultValue="Pedro Duarte" />
+      </div>
+    </div>
+    <SheetFooter>
+      <SheetClose asChild>
+        <Button>Save changes</Button>
+      </SheetClose>
+    </SheetFooter>
+  </SheetContent>
+</Sheet>`}>
+  <Demo name="sheet-right" />
+</ComponentPreview>
+
+## From the left
+
+<ComponentPreview code={`<SheetContent side="left">...</SheetContent>`}>
+  <Demo name="sheet-left" />
+</ComponentPreview>
+
+## API
+
+Every part matches [`Dialog`](/docs/components/molecules/dialog)'s (same root `open`/`onOpenChange`/`modal`, same `Trigger`/`Header`/`Title`/`Description`/`Footer`/`Close` shape), with one addition:
+
+**SheetContent**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `side` | `"right" \| "left" \| "top" \| "bottom"` | `"right"` | Which edge it slides in from. |
+
+Plus every prop `DialogContent` accepts — Portal-rendered, focus-trapped, closes on <kbd>Esc</kbd> or outside click.
+
+### Accessibility
+
+Same as `Dialog`: `role="dialog"` with `aria-modal="true"`, `SheetTitle` required for the accessible name (give it `className="sr-only"` rather than omitting it if no visible title fits the design), focus trapped while open and returned to the trigger on close.

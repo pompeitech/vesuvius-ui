@@ -1,0 +1,51 @@
+---
+title: Kanban Board
+---
+
+# Kanban Board
+
+Una board generica drag-and-drop per colonne di workflow. Il componente gestisce l'interazione DnD e il layout delle colonne; lo stato degli elementi resta al chiamante tramite `onItemMove`, che decide anche come renderizzare ogni card.
+
+```tsx
+import { KanbanBoard } from "@pompeitech/vesuvius-ui";
+```
+
+## Esempio interattivo
+
+Trascina una card in un’altra colonna. La board occupa tutta la larghezza
+disponibile e mantiene lo scorrimento orizzontale al suo interno quando serve.
+
+<ComponentPreview
+  code={`const [items, setItems] = useState(initialItems);
+
+<KanbanBoard
+  columns={columns}
+  items={items}
+  getItemId={(item) => item.id}
+  getItemColumn={(item) => item.status}
+  onItemMove={(item, status) => setItems(/* aggiorna lo stato */)}
+  renderItem={(item) => <Card>{item.title}</Card>}
+/>`}
+  className="w-full"
+>
+  <Demo name="kanban-board" />
+</ComponentPreview>
+
+## API
+
+**KanbanBoard**
+
+| Prop                            | Tipo                                         | Descrizione                                     |
+| ------------------------------- | -------------------------------------------- | ----------------------------------------------- |
+| `columns`                       | `{ id, title, count? }[]`                    | Colonne di drop ordinate.                       |
+| `items`                         | `TItem[]`                                    | Card visualizzate nella board.                  |
+| `getItemId`                     | `(item: TItem) => string`                    | Identità stabile dell'elemento trascinabile.    |
+| `getItemColumn`                 | `(item: TItem) => TColumnId`                 | Restituisce la colonna corrente dell'elemento.  |
+| `onItemMove`                    | `(item: TItem, columnId: TColumnId) => void` | Chiamato dopo il drop su un'altra colonna.      |
+| `renderItem`                    | `(item: TItem) => ReactNode`                 | Renderizza il contenuto della card.             |
+| `columnWidth`                   | `string`                                     | Larghezza CSS di ogni colonna. Default `16rem`. |
+| `className` / `columnClassName` | `string`                                     | Classi di layout per board e colonne.           |
+
+### Accessibilità
+
+Le colonne sono regioni di drop etichettate e la board usa una distanza minima di attivazione del puntatore, così un click su una card non avvia accidentalmente un trascinamento. Il contenuto della card resta responsabile della propria interazione da tastiera e del nome accessibile.

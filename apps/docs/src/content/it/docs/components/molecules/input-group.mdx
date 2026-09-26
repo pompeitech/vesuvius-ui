@@ -1,0 +1,30 @@
+---
+title: Input Group
+---
+
+# Input Group
+
+Componi un input con icona iniziale, unità, suffisso o azione mantenendo un unico bordo visivo.
+
+<ComponentPreview code={`<InputGroup>
+  <InputGroupAddon><SearchIcon className="size-4" /></InputGroupAddon>
+  <InputGroupInput aria-label="Cerca ordini" placeholder="Cerca ordini..." />
+</InputGroup>`}>
+  <InputGroup className="w-full max-w-sm">
+    <InputGroupAddon><SearchIcon className="size-4" /></InputGroupAddon>
+    <InputGroupInput aria-label="Cerca ordini" placeholder="Cerca ordini..." />
+  </InputGroup>
+</ComponentPreview>
+
+`InputGroupButton` è disponibile per azioni finali come filtri, cancellazione o mostra/nascondi password.
+
+## API
+
+| Componente         | Descrizione                                             |
+| ------------------ | ------------------------------------------------------- |
+| `InputGroup`       | Wrapper con bordo, focus ring e gestione dell’overflow. |
+| `InputGroupAddon`  | Contenuto non modificabile prima o dopo l’input.        |
+| `InputGroupInput`  | Input senza bordo che occupa lo spazio disponibile.     |
+| `InputGroupButton` | Pulsante compatto per azioni accessibili.               |
+
+Tutti i componenti accettano le rispettive props HTML native.

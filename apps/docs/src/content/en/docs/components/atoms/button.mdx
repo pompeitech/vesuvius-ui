@@ -1,0 +1,156 @@
+---
+title: Button
+---
+
+# Button
+
+A styled `<button>` (or, with `asChild`, whatever element you hand it) — 6 variants, 4 text sizes, 4 icon-only sizes.
+
+```tsx
+import { Button } from "@pompeitech/vesuvius-ui";
+```
+
+## Variants
+
+<ComponentPreview
+  code={`<Button variant="default">Default</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>`}
+>
+  <Button variant="default">Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="destructive">Destructive</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
+</ComponentPreview>
+
+## Sizes
+
+The shared control scale is `xs` 28 px, `sm` 32 px, `default` 36 px, and `lg` 40 px. These heights align with `Input`, `SelectTrigger`, and `MultiSelect`.
+
+<ComponentPreview
+  code={`<Button size="xs">Extra small</Button>
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>`}
+>
+  <Button size="xs">Extra small</Button>
+  <Button size="sm">Small</Button>
+  <Button size="default">Default</Button>
+  <Button size="lg">Large</Button>
+</ComponentPreview>
+
+## Icon sizes
+
+A dedicated icon size for each text size above, so an icon-only button can match whatever size button it sits next to:
+
+<ComponentPreview
+  code={`<Button size="icon-xs" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon-sm" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon" aria-label="Send email">
+  <MailIcon />
+</Button>
+<Button size="icon-lg" aria-label="Send email">
+  <MailIcon />
+</Button>`}
+>
+  <Button size="icon-xs" aria-label="Send email">
+    <MailIcon />
+  </Button>
+  <Button size="icon-sm" aria-label="Send email">
+    <MailIcon />
+  </Button>
+  <Button size="icon" aria-label="Send email">
+    <MailIcon />
+  </Button>
+  <Button size="icon-lg" aria-label="Send email">
+    <MailIcon />
+  </Button>
+</ComponentPreview>
+
+## Disabled
+
+<ComponentPreview code={`<Button disabled>Button</Button>`}>
+  <Button disabled>Button</Button>
+</ComponentPreview>
+
+## With an icon
+
+Any `<svg>` child (including a Lucide icon) is auto-sized to `size-4` and given the right gap from adjacent text — no wrapper span needed:
+
+<ComponentPreview
+  code={`<Button>
+  <MailIcon />
+  Send email
+</Button>
+<Button variant="outline">
+  Continue
+  <MailIcon />
+</Button>`}
+>
+  <Button>
+    <MailIcon />
+    Send email
+  </Button>
+  <Button variant="outline">
+    Continue
+    <MailIcon />
+  </Button>
+</ComponentPreview>
+
+## Loading state
+
+There's no `loading` prop — compose it from `disabled` (to prevent a second submit and to drop the hover/focus states) plus a spinning icon, same as any other icon usage above:
+
+<ComponentPreview
+  code={`<Button disabled>
+  <Loader2 className="animate-spin" />
+  Please wait
+</Button>`}
+>
+  <Button disabled>
+    <Loader2 className="animate-spin" />
+    Please wait
+  </Button>
+</ComponentPreview>
+
+## Full width
+
+<ComponentPreview
+  code={`<Button className="w-full">Continue</Button>`}
+  className="w-full"
+>
+  <Button className="w-full">Continue</Button>
+</ComponentPreview>
+
+## As a link
+
+`asChild` renders the button's styling on whatever single child element you pass it (via Radix `Slot`), instead of a `<button>` — useful for a router `<Link>` that should look like a button. The child becomes the actual rendered DOM element, so it needs to accept the same props a `<button>` would (`className`, event handlers, …), which any anchor or router link component does.
+
+```tsx
+<Button asChild>
+  <a href="/get-started">Get Started</a>
+</Button>
+```
+
+## API
+
+| Prop      | Type                                                                                 | Default     | Description                                                                                                                          |
+| --------- | ------------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"`        | `"default"` | Visual style.                                                                                                                        |
+| `size`    | `"xs" \| "sm" \| "default" \| "lg" \| "icon-xs" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` | The `icon-*` sizes are square icon-only buttons matching each text size's height (pair with `aria-label` — see Accessibility below). |
+| `asChild` | `boolean`                                                                            | `false`     | Render as the single child element instead of a `<button>`.                                                                          |
+
+Plus every native `<button>` prop (`onClick`, `disabled`, `type`, `form`, …), and `ref` (forwarded to the underlying `<button>`, or to whatever element `asChild`'s child renders as).
+
+### Accessibility
+
+An icon-only button (any `icon-*` size) has no visible text for a screen reader to announce — always pair it with `aria-label` (see the icon-size example above). `disabled` on a native `<button>` already removes it from the tab order and announces it as unavailable; no extra `aria-disabled` needed on top of it unless you specifically need the element to _stay_ focusable while disabled (a real accessibility technique for explaining _why_ an action is unavailable, but not this component's default behavior). Every `<button>` (and anything else rendered with `role="button"`, e.g. `asChild`) also gets `cursor: pointer` restored — Tailwind v4 dropped that from its own base reset.

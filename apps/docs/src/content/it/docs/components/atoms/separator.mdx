@@ -1,0 +1,58 @@
+---
+title: Separator
+---
+
+# Separator
+
+Un `Separator.Root` di Radix — una sottile riga divisoria, orizzontale o verticale.
+
+```tsx
+import { Separator } from "@pompeitech/vesuvius-ui";
+```
+
+## Orizzontale
+
+<ComponentPreview code={`<div className="w-64">
+  <div className="text-sm">Vesuvius UI</div>
+  <Separator className="my-4" />
+  <div className="text-sm text-muted-foreground">A personal design system</div>
+</div>`}>
+  <div className="w-64">
+    <div className="text-sm">Vesuvius UI</div>
+    <Separator className="my-4" />
+    <div className="text-sm text-muted-foreground">Un design system personale</div>
+  </div>
+</ComponentPreview>
+
+## Verticale
+
+<ComponentPreview code={`<div className="flex h-8 items-center gap-4 text-sm">
+  <span>Blog</span>
+  <Separator orientation="vertical" />
+  <span>Docs</span>
+  <Separator orientation="vertical" />
+  <span>Source</span>
+</div>`}>
+  <div className="flex h-8 items-center gap-4 text-sm">
+    <span>Blog</span>
+    <Separator orientation="vertical" />
+    <span>Docs</span>
+    <Separator orientation="vertical" />
+    <span>Source</span>
+  </div>
+</ComponentPreview>
+
+## API
+
+**Separator**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | La versione verticale necessita di un'altezza definita dal proprio contenitore (`flex` + `items-center` con una riga ad altezza fissa, come nell'esempio sopra) — non ha un'altezza intrinseca propria. |
+| `decorative` | `boolean` | `true` | `true` lo nasconde alla tecnologia assistiva (è puramente visivo, non contenuto semantico) renderizzando `role="none"`. Imposta `false` solo se il separatore segna davvero una rottura tematica nel contenuto (Radix renderizza allora `role="separator"` con il corretto `aria-orientation`). |
+
+Più ogni prop nativa di `<div>`.
+
+### Accessibilità
+
+Lascia `decorative` al suo default `true` per i divisori puramente visivi — il caso comune. Imposta `false` solo quando il separatore stesso porta un significato (separando sezioni di contenuto non correlate di cui uno screen reader dovrebbe informare l'utente), non solo un ritmo visivo tra elementi già raggruppati in altro modo.

@@ -1,0 +1,65 @@
+---
+title: Label
+---
+
+# Label
+
+A Radix `Label.Root` — a `<label>` that stays associated with its control even when that control is a styled non-native element (like Checkbox, which renders a `<button>`).
+
+```tsx
+import { Label } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-label-terms" />
+    <Label htmlFor="docs-label-terms">Accept terms and conditions</Label>
+  </div>
+</ComponentPreview>
+
+## With a required marker
+
+There's no `required` prop — add the asterisk (or any other marker) yourself as part of the children, styled however your form needs:
+
+<ComponentPreview code={`<Label htmlFor="email">
+  Email <span className="text-destructive">*</span>
+</Label>`}>
+  <Label htmlFor="docs-label-email">
+    Email <span className="text-destructive">*</span>
+  </Label>
+</ComponentPreview>
+
+## Disabled state
+
+Radix's `Label` automatically dims and disables text-selection when its associated control carries `data-disabled` or sits inside a `<fieldset disabled>` — no prop to set on the label itself:
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="disabled-example" disabled />
+  <Label htmlFor="disabled-example">Disabled option</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-label-disabled" disabled />
+    <Label htmlFor="docs-label-disabled">Disabled option</Label>
+  </div>
+</ComponentPreview>
+
+## API
+
+**Label**
+
+Every native `<label>` prop, most importantly:
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `htmlFor` | `string` | Matches the `id` of the associated control — clicking the label then focuses/activates that control, exactly like a native label/input pair. |
+
+No custom props of its own beyond the styling hooks — its value over a bare `<label className="...">` is that clicking/selecting text inside it is correctly suppressed when the associated control is disabled, which a plain native label does not do automatically for non-native controls like [`Checkbox`](/docs/components/atoms/checkbox).
+
+### Accessibility
+
+Prefer `htmlFor`/`id` association (as in every example above) over wrapping the control as a child — an explicit `id` match is what lets assistive technology announce the label even when the control isn't a direct DOM descendant.

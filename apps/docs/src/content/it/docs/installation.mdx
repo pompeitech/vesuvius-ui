@@ -1,0 +1,236 @@
+---
+title: Installazione
+---
+
+# Installazione
+
+## Requisiti
+
+- **React 19** (`react` e `react-dom`, `^19.0.0`) — sono peer dependency; installale se la tua applicazione non le include già.
+- **Tailwind CSS v4** deve essere abilitato nell'applicazione host. Vesuvius distribuisce il proprio foglio di stile Tailwind e registra automaticamente i componenti compilati come sorgente, ma il framework deve comunque elaborare quel foglio di stile.
+- **TypeScript** è facoltativo ma consigliato — ogni componente è completamente tipizzato e il pacchetto include i propri file `.d.ts` (non serve alcun pacchetto `@types/*`).
+
+## 1. Installa il pacchetto
+
+<Tabs groupId="package-manager">
+<TabItem value="pnpm" label="pnpm" default>
+
+```bash
+pnpm add @pompeitech/vesuvius-ui
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```bash
+npm install @pompeitech/vesuvius-ui
+```
+
+</TabItem>
+<TabItem value="yarn" label="yarn">
+
+```bash
+yarn add @pompeitech/vesuvius-ui
+```
+
+</TabItem>
+<TabItem value="bun" label="bun">
+
+```bash
+bun add @pompeitech/vesuvius-ui
+```
+
+</TabItem>
+</Tabs>
+
+Se il tuo package manager non risolve automaticamente le peer dependency (npm ≤6 o una configurazione pnpm restrittiva), installa esplicitamente anche `react` e `react-dom`:
+
+<Tabs groupId="package-manager">
+<TabItem value="pnpm" label="pnpm" default>
+
+```bash
+pnpm add react react-dom
+```
+
+</TabItem>
+<TabItem value="npm" label="npm">
+
+```bash
+npm install react react-dom
+```
+
+</TabItem>
+<TabItem value="yarn" label="yarn">
+
+```bash
+yarn add react react-dom
+```
+
+</TabItem>
+<TabItem value="bun" label="bun">
+
+```bash
+bun add react react-dom
+```
+
+</TabItem>
+</Tabs>
+
+## 2. Importa il CSS
+
+Dopo aver abilitato Tailwind v4, importa una sola volta il foglio di stile nel punto di ingresso dell'applicazione:
+
+```ts title="main.tsx"
+import "@pompeitech/vesuvius-ui/styles.css";
+```
+
+`styles.css` include i token base (chiaro e scuro), `lava` e gli altri 9 temi colore con nome. Per ottenere un bundle più piccolo con i soli temi che vuoi offrire, importa `base.css` insieme ai singoli file `themes/<nome>.css`:
+
+```ts
+import "@pompeitech/vesuvius-ui/base.css";
+import "@pompeitech/vesuvius-ui/themes/lava.css";
+```
+
+Ogni tema è disponibile come subpath in `exports` (`themes/lava.css`, `themes/stripe.css`, `themes/vercel.css`, `themes/supabase.css`, `themes/linear.css`, `themes/claude.css`, `themes/amber-minimal.css`, `themes/claymorphism.css`, `themes/alpine.css`, `themes/aubergine.css`): importane quanti ne vuoi rendere selezionabili.
+
+## 3. Avvolgi l'applicazione in `ThemeProvider`
+
+```tsx title="App.tsx"
+import { ThemeProvider } from "@pompeitech/vesuvius-ui";
+
+export function App() {
+  return (
+    <ThemeProvider defaultColorTheme="lava">
+      {/* la tua applicazione */}
+    </ThemeProvider>
+  );
+}
+```
+
+### Bundle JavaScript più piccoli
+
+L'export principale è il modo più semplice per iniziare. Se l'applicazione usa
+solo una parte della libreria, importa i componenti dai loro entry point
+dedicati per evitare di includere nel bundle le funzionalità opzionali più
+pesanti:
+
+```tsx
+import { Button } from "@pompeitech/vesuvius-ui/atoms/button";
+import { ThemeProvider } from "@pompeitech/vesuvius-ui/theme";
+```
+
+## Note per i framework
+
+<Tabs groupId="framework">
+<TabItem value="vite" label="Vite" default>
+
+Installa l'integrazione ufficiale per Vite e aggiungila alla configurazione:
+
+```bash
+pnpm add -D tailwindcss @tailwindcss/vite
+```
+
+```ts title="vite.config.ts"
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
+```
+
+Importa quindi il foglio di stile Vesuvius in `main.tsx` e avvolgi `<App />` in `ThemeProvider`.
+
+</TabItem>
+<TabItem value="next" label="Next.js (App Router)">
+
+Installa e configura prima l'integrazione ufficiale per PostCSS:
+
+```bash
+pnpm add -D tailwindcss @tailwindcss/postcss
+```
+
+```js title="postcss.config.mjs"
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+`ThemeProvider` usa hook internamente e il pacchetto non include una direttiva `"use client"` (è un normale pacchetto React, non specifico per Next), quindi un Server Component come `app/layout.tsx` non può renderizzarlo direttamente. Esportalo attraverso un piccolo Client Component e usa quest'ultimo nel layout:
+
+```tsx title="app/theme-provider.tsx"
+"use client";
+
+export { ThemeProvider } from "@pompeitech/vesuvius-ui";
+```
+
+```tsx title="app/layout.tsx"
+import "@pompeitech/vesuvius-ui/styles.css";
+import { ThemeProvider } from "./theme-provider";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="it" suppressHydrationWarning>
+      <body>
+        <ThemeProvider defaultColorTheme="lava">{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+`suppressHydrationWarning` su `<html>` evita un avviso innocuo: al mount `ThemeProvider` legge il tema persistito da `localStorage` e lo applica a `<html>` tramite la classe `.dark` e l'attributo `data-theme`. Per un singolo frame il markup può quindi differire da quello renderizzato dal server.
+
+</TabItem>
+<TabItem value="remix" label="Remix / React Router">
+
+Per un'applicazione React Router o Remix basata su Vite, abilita `@tailwindcss/vite` come mostrato nella scheda Vite. Importa poi il foglio di stile nella route radice (`app/root.tsx`) e avvolgi `<Outlet />` (o `{children}` in `Layout`) in `ThemeProvider`:
+
+```tsx title="app/root.tsx"
+import "@pompeitech/vesuvius-ui/styles.css";
+import { ThemeProvider } from "@pompeitech/vesuvius-ui";
+import { Outlet } from "react-router";
+
+export default function App() {
+  return (
+    <ThemeProvider defaultColorTheme="lava">
+      <Outlet />
+    </ThemeProvider>
+  );
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usi Tailwind anche nella tua applicazione?
+
+Normalmente Tailwind rileva automaticamente i file sorgente dell'applicazione. In un monorepo, o quando la directory di lavoro non coincide con la radice dell'app, registra esplicitamente la tua sorgente accanto a quella del kit:
+
+```css title="index.css"
+@import "@pompeitech/vesuvius-ui/styles.css";
+@source "./**/*.{ts,tsx}";
+```
+
+`@source` indica allo scanner di Tailwind dove cercare le classi usate dal tuo codice. Vesuvius registra già il proprio output compilato da `base.css`, quindi devi aggiungere la directory della tua applicazione solo quando il rilevamento automatico non riesce a trovarla.
+
+## Risoluzione dei problemi
+
+**I componenti non hanno stile.**  
+Tailwind v4 non è configurato, manca l'importazione CSS del passaggio 2 oppure gli stili dell'applicazione host la sovrascrivono. Verifica che il plugin Tailwind del framework sia attivo e che `"@pompeitech/vesuvius-ui/styles.css"` (oppure `base.css` più i file `themes/*.css` scelti) venga importato una sola volta.
+
+**La modalità scura o un tema colore diverso dal predefinito non viene applicato.**  
+Verifica che `ThemeProvider` avvolga effettivamente la parte dell'albero che stai controllando. La modalità viene applicata come classe `.dark` su `<html>` e il tema colore come `data-theme="<nome>"`, entrambi dopo il mount di `ThemeProvider`. Se importi singoli file `themes/*.css`, assicurati che il tema selezionato sia stato realmente importato.
+
+**TypeScript non trova i tipi di un componente.**  
+Il pacchetto include i propri file `.d.ts` tramite la mappa `exports`: non esiste un pacchetto `@types/@pompeitech/vesuvius-ui` separato. Assicurati che `moduleResolution` nel tuo `tsconfig.json` sia `"bundler"`, `"node16"` o `"nodenext"`, non il resolver legacy `"node"`.
+
+**Uso insieme a un altro host basato su Tailwind, un CMS o un design system esistente.**  
+I reset CSS dell'host possono influenzare gli elementi HTML nativi renderizzati dal kit, in particolare `<table>` e `<a>`, soprattutto quando gli stili dell'host non usano cascade layer.

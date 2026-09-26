@@ -1,0 +1,57 @@
+---
+title: Tree View
+---
+
+# Tree View
+
+Un albero in stile esploratore di file — cartelle espandibili, multi-selezione opzionale con checkbox, navigazione da tastiera.
+
+```tsx
+import { TreeView, type TreeNode } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const data: TreeNode[] = [
+  {
+    id: "src", label: "src", icon: FolderIcon,
+    children: [
+      { id: "components", label: "components", icon: FolderIcon, children: [
+        { id: "button.tsx", label: "button.tsx", icon: FileIcon },
+      ] },
+      { id: "index.ts", label: "index.ts", icon: FileIcon },
+    ],
+  },
+  { id: "package.json", label: "package.json", icon: FileIcon },
+];
+
+<TreeView data={data} defaultExpanded={["src", "components"]} />`}>
+  <Demo name="tree-view-file-explorer" />
+</ComponentPreview>
+
+## API
+
+**TreeView**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `data` | `TreeNode[]` | Obbligatorio — l'albero da renderizzare. |
+| `defaultExpanded` | `string[]` | Id dei nodi aperti al primo render. |
+| `multiSelect` | `boolean` | Aggiunge una checkbox per nodo invece dell'evidenziazione a selezione singola. |
+| `onSelect` | `(ids: string[]) => void` | Chiamata con la selezione corrente — un array a un elemento in modalità selezione singola, qualsiasi numero in modalità `multiSelect`. |
+
+Più ogni prop nativa di `<div>`.
+
+**TreeNode**
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `id` | `string` | Obbligatorio — univoco all'interno dell'albero. |
+| `label` | `string` | Obbligatorio. |
+| `icon` | `LucideIcon` | Icona iniziale opzionale. |
+| `children` | `TreeNode[]` | Nodi annidati — la presenza di questo campo (anche vuoto) rende il nodo una cartella espandibile invece di un file foglia. |
+| `disabled` | `boolean` | Esclude il nodo dalla selezione e dalla navigazione da tastiera. |
+
+### Accessibilità
+
+Implementa il pattern ARIA `tree`/`treeitem` — le frecce navigano (<kbd>↑</kbd>/<kbd>↓</kbd> tra i nodi visibili, <kbd>→</kbd> espande o entra in una cartella, <kbd>←</kbd> comprime o si sposta al genitore), <kbd>Invio</kbd>/<kbd>Spazio</kbd> seleziona, e `aria-expanded`/`aria-selected` vengono mantenuti sincronizzati automaticamente.

@@ -1,0 +1,51 @@
+---
+title: Pagination
+---
+
+# Pagination
+
+Un `nav[aria-label="pagination"]` costruito con semplici link — porta il tuo stato di pagina/routing, questo si limita a renderizzare il controllo e a contrassegnare la pagina attiva con `aria-current="page"`.
+
+```tsx
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Pagination>
+  <PaginationContent>
+    <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+    <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationEllipsis /></PaginationItem>
+    <PaginationItem><PaginationNext href="#" /></PaginationItem>
+  </PaginationContent>
+</Pagination>`}>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+      <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationEllipsis /></PaginationItem>
+      <PaginationItem><PaginationNext href="#" /></PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</ComponentPreview>
+
+## API
+
+| Componente | Renderizza | Prop |
+| --- | --- | --- |
+| `Pagination` | `<nav aria-label="pagination">` | Ogni prop nativa di `<nav>`. |
+| `PaginationContent` | `<ul>` | Ogni prop nativa di `<ul>`. |
+| `PaginationItem` | `<li>` | Ogni prop nativa di `<li>`. |
+| `PaginationLink` | `<a>` | `href`, `isActive` (`boolean`, default `false` — imposta `aria-current="page"` e lo stile attivo), più ogni prop nativa di `<a>`. |
+| `PaginationPrevious` | `<a>` (`PaginationLink` stilizzato) | Come `PaginationLink` meno `isActive`; pre-etichettato "Previous" con un chevron, `aria-label="Go to previous page"`. |
+| `PaginationNext` | `<a>` (`PaginationLink` stilizzato) | Come `PaginationLink` meno `isActive`; pre-etichettato "Next" con un chevron, `aria-label="Go to next page"`. |
+| `PaginationEllipsis` | `<span>` | Un "…" visivo per intervalli di pagine saltati, con un'etichetta `sr-only "More pages"`; nessuna prop personalizzata. |
+
+### Accessibilità
+
+Il `PaginationLink` della pagina attiva porta `aria-current="page"` tramite `isActive` — impostalo esattamente su un link per render. Dato che ogni link è un semplice `<a href>`, collega `href` al tuo routing effettivo (o intercetta `onClick` per la paginazione lato client) invece di lasciare ogni link che punta alla stessa URL, cosa che rompe sia l'apertura da tastiera "in una nuova scheda" che la navigazione a elenco-link degli screen reader.

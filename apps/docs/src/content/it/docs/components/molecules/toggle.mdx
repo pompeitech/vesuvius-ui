@@ -1,0 +1,38 @@
+---
+title: Toggle
+---
+
+# Toggle
+
+Un `Toggle` di Radix — un pulsante a due stati (premuto/non premuto), `aria-pressed` non `aria-checked`. Per una riga di questi che agisce come un unico controllo, vedi `ToggleGroup`.
+
+```tsx
+import { Toggle } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Toggle aria-label="Toggle bold"><Bold /></Toggle>
+<Toggle variant="outline" aria-label="Toggle bold"><Bold />Bold</Toggle>`}>
+  <Toggle aria-label="Attiva grassetto"><Bold /></Toggle>
+  <Toggle variant="outline" aria-label="Attiva grassetto"><Bold />Grassetto</Toggle>
+</ComponentPreview>
+
+## API
+
+**Toggle**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "outline"` | `"default"` | |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | |
+| `pressed` | `boolean` | | Stato premuto controllato. |
+| `defaultPressed` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onPressedChange` | `(pressed: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+
+Più ogni altra prop nativa di `<button>`.
+
+### Accessibilità
+
+Renderizza `aria-pressed` (uno stato toggle vero/falso), non `aria-checked` — la semantica corretta per un controllo on/off autonomo come "grassetto" in una toolbar, distinto da una checkbox o un radio. Dagli sempre un nome accessibile tramite `aria-label` quando contiene solo un'icona, come nel primo esempio sopra.

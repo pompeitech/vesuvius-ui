@@ -1,0 +1,8 @@
+@import "@pompeitech/vesuvius-ui/styles.css";
+
+/* Tailwind's automatic content detection is rooted where the *importing*
+   CSS file lives — this file is inside apps/admin-kit/src, but @pompeitech/vesuvius-ui's
+   own globals.css (imported above) only tells the scanner about its own
+   package/src. Without this, utility classes used in this app's own
+   dashboard pages below would be silently missing from the build. */
+@source "./**/*.{ts,tsx}";

@@ -1,0 +1,99 @@
+---
+title: Card
+---
+
+# Card
+
+A bordered container with optional header/footer sections — the base for StatCard and ChartCard.
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Card className="w-96">
+  <CardHeader>
+    <CardTitle>Monthly revenue</CardTitle>
+    <CardDescription>February 2026</CardDescription>
+    <CardAction>
+      <Button variant="outline" size="sm">Export</Button>
+    </CardAction>
+  </CardHeader>
+  <CardContent>
+    <p className="text-2xl font-semibold">$189,540.75</p>
+    <p className="text-sm text-muted-foreground">+27.9% vs previous month</p>
+  </CardContent>
+  <CardFooter className="border-t">
+    <p className="text-xs text-muted-foreground">Last updated just now</p>
+  </CardFooter>
+</Card>`}>
+  <Card className="w-96">
+    <CardHeader>
+      <CardTitle>Monthly revenue</CardTitle>
+      <CardDescription>February 2026</CardDescription>
+      <CardAction>
+        <Button variant="outline" size="sm">Export</Button>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
+      <p className="text-2xl font-semibold">$189,540.75</p>
+      <p className="text-sm text-muted-foreground">+27.9% vs previous month</p>
+    </CardContent>
+    <CardFooter className="border-t">
+      <p className="text-xs text-muted-foreground">Last updated just now</p>
+    </CardFooter>
+  </Card>
+</ComponentPreview>
+
+## Minimal — just content
+
+None of the sub-components are required — a `Card` around a bare `CardContent` is a perfectly normal use:
+
+<ComponentPreview code={`<Card className="w-96">
+  <CardContent>
+    <p className="text-sm">A card doesn't need a header or footer.</p>
+  </CardContent>
+</Card>`}>
+  <Card className="w-96">
+    <CardContent>
+      <p className="text-sm">A card doesn't need a header or footer.</p>
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+## Clickable card
+
+`Card` renders a `<div>`, not a button or link — wrap it (or make the whole thing `asChild`-composed some other way) when the *entire* card should be interactive, rather than adding `onClick` to a `<div>` directly, which isn't keyboard-operable on its own:
+
+<ComponentPreview code={`<button type="button" className="text-left">
+  <Card className="w-72 transition-colors hover:bg-accent/50">
+    <CardHeader>
+      <CardTitle>View project</CardTitle>
+      <CardDescription>Click anywhere on this card</CardDescription>
+    </CardHeader>
+  </Card>
+</button>`}>
+  <button type="button" className="text-left">
+    <Card className="w-72 transition-colors hover:bg-accent/50">
+      <CardHeader>
+        <CardTitle>View project</CardTitle>
+        <CardDescription>Click anywhere on this card</CardDescription>
+      </CardHeader>
+    </Card>
+  </button>
+</ComponentPreview>
+
+## API
+
+| Component | Description |
+| --- | --- |
+| `Card` | The bordered container — `flex flex-col gap-6 rounded-xl border py-6 shadow-sm`. |
+| `CardHeader` | Top section. Its own layout is a CSS grid that reflows to a two-column layout (title/description in one column, `CardAction` in the other) automatically once a `CardAction` is present — driven by a container query (`@container/card-header`), not a prop. |
+| `CardTitle` | Renders a `<div>` with heading-like styling (`font-semibold`), not an actual `<h1>`–`<h6>` — use Typography's `as` prop instead if you need real heading semantics inside a card. |
+| `CardDescription` | Muted supporting text under the title. |
+| `CardAction` | Top-right slot inside the header — a button, a dropdown menu trigger. Only affects layout when placed inside `CardHeader`. |
+| `CardContent` | Main body — `px-6`, no vertical padding of its own (the gaps come from `Card`'s own `gap-6`). |
+| `CardFooter` | Bottom section — pass `className="border-t"` for a visible divider above it, as in the first example (not automatic, since plenty of footers don't want one). Adding `border-t` also adds the right top padding automatically (`[.border-t]:pt-6` in its own classes reacts to that literal class being present), so you don't end up with a divider sitting flush against the content above it. `CardHeader` has the same trick for `border-b`. |
+
+All accept the props of a `<div>`, and all carry a `data-slot="card"` / `"card-header"` / etc. for CSS targeting.

@@ -1,0 +1,55 @@
+---
+title: User Avatar
+---
+
+# User Avatar
+
+L'avatar "dammi solo un nome" — mostra l'immagine quando si carica, altrimenti ripiega su iniziali con un colore derivato in modo deterministico dal nome (stesso nome → stesso colore, ogni volta). Usa il primitivo puro [`Avatar`](/docs/components/atoms/avatar) per qualsiasi cosa più personalizzata.
+
+```tsx
+import { UserAvatar } from "@pompeitech/vesuvius-ui";
+```
+
+## Fallback a iniziali
+
+<ComponentPreview code={`<UserAvatar name="Ada Lovelace" />
+<UserAvatar name="Grace Hopper" />
+<UserAvatar name="Alan Turing" />
+<UserAvatar name="Barbara" />`}>
+  <UserAvatar name="Ada Lovelace" />
+  <UserAvatar name="Grace Hopper" />
+  <UserAvatar name="Alan Turing" />
+  <UserAvatar name="Barbara" />
+</ComponentPreview>
+
+## Forme e dimensioni
+
+<ComponentPreview code={`<UserAvatar name="Ada Lovelace" shape="circle" />
+<UserAvatar name="Ada Lovelace" shape="square" />
+<UserAvatar name="Ada Lovelace" size="sm" />
+<UserAvatar name="Ada Lovelace" size="lg" />
+<UserAvatar name="Ada Lovelace" size="xl" />`}>
+  <UserAvatar name="Ada Lovelace" shape="circle" />
+  <UserAvatar name="Ada Lovelace" shape="square" />
+  <UserAvatar name="Ada Lovelace" size="sm" />
+  <UserAvatar name="Ada Lovelace" size="lg" />
+  <UserAvatar name="Ada Lovelace" size="xl" />
+</ComponentPreview>
+
+## API
+
+**UserAvatar**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `name` | `string` | | Obbligatorio — usato per il testo `alt` e, quando nessuna immagine si carica, sia per le iniziali mostrate che per il colore di fallback deterministico. |
+| `src` | `string` | | URL dell'immagine; ripiega sulle iniziali in caso di errore di caricamento o in sua assenza, come `AvatarImage`/`AvatarFallback`. |
+| `shape` | `"circle" \| "square"` | `"circle"` | |
+| `size` | `"sm" \| "default" \| "lg" \| "xl"` | `"default"` | |
+| `fallbackClassName` | `string` | | Sovrascrivi lo sfondo di fallback colore-dal-nome — ad es. per contrassegnare "tu" con un colore d'accento fisso invece di quello derivato. |
+
+Più ogni prop accettata dalla radice [`Avatar`](/docs/components/atoms/avatar) sottostante.
+
+### Accessibilità
+
+`name` funge anche da testo accessibile `alt` dell'immagine — passa il vero nome visualizzato della persona, non un placeholder generico, così si legge correttamente sia che l'immagine si carichi sia che venga mostrato il fallback a iniziali.

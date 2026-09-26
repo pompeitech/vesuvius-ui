@@ -1,0 +1,83 @@
+---
+title: Context Menu
+---
+
+# Context Menu
+
+A Radix `ContextMenu` — opens on right-click, same item parts as `DropdownMenu`.
+
+```tsx
+import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuLabel, ContextMenuSeparator, ContextMenuItem, ContextMenuShortcut } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<ContextMenu>
+  <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+    Right click here
+  </ContextMenuTrigger>
+  <ContextMenuContent className="w-56">
+    <ContextMenuLabel>Actions</ContextMenuLabel>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      Back
+      <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`}>
+  <ContextMenu>
+    <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+      Right click here
+    </ContextMenuTrigger>
+    <ContextMenuContent className="w-56">
+      <ContextMenuLabel>Actions</ContextMenuLabel>
+      <ContextMenuSeparator />
+      <ContextMenuItem>
+        Back
+        <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</ComponentPreview>
+
+## API
+
+Same shape as `DropdownMenu`, triggered by right-click instead of a click on the trigger.
+
+**ContextMenu**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `modal` | `boolean` | `true` | Whether interaction outside the menu is blocked while open. |
+
+**ContextMenuTrigger** — every native `<div>` prop (or `asChild` to wrap another element); the region that opens the menu on right-click.
+
+**ContextMenuContent** — every native `<div>` prop; positioned at the cursor, not relative to the trigger.
+
+**ContextMenuLabel** — every native `<div>` prop; non-interactive section heading.
+
+**ContextMenuSeparator** — every native `<div>` prop; visual divider.
+
+**ContextMenuItem**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "destructive"` | `"default"` | `"destructive"` tints the item red, for delete-style actions. |
+| `disabled` | `boolean` | `false` | |
+| `onSelect` | `(event: Event) => void` | | Fires on click or <kbd>Enter</kbd> while highlighted. |
+
+**ContextMenuCheckboxItem** — adds `checked`/`onCheckedChange`, same shape as [`Checkbox`](/docs/components/atoms/checkbox).
+
+**ContextMenuRadioGroup** / **ContextMenuRadioItem** — `value`/`onValueChange` on the group, `value` on each item, same single-selection shape as `RadioGroup`.
+
+**ContextMenuShortcut** — every native `<span>` prop; right-aligned keyboard-hint text inside an item.
+
+### Accessibility
+
+Opens via right-click (or the keyboard context-menu key / <kbd>Shift</kbd>+<kbd>F10</kbd>) with `role="menu"` and roving `tabIndex` across items — arrow keys navigate, <kbd>Enter</kbd>/<kbd>Space</kbd> select, <kbd>Esc</kbd> closes. Since right-click has no visible affordance, always pair the trigger region with some other discoverable way to reach the same actions (a visible button, a `DropdownMenu`) rather than relying on context-menu alone.

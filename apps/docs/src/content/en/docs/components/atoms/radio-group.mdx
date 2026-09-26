@@ -1,0 +1,127 @@
+---
+title: Radio Group
+---
+
+# Radio Group
+
+A Radix `RadioGroup.Root` + `RadioGroup.Item` pair — single selection among a set of options.
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<RadioGroup defaultValue="comfortable">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="default" id="r1" />
+    <Label htmlFor="r1">Default</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="comfortable" id="r2" />
+    <Label htmlFor="r2">Comfortable</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="compact" id="r3" />
+    <Label htmlFor="r3">Compact</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="comfortable">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="default" id="docs-r1" />
+      <Label htmlFor="docs-r1">Default</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="comfortable" id="docs-r2" />
+      <Label htmlFor="docs-r2">Comfortable</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="compact" id="docs-r3" />
+      <Label htmlFor="docs-r3">Compact</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## Disabled
+
+Disable the whole group, or a single item within it:
+
+<ComponentPreview code={`<RadioGroup defaultValue="a">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="a" id="d1" />
+    <Label htmlFor="d1">Available</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="b" id="d2" disabled />
+    <Label htmlFor="d2">Out of stock</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="a">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="a" id="docs-d1" />
+      <Label htmlFor="docs-d1">Available</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="b" id="docs-d2" disabled />
+      <Label htmlFor="docs-d2">Out of stock</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## Horizontal layout
+
+`RadioGroup`'s own layout is just `grid gap-3` (vertical) — override it with `className` for a row:
+
+<ComponentPreview code={`<RadioGroup defaultValue="card" className="flex gap-4">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="card" id="h1" />
+    <Label htmlFor="h1">Card</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="paypal" id="h2" />
+    <Label htmlFor="h2">PayPal</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="bank" id="h3" />
+    <Label htmlFor="h3">Bank transfer</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="card" className="flex gap-4">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="card" id="docs-h1" />
+      <Label htmlFor="docs-h1">Card</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="paypal" id="docs-h2" />
+      <Label htmlFor="docs-h2">PayPal</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="bank" id="docs-h3" />
+      <Label htmlFor="docs-h3">Bank transfer</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## API
+
+**RadioGroup**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | | Controlled selected value. |
+| `defaultValue` | `string` | | Initial value, uncontrolled. |
+| `onValueChange` | `(value: string) => void` | | |
+| `disabled` | `boolean` | `false` | Disables every item in the group. |
+| `name` | `string` | | For plain (non-JS) form submission. |
+| `loop` | `boolean` | `true` | Whether arrow-key navigation wraps from the last item back to the first. |
+
+**RadioGroupItem**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `string` | | Required — the value this item represents. |
+| `disabled` | `boolean` | `false` | Disables just this one item. |
+
+### Accessibility
+
+Arrow keys (<kbd>↑</kbd>/<kbd>↓</kbd>/<kbd>←</kbd>/<kbd>→</kbd>) move selection between items and select the newly-focused one immediately — matching native `<input type="radio">` group behavior, not a list you arrow through and separately confirm. Only one item in the group is ever in the tab order at a time. Pair each item with a `Label htmlFor` (as in every example above) — same association rule as [`Checkbox`](/docs/components/atoms/checkbox).

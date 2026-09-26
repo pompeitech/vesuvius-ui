@@ -1,0 +1,85 @@
+---
+title: Checkbox
+---
+
+# Checkbox
+
+Un `Checkbox.Root` di Radix — controllato o non controllato, capace di tre stati (`checked`, `unchecked`, `"indeterminate"`).
+
+```tsx
+import { Checkbox } from "@pompeitech/vesuvius-ui";
+```
+
+## Con un'etichetta
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Checkbox id="docs-terms-it" />
+    <Label htmlFor="docs-terms-it">Accetta i termini e condizioni</Label>
+  </div>
+</ComponentPreview>
+
+## Selezionato / disabilitato / indeterminato
+
+`"indeterminate"` è un vero terzo stato, non solo visivo — è ciò che mostra una checkbox "seleziona tutto" quando solo alcuni dei suoi figli sono selezionati:
+
+<ComponentPreview code={`<Checkbox defaultChecked aria-label="Checked" />
+<Checkbox checked="indeterminate" aria-label="Some selected" />
+<Checkbox disabled aria-label="Disabled" />
+<Checkbox disabled defaultChecked aria-label="Disabled, checked" />`}>
+  <Checkbox defaultChecked aria-label="Selezionato" />
+  <Checkbox checked="indeterminate" aria-label="Alcuni selezionati" />
+  <Checkbox disabled aria-label="Disabilitato" />
+  <Checkbox disabled defaultChecked aria-label="Disabilitato, selezionato" />
+</ComponentPreview>
+
+## Controllato, con un "seleziona tutto"
+
+Il pattern classico per cui esiste questo stato — una checkbox genitore che riflette l'unione delle sue figlie:
+
+<ComponentPreview code={`const [items, setItems] = useState(() => [true, false, false]);
+const allChecked = items.every(Boolean);
+const someChecked = items.some(Boolean) && !allChecked;
+
+<div className="flex flex-col gap-2">
+  <div className="flex items-center gap-2 border-b pb-2">
+    <Checkbox
+      checked={someChecked ? "indeterminate" : allChecked}
+      onCheckedChange={(v) => setItems(items.map(() => v === true))}
+    />
+    <Label>Seleziona tutto</Label>
+  </div>
+  {items.map((checked, i) => (
+    <div key={i} className="flex items-center gap-2">
+      <Checkbox
+        checked={checked}
+        onCheckedChange={(v) => setItems(items.map((it, idx) => idx === i ? v === true : it))}
+      />
+      <Label>Elemento {i + 1}</Label>
+    </div>
+  ))}
+</div>`}>
+  <Demo name="checkbox-select-all" selectAllLabel="Seleziona tutto" itemLabel="Elemento" />
+</ComponentPreview>
+
+## API
+
+**Checkbox**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `checked` | `boolean \| "indeterminate"` | | Stato selezionato controllato. |
+| `defaultChecked` | `boolean \| "indeterminate"` | `false` | Stato iniziale, non controllato. |
+| `onCheckedChange` | `(checked: boolean \| "indeterminate") => void` | | Chiamata con il *nuovo* stato a ogni toggle da click/tastiera. |
+| `disabled` | `boolean` | `false` | |
+| `required` | `boolean` | `false` | Segna il campo come obbligatorio per la validazione nativa del form. |
+| `name` / `value` | `string` | | Per l'invio nativo del form senza JS — renderizza un input nativo nascosto accanto al pulsante stilizzato. |
+
+Più ogni altra prop nativa di `<button>` (il `Checkbox.Root` di Radix renderizza un `<button role="checkbox">`, non un `<input type="checkbox">` nativo).
+
+### Accessibilità
+
+Completamente operabile da tastiera fuori dalla scatola: <kbd>Tab</kbd> per il focus, <kbd>Spazio</kbd> per attivare/disattivare. Abbinala sempre a un `<Label htmlFor>` (come in ogni esempio sopra) o a un `aria-label` esplicito sulla checkbox stessa — l'elemento renderizzato è un `<button>`, non un `<input>`, quindi non ha un nome accessibile implicito come invece ottiene gratuitamente l'associazione checkbox+label nativa.

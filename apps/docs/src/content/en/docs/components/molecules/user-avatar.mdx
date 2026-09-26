@@ -1,0 +1,55 @@
+---
+title: User Avatar
+---
+
+# User Avatar
+
+The "just give me a name" avatar — shows the image when it loads, otherwise falls back to initials on a color deterministically derived from the name (same name → same color, every time). Use the bare [`Avatar`](/docs/components/atoms/avatar) primitive for anything more custom.
+
+```tsx
+import { UserAvatar } from "@pompeitech/vesuvius-ui";
+```
+
+## Initials fallback
+
+<ComponentPreview code={`<UserAvatar name="Ada Lovelace" />
+<UserAvatar name="Grace Hopper" />
+<UserAvatar name="Alan Turing" />
+<UserAvatar name="Barbara" />`}>
+  <UserAvatar name="Ada Lovelace" />
+  <UserAvatar name="Grace Hopper" />
+  <UserAvatar name="Alan Turing" />
+  <UserAvatar name="Barbara" />
+</ComponentPreview>
+
+## Shapes & sizes
+
+<ComponentPreview code={`<UserAvatar name="Ada Lovelace" shape="circle" />
+<UserAvatar name="Ada Lovelace" shape="square" />
+<UserAvatar name="Ada Lovelace" size="sm" />
+<UserAvatar name="Ada Lovelace" size="lg" />
+<UserAvatar name="Ada Lovelace" size="xl" />`}>
+  <UserAvatar name="Ada Lovelace" shape="circle" />
+  <UserAvatar name="Ada Lovelace" shape="square" />
+  <UserAvatar name="Ada Lovelace" size="sm" />
+  <UserAvatar name="Ada Lovelace" size="lg" />
+  <UserAvatar name="Ada Lovelace" size="xl" />
+</ComponentPreview>
+
+## API
+
+**UserAvatar**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `name` | `string` | | Required — used for `alt` text and, when no image loads, both the initials shown and the deterministic fallback color. |
+| `src` | `string` | | Image URL; falls back to initials on load failure or while absent, same as `AvatarImage`/`AvatarFallback`. |
+| `shape` | `"circle" \| "square"` | `"circle"` | |
+| `size` | `"sm" \| "default" \| "lg" \| "xl"` | `"default"` | |
+| `fallbackClassName` | `string` | | Override the color-from-name fallback background — e.g. to mark "you" with a fixed accent color instead of the derived one. |
+
+Plus every prop the underlying [`Avatar`](/docs/components/atoms/avatar) root accepts.
+
+### Accessibility
+
+`name` doubles as the image's accessible `alt` text — pass the person's actual display name, not a generic placeholder, so it reads correctly whether the image loads or the initials fallback shows instead.

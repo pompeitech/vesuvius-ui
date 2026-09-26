@@ -1,0 +1,128 @@
+---
+title: Tooltip
+---
+
+# Tooltip
+
+Un `Tooltip` di Radix — una breve etichetta mostrata al passaggio del mouse/focus. Necessita di un `TooltipProvider` montato una volta vicino alla radice della tua app (controlla il ritardo condiviso di apertura/chiusura).
+
+```tsx
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Passaci sopra</Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Aggiungi alla libreria</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## Posizionamento
+
+`side`/`align` di `TooltipContent` controllano dove viene renderizzato rispetto al trigger — si capovolge anche automaticamente per restare visibile vicino al bordo di un viewport, stessa gestione delle collisioni di [`Popover`](/docs/components/molecules/popover):
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Top</Button>
+    </TooltipTrigger>
+    <TooltipContent side="top">Shown above</TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Sopra</Button>
+      </TooltipTrigger>
+      <TooltipContent side="top">Mostrato sopra</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## Su un pulsante a icona
+
+L'uso reale più comune — etichettare un pulsante solo-icona che non ha testo visibile proprio:
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" size="icon" aria-label="Settings">
+        <SettingsIcon />
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>Settings</TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon" aria-label="Impostazioni">
+          <SettingsIcon />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>Impostazioni</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## Ritardo di apertura personalizzato
+
+`delayDuration` di `TooltipProvider` (ms) si applica a ogni `Tooltip` sottostante — accorcialo per una sensazione più reattiva, o impostalo a `0` per mostrarlo istantaneamente:
+
+```tsx
+<TooltipProvider delayDuration={100}>
+  {/* ogni Tooltip qui dentro si apre dopo 100ms di hover, invece dei 700ms di default */}
+</TooltipProvider>
+```
+
+## API
+
+**TooltipProvider**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `delayDuration` | `number` (ms) | `700` | Ritardo di hover prima della visualizzazione. |
+| `skipDelayDuration` | `number` (ms) | `300` | Dopo aver chiuso un tooltip, per quanto tempo un hover rapido su un altro trigger continua a saltare il ritardo. |
+
+Montalo **una sola volta**, vicino alla radice dell'app — coordina la temporizzazione di ogni tooltip nella pagina, non solo dei propri figli.
+
+**Tooltip**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `open` | `boolean` | Stato aperto controllato — raro, di solito lasciato non controllato. |
+| `defaultOpen` | `boolean` | |
+| `onOpenChange` | `(open: boolean) => void` | |
+
+**TooltipTrigger** — ogni prop nativa di `<button>`, più `asChild` (`boolean`, default `false`) per collegare il tooltip al tuo elemento invece di avvolgerlo in uno extra.
+
+**TooltipContent**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | |
+| `sideOffset` | `number` (px) | `4` | |
+
+Più ogni prop nativa di `<div>`; renderizzato in un Portal.
+
+### Accessibilità
+
+Si mostra al passaggio del mouse *e* al focus da tastiera (non solo hover), e si chiude con <kbd>Esc</kbd> — quindi è raggiungibile senza mouse. **Non** è un sostituto per un vero nome accessibile — il contenuto realmente necessario per capire un controllo (non solo un suggerimento carino da avere) appartiene ad `aria-label`, dato che il contenuto del tooltip non viene annunciato in modo affidabile da ogni screen reader in ogni modalità.

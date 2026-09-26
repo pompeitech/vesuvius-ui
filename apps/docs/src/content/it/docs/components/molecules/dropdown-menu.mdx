@@ -1,0 +1,82 @@
+---
+title: Dropdown Menu
+---
+
+# Dropdown Menu
+
+Un `DropdownMenu` di Radix — azioni attivate da un pulsante, con elementi checkbox/radio, gruppi, separatori, indicazioni di scorciatoie e sottomenu annidati.
+
+```tsx
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuShortcut } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Open menu</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent className="w-56">
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem>
+        Profile
+        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+      </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+      Status Bar
+    </DropdownMenuCheckboxItem>
+  </DropdownMenuContent>
+</DropdownMenu>`}>
+  <Demo
+    name="dropdown-menu-account"
+    triggerLabel="Apri menu"
+    accountLabel="Il mio account"
+    profileLabel="Profilo"
+    billingLabel="Fatturazione"
+    statusBarLabel="Barra di stato"
+  />
+</ComponentPreview>
+
+## API
+
+**DropdownMenu**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `modal` | `boolean` | `true` | Se l'interazione fuori dal menu è bloccata mentre è aperto. |
+
+**DropdownMenuTrigger** — ogni prop nativa di `<button>`, più `asChild`.
+
+**DropdownMenuContent** — ogni prop nativa di `<div>`, più prop di posizionamento ereditate dal `Popper` di Radix (`side`, `align`, `sideOffset`) per i casi in cui il posizionamento predefinito non va bene.
+
+**DropdownMenuLabel** — ogni prop nativa di `<div>`; intestazione di sezione non interattiva.
+
+**DropdownMenuSeparator** — ogni prop nativa di `<div>`; divisore visivo.
+
+**DropdownMenuGroup** — ogni prop nativa di `<div>`; raggruppa elementi correlati per la semantica `role="group"` (nessuna differenza visiva di per sé).
+
+**DropdownMenuItem**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "destructive"` | `"default"` | `"destructive"` tinge l'elemento di rosso, per azioni in stile eliminazione. |
+| `disabled` | `boolean` | `false` | |
+| `onSelect` | `(event: Event) => void` | | Chiamata al click o su <kbd>Invio</kbd> mentre è evidenziato. Chiama `event.preventDefault()` al suo interno per mantenere il menu aperto dopo la selezione. |
+
+**DropdownMenuCheckboxItem** — aggiunge `checked`/`onCheckedChange`, stessa forma di [`Checkbox`](/docs/components/atoms/checkbox).
+
+**DropdownMenuRadioGroup** / **DropdownMenuRadioItem** — `value`/`onValueChange` sul gruppo, `value` su ogni elemento, stessa forma a selezione singola di `RadioGroup`.
+
+**DropdownMenuShortcut** — ogni prop nativa di `<span>`; testo allineato a destra con l'indicazione della scorciatoia dentro un elemento.
+
+**DropdownMenuSub** / **DropdownMenuSubTrigger** / **DropdownMenuSubContent** — sottomenu annidati: avvolgi una coppia `DropdownMenuSubTrigger` + `DropdownMenuSubContent` in un `DropdownMenuSub` al posto di un elemento normale.
+
+### Accessibilità
+
+Implementa il pattern ARIA `menu` — <kbd>↑</kbd>/<kbd>↓</kbd> navigano gli elementi, <kbd>→</kbd> apre un sottomenu, <kbd>←</kbd>/<kbd>Esc</kbd> lo chiude, digitare una lettera salta a un elemento corrispondente. Il focus torna automaticamente al trigger alla chiusura.

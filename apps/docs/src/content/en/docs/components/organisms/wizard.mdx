@@ -1,0 +1,91 @@
+---
+title: Wizard
+---
+
+# Wizard
+
+A complete step-by-step flow: a [`Stepper`](/docs/components/molecules/stepper) header + the current step's content + Back/Next/Finish navigation, with an optional async `validate` gate per step (e.g. block advancing until a form section is valid).
+
+```tsx
+import { Wizard, type WizardStep } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Wizard
+  steps={[
+    { title: "Account", description: "Basic info", content: <AccountForm /> },
+    { title: "Payment", description: "Billing details", content: <PaymentForm /> },
+    { title: "Review", description: "Confirm", content: <ReviewStep /> },
+  ]}
+  onFinish={() => submit()}
+/>`} className="w-full">
+  <div className="w-full max-w-lg">
+    <Wizard
+      steps={[
+        {
+          title: "Account",
+          description: "Basic info",
+          content: (
+            <div className="grid gap-1.5 py-2">
+              <Label htmlFor="w-email">Email</Label>
+              <Input id="w-email" type="email" placeholder="you@example.com" />
+            </div>
+          ),
+        },
+        {
+          title: "Payment",
+          description: "Billing details",
+          content: (
+            <div className="grid gap-1.5 py-2">
+              <Label htmlFor="w-card">Card number</Label>
+              <Input id="w-card" placeholder="4242 4242 4242 4242" />
+            </div>
+          ),
+        },
+        {
+          title: "Review",
+          description: "Confirm",
+          content: <p className="py-2 text-sm text-muted-foreground">Review your order and click Finish to confirm.</p>,
+        },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## A blocking validation step
+
+`validate` runs before advancing past a step — return (or resolve) `false` to block, e.g. trigger react-hook-form's `trigger()` for that step's fields.
+
+<ComponentPreview code={`{
+  title: "Account",
+  content: <EmailField />,
+  validate: () => trigger(),
+}`} className="w-full">
+  <Demo name="wizard-validated" />
+</ComponentPreview>
+
+## API
+
+**Wizard**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `steps` | `WizardStep[]` | | Required. |
+| `activeStep` / `defaultActiveStep` | `number` | | Controlled/uncontrolled current step index. |
+| `onStepChange` | `(index: number) => void` | | |
+| `onFinish` | `() => void` | | Called after `validate` passes on the last step. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Passed through to the internal [`Stepper`](/docs/components/molecules/stepper) header. |
+| `allowStepClick` | `boolean` | `true` | Jump to any already-visited step by clicking it on the `Stepper` header. |
+| `nextLabel` / `backLabel` / `finishLabel` | `string` | `"Next"` / `"Back"` / `"Finish"` | |
+
+**WizardStep** — extends `StepperStep` (`title`, `description?`, `status?`) with:
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `content` | `ReactNode` | Required — the step's body, rendered while it's active. |
+| `validate` | `() => boolean \| Promise<boolean>` | Runs before advancing past this step; returning (or resolving) `false` blocks the Next/Finish action. Async, so it can await a network validation call. |
+
+### Accessibility
+
+The `Stepper` header keeps its own `role="tab"`/`aria-selected` semantics; Back/Next/Finish are real buttons, and a step blocked by `validate` simply doesn't advance rather than disabling the Next button preemptively — pair a failed `validate` with visible feedback in the step's own `content` (as the email example does with `FormHelperText`), since there's no built-in error announcement of its own.

@@ -1,0 +1,71 @@
+---
+title: Heatmap Grid
+---
+
+# Heatmap Grid
+
+Una griglia di intensità in stile calendario/attività — per un valore che varia lungo due dimensioni discrete (giorno × settimana, ora × giorno della settimana, ...) mostrato come colore della cella invece che come altezza di barra/linea. Semplice CSS grid, non una libreria di grafici: non c'è alcun meccanismo di assi/tooltip di cui una griglia fissa di celle colorate abbia realmente bisogno.
+
+```tsx
+import { HeatmapGrid } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<HeatmapGrid
+  rows={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+  columns={["Week 1", "Week 2", "Week 3", "Week 4"]}
+  cells={[
+    [0.3, 0.6, 0.4, 0.8],
+    [0.5, 0.7, 0.6, 0.9],
+    [0.6, 0.5, 0.7, 0.6],
+    [0.2, 0.4, 0.3, 0.5],
+    [0.9, 1, 0.8, 0.95],
+    [0.4, 0.3, 0.5, 0.4],
+    [0.1, 0.2, 0.15, 0.25],
+  ]}
+  legend={[
+    { label: "Low", value: 0.2 },
+    { label: "Medium", value: 0.55 },
+    { label: "High", value: 0.95 },
+  ]}
+/>`} className="w-full">
+  <div className="w-full max-w-sm">
+    <HeatmapGrid
+      rows={["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"]}
+      columns={["Sett. 1", "Sett. 2", "Sett. 3", "Sett. 4"]}
+      cells={[
+        [0.3, 0.6, 0.4, 0.8],
+        [0.5, 0.7, 0.6, 0.9],
+        [0.6, 0.5, 0.7, 0.6],
+        [0.2, 0.4, 0.3, 0.5],
+        [0.9, 1, 0.8, 0.95],
+        [0.4, 0.3, 0.5, 0.4],
+        [0.1, 0.2, 0.15, 0.25],
+      ]}
+      legend={[
+        { label: "Basso", value: 0.2 },
+        { label: "Medio", value: 0.55 },
+        { label: "Alto", value: 0.95 },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**HeatmapGrid**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `rows` | `string[]` | | Obbligatorio — etichette delle righe, dall'alto in basso. |
+| `columns` | `string[]` | | Obbligatorio — etichette delle colonne, da sinistra a destra. |
+| `cells` | `number[][]` | | Obbligatorio — `cells[rowIndex][columnIndex]`, ciascuno `0`–`1`, usato direttamente come opacità di riempimento della cella. |
+| `color` | `string` | `"var(--primary)"` | Colore base che ogni cella tinge, all'intensità specificata da `cells`. |
+| `legend` | `{ label: string; value: number }[]` | | Mostrata sotto la griglia come chiave etichettata dell'intensità colore. |
+
+Più ogni prop nativa di `<div>` sul wrapper radice.
+
+### Accessibilità
+
+Una griglia di intensità visiva non ha un testo alternativo intrinseco — se i dati sottostanti contano oltre a un colpo d'occhio (non solo un indicatore di tendenza decorativo), abbinala a una [`Table`](/docs/components/molecules/table)/`DataTable` che presenti gli stessi valori come testo, o come minimo dai al wrapper un `aria-label` che riassuma cosa mostra la griglia.

@@ -1,0 +1,61 @@
+---
+title: Header
+---
+
+# Header
+
+The app's top bar — `sticky top-0` by construction, translucent with a backdrop blur so content stays visible scrolling underneath. This very site's own navbar is built on it.
+
+```tsx
+import { Header, HeaderStart, HeaderEnd } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Header>
+  <HeaderStart>
+    <Button variant="ghost" size="icon" className="size-7">☰</Button>
+    <Separator orientation="vertical" className="h-4" />
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem><BreadcrumbLink href="#">Ecommerce</BreadcrumbLink></BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem><BreadcrumbPage>Dashboard</BreadcrumbPage></BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  </HeaderStart>
+  <HeaderEnd>
+    <Button variant="outline" size="sm">Action</Button>
+  </HeaderEnd>
+</Header>`} className="w-full p-0">
+  <div className="w-full">
+    <Header className="relative">
+      <HeaderStart>
+        <Button variant="ghost" size="icon" className="size-7">☰</Button>
+        <Separator orientation="vertical" className="h-4" />
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink href="#">Ecommerce</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem><BreadcrumbPage>Dashboard</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </HeaderStart>
+      <HeaderEnd>
+        <Button variant="outline" size="sm">Action</Button>
+      </HeaderEnd>
+    </Header>
+  </div>
+</ComponentPreview>
+
+## API
+
+**Header** — the `<header>` itself. Every native `<header>` prop. Own layout: `sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between gap-2 border-b bg-background/95 px-4 backdrop-blur` — override via `className` for a different height/padding.
+
+**HeaderStart** — left-aligned slot (`flex min-w-0 items-center gap-2` — `min-w-0` lets a long breadcrumb/title truncate instead of pushing `HeaderEnd` off-screen) for a sidebar trigger, breadcrumb, page title. Every native `<div>` prop.
+
+**HeaderEnd** — right-aligned slot (`flex items-center gap-2`) for actions, theme controls, account menu. Every native `<div>` prop.
+
+### Accessibility
+
+`Header` renders a real `<header>` landmark — no `role` needed. Since it's `sticky`, keep its height reasonable on small viewports; a header that consumes too much vertical space on mobile pushes usable content further down and can't be dismissed.

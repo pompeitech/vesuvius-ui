@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Vesuvius UI — marchio per sfondo scuro</title>
+  <desc id="desc">Cinque moduli geometrici formano il profilo del Vesuvio e una colata di lava.</desc>
+  <g fill="#F5EFE8">
+    <path d="M54 390 160 238l56-22-58 174Z"/>
+    <path d="m169 220 63-101 30 38-43 48Z"/>
+    <path d="m276 160 34-50 35 46 5 67-65-18Z"/>
+    <path d="m354 237 104 153H354l-59-172Z"/>
+  </g>
+  <path fill="#E86B3F" d="m259 164 29 54-25 48 24 57-38 76h-46l31-81-17-54 35-48Z"/>
+</svg>

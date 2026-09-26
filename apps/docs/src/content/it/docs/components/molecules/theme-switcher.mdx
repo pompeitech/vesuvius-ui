@@ -1,0 +1,85 @@
+---
+title: Theme Switcher
+---
+
+# Theme Switcher
+
+Tre controlli pronti all'uso, tutti che leggono/scrivono lo stesso contesto `ThemeProvider` tramite `useTheme()`. Il chrome di questo stesso sito è dogfoodato sul vero `ThemeProvider` di Vesuvius, quindi ogni anteprima sotto è live e cambia davvero il tema di questa pagina — provale.
+
+```tsx
+import {
+  ThemeModeToggle,
+  ThemePalettePicker,
+  ThemeSwitcher,
+} from "@pompeitech/vesuvius-ui";
+```
+
+## ThemeModeToggle
+
+Un singolo pulsante a icona che alterna chiaro/scuro.
+
+<ComponentPreview code={`<ThemeModeToggle />`}>
+  <ThemeModeToggle />
+</ComponentPreview>
+
+## ThemePalettePicker
+
+Una palette [`Command`](/docs/components/molecules/command) ricercabile di temi colore, con un pulsante shuffle e un'anteprima swatch per tema.
+
+<ComponentPreview code={`<ThemePalettePicker />
+
+// I temi personalizzati necessitano di una propria voce swatch (altrimenti ripiega sul grigio):
+
+<ThemePalettePicker swatches={{ acme: ["#16a34a", "#22c55e", "#15803d", "#166534"] }} />`}>
+  <ThemePalettePicker />
+</ComponentPreview>
+
+## ThemeSwitcher
+
+Sia la modalità che il tema colore in un unico dropdown — il classico pattern "topbar".
+
+<ComponentPreview code={`<ThemeSwitcher />
+
+// Un tema non presente nella palette integrata necessita di un proprio colore swatch:
+
+<ThemeSwitcher swatchColors={{ acme: "#16a34a" }} />`}>
+  <ThemeSwitcher />
+</ComponentPreview>
+
+## Posizionamento tipico
+
+```tsx
+<Header>
+  <HeaderStart>{/* ... */}</HeaderStart>
+  <HeaderEnd>
+    <ThemeSwitcher />
+  </HeaderEnd>
+</Header>
+```
+
+## API
+
+**ThemeModeToggle**
+
+| Prop        | Tipo     | Descrizione |
+| ----------- | -------- | ----------- |
+| `className` | `string` |             |
+
+Legge `resolvedTheme` da `useTheme()` (quindi `"system"` è già risolto a un valore concreto) e alterna direttamente tra `"light"`/`"dark"` al click — non imposta mai `"system"` da sé, quindi una volta cliccato il tema resta ancorato a una scelta esplicita invece di seguire di nuovo il sistema operativo.
+
+**ThemePalettePicker**
+
+| Prop       | Tipo                                               | Descrizione                                                                                                                                                                                                                                         |
+| ---------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `swatches` | `Record<string, [string, string, string, string]>` | Mappa il nome di un tema colore a 4 colori swatch esadecimali mostrati nella sua riga nell'elenco. I temi integrati hanno già le proprie voci; aggiungi qui i nomi dei tuoi temi personalizzati o verranno renderizzati come un placeholder grigio. |
+
+Ogni altra prop viene inoltrata alla palette [`Command`](/docs/components/molecules/command) sottostante.
+
+**ThemeSwitcher**
+
+| Prop           | Tipo                     | Descrizione                                                                                                                                                                                                                 |
+| -------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `swatchColors` | `Record<string, string>` | Mappa il nome di un tema colore a un singolo colore esadecimale per il suo pallino swatch nel dropdown. Stesso comportamento di ripiego sul grigio di `ThemePalettePicker.swatches` per i temi personalizzati non elencati. |
+| `className`    | `string`                 |                                                                                                                                                                                                                             |
+
+Tutti e tre richiedono un antenato `ThemeProvider` (altrimenti lanciano un errore tramite `useTheme()`) — montalo una volta vicino alla radice della tua app; vedi [Theming](/docs/theming) per `ThemeProvider` stesso e il [catalogo visuale dei temi](/themes).

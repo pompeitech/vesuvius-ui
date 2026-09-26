@@ -1,0 +1,124 @@
+---
+title: Navigation Menu
+---
+
+# Navigation Menu
+
+Un `NavigationMenu` di Radix — una navigazione di primo livello del sito con dropdown attivabili al passaggio del mouse/click, distinto da DropdownMenu (pensato per le azioni, non per la navigazione) nel suo modello da tastiera e nei ruoli ARIA.
+
+```tsx
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuGrid, NavigationMenuGridItem, NavigationMenuLink } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+`NavigationMenuGrid`/`NavigationMenuGridItem` sono l'`<ul>`/`<li>` stilizzati per l'elenco link di un dropdown — non qualcosa da costruire a mano con le proprie classi Tailwind ogni volta. `NavigationMenuGridItem` avvolge esso stesso `NavigationMenuLink` (quindi è un vero link focalizzabile, componibile con `asChild`, non testo inerte), e accetta un `title` opzionale per un'intestazione in grassetto sopra la sua descrizione `children`:
+
+<ComponentPreview allowOverflow code={`<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuGrid>
+          <NavigationMenuGridItem href="#" title="Ecommerce dashboard">
+            Orders, products, and customers in one place.
+          </NavigationMenuGridItem>
+          <NavigationMenuGridItem href="#" title="Project management">
+            Boards, timelines, and team workload.
+          </NavigationMenuGridItem>
+        </NavigationMenuGrid>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">Docs</NavigationMenuLink>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>`}>
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Prodotti</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuGrid>
+            <NavigationMenuGridItem href="#" title="Dashboard ecommerce">Ordini, prodotti e clienti in un unico posto.</NavigationMenuGridItem>
+            <NavigationMenuGridItem href="#" title="Gestione progetti">Board, timeline e carico di lavoro del team.</NavigationMenuGridItem>
+          </NavigationMenuGrid>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+      <NavigationMenuItem>
+        <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">Docs</NavigationMenuLink>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</ComponentPreview>
+
+## Solo titolo, senza descrizione
+
+`children` è opzionale — omettilo per un semplice link su una riga. (`NavigationMenuGridItem` renderizza esso stesso `NavigationMenuLink`, che — come ogni parte di `NavigationMenu` di Radix — funziona solo annidato dentro un vero `NavigationMenu`; non è pensato per essere usato in autonomia.)
+
+<ComponentPreview allowOverflow code={`<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Account</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <NavigationMenuGrid>
+          <NavigationMenuGridItem href="#" title="Settings" />
+          <NavigationMenuGridItem href="#" title="Billing" />
+        </NavigationMenuGrid>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>`}>
+  <NavigationMenu>
+    <NavigationMenuList>
+      <NavigationMenuItem>
+        <NavigationMenuTrigger>Account</NavigationMenuTrigger>
+        <NavigationMenuContent>
+          <NavigationMenuGrid className="w-56">
+            <NavigationMenuGridItem href="#" title="Impostazioni" />
+            <NavigationMenuGridItem href="#" title="Fatturazione" />
+          </NavigationMenuGrid>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    </NavigationMenuList>
+  </NavigationMenu>
+</ComponentPreview>
+
+## API
+
+**NavigationMenu**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `viewport` | `boolean` | `true` | `true` condivide un unico viewport posizionato in modo assoluto tra il contenuto di ogni elemento (ridimensiona/anima fluidamente tra uno e l'altro). `false` posiziona ogni `NavigationMenuContent` in modo indipendente, direttamente sotto il proprio trigger. |
+
+Più ogni prop di `NavigationMenu.Root` di Radix.
+
+**NavigationMenuList** — ogni prop di `NavigationMenu.List` di Radix (inoltra le prop native di `<ul>`).
+
+**NavigationMenuItem** — `NavigationMenu.Item` di Radix direttamente, nessun wrapper proprio.
+
+**NavigationMenuTrigger** — ogni prop di `NavigationMenu.Trigger` di Radix (inoltra le prop native di `<button>`). Renderizza la propria icona a chevron dopo `children`.
+
+**NavigationMenuContent** — ogni prop di `NavigationMenu.Content` di Radix (inoltra le prop native di `<div>`). Il pannello dropdown — metti al suo interno un `NavigationMenuGrid` o qualsiasi altro contenuto.
+
+**NavigationMenuLink** — `NavigationMenu.Link` di Radix direttamente — `href`, o `asChild` per comporre con il componente link proprio di un router. Stilizza una voce di primo livello, non-dropdown, con l'helper esportato `navigationMenuTriggerStyle()`, come nel link "Docs" sopra.
+
+**NavigationMenuGrid**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `className` | `string` | `"grid w-72 gap-2 p-2"` | Sovrascrivilo per un numero di colonne/larghezza diversi — ad es. `grid-cols-2 w-[500px]` per un dropdown più largo, multi-colonna. |
+
+Più ogni prop nativa di `<ul>`.
+
+**NavigationMenuGridItem**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `title` | `ReactNode` | | Intestazione in grassetto opzionale. |
+| `children` | `ReactNode` | | Descrizione attenuata opzionale sotto `title`. Almeno uno dei due dovrebbe essere presente. |
+
+Più ogni prop nativa di `<a>` (`href`, `asChild` per comporre con il componente link proprio di un router, …) — renderizza esso stesso `NavigationMenuLink`, quindi è un vero link focalizzabile e operabile da tastiera, non testo stilizzato inerte.
+
+**NavigationMenuIndicator** — un cursore animato che segue il trigger attivo, da usare insieme a `viewport={false}`; ogni prop di `NavigationMenu.Indicator` di Radix.

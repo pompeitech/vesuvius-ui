@@ -1,0 +1,54 @@
+---
+title: Form Helper Text
+---
+
+# Form Helper Text
+
+Field-level helper text with a state — info/success/warning/error, not just neutral-or-error like plain form descriptions. Inside an RHF-managed `FormField`, prefer [`FormMessage`](/docs/components/molecules/form) (renders the actual validation error automatically); reach for this when you need success/info states, or a helper text outside that context.
+
+```tsx
+import { FormHelperText } from "@pompeitech/vesuvius-ui";
+```
+
+## Variants
+
+<ComponentPreview code={`<FormHelperText variant="default">We'll never share your email.</FormHelperText>
+<FormHelperText variant="info">Your plan renews on the 1st.</FormHelperText>
+<FormHelperText variant="success">Username is available.</FormHelperText>
+<FormHelperText variant="warning">This action can't be easily undone.</FormHelperText>
+<FormHelperText variant="error">Password must be at least 8 characters.</FormHelperText>`} className="w-80 flex-col items-start">
+  <FormHelperText variant="default">We'll never share your email.</FormHelperText>
+  <FormHelperText variant="info">Your plan renews on the 1st.</FormHelperText>
+  <FormHelperText variant="success">Username is available.</FormHelperText>
+  <FormHelperText variant="warning">This action can't be easily undone.</FormHelperText>
+  <FormHelperText variant="error">Password must be at least 8 characters.</FormHelperText>
+</ComponentPreview>
+
+## Paired with a field
+
+<ComponentPreview code={`<div className="grid gap-1.5">
+  <Label htmlFor="username">Username</Label>
+  <Input id="username" defaultValue="ada_lovelace" />
+  <FormHelperText variant="success">Username is available.</FormHelperText>
+</div>`}>
+  <div className="grid w-80 gap-1.5">
+    <Label htmlFor="docs-username">Username</Label>
+    <Input id="docs-username" defaultValue="ada_lovelace" />
+    <FormHelperText variant="success">Username is available.</FormHelperText>
+  </div>
+</ComponentPreview>
+
+## API
+
+**FormHelperText**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "info" \| "success" \| "warning" \| "error"` | `"default"` | Sets both the text color and the leading icon. |
+| `showIcon` | `boolean` | `true` | Ignored for `"default"`, which has no icon regardless. |
+
+Plus every native `<p>` prop.
+
+### Accessibility
+
+Purely visual coloring/iconography — it carries no ARIA role of its own. When paired with a field outside RHF, associate it via `aria-describedby` pointing at its `id` so assistive tech reads it alongside the field; inside an RHF `FormField`, prefer `FormMessage`/`FormDescription`, which wire this automatically.

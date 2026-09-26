@@ -1,0 +1,96 @@
+---
+title: Wizard
+---
+
+# Wizard
+
+Un flusso completo passo-passo: un'intestazione [`Stepper`](/docs/components/molecules/stepper) + il contenuto del passo corrente + navigazione Indietro/Avanti/Fine, con un `validate` asincrono opzionale per passo (ad es. bloccare l'avanzamento finché una sezione del form non è valida).
+
+```tsx
+import { Wizard, type WizardStep } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Wizard
+  steps={[
+    { title: "Account", description: "Basic info", content: <AccountForm /> },
+    { title: "Payment", description: "Billing details", content: <PaymentForm /> },
+    { title: "Review", description: "Confirm", content: <ReviewStep /> },
+  ]}
+  onFinish={() => submit()}
+/>`} className="w-full">
+  <div className="w-full max-w-lg">
+    <Wizard
+      steps={[
+        {
+          title: "Account",
+          description: "Informazioni di base",
+          content: (
+            <div className="grid gap-1.5 py-2">
+              <Label htmlFor="w-email-it">Email</Label>
+              <Input id="w-email-it" type="email" placeholder="tu@esempio.com" />
+            </div>
+          ),
+        },
+        {
+          title: "Pagamento",
+          description: "Dettagli di fatturazione",
+          content: (
+            <div className="grid gap-1.5 py-2">
+              <Label htmlFor="w-card-it">Numero carta</Label>
+              <Input id="w-card-it" placeholder="4242 4242 4242 4242" />
+            </div>
+          ),
+        },
+        {
+          title: "Riepilogo",
+          description: "Conferma",
+          content: <p className="py-2 text-sm text-muted-foreground">Rivedi il tuo ordine e clicca Fine per confermare.</p>,
+        },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## Un passo con validazione bloccante
+
+`validate` viene eseguito prima di avanzare oltre un passo — restituisci (o risolvi) `false` per bloccare, ad es. attivando `trigger()` di react-hook-form per i campi di quel passo.
+
+<ComponentPreview code={`{
+  title: "Account",
+  content: <EmailField />,
+  validate: () => trigger(),
+}`} className="w-full">
+  <Demo
+    name="wizard-validated"
+    emailErrorMsg="Inserisci un'email valida per continuare."
+    doneTitle="Fatto"
+    doneMsg="Non puoi raggiungere questo passo senza un'email valida."
+  />
+</ComponentPreview>
+
+## API
+
+**Wizard**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `steps` | `WizardStep[]` | | Obbligatorio. |
+| `activeStep` / `defaultActiveStep` | `number` | | Indice del passo corrente, controllato o non controllato. |
+| `onStepChange` | `(index: number) => void` | | |
+| `onFinish` | `() => void` | | Chiamata dopo che `validate` ha successo sull'ultimo passo. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Passata all'intestazione [`Stepper`](/docs/components/molecules/stepper) interna. |
+| `allowStepClick` | `boolean` | `true` | Salta a qualsiasi passo già visitato cliccandolo sull'intestazione `Stepper`. |
+| `nextLabel` / `backLabel` / `finishLabel` | `string` | `"Next"` / `"Back"` / `"Finish"` | |
+
+**WizardStep** — estende `StepperStep` (`title`, `description?`, `status?`) con:
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `content` | `ReactNode` | Obbligatorio — il corpo del passo, renderizzato mentre è attivo. |
+| `validate` | `() => boolean \| Promise<boolean>` | Viene eseguita prima di avanzare oltre questo passo; restituire (o risolvere) `false` blocca l'azione Avanti/Fine. Asincrona, così può attendere una chiamata di validazione di rete. |
+
+### Accessibilità
+
+L'intestazione `Stepper` mantiene la propria semantica `role="tab"`/`aria-selected`; Indietro/Avanti/Fine sono veri pulsanti, e un passo bloccato da `validate` semplicemente non avanza invece di disabilitare preventivamente il pulsante Avanti — abbina un `validate` fallito a un feedback visibile nel `content` stesso del passo (come fa l'esempio email con `FormHelperText`), dato che non esiste un annuncio d'errore integrato di per sé.

@@ -1,0 +1,99 @@
+---
+title: Card
+---
+
+# Card
+
+Un contenitore con bordo e sezioni opzionali di header/footer — la base per StatCard e ChartCard.
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Card className="w-96">
+  <CardHeader>
+    <CardTitle>Monthly revenue</CardTitle>
+    <CardDescription>February 2026</CardDescription>
+    <CardAction>
+      <Button variant="outline" size="sm">Export</Button>
+    </CardAction>
+  </CardHeader>
+  <CardContent>
+    <p className="text-2xl font-semibold">$189,540.75</p>
+    <p className="text-sm text-muted-foreground">+27.9% vs previous month</p>
+  </CardContent>
+  <CardFooter className="border-t">
+    <p className="text-xs text-muted-foreground">Last updated just now</p>
+  </CardFooter>
+</Card>`}>
+  <Card className="w-96">
+    <CardHeader>
+      <CardTitle>Ricavi mensili</CardTitle>
+      <CardDescription>Febbraio 2026</CardDescription>
+      <CardAction>
+        <Button variant="outline" size="sm">Esporta</Button>
+      </CardAction>
+    </CardHeader>
+    <CardContent>
+      <p className="text-2xl font-semibold">189.540,75 €</p>
+      <p className="text-sm text-muted-foreground">+27,9% rispetto al mese precedente</p>
+    </CardContent>
+    <CardFooter className="border-t">
+      <p className="text-xs text-muted-foreground">Aggiornato pochi istanti fa</p>
+    </CardFooter>
+  </Card>
+</ComponentPreview>
+
+## Minimale — solo contenuto
+
+Nessuno dei sotto-componenti è obbligatorio — una `Card` attorno a un semplice `CardContent` è un uso perfettamente normale:
+
+<ComponentPreview code={`<Card className="w-96">
+  <CardContent>
+    <p className="text-sm">A card doesn't need a header or footer.</p>
+  </CardContent>
+</Card>`}>
+  <Card className="w-96">
+    <CardContent>
+      <p className="text-sm">Una card non ha bisogno di header o footer.</p>
+    </CardContent>
+  </Card>
+</ComponentPreview>
+
+## Card cliccabile
+
+`Card` renderizza un `<div>`, non un button o un link — avvolgila (o rendi l'intero elemento `asChild`-composto in qualche altro modo) quando l'*intera* card deve essere interattiva, invece di aggiungere `onClick` direttamente a un `<div>`, cosa che non è operabile da tastiera di per sé:
+
+<ComponentPreview code={`<button type="button" className="text-left">
+  <Card className="w-72 transition-colors hover:bg-accent/50">
+    <CardHeader>
+      <CardTitle>View project</CardTitle>
+      <CardDescription>Click anywhere on this card</CardDescription>
+    </CardHeader>
+  </Card>
+</button>`}>
+  <button type="button" className="text-left">
+    <Card className="w-72 transition-colors hover:bg-accent/50">
+      <CardHeader>
+        <CardTitle>Vedi progetto</CardTitle>
+        <CardDescription>Clicca in qualsiasi punto di questa card</CardDescription>
+      </CardHeader>
+    </Card>
+  </button>
+</ComponentPreview>
+
+## API
+
+Tutte le seguenti accettano le prop di un `<div>` senza prop personalizzate proprie oltre agli aggancci di stile, e portano un `data-slot="card"` / `"card-header"` / ecc. per il targeting CSS.
+
+| Componente | Descrizione |
+| --- | --- |
+| `Card` | Il contenitore con bordo — `flex flex-col gap-6 rounded-xl border py-6 shadow-sm`. |
+| `CardHeader` | Sezione superiore. Il suo layout è una griglia CSS che si riorganizza automaticamente in due colonne (titolo/descrizione in una colonna, `CardAction` nell'altra) non appena è presente un `CardAction` — guidato da una container query (`@container/card-header`), non da una prop. |
+| `CardTitle` | Renderizza un `<div>` con stile simile a un heading (`font-semibold`), non un vero `<h1>`–`<h6>` — usa invece la prop `as` di [`Typography`](/docs/components/atoms/typography) se ti serve una vera semantica di heading dentro una card. |
+| `CardDescription` | Testo di supporto attenuato sotto il titolo. |
+| `CardAction` | Slot in alto a destra dentro l'header — un pulsante, il trigger di un menu a tendina. Influisce sul layout solo quando è posizionato dentro `CardHeader`. |
+| `CardContent` | Corpo principale — `px-6`, nessun padding verticale proprio (gli spazi vengono dal `gap-6` di `Card` stesso). |
+| `CardFooter` | Sezione inferiore — passa `className="border-t"` per un divisore visibile sopra di essa, come nel primo esempio (non automatico, dato che molti footer non ne vogliono uno). Aggiungere `border-t` aggiunge automaticamente anche il giusto padding superiore (`[.border-t]:pt-6` nelle sue stesse classi reagisce a quella classe letterale essendo presente), così non ti ritrovi con un divisore appiccicato al contenuto sopra. `CardHeader` ha lo stesso trucco per `border-b`. |

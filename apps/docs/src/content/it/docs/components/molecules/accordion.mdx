@@ -1,0 +1,88 @@
+---
+title: Accordion
+---
+
+# Accordion
+
+Un `Accordion` di Radix — sezioni espandibili/comprimibili, una aperta alla volta (`type="single"`) o diverse (`type="multiple"`).
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Accordion type="single" collapsible className="w-96">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Is it styled?</AccordionTrigger>
+    <AccordionContent>Yes. It comes with default styles that match the design system.</AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion type="single" collapsible className="w-96">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>È accessibile?</AccordionTrigger>
+      <AccordionContent>Sì. Aderisce al pattern di design WAI-ARIA.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Ha uno stile?</AccordionTrigger>
+      <AccordionContent>Sì. Include stili predefiniti coerenti con il design system.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+## Più elementi aperti insieme
+
+`type="multiple"` rimuove il vincolo di apertura singola — qualsiasi numero di elementi può essere espanso insieme, e non c'è alcuna prop `collapsible` da impostare (si applica solo a `type="single"`):
+
+<ComponentPreview code={`<Accordion type="multiple" className="w-96">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>First section</AccordionTrigger>
+    <AccordionContent>Content of the first section.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Second section</AccordionTrigger>
+    <AccordionContent>Content of the second section.</AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion type="multiple" className="w-96">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Prima sezione</AccordionTrigger>
+      <AccordionContent>Contenuto della prima sezione.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Seconda sezione</AccordionTrigger>
+      <AccordionContent>Contenuto della seconda sezione.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+## API
+
+**Accordion**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `type` | `"single" \| "multiple"` | | Obbligatorio. `"single"` permette al massimo un elemento aperto; `"multiple"` ne permette qualsiasi numero. |
+| `collapsible` | `boolean` | `false` | Solo `type="single"` — se l'elemento aperto può essere chiuso ricliccandolo, lasciandone nessuno aperto. |
+| `value` / `defaultValue` | `string` (single) o `string[]` (multiple) | | Elemento/i aperto/i controllato/i o non controllato/i — il tipo deve corrispondere a `type`. |
+| `onValueChange` | `(value: string \| string[]) => void` | | |
+| `disabled` | `boolean` | `false` | Disabilita ogni elemento dell'accordion. |
+
+**AccordionItem**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Obbligatorio — identificatore univoco usato da `value`/`onValueChange` sopra. |
+| `disabled` | `boolean` | Disabilita solo questo elemento. |
+
+**AccordionTrigger** — ogni prop nativa di `<button>`; nessuna prop personalizzata. Renderizza automaticamente l'indicatore a chevron come parte del proprio markup.
+
+**AccordionContent** — ogni prop nativa di `<div>`; nessuna prop personalizzata. Anima l'altezza apertura/chiusura tramite custom property CSS impostate da Radix (`--radix-accordion-content-height`), non JavaScript.
+
+### Accessibilità
+
+Ogni trigger è un vero `<button>` con `aria-expanded`; il contenuto è `role="region"` collegato tramite `aria-labelledby`. <kbd>Tab</kbd> si sposta tra i trigger, <kbd>Spazio</kbd>/<kbd>Invio</kbd> attiva/disattiva quello a fuoco — nessuna gestione da tastiera personalizzata necessaria.

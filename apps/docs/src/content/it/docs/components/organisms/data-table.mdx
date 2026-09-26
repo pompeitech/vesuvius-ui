@@ -1,0 +1,85 @@
+---
+title: Data Table
+---
+
+# Data Table
+
+Un wrapper per [TanStack Table](https://tanstack.com/table) — ordinamento, filtri per colonna, ricerca globale, visibilità delle colonne, blocco (pinning), trascinamento per riordinare, trascinamento per ridimensionare, selezione righe e paginazione, tutto controllabile o lasciato non controllato. `columns` usa la forma `ColumnDef` propria di TanStack.
+
+```tsx
+import {
+  DataTable,
+  DataTableColumnHeader,
+  type ColumnDef,
+} from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const columns: ColumnDef<Order>[] = [
+  {
+    accessorKey: "id",
+    header: ({ header }) => <DataTableColumnHeader header={header} title="Order" />,
+  },
+  {
+    accessorKey: "status",
+    header: ({ header }) => <DataTableColumnHeader header={header} title="Status" />,
+    cell: ({ getValue }) => <Badge variant={statusVariant[getValue()]}>{getValue()}</Badge>,
+  },
+  // ...
+];
+
+<DataTable columns={columns} data={orders} />`} className="w-full items-start">
+  <Demo name="data-table" orderCol="Ordine" customerCol="Cliente" statusCol="Stato" amountCol="Importo" />
+</ComponentPreview>
+
+Clicca un'intestazione di colonna per ordinare — cicla tra ascendente → discendente → non ordinato.
+
+## Costruirci sopra
+
+| Elemento                  | Aggiunge                                                                                                                                                                                                          |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `createSelectionColumn()` | Una colonna checkbox per la selezione delle righe — anteponila a `columns`.                                                                                                                                       |
+| `DataTableToolbar`        | Un input di ricerca globale + un menu di visibilità "Columns", sopra la tabella.                                                                                                                                  |
+| `DataTableFacetedFilter`  | Un filtro multi-select a faccette per una colonna, inserito nella toolbar.                                                                                                                                        |
+| `DataTableColumnHeader`   | Cella di intestazione ordinabile — clicca per ordinare, include l'icona di direzione dell'ordinamento.                                                                                                            |
+| `DataTablePagination`     | Dimensione pagina + controlli precedente/successivo, sotto la tabella.                                                                                                                                            |
+| `useDataTable(props)`     | L'hook che `DataTable` stesso usa — chiamalo direttamente per il pieno controllo sull'istanza `table` (ad es. per guidare tu stesso `DataTableToolbar`/`DataTablePagination` attorno a un layout personalizzato). |
+
+## API
+
+**DataTable**
+
+| Prop                                | Tipo                                          | Descrizione                                                                                                                                                                                  |
+| ----------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `columns`                           | `ColumnDef<TData>[]`                          | Obbligatorio — la forma di definizione colonna propria di TanStack.                                                                                                                          |
+| `data`                              | `TData[]`                                     | Obbligatorio.                                                                                                                                                                                |
+| `getRowId`                          | `(row: TData) => string`                      | Identità di riga stabile tra ri-ordinamenti/ri-filtri — senza, TanStack ripiega sull'indice di riga, il che rompe lo stato di selezione/pinning quando l'ordine delle righe cambia.          |
+| `enableRowSelection`                | `boolean`                                     | Necessario insieme a `createSelectionColumn()` perché le checkbox commutino davvero.                                                                                                         |
+| `enableColumnPinning`               | `boolean`                                     |                                                                                                                                                                                              |
+| `enableColumnResizing`              | `boolean`                                     | Attiva la maniglia di trascinamento-per-ridimensionare sui bordi delle colonne.                                                                                                              |
+| `manualSorting` / `manualFiltering` | `boolean`                                     | Da impostare quando ordinamento/filtro avvengono lato server — TanStack allora smette di ordinare/filtrare `data` da solo e traccia solo lo stato richiesto perché tu agisca di conseguenza. |
+| `enableExport`                      | `boolean`                                     | Aggiunge l'azione Export CSV per le righe visibili e filtrate.                                                                                                                               |
+| `exportFilename`                    | `string`                                      | Nome del file CSV scaricato. Default `export.csv`.                                                                                                                                           |
+| `exportSelectedOnly`                | `boolean`                                     | Esporta solo le righe selezionate invece di tutte quelle filtrate.                                                                                                                           |
+| `bulkActions`                       | `ReactNode \| ({ rows, table }) => ReactNode` | Azioni mostrate quando una o più righe sono selezionate.                                                                                                                                     |
+
+Ognuno dei seguenti segue la stessa forma a coppia non controllata/controllata — una prop `default*` per il valore iniziale, più `*`/`on*Change` per una versione pienamente controllata (stesso pattern di `defaultValue`/`value`/`onValueChange` di [`Select`](/docs/components/molecules/select)):
+
+La tabella occupa sempre tutta la larghezza del contenitore. Se la somma delle larghezze delle colonne supera lo spazio disponibile, scorre orizzontalmente solo l'area della tabella senza tagliare il layout della pagina.
+
+| Stato              | Prop non controllata      | Prop controllata   | Gestore di cambiamento     |
+| ------------------ | ------------------------- | ------------------ | -------------------------- |
+| Ordinamento        | `defaultSorting`          | `sorting`          | `onSortingChange`          |
+| Filtri colonna     | `defaultColumnFilters`    | `columnFilters`    | `onColumnFiltersChange`    |
+| Ricerca globale    | `defaultGlobalFilter`     | `globalFilter`     | `onGlobalFilterChange`     |
+| Visibilità colonne | `defaultColumnVisibility` | `columnVisibility` | `onColumnVisibilityChange` |
+| Blocco colonne     | `defaultColumnPinning`    | `columnPinning`    | `onColumnPinningChange`    |
+| Ordine colonne     | `defaultColumnOrder`      | `columnOrder`      | `onColumnOrderChange`      |
+| Dimensione colonne | `defaultColumnSizing`     | `columnSizing`     | `onColumnSizingChange`     |
+| Selezione righe    | `defaultRowSelection`     | `rowSelection`     | `onRowSelectionChange`     |
+| Paginazione        | `defaultPagination`       | `pagination`       | `onPaginationChange`       |
+
+### Accessibilità
+
+Renderizza sotto un vero `<table>` (stessa semantica di [`Table`](/docs/components/molecules/table)). La maniglia di ridimensionamento su ogni bordo di colonna è un vero elemento `role="slider"` con `aria-valuenow`/`aria-valuemin`/`aria-valuemax` e un `aria-label` descrittivo — il ridimensionamento delle colonne non è solo-puntatore, a differenza del trascinamento-per-riordinare, che al momento non ha un equivalente da tastiera; l'ordine delle colonne è comunque solo stato, non l'unico modo per raggiungere i dati di una colonna, quindi un ordine fisso resta pienamente utilizzabile.

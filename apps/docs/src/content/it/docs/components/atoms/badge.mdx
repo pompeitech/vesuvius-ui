@@ -1,0 +1,70 @@
+---
+title: Badge
+---
+
+# Badge
+
+Una piccola pillola di stato/etichetta. Renderizza uno `<span>`, o con `asChild`, qualsiasi singolo figlio tu passi.
+
+```tsx
+import { Badge } from "@pompeitech/vesuvius-ui";
+```
+
+## Varianti
+
+<ComponentPreview code={`<Badge variant="default">Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="highlight">Highlight</Badge>
+<Badge variant="outline">Outline</Badge>`}>
+  <div className="flex flex-wrap items-center justify-center gap-2">
+    <Badge variant="default">Default</Badge>
+    <Badge variant="secondary">Secondary</Badge>
+    <Badge variant="destructive">Destructive</Badge>
+    <Badge variant="success">Success</Badge>
+    <Badge variant="warning">Warning</Badge>
+    <Badge variant="info">Info</Badge>
+    <Badge variant="highlight">Highlight</Badge>
+    <Badge variant="outline">Outline</Badge>
+  </div>
+</ComponentPreview>
+
+## Con un'icona
+
+Qualsiasi figlio `<svg>` (incluse le icone Lucide) viene dimensionato automaticamente a `size-3`:
+
+<ComponentPreview code={`<Badge variant="success">
+  <CheckIcon />
+  Verified
+</Badge>`}>
+  <Badge variant="success">
+    <CheckIcon />
+    Verified
+  </Badge>
+</ComponentPreview>
+
+## Come link
+
+`asChild` renderizza lo stile del badge su un singolo elemento figlio invece che su uno `<span>` — gli stati hover si adattano automaticamente (`[a&]:hover:...` nelle classi di variante si applica solo quando l'elemento renderizzato è un `<a>`):
+
+<ComponentPreview code={`<Badge asChild variant="outline">
+  <a href="#">v2.4.0</a>
+</Badge>`}>
+  <Badge asChild variant="outline">
+    <a href="#">v2.4.0</a>
+  </Badge>
+</ComponentPreview>
+
+## API
+
+**Badge**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "success" \| "warning" \| "info" \| "highlight" \| "outline"` | `"default"` | Stile visivo. |
+| `asChild` | `boolean` | `false` | Renderizza come il singolo elemento figlio invece che come `<span>`. |
+
+Più ogni prop nativa di `<span>` (o qualsiasi elemento sia il figlio di `asChild`).

@@ -1,0 +1,50 @@
+---
+title: Sparkline
+---
+
+# Sparkline
+
+Una minuscola linea di tendenza inline — SVG puro (min/max scalati automaticamente, nessun asse/tacca/tooltip), non una composizione [`Charts`](/docs/components/organisms/charts): a questa dimensione, i meccanismi di responsive-container/tooltip di Recharts sono puro overhead per "la linea sale o scende." Non renderizza nulla per meno di 2 punti. Si inserisce direttamente nella prop `trend` di `StatCard` o in `ChartCard`.
+
+```tsx
+import { Sparkline } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} />`}>
+  <div className="w-32 text-primary">
+    <Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} />
+  </div>
+</ComponentPreview>
+
+## Riempita
+
+<ComponentPreview code={`<Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} filled />`}>
+  <div className="w-32 text-success-emphasis">
+    <Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} filled />
+  </div>
+</ComponentPreview>
+
+## In discesa
+
+<ComponentPreview code={`<Sparkline data={[31, 27, 29, 22, 20, 18, 15, 12]} />`}>
+  <div className="w-32 text-destructive">
+    <Sparkline data={[31, 27, 29, 22, 20, 18, 15, 12]} />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Sparkline**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `data` | `number[]` | | Obbligatorio. Non renderizza nulla per meno di 2 punti. |
+| `width` / `height` | `number` | `100` / `32` | Dimensioni del viewport SVG — l'elemento stesso si ridimensiona comunque al proprio contenitore tramite `viewBox`, quindi larghezza/altezza in pixel influiscono principalmente sul rapporto d'aspetto. |
+| `color` | `string` | `"currentColor"` | Imposta `text-*` su un wrapper (come in ogni esempio sopra) per tematizzarlo, invece di passare un valore colore letterale. |
+| `filled` | `boolean` | `false` | Aggiunge un morbido riempimento a gradiente sotto la linea. |
+
+### Accessibilità
+
+SVG puramente decorativo senza un proprio testo alternativo — quando la tendenza che mostra trasporta un'informazione non disponibile altrove (non solo un accento visivo accanto a un numero che già indica la variazione), dai al suo wrapper un `aria-label` che riassuma la tendenza, oppure assicurati che il testo circostante (come il `changePct` di `StatCard`) la copra già.

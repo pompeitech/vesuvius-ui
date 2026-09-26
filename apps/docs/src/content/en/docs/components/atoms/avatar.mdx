@@ -1,0 +1,96 @@
+---
+title: Avatar
+---
+
+# Avatar
+
+A Radix `Avatar.Root` + `Avatar.Image` + `Avatar.Fallback` — shows the image once it loads, the fallback (initials, an icon, ...) until then or if it fails. For a "just give me a name" avatar with automatic initials, see UserAvatar instead.
+
+```tsx
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Avatar>
+  <AvatarImage src="https://github.com/pompeitech.png" alt="@pompeitech" />
+  <AvatarFallback>PT</AvatarFallback>
+</Avatar>`}>
+  <Avatar>
+    <AvatarImage src="https://github.com/pompeitech.png" alt="@pompeitech" />
+    <AvatarFallback>PT</AvatarFallback>
+  </Avatar>
+</ComponentPreview>
+
+## Group
+
+<ComponentPreview code={`<AvatarGroup>
+  <Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>CD</AvatarFallback></Avatar>
+  <Avatar><AvatarFallback>EF</AvatarFallback></Avatar>
+</AvatarGroup>`}>
+  <AvatarGroup>
+    <Avatar><AvatarFallback>AB</AvatarFallback></Avatar>
+    <Avatar><AvatarFallback>CD</AvatarFallback></Avatar>
+    <Avatar><AvatarFallback>EF</AvatarFallback></Avatar>
+  </AvatarGroup>
+</ComponentPreview>
+
+For an overlapping stack with automatic "+N" overflow, see AvatarGroup.
+
+## Sizes and shape
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Avatar size="sm"><AvatarFallback>SM</AvatarFallback></Avatar>
+  <Avatar size="default"><AvatarFallback>MD</AvatarFallback></Avatar>
+  <Avatar size="lg"><AvatarFallback>LG</AvatarFallback></Avatar>
+  <Avatar size="xl"><AvatarFallback>XL</AvatarFallback></Avatar>
+  <Avatar shape="square"><AvatarFallback>SQ</AvatarFallback></Avatar>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Avatar size="sm"><AvatarFallback>SM</AvatarFallback></Avatar>
+    <Avatar size="default"><AvatarFallback>MD</AvatarFallback></Avatar>
+    <Avatar size="lg"><AvatarFallback>LG</AvatarFallback></Avatar>
+    <Avatar size="xl"><AvatarFallback>XL</AvatarFallback></Avatar>
+    <Avatar shape="square"><AvatarFallback>SQ</AvatarFallback></Avatar>
+  </div>
+</ComponentPreview>
+
+## Broken image → fallback
+
+`AvatarImage` renders nothing while loading or on error — `AvatarFallback` fills that gap automatically, no `onError` handling needed on your end:
+
+<ComponentPreview code={`<Avatar>
+  <AvatarImage src="https://broken-url.invalid/none.png" alt="Jane Doe" />
+  <AvatarFallback>JD</AvatarFallback>
+</Avatar>`}>
+  <Avatar>
+    <AvatarImage src="https://broken-url.invalid/none.png" alt="Jane Doe" />
+    <AvatarFallback>JD</AvatarFallback>
+  </Avatar>
+</ComponentPreview>
+
+## API
+
+**Avatar**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `shape` | `"circle" \| "square"` | `"circle"` | |
+| `size` | `"sm" \| "default" \| "lg" \| "xl"` | `"default"` | `sm`=24px, `default`=32px, `lg`=40px, `xl`=56px. |
+
+Plus every prop of Radix's `Avatar.Root` (which itself forwards every native `<span>` prop).
+
+**AvatarImage** — every native `<img>` prop, including `onLoadingStatusChange`, called with `"idle" | "loading" | "loaded" | "error"` if you need to react to the load state yourself.
+
+**AvatarFallback**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delayMs` | `number` | | Wait this long before showing, to avoid a flash while a fast-loading image is still pending. |
+
+Plus every native `<span>` prop.
+
+### Accessibility
+
+`AvatarImage`'s `alt` should be the person or entity's name, not a generic "avatar" — screen readers announce it exactly as a normal `<img alt>`. `AvatarFallback`'s initials-only content (no `alt` of its own) means it should visually convey the same identity `alt` would have.

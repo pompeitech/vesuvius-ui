@@ -1,0 +1,62 @@
+---
+title: Date Range Picker
+---
+
+# Date Range Picker
+
+Un selettore "Da — a": un pulsante trigger che mostra l'intervallo formattato, apre un [`Popover`](/docs/components/molecules/popover) con un [`Calendar`](/docs/components/organisms/calendar) a due mesi in modalità intervallo.
+
+```tsx
+import { DateRangePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateRangePicker />`}>
+  <DateRangePicker />
+</ComponentPreview>
+
+## Con un intervallo predefinito
+
+<ComponentPreview code={`<DateRangePicker
+  defaultValue={{
+    from: new Date(new Date().setDate(new Date().getDate() - 7)),
+    to: new Date(),
+  }}
+/>`}>
+  <DateRangePicker
+    defaultValue={{
+      from: new Date(new Date().setDate(new Date().getDate() - 7)),
+      to: new Date(),
+    }}
+  />
+</ComponentPreview>
+
+## Un solo mese
+
+<ComponentPreview code={`<DateRangePicker numberOfMonths={1} />`}>
+  <DateRangePicker numberOfMonths={1} />
+</ComponentPreview>
+
+**Nota:** il primo click imposta solo la data di inizio e mantiene il popover aperto; il secondo click completa l'intervallo, ma il popover resta aperto finché non premi il pulsante di conferma. (La selezione a intervallo nativa di react-day-picker risolverebbe di default un singolo click direttamente in un intervallo di un giorno — `DateRangePicker` passa internamente `min={1}` apposta per evitarlo.)
+
+## API
+
+**DateRangePicker**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `{ from?: Date; to?: Date }` | | Intervallo selezionato, controllato o non controllato. |
+| `onChange` | `(range: DateRange \| undefined) => void` | | |
+| `placeholder` | `string` | `"Pick a date range"` | Mostrato sul trigger quando nulla è selezionato. |
+| `dateFormat` | `string` | `"LLL d, y"` | Una stringa di formato date-fns, applicata a ciascun estremo dell'intervallo sul trigger. |
+| `numberOfMonths` | `number` | `2` | |
+| `disabled` | `boolean` | `false` | |
+| `fromYear` / `toYear` | `number` | | Limiti per il dropdown dell'anno. |
+| `confirmLabel` | `string` | `"Apply"` | Testo del pulsante che conferma l'intervallo selezionato. |
+
+Più ogni prop nativa del pulsante trigger sottostante.
+
+### Accessibilità
+
+Stesso modello da tastiera della modalità intervallo di [`Calendar`](/docs/components/organisms/calendar) — le frecce spostano il giorno a fuoco, <kbd>Invio</kbd>/<kbd>Spazio</kbd> lo conferma come inizio o fine dell'intervallo. La selezione e `onChange` vengono confermati solo dopo l'attivazione del pulsante di conferma.

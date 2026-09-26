@@ -1,0 +1,88 @@
+---
+title: Accordion
+---
+
+# Accordion
+
+A Radix `Accordion` — expandable/collapsible sections, one open at a time (`type="single"`) or several (`type="multiple"`).
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Accordion type="single" collapsible className="w-96">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Is it styled?</AccordionTrigger>
+    <AccordionContent>Yes. It comes with default styles that match the design system.</AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion type="single" collapsible className="w-96">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>Is it accessible?</AccordionTrigger>
+      <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Is it styled?</AccordionTrigger>
+      <AccordionContent>Yes. It comes with default styles that match the design system.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+## Multiple open at once
+
+`type="multiple"` drops the single-open constraint — any number of items can be expanded together, and there's no `collapsible` prop to set (it only applies to `type="single"`):
+
+<ComponentPreview code={`<Accordion type="multiple" className="w-96">
+  <AccordionItem value="item-1">
+    <AccordionTrigger>First section</AccordionTrigger>
+    <AccordionContent>Content of the first section.</AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="item-2">
+    <AccordionTrigger>Second section</AccordionTrigger>
+    <AccordionContent>Content of the second section.</AccordionContent>
+  </AccordionItem>
+</Accordion>`}>
+  <Accordion type="multiple" className="w-96">
+    <AccordionItem value="item-1">
+      <AccordionTrigger>First section</AccordionTrigger>
+      <AccordionContent>Content of the first section.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="item-2">
+      <AccordionTrigger>Second section</AccordionTrigger>
+      <AccordionContent>Content of the second section.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
+
+## API
+
+**Accordion**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `type` | `"single" \| "multiple"` | | Required. `"single"` allows at most one open item; `"multiple"` allows any number. |
+| `collapsible` | `boolean` | `false` | `type="single"` only — whether the open item can be closed by clicking it again, leaving none open. |
+| `value` / `defaultValue` | `string` (single) or `string[]` (multiple) | | Controlled/uncontrolled open item(s) — the type must match `type`. |
+| `onValueChange` | `(value: string \| string[]) => void` | | |
+| `disabled` | `boolean` | `false` | Disables every item in the accordion. |
+
+**AccordionItem**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | Required — unique identifier used by `value`/`onValueChange` above. |
+| `disabled` | `boolean` | Disables just this one item. |
+
+**AccordionTrigger** — every native `<button>` prop; no custom props. Renders the chevron indicator automatically as part of its own markup.
+
+**AccordionContent** — every native `<div>` prop; no custom props. Animates open/closed height via CSS custom properties Radix sets (`--radix-accordion-content-height`), not JavaScript.
+
+### Accessibility
+
+Each trigger is a real `<button>` with `aria-expanded`; content is `role="region"` linked via `aria-labelledby`. <kbd>Tab</kbd> moves between triggers, <kbd>Space</kbd>/<kbd>Enter</kbd> toggles the focused one — no custom keyboard handling needed.

@@ -1,0 +1,43 @@
+---
+title: Date Time Picker
+---
+
+# Date Time Picker
+
+Modellato sul `DateTimePicker` di MUI X: un trigger a campo apre un popover con un Calendar a sinistra e colonne scorrevoli Ora/Minuto/(Secondo)/AM-PM a destra, footer Annulla/OK. Le selezioni vengono messe in scena in una bozza locale e confermate (`onChange`) solo su OK — Annulla le scarta.
+
+```tsx
+import { DateTimePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateTimePicker label="Basic date time picker" defaultValue={new Date(2026, 8, 12, 17, 20)} />`}>
+  <DateTimePicker label="Selettore data e ora di base" defaultValue={new Date(2026, 8, 12, 17, 20)} />
+</ComponentPreview>
+
+## 24 ore, con i secondi
+
+<ComponentPreview code={`<DateTimePicker label="Date & time (24h)" hourFormat="24" showSeconds defaultValue={new Date(2026, 8, 12, 17, 20, 45)} />`}>
+  <DateTimePicker label="Data e ora (24h)" hourFormat="24" showSeconds defaultValue={new Date(2026, 8, 12, 17, 20, 45)} />
+</ComponentPreview>
+
+## API
+
+**DateTimePicker**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `Date` | | Data+ora confermata, controllata o non controllata. |
+| `onChange` | `(date: Date \| undefined) => void` | | Chiamata solo dopo OK, non a ogni modifica della bozza dentro il popover aperto. |
+| `label` | `string` | | Etichetta fluttuante sul campo. |
+| `hourFormat` | `"12" \| "24"` | `"12"` | |
+| `minuteStep` | `number` | `5` | Granularità della colonna dei minuti. |
+| `showSeconds` | `boolean` | `false` | Aggiunge una terza colonna scorrevole per i Secondi. |
+| `disabled` | `boolean` | `false` | |
+
+Più ogni prop nativa del pulsante trigger sottostante.
+
+### Accessibilità
+
+Il trigger è un vero pulsante che apre un [`Popover`](/docs/components/molecules/popover) — raggiungibile e operabile da tastiera come qualsiasi pulsante. Dato che le selezioni si mettono in scena in una bozza fino a OK, un utente di screen reader può rivedere l'intera data+ora in sospeso prima di confermare, invece che ogni cambio di colonna annunci un cambiamento di valore definitivo.

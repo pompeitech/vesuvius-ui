@@ -1,0 +1,57 @@
+---
+title: Skeleton
+---
+
+# Skeleton
+
+A pulsing placeholder block for loading states — just a styled `<div>`, sized via `className`.
+
+```tsx
+import { Skeleton } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="flex items-center gap-4">
+  <Skeleton className="size-12 rounded-full" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-40" />
+    <Skeleton className="h-4 w-24" />
+  </div>
+</div>`}>
+  <div className="flex items-center gap-4">
+    <Skeleton className="size-12 rounded-full" />
+    <div className="space-y-2">
+      <Skeleton className="h-4 w-40" />
+      <Skeleton className="h-4 w-24" />
+    </div>
+  </div>
+</ComponentPreview>
+
+## A card skeleton
+
+<ComponentPreview code={`<div className="w-72 space-y-3">
+  <Skeleton className="h-32 w-full rounded-xl" />
+  <Skeleton className="h-4 w-3/4" />
+  <Skeleton className="h-4 w-1/2" />
+</div>`}>
+  <div className="w-72 space-y-3">
+    <Skeleton className="h-32 w-full rounded-xl" />
+    <Skeleton className="h-4 w-3/4" />
+    <Skeleton className="h-4 w-1/2" />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Skeleton**
+
+Every native `<div>` prop — shape and size come entirely from `className` (a circle avatar placeholder is `size-12 rounded-full`, a text line is `h-4 w-40`, and so on). No `variant`/`shape` prop, by design, since the shapes needed are unbounded.
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `className` | `string` | Every visual property — size, radius, spacing — is expressed here rather than through dedicated props. |
+
+### Accessibility
+
+Purely visual — it has no ARIA role of its own. Wrap the region that's loading in `aria-busy="true"` on its container (and remove it once real content replaces the skeletons) if you want assistive tech to know a loading state is in progress, rather than silently seeing empty placeholder blocks.

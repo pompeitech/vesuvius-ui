@@ -1,0 +1,78 @@
+---
+title: Table
+---
+
+# Table
+
+Un semplice `<table>` stilizzato — markup statico, nessuna logica di ordinamento/filtro/paginazione. Per quello, vedi `DataTable`.
+
+```tsx
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell, TableCaption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Table>
+  <TableCaption>A list of your recent invoices.</TableCaption>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Invoice</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell className="font-medium">INV001</TableCell>
+      <TableCell><Badge variant="success">Paid</Badge></TableCell>
+      <TableCell className="text-right">$250.00</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell className="font-medium">INV002</TableCell>
+      <TableCell><Badge variant="warning">Pending</Badge></TableCell>
+      <TableCell className="text-right">$150.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`} className="w-full">
+  <Table className="w-[500px]">
+    <TableCaption>Un elenco delle tue fatture recenti.</TableCaption>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Fattura</TableHead>
+        <TableHead>Stato</TableHead>
+        <TableHead className="text-right">Importo</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell className="font-medium">INV001</TableCell>
+        <TableCell><Badge variant="success">Pagata</Badge></TableCell>
+        <TableCell className="text-right">250,00 €</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell className="font-medium">INV002</TableCell>
+        <TableCell><Badge variant="warning">In sospeso</Badge></TableCell>
+        <TableCell className="text-right">150,00 €</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+</ComponentPreview>
+
+## API
+
+| Componente | Renderizza | Note |
+| --- | --- | --- |
+| `Table` | `<table>` | Si avvolge automaticamente in un contenitore di scroll `overflow-x-auto` — nessun wrapper manuale necessario per una tabella più larga della sua colonna. |
+| `TableHeader` | `<thead>` | |
+| `TableBody` | `<tbody>` | |
+| `TableFooter` | `<tfoot>` | Stilizzato con uno sfondo tenue per distinguerlo da `TableBody`. |
+| `TableRow` | `<tr>` | Riceve automaticamente uno sfondo hover e un bordo inferiore. |
+| `TableHead` | `<th>` | |
+| `TableCell` | `<td>` | |
+| `TableCaption` | `<caption>` | Renderizzato sotto la tabella per default, testo attenuato. |
+
+Tutti accettano ogni prop nativa del loro elemento sottostante, più `className`.
+
+### Accessibilità
+
+Un vero `<table>` semantico — `TableHead`/`TableCaption` danno gratuitamente agli screen reader la struttura di cui hanno bisogno. Usa `TableCaption` (invece di un `<h2>`/`<p>` adiacente) per descrivere lo scopo della tabella, dato che è associato programmaticamente alla tabella stessa.

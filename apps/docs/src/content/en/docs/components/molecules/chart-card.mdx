@@ -1,0 +1,43 @@
+---
+title: Chart Card
+---
+
+# Chart Card
+
+The "headline number above a chart" pattern used across admin dashboards — boxed icon + label, a large bold figure, a trend badge, a caption, then any chart underneath. Pairs with the chart family or Sparkline as the `children`.
+
+```tsx
+import { ChartCard } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<ChartCard
+  icon={DollarSignIcon}
+  label="Total Revenue"
+  value="$276,000.00"
+  changePct={12}
+  changeLabel="vs last month"
+  caption="Total Revenue (Last 6 Months)"
+>
+  <Sparkline data={[41000, 36000, 52000, 45000, 58000, 41000]} filled />
+</ChartCard>`}>
+  <Demo name="chart-card-revenue" />
+</ComponentPreview>
+
+## API
+
+**ChartCard**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `icon` | `LucideIcon` | | Optional boxed icon next to the label. |
+| `label` | `string` | | |
+| `value` | `ReactNode` | | The headline figure. |
+| `changePct` | `number` | | Renders a trend badge — green+up for positive, red+down for negative. |
+| `changeLabel` | `string` | | Text after the percentage, e.g. `"vs last month"`. |
+| `caption` | `ReactNode` | | Small muted line under the value. |
+| `action` | `ReactNode` | | Top-right slot — a legend, a period switcher. |
+| `children` | `ReactNode` | | The chart itself — any chart component ([`Sparkline`](/docs/components/organisms/sparkline), [`Charts`](/docs/components/organisms/charts)) sized to fill its container. |
+
+Plus every native `<div>` prop on the root.

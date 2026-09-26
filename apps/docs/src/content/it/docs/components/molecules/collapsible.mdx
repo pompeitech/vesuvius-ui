@@ -1,0 +1,47 @@
+---
+title: Collapsible
+---
+
+# Collapsible
+
+Un `Collapsible` di Radix — una singola sezione espandibile/comprimibile (per un insieme di sezioni mutuamente esclusive, vedi [`Accordion`](/docs/components/molecules/accordion)).
+
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Collapsible open={open} onOpenChange={setOpen} className="w-72 space-y-2">
+  <div className="flex items-center justify-between gap-4 px-1">
+    <span className="text-sm font-semibold">Starred repos</span>
+    <CollapsibleTrigger asChild>
+      <Button variant="ghost" size="icon" className="size-8"><ChevronsUpDown className="size-4" /></Button>
+    </CollapsibleTrigger>
+  </div>
+  <div className="rounded-md border px-4 py-2 text-sm shadow-xs">@radix-ui/primitives</div>
+  <CollapsibleContent className="space-y-2">
+    <div className="rounded-md border px-4 py-2 text-sm shadow-xs">@tanstack/react-table</div>
+  </CollapsibleContent>
+</Collapsible>`}>
+  <Demo name="collapsible-starred-repos" title="Repository preferiti" />
+</ComponentPreview>
+
+## API
+
+**Collapsible**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `defaultOpen` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+
+**CollapsibleTrigger** — ogni prop nativa di `<button>`, più `asChild` (`boolean`, default `false`) per renderizzare su un singolo figlio invece che su un `<button>`.
+
+**CollapsibleContent** — ogni prop nativa di `<div>`. Anima l'altezza apertura/chiusura tramite custom property CSS impostate da Radix (`--radix-collapsible-content-height`), non JavaScript. Resta montato (nascosto) dopo la chiusura per default a meno che `forceMount` non venga usato altrove nella tua composizione.
+
+### Accessibilità
+
+Il trigger è un vero `<button>` con `aria-expanded`, e il contenuto è collegato ad esso tramite `aria-controls` — nessuna gestione da tastiera personalizzata necessaria, <kbd>Tab</kbd> poi <kbd>Spazio</kbd>/<kbd>Invio</kbd> lo aziona come qualsiasi pulsante.

@@ -1,0 +1,90 @@
+---
+title: Command
+---
+
+# Command
+
+Una palette dei comandi basata su [`cmdk`](https://cmdk.paco.me/) — elenco di azioni filtrabile in modo fuzzy. La base per `ThemePalettePicker` e per il pattern globale di ricerca command-K.
+
+```tsx
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator, CommandShortcut } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Command className="w-96 rounded-lg border shadow-md">
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem><Calendar />Calendar</CommandItem>
+      <CommandItem><Smile />Search Emoji</CommandItem>
+      <CommandItem><Calculator />Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>
+        <User />Profile
+        <CommandShortcut>⌘P</CommandShortcut>
+      </CommandItem>
+      <CommandItem>
+        <CreditCard />Billing
+        <CommandShortcut>⌘B</CommandShortcut>
+      </CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>`}>
+  <Demo
+    name="command-palette"
+    searchPlaceholder="Digita un comando o cerca..."
+    emptyText="Nessun risultato trovato."
+    suggestionsLabel="Suggerimenti"
+    settingsLabel="Impostazioni"
+    calendarLabel="Calendario"
+    emojiLabel="Cerca Emoji"
+    calculatorLabel="Calcolatrice"
+    profileLabel="Profilo"
+    billingLabel="Fatturazione"
+  />
+</ComponentPreview>
+
+## API
+
+**Command**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `filter` | `(value: string, search: string, keywords?: string[]) => number` | il matcher fuzzy integrato di `cmdk` | Sovrascrivilo per personalizzare il ranking, o restituisci un `1`/`0` fisso per disabilitare del tutto il matching fuzzy. |
+| `shouldFilter` | `boolean` | `true` | Imposta `false` se filtri tu stesso l'elenco degli elementi (ad es. ricerca lato server) invece di lasciare che lo faccia `cmdk` lato client. |
+| `value` / `onValueChange` | `string` / `(value: string) => void` | | Elemento attualmente evidenziato, controllato o non controllato. |
+| `loop` | `boolean` | `false` | Se la navigazione con le frecce torna all'inizio/fine della lista. |
+
+**CommandInput** — ogni prop nativa di `<input>`; collegato automaticamente per filtrare la lista mentre l'utente digita.
+
+**CommandList** — ogni prop nativa di `<div>`; il viewport scrollabile che contiene gruppi/elementi.
+
+**CommandEmpty** — ogni prop nativa di `<div>`; renderizzato solo quando nessun elemento corrisponde alla ricerca corrente.
+
+**CommandGroup**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `heading` | `ReactNode` | Etichetta renderizzata sopra gli elementi del gruppo. |
+
+**CommandItem**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `value` | `string` | Ciò che viene confrontato con la query di ricerca — di default il contenuto testuale dell'elemento se omesso. |
+| `onSelect` | `(value: string) => void` | Chiamata al click o su <kbd>Invio</kbd> mentre è evidenziato. |
+| `disabled` | `boolean` | Esclude l'elemento dalla navigazione da tastiera e lo filtra fuori dalla selezione. |
+
+**CommandSeparator** — ogni prop nativa di `<div>`; un divisore visivo tra gruppi.
+
+**CommandShortcut** — ogni prop nativa di `<span>`; testo allineato a destra con l'indicazione della scorciatoia (`⌘P`, `⌘B`, ...) dentro un `CommandItem`.
+
+Per una versione apribile da qualsiasi punto dell'app tramite una scorciatoia da tastiera, avvolgi `Command` in un [`Dialog`](/docs/components/molecules/dialog).
+
+### Accessibilità
+
+`cmdk` implementa automaticamente il pattern ARIA combobox/listbox — <kbd>↑</kbd>/<kbd>↓</kbd> spostano l'evidenziazione, <kbd>Invio</kbd> seleziona, digitare filtra in tempo reale, e l'elemento evidenziato viene annunciato agli screen reader tramite `aria-activedescendant`. Nessun collegamento ARIA manuale necessario da parte tua.

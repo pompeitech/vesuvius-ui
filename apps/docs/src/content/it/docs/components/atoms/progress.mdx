@@ -1,0 +1,59 @@
+---
+title: Progress
+---
+
+# Progress
+
+Un `Progress.Root` di Radix — una barra di progresso determinata. `value` viene correttamente inoltrato ad `aria-valuenow`, quindi gli screen reader annunciano un progresso reale, non una barra silenziosa.
+
+```tsx
+import { Progress } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Progress value={60} />`}>
+  <Progress value={60} className="w-72" />
+</ComponentPreview>
+
+## Valori diversi
+
+<ComponentPreview code={`<Progress value={13} />
+<Progress value={40} />
+<Progress value={75} />
+<Progress value={100} />`} className="flex-col items-stretch gap-4">
+  <Progress value={13} className="w-72" />
+  <Progress value={40} className="w-72" />
+  <Progress value={75} className="w-72" />
+  <Progress value={100} className="w-72" />
+</ComponentPreview>
+
+## Animato
+
+`value` è un semplice numero, quindi animarlo è solo stato React su un timer — la transizione di riempimento della barra è CSS, non guidata da alcun loop di animazione interno:
+
+<ComponentPreview code={`const [value, setValue] = useState(13);
+
+useEffect(() => {
+  const timer = setTimeout(() => setValue(66), 500);
+  return () => clearTimeout(timer);
+}, []);
+
+<Progress value={value} />`}>
+  <Demo name="progress-animated" />
+</ComponentPreview>
+
+## API
+
+**Progress**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` | `number \| null` | `0` | Progresso corrente, `0`–`max`. `null` renderizza una traccia vuota dall'aspetto indeterminato e non imposta alcun valore su `aria-valuenow`, secondo la specifica ARIA progressbar. |
+| `max` | `number` | `100` | Il valore che rappresenta il 100% completato. |
+
+Più ogni altra prop nativa di `<div>` sulla radice.
+
+### Accessibilità
+
+Renderizza `role="progressbar"` con `aria-valuenow`/`aria-valuemin`/`aria-valuemax` collegati automaticamente da `value`/`max` — nessun attributo ARIA manuale necessario. Abbinalo a un'etichetta visibile (un heading, o `aria-label`/`aria-labelledby`) che descriva *cosa* sta procedendo; la barra da sola comunica solo *quanto*.

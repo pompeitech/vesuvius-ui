@@ -1,0 +1,30 @@
+---
+title: Empty State
+---
+
+# Empty State
+
+Stato coerente per primo utilizzo, risultati filtrati o liste vuote in pagine, card e tabelle.
+
+<ComponentPreview code={`<EmptyState
+  icon={FileSearchIcon}
+  title="Nessun ordine"
+  description="Gli ordini appariranno qui dopo il primo acquisto."
+  action={<Button size="sm">Crea ordine</Button>}
+/>`}>
+  <Demo name="empty-state-default" title="Nessun ordine" description="Gli ordini appariranno qui dopo il primo acquisto." actionLabel="Crea ordine" />
+</ComponentPreview>
+
+Usa `compact` dentro una card o nel corpo di una tabella quando lo spazio verticale è limitato.
+
+## API
+
+| Prop          | Tipo            | Default | Descrizione                               |
+| ------------- | --------------- | ------- | ----------------------------------------- |
+| `title`       | `string`        | —       | Titolo principale dello stato vuoto.      |
+| `description` | `string`        | —       | Spiegazione di supporto.                  |
+| `icon`        | `ComponentType` | —       | Icona decorativa opzionale.               |
+| `action`      | `ReactNode`     | —       | Azione opzionale, di solito un Button.    |
+| `compact`     | `boolean`       | `false` | Spaziatura ridotta per stati incorporati. |
+
+La radice accetta tutte le props native di `<div>`.

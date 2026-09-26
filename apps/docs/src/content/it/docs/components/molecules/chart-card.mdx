@@ -1,0 +1,49 @@
+---
+title: Chart Card
+---
+
+# Chart Card
+
+Il pattern "numero in evidenza sopra un grafico" usato nelle dashboard di amministrazione — icona in un box + etichetta, una cifra grande in grassetto, un badge di tendenza, una didascalia, poi qualsiasi grafico sotto. Si abbina alla famiglia di grafici o a Sparkline come `children`.
+
+```tsx
+import { ChartCard } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<ChartCard
+  icon={DollarSignIcon}
+  label="Total Revenue"
+  value="$276,000.00"
+  changePct={12}
+  changeLabel="vs last month"
+  caption="Total Revenue (Last 6 Months)"
+>
+  <Sparkline data={[41000, 36000, 52000, 45000, 58000, 41000]} filled />
+</ChartCard>`}>
+  <Demo
+    name="chart-card-revenue"
+    label="Ricavi totali"
+    value="276.000,00 €"
+    changeLabel="rispetto al mese scorso"
+    caption="Ricavi totali (ultimi 6 mesi)"
+  />
+</ComponentPreview>
+
+## API
+
+**ChartCard**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `icon` | `LucideIcon` | | Icona in un box opzionale accanto all'etichetta. |
+| `label` | `string` | | |
+| `value` | `ReactNode` | | La cifra in evidenza. |
+| `changePct` | `number` | | Renderizza un badge di tendenza — verde+su per positivo, rosso+giù per negativo. |
+| `changeLabel` | `string` | | Testo dopo la percentuale, ad es. `"vs last month"`. |
+| `caption` | `ReactNode` | | Piccola riga attenuata sotto il valore. |
+| `action` | `ReactNode` | | Slot in alto a destra — una legenda, un selettore di periodo. |
+| `children` | `ReactNode` | | Il grafico stesso — qualsiasi componente grafico ([`Sparkline`](/docs/components/organisms/sparkline), [`Charts`](/docs/components/organisms/charts)) dimensionato per riempire il proprio contenitore. |
+
+Più ogni prop nativa di `<div>` sulla radice.

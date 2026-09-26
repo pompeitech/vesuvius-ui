@@ -1,0 +1,10 @@
+{
+  "extends": "@pompeitech/config-typescript/base.json",
+  "compilerOptions": {
+    // Consumed from both the browser (apps/admin-kit) and Node (Storybook,
+    // scripts) — DOM adds setTimeout's browser overload used by the
+    // simulated-latency helper below.
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src"]
+}

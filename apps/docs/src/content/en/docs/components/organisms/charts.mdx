@@ -1,0 +1,259 @@
+---
+title: Charts
+---
+
+# Charts
+
+A [Recharts](https://recharts.org/) wrapper — bar/line/area/pie/donut and a radial-progress ring, all from plain tabular data, no manual config. See also `HeatmapGrid`, `SimpleRadarChart`, and [`Sparkline`](/docs/components/organisms/sparkline) for the rest of the chart family.
+
+```tsx
+import { SimpleBarChart, SimpleLineChart, SimpleAreaChart, SimplePieChart, RadialProgressChart } from "@pompeitech/vesuvius-ui";
+```
+
+export const REVENUE_DATA = [
+  { month: "Jan", revenue: 4200, expenses: 2800 },
+  { month: "Feb", revenue: 3800, expenses: 2600 },
+  { month: "Mar", revenue: 5100, expenses: 3100 },
+  { month: "Apr", revenue: 4700, expenses: 2900 },
+  { month: "May", revenue: 6200, expenses: 3400 },
+  { month: "Jun", revenue: 7100, expenses: 3800 },
+];
+
+export const CATEGORY_DATA = [
+  { category: "Electronics", value: 38 },
+  { category: "Clothing", value: 27 },
+  { category: "Home & Garden", value: 21 },
+  { category: "Sports", value: 14 },
+];
+
+## Bar
+
+A single metric is the common case — pass one key in `categories`:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue"]} />
+  </div>
+</ComponentPreview>
+
+### Bar — multi-series
+
+More than one key in `categories` renders one bar per series, grouped side by side per `index` value:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue", "expenses"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} />
+  </div>
+</ComponentPreview>
+
+### Bar — stacked
+
+Same multi-series data, `stacked` — each `index` value now gets one bar, segments stacked instead of grouped:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue", "expenses"]} stacked />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} stacked />
+  </div>
+</ComponentPreview>
+
+## Line
+
+<ComponentPreview code={`<SimpleLineChart data={data} index="month" categories={["revenue", "expenses"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleLineChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} />
+  </div>
+</ComponentPreview>
+
+## Area
+
+Same idea as Bar — a single series first:
+
+<ComponentPreview code={`<SimpleAreaChart data={data} index="month" categories={["revenue"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleAreaChart data={REVENUE_DATA} index="month" categories={["revenue"]} />
+  </div>
+</ComponentPreview>
+
+### Area — stacked
+
+<ComponentPreview code={`<SimpleAreaChart data={data} index="month" categories={["revenue", "expenses"]} stacked />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleAreaChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} stacked />
+  </div>
+</ComponentPreview>
+
+### Area — minimal (no grid, no axes)
+
+For a chart embedded in a small stat card rather than as a standalone figure — drop the chrome entirely and let the shape speak for itself, same idea as [`Sparkline`](/docs/components/organisms/sparkline) but with axis/tooltip machinery still available if you turn it back on:
+
+<ComponentPreview code={`<SimpleAreaChart
+  data={data}
+  index="month"
+  categories={["revenue"]}
+  showGrid={false}
+  showXAxis={false}
+  showYAxis={false}
+  showLegend={false}
+  className="h-24"
+/>`} className="w-full">
+  <div className="h-24 w-full max-w-sm">
+    <SimpleAreaChart
+      data={REVENUE_DATA}
+      index="month"
+      categories={["revenue"]}
+      showGrid={false}
+      showXAxis={false}
+      showYAxis={false}
+      showLegend={false}
+      className="h-24"
+    />
+  </div>
+</ComponentPreview>
+
+## Pie / donut
+
+A full pie (`innerRadius={0}`, the default) first:
+
+<ComponentPreview code={`<SimplePieChart data={data} index="category" category="value" />`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <SimplePieChart data={CATEGORY_DATA} index="category" category="value" />
+  </div>
+</ComponentPreview>
+
+### Pie — donut
+
+Any non-zero `innerRadius` (a pixel number, or a percentage string relative to the outer radius) punches the hole:
+
+<ComponentPreview code={`<SimplePieChart data={data} index="category" category="value" innerRadius="60%" />`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <SimplePieChart data={CATEGORY_DATA} index="category" category="value" innerRadius="60%" />
+  </div>
+</ComponentPreview>
+
+## Custom colors
+
+`colors` overrides the default `--chart-1`…`--chart-5` sequence, one entry per category — any valid CSS color, including another design-system token:
+
+<ComponentPreview code={`<SimpleBarChart
+  data={data}
+  index="month"
+  categories={["revenue", "expenses"]}
+  colors={["var(--success)", "var(--destructive)"]}
+/>`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart
+      data={REVENUE_DATA}
+      index="month"
+      categories={["revenue", "expenses"]}
+      colors={["var(--success)", "var(--destructive)"]}
+    />
+  </div>
+</ComponentPreview>
+
+## Formatted values
+
+`valueFormatter` reformats the y-axis ticks *and* the tooltip's value together — pass it once, both stay in sync automatically:
+
+<ComponentPreview code={`<SimpleLineChart
+  data={data}
+  index="month"
+  categories={["revenue"]}
+  valueFormatter={(v) => \`$\${(v / 1000).toFixed(1)}k\`}
+/>`} className="w-full">
+  <Demo name="chart-formatted-values" />
+</ComponentPreview>
+
+## Radial progress
+
+A multi-segment ring — a "Project Health" widget (on-track / at-risk / blocked breakdown), not a percentage-of-100 gauge.
+
+<ComponentPreview code={`<RadialProgressChart
+  data={[
+    { label: "On Track", value: 2, color: "var(--success)" },
+    { label: "At Risk", value: 1, color: "var(--warning)" },
+    { label: "Blocked", value: 1, color: "var(--destructive)" },
+  ]}
+/>`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <RadialProgressChart
+      data={[
+        { label: "On Track", value: 2, color: "var(--success)" },
+        { label: "At Risk", value: 1, color: "var(--warning)" },
+        { label: "Blocked", value: 1, color: "var(--destructive)" },
+        { label: "Dependency", value: 3, color: "var(--muted-foreground)" },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## Custom compositions
+
+For anything the `Simple*` wrappers don't cover, compose Recharts primitives directly inside `ChartContainer` — it handles the CSS variable → chart color wiring (`config` maps a data key to a `--color-<key>` token) that `ChartTooltip`/`ChartLegend` read from.
+
+```tsx
+import * as Recharts from "recharts";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from "@pompeitech/vesuvius-ui";
+
+const config = {
+  revenue: { label: "Revenue", color: "var(--chart-1)" },
+  expenses: { label: "Expenses", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+
+<ChartContainer config={config} className="h-72">
+  <Recharts.ComposedChart data={data}>
+    <Recharts.CartesianGrid vertical={false} />
+    <Recharts.XAxis dataKey="month" />
+    <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+    <ChartLegend content={<ChartLegendContent />} />
+    <Recharts.Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
+    <Recharts.Line dataKey="revenue" stroke="var(--color-revenue)" strokeWidth={2} dot={false} />
+  </Recharts.ComposedChart>
+</ChartContainer>
+```
+
+## API
+
+**SimpleBarChart / SimpleLineChart / SimpleAreaChart** share this shape:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Required. |
+| `index` | `string` | | Required — key used for the x-axis labels. |
+| `categories` | `string[]` | | Required — keys plotted as series. More than one draws multiple bars/lines/areas. |
+| `colors` | `string[]` | the theme's `--chart-1`…`--chart-5` tokens | One color per category, in order. |
+| `stacked` | `boolean` | `false` | Bar/Area only — stacks series per `index` value instead of grouping them side by side. |
+| `showLegend` | `boolean` | `true` | |
+| `showGrid` | `boolean` | `true` | |
+| `showXAxis` | `boolean` | `true` | |
+| `showYAxis` | `boolean` | `true` | |
+| `valueFormatter` | `(value: number) => string` | | Reformats both the y-axis ticks and the tooltip value together. |
+
+**SimplePieChart**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Required. |
+| `index` | `string` | | Required — key holding each slice's label. |
+| `category` | `string` | | Required — key holding each slice's value (singular, unlike the other charts' `categories`, since a pie has exactly one value series). |
+| `innerRadius` | `number \| string` | `0` | Non-zero punches a donut hole — a pixel number, or a percentage string relative to the outer radius. |
+| `colors` | `string[]` | the theme's `--chart-1`…`--chart-5` tokens | One color per slice, in data order. |
+| `showLegend` | `boolean` | `true` | |
+| `valueFormatter` | `(value: number) => string` | | Reformats the tooltip value. |
+
+**RadialProgressChart**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `data` | `{ label: string; value: number; color: string }[]` | Required — one entry per ring segment; segments are proportional to each other, not to a fixed 100% total, so it's a breakdown widget, not a percentage gauge. |
+
+**ChartContainer** (for custom compositions)
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `config` | `ChartConfig` — `Record<string, { label: string; color: string }>` | Maps each data key to a label and color, exposed to its children as `--color-<key>` CSS custom properties. |
+
+`ChartTooltip`/`ChartLegend` are thin wrappers around Recharts' own [`Tooltip`](/docs/components/molecules/tooltip)/`Legend` that accept `ChartTooltipContent`/`ChartLegendContent` (styled to match the kit) as their `content`.
+
+### Accessibility
+
+Recharts' SVG output has no built-in text alternative — a chart conveys its data visually only. For anything beyond a decorative accent, pair the chart with a [`Table`](/docs/components/molecules/table)/`DataTable` presenting the same values as text, or at minimum wrap it in a container with an `aria-label` summarizing what it shows.

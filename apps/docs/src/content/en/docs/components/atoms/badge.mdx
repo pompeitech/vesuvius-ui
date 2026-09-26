@@ -1,0 +1,71 @@
+---
+title: Badge
+---
+
+# Badge
+
+A small status/label pill. Renders a `<span>`, or with `asChild`, whatever single child you give it.
+
+```tsx
+import { Badge } from "@pompeitech/vesuvius-ui";
+```
+
+## Variants
+
+<ComponentPreview code={`
+<Badge variant="default">Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="success">Success</Badge>
+<Badge variant="warning">Warning</Badge>
+<Badge variant="info">Info</Badge>
+<Badge variant="highlight">Highlight</Badge>
+<Badge variant="outline">Outline</Badge>`}>
+<div className="flex flex-wrap items-center justify-center gap-2">
+  <Badge variant="default">Default</Badge>
+  <Badge variant="secondary">Secondary</Badge>
+  <Badge variant="destructive">Destructive</Badge>
+  <Badge variant="success">Success</Badge>
+  <Badge variant="warning">Warning</Badge>
+  <Badge variant="info">Info</Badge>
+  <Badge variant="highlight">Highlight</Badge>
+  <Badge variant="outline">Outline</Badge>
+</div>
+</ComponentPreview>
+
+## With an icon
+
+Any `<svg>` child (including a Lucide icon) is sized to `size-3` automatically:
+
+<ComponentPreview code={`<Badge variant="success">
+  <CheckIcon />
+  Verified
+</Badge>`}>
+  <Badge variant="success">
+    <CheckIcon />
+    Verified
+  </Badge>
+</ComponentPreview>
+
+## As a link
+
+`asChild` renders the badge's styling on a single child element instead of a `<span>` — hover states adjust automatically (`[a&]:hover:...` in the variant classes only applies when the rendered element is an `<a>`):
+
+<ComponentPreview code={`<Badge asChild variant="outline">
+  <a href="#">v2.4.0</a>
+</Badge>`}>
+  <Badge asChild variant="outline">
+    <a href="#">v2.4.0</a>
+  </Badge>
+</ComponentPreview>
+
+## API
+
+**Badge**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "secondary" \| "destructive" \| "success" \| "warning" \| "info" \| "highlight" \| "outline"` | `"default"` | Visual style. |
+| `asChild` | `boolean` | `false` | Render as the single child element instead of a `<span>`. |
+
+Plus every native `<span>` prop (or whatever element `asChild`'s child is).

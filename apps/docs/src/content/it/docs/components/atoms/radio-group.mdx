@@ -1,0 +1,127 @@
+---
+title: Radio Group
+---
+
+# Radio Group
+
+Una coppia `RadioGroup.Root` + `RadioGroup.Item` di Radix — selezione singola tra un insieme di opzioni.
+
+```tsx
+import { RadioGroup, RadioGroupItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<RadioGroup defaultValue="comfortable">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="default" id="r1" />
+    <Label htmlFor="r1">Default</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="comfortable" id="r2" />
+    <Label htmlFor="r2">Comfortable</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="compact" id="r3" />
+    <Label htmlFor="r3">Compact</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="comfortable">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="default" id="docs-r1-it" />
+      <Label htmlFor="docs-r1-it">Default</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="comfortable" id="docs-r2-it" />
+      <Label htmlFor="docs-r2-it">Comfortable</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="compact" id="docs-r3-it" />
+      <Label htmlFor="docs-r3-it">Compact</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## Disabilitato
+
+Disabilita l'intero gruppo, o un singolo elemento al suo interno:
+
+<ComponentPreview code={`<RadioGroup defaultValue="a">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="a" id="d1" />
+    <Label htmlFor="d1">Available</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="b" id="d2" disabled />
+    <Label htmlFor="d2">Out of stock</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="a">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="a" id="docs-d1-it" />
+      <Label htmlFor="docs-d1-it">Disponibile</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="b" id="docs-d2-it" disabled />
+      <Label htmlFor="docs-d2-it">Esaurito</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## Layout orizzontale
+
+Il layout proprio di `RadioGroup` è solo `grid gap-3` (verticale) — sovrascrivilo con `className` per una riga:
+
+<ComponentPreview code={`<RadioGroup defaultValue="card" className="flex gap-4">
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="card" id="h1" />
+    <Label htmlFor="h1">Card</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="paypal" id="h2" />
+    <Label htmlFor="h2">PayPal</Label>
+  </div>
+  <div className="flex items-center gap-2">
+    <RadioGroupItem value="bank" id="h3" />
+    <Label htmlFor="h3">Bank transfer</Label>
+  </div>
+</RadioGroup>`}>
+  <RadioGroup defaultValue="card" className="flex gap-4">
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="card" id="docs-h1-it" />
+      <Label htmlFor="docs-h1-it">Carta</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="paypal" id="docs-h2-it" />
+      <Label htmlFor="docs-h2-it">PayPal</Label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="bank" id="docs-h3-it" />
+      <Label htmlFor="docs-h3-it">Bonifico bancario</Label>
+    </div>
+  </RadioGroup>
+</ComponentPreview>
+
+## API
+
+**RadioGroup**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` | `string` | | Valore selezionato controllato. |
+| `defaultValue` | `string` | | Valore iniziale, non controllato. |
+| `onValueChange` | `(value: string) => void` | | |
+| `disabled` | `boolean` | `false` | Disabilita ogni elemento del gruppo. |
+| `name` | `string` | | Per l'invio nativo del form senza JS. |
+| `loop` | `boolean` | `true` | Se la navigazione con le frecce torna dall'ultimo elemento al primo. |
+
+**RadioGroupItem**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `value` | `string` | | Obbligatorio — il valore rappresentato da questo elemento. |
+| `disabled` | `boolean` | `false` | Disabilita solo questo elemento. |
+
+### Accessibilità
+
+Le frecce (<kbd>↑</kbd>/<kbd>↓</kbd>/<kbd>←</kbd>/<kbd>→</kbd>) spostano la selezione tra gli elementi e selezionano immediatamente quello appena focalizzato — replicando il comportamento nativo di un gruppo `<input type="radio">`, non una lista che navighi con le frecce e confermi separatamente. Solo un elemento del gruppo è mai nell'ordine di tabulazione alla volta. Abbina ogni elemento a una `Label htmlFor` (come in ogni esempio sopra) — stessa regola di associazione di [`Checkbox`](/docs/components/atoms/checkbox).

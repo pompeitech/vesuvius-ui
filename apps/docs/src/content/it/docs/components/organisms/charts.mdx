@@ -1,0 +1,259 @@
+---
+title: Charts
+---
+
+# Charts
+
+Un wrapper per [Recharts](https://recharts.org/) — barre/linee/aree/torta/donut e un anello a progresso radiale, tutti a partire da semplici dati tabellari, nessuna configurazione manuale. Vedi anche `HeatmapGrid`, `SimpleRadarChart` e [`Sparkline`](/docs/components/organisms/sparkline) per il resto della famiglia di grafici.
+
+```tsx
+import { SimpleBarChart, SimpleLineChart, SimpleAreaChart, SimplePieChart, RadialProgressChart } from "@pompeitech/vesuvius-ui";
+```
+
+export const REVENUE_DATA = [
+  { month: "Jan", revenue: 4200, expenses: 2800 },
+  { month: "Feb", revenue: 3800, expenses: 2600 },
+  { month: "Mar", revenue: 5100, expenses: 3100 },
+  { month: "Apr", revenue: 4700, expenses: 2900 },
+  { month: "May", revenue: 6200, expenses: 3400 },
+  { month: "Jun", revenue: 7100, expenses: 3800 },
+];
+
+export const CATEGORY_DATA = [
+  { category: "Electronics", value: 38 },
+  { category: "Clothing", value: 27 },
+  { category: "Home & Garden", value: 21 },
+  { category: "Sports", value: 14 },
+];
+
+## Barre
+
+Una singola metrica è il caso comune — passa una chiave in `categories`:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue"]} />
+  </div>
+</ComponentPreview>
+
+### Barre — multi-serie
+
+Più di una chiave in `categories` renderizza una barra per serie, raggruppate fianco a fianco per ogni valore di `index`:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue", "expenses"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} />
+  </div>
+</ComponentPreview>
+
+### Barre — impilate
+
+Stessi dati multi-serie, `stacked` — ogni valore di `index` ora ottiene una sola barra, con i segmenti impilati invece che raggruppati:
+
+<ComponentPreview code={`<SimpleBarChart data={data} index="month" categories={["revenue", "expenses"]} stacked />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} stacked />
+  </div>
+</ComponentPreview>
+
+## Linea
+
+<ComponentPreview code={`<SimpleLineChart data={data} index="month" categories={["revenue", "expenses"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleLineChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} />
+  </div>
+</ComponentPreview>
+
+## Area
+
+Stessa idea di Barre — prima una singola serie:
+
+<ComponentPreview code={`<SimpleAreaChart data={data} index="month" categories={["revenue"]} />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleAreaChart data={REVENUE_DATA} index="month" categories={["revenue"]} />
+  </div>
+</ComponentPreview>
+
+### Area — impilata
+
+<ComponentPreview code={`<SimpleAreaChart data={data} index="month" categories={["revenue", "expenses"]} stacked />`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleAreaChart data={REVENUE_DATA} index="month" categories={["revenue", "expenses"]} stacked />
+  </div>
+</ComponentPreview>
+
+### Area — minimale (nessuna griglia, nessun asse)
+
+Per un grafico incorporato in una piccola card statistica invece che come figura autonoma — elimina completamente il chrome e lascia che la forma parli da sé, stessa idea di [`Sparkline`](/docs/components/organisms/sparkline) ma con i meccanismi di asse/tooltip ancora disponibili se li riattivi:
+
+<ComponentPreview code={`<SimpleAreaChart
+  data={data}
+  index="month"
+  categories={["revenue"]}
+  showGrid={false}
+  showXAxis={false}
+  showYAxis={false}
+  showLegend={false}
+  className="h-24"
+/>`} className="w-full">
+  <div className="h-24 w-full max-w-sm">
+    <SimpleAreaChart
+      data={REVENUE_DATA}
+      index="month"
+      categories={["revenue"]}
+      showGrid={false}
+      showXAxis={false}
+      showYAxis={false}
+      showLegend={false}
+      className="h-24"
+    />
+  </div>
+</ComponentPreview>
+
+## Torta / donut
+
+Prima una torta completa (`innerRadius={0}`, il default):
+
+<ComponentPreview code={`<SimplePieChart data={data} index="category" category="value" />`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <SimplePieChart data={CATEGORY_DATA} index="category" category="value" />
+  </div>
+</ComponentPreview>
+
+### Torta — donut
+
+Qualsiasi `innerRadius` diverso da zero (un numero in pixel, o una stringa percentuale relativa al raggio esterno) crea il buco:
+
+<ComponentPreview code={`<SimplePieChart data={data} index="category" category="value" innerRadius="60%" />`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <SimplePieChart data={CATEGORY_DATA} index="category" category="value" innerRadius="60%" />
+  </div>
+</ComponentPreview>
+
+## Colori personalizzati
+
+`colors` sovrascrive la sequenza predefinita `--chart-1`…`--chart-5`, una voce per categoria — qualsiasi colore CSS valido, incluso un altro token del design system:
+
+<ComponentPreview code={`<SimpleBarChart
+  data={data}
+  index="month"
+  categories={["revenue", "expenses"]}
+  colors={["var(--success)", "var(--destructive)"]}
+/>`} className="w-full">
+  <div className="h-72 w-full">
+    <SimpleBarChart
+      data={REVENUE_DATA}
+      index="month"
+      categories={["revenue", "expenses"]}
+      colors={["var(--success)", "var(--destructive)"]}
+    />
+  </div>
+</ComponentPreview>
+
+## Valori formattati
+
+`valueFormatter` riformatta insieme le tacche dell'asse y *e* il valore del tooltip — passalo una volta, entrambi restano sincronizzati automaticamente:
+
+<ComponentPreview code={`<SimpleLineChart
+  data={data}
+  index="month"
+  categories={["revenue"]}
+  valueFormatter={(v) => \`$\${(v / 1000).toFixed(1)}k\`}
+/>`} className="w-full">
+  <Demo name="chart-formatted-values" />
+</ComponentPreview>
+
+## Progresso radiale
+
+Un anello a più segmenti — un widget "Project Health" (ripartizione on-track / at-risk / blocked), non un indicatore percentuale su 100.
+
+<ComponentPreview code={`<RadialProgressChart
+  data={[
+    { label: "On Track", value: 2, color: "var(--success)" },
+    { label: "At Risk", value: 1, color: "var(--warning)" },
+    { label: "Blocked", value: 1, color: "var(--destructive)" },
+  ]}
+/>`} className="w-full">
+  <div className="h-72 w-full max-w-sm">
+    <RadialProgressChart
+      data={[
+        { label: "On Track", value: 2, color: "var(--success)" },
+        { label: "At Risk", value: 1, color: "var(--warning)" },
+        { label: "Blocked", value: 1, color: "var(--destructive)" },
+        { label: "Dependency", value: 3, color: "var(--muted-foreground)" },
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## Composizioni personalizzate
+
+Per qualsiasi cosa che i wrapper `Simple*` non coprano, componi direttamente i primitivi Recharts dentro `ChartContainer` — gestisce il collegamento variabile CSS → colore del grafico (`config` mappa una chiave dati a un token `--color-<key>`) che `ChartTooltip`/`ChartLegend` leggono.
+
+```tsx
+import * as Recharts from "recharts";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, type ChartConfig } from "@pompeitech/vesuvius-ui";
+
+const config = {
+  revenue: { label: "Revenue", color: "var(--chart-1)" },
+  expenses: { label: "Expenses", color: "var(--chart-2)" },
+} satisfies ChartConfig;
+
+<ChartContainer config={config} className="h-72">
+  <Recharts.ComposedChart data={data}>
+    <Recharts.CartesianGrid vertical={false} />
+    <Recharts.XAxis dataKey="month" />
+    <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+    <ChartLegend content={<ChartLegendContent />} />
+    <Recharts.Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
+    <Recharts.Line dataKey="revenue" stroke="var(--color-revenue)" strokeWidth={2} dot={false} />
+  </Recharts.ComposedChart>
+</ChartContainer>
+```
+
+## API
+
+**SimpleBarChart / SimpleLineChart / SimpleAreaChart** condividono questa forma:
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Obbligatorio. |
+| `index` | `string` | | Obbligatorio — chiave usata per le etichette dell'asse x. |
+| `categories` | `string[]` | | Obbligatorio — chiavi tracciate come serie. Più di una disegna più barre/linee/aree. |
+| `colors` | `string[]` | i token `--chart-1`…`--chart-5` del tema | Un colore per categoria, in ordine. |
+| `stacked` | `boolean` | `false` | Solo Bar/Area — impila le serie per ogni valore di `index` invece di raggrupparle fianco a fianco. |
+| `showLegend` | `boolean` | `true` | |
+| `showGrid` | `boolean` | `true` | |
+| `showXAxis` | `boolean` | `true` | |
+| `showYAxis` | `boolean` | `true` | |
+| `valueFormatter` | `(value: number) => string` | | Riformatta insieme le tacche dell'asse y e il valore del tooltip. |
+
+**SimplePieChart**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `data` | `Record<string, any>[]` | | Obbligatorio. |
+| `index` | `string` | | Obbligatorio — chiave che contiene l'etichetta di ogni fetta. |
+| `category` | `string` | | Obbligatorio — chiave che contiene il valore di ogni fetta (singolare, a differenza delle `categories` degli altri grafici, dato che una torta ha esattamente una serie di valori). |
+| `innerRadius` | `number \| string` | `0` | Diverso da zero crea un buco donut — un numero in pixel, o una stringa percentuale relativa al raggio esterno. |
+| `colors` | `string[]` | i token `--chart-1`…`--chart-5` del tema | Un colore per fetta, nell'ordine dei dati. |
+| `showLegend` | `boolean` | `true` | |
+| `valueFormatter` | `(value: number) => string` | | Riformatta il valore del tooltip. |
+
+**RadialProgressChart**
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `data` | `{ label: string; value: number; color: string }[]` | Obbligatorio — una voce per segmento dell'anello; i segmenti sono proporzionali tra loro, non rispetto a un totale fisso del 100%, quindi è un widget di ripartizione, non un indicatore percentuale. |
+
+**ChartContainer** (per composizioni personalizzate)
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `config` | `ChartConfig` — `Record<string, { label: string; color: string }>` | Mappa ogni chiave dati a un'etichetta e un colore, esposti ai figli come custom property CSS `--color-<key>`. |
+
+`ChartTooltip`/`ChartLegend` sono sottili wrapper attorno a [`Tooltip`](/docs/components/molecules/tooltip)/`Legend` di Recharts stessi che accettano `ChartTooltipContent`/`ChartLegendContent` (stilizzati per abbinarsi al kit) come loro `content`.
+
+### Accessibilità
+
+L'output SVG di Recharts non ha un testo alternativo integrato — un grafico trasmette i suoi dati solo visivamente. Per qualsiasi cosa oltre a un accento decorativo, abbina il grafico a una [`Table`](/docs/components/molecules/table)/`DataTable` che presenti gli stessi valori come testo, o come minimo avvolgilo in un contenitore con un `aria-label` che riassuma cosa mostra.

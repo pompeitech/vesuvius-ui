@@ -1,0 +1,77 @@
+---
+title: Alert Dialog
+---
+
+# Alert Dialog
+
+A Radix `AlertDialog` — for confirmations that need an explicit choice (delete, discard, ...). Unlike [`Dialog`](/docs/components/molecules/dialog), it can't be dismissed by clicking outside or pressing <kbd>Esc</kbd>.
+
+```tsx
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete account</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone. This will permanently delete your account.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`}>
+  <AlertDialog>
+    <AlertDialogTrigger asChild>
+      <Button variant="destructive">Delete account</Button>
+    </AlertDialogTrigger>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+        <AlertDialogDescription>
+          This action cannot be undone. This will permanently delete your account.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogAction>Continue</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+</ComponentPreview>
+
+## API
+
+**AlertDialog**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. |
+| `defaultOpen` | `boolean` | `false` | Initial state, uncontrolled. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+
+**AlertDialogTrigger** — every native `<button>` prop, plus `asChild` (`boolean`, default `false`) to render on a single child instead of a `<button>` (as with the destructive [`Button`](/docs/components/atoms/button) above).
+
+**AlertDialogContent** — every native `<div>` prop. Rendered in a Portal; focus is trapped inside it while open, and returns to the trigger on close.
+
+**AlertDialogHeader** / **AlertDialogFooter** — plain layout `<div>`s, no custom props (header stacks text top-to-bottom, footer right-aligns its buttons on desktop and stacks them full-width on mobile).
+
+**AlertDialogTitle** — every native heading-adjacent prop; required — provides the dialog's accessible name.
+
+**AlertDialogDescription** — every native `<p>` prop; provides the dialog's accessible description.
+
+**AlertDialogCancel** — every native `<button>` prop, plus `asChild`. Closes the dialog without firing any confirmation logic.
+
+**AlertDialogAction** — every native `<button>` prop, plus `asChild`. Does **not** close the dialog automatically — wire your own confirm handler (e.g. `onClick`) to perform the action and close it yourself, since an async action (a delete request) may need to stay open until it resolves.
+
+### Accessibility
+
+Renders with `role="alertdialog"` (not `role="dialog"`) — screen readers announce it more assertively, appropriate for a choice the user must make. Deliberately does not close on outside click or <kbd>Esc</kbd>, unlike [`Dialog`](/docs/components/molecules/dialog); use it only when the user must make an explicit choice, not for dismissible content.

@@ -1,0 +1,122 @@
+---
+title: Alert
+---
+
+# Alert
+
+Un box di callout con `role="alert"` — un'icona, un titolo, una descrizione.
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Alert>
+  <Terminal />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>You can add components and dependencies to your app using the CLI.</AlertDescription>
+</Alert>`}>
+  <Alert className="w-96">
+    <Terminal />
+    <AlertTitle>Heads up!</AlertTitle>
+    <AlertDescription>You can add components and dependencies to your app using the CLI.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Varianti
+
+<ComponentPreview code={`<Alert variant="success">
+  <CheckCircle2 />
+  <AlertTitle>Order confirmed</AlertTitle>
+  <AlertDescription>Your order has been placed successfully.</AlertDescription>
+</Alert>
+<Alert variant="destructive">
+  <AlertTriangle />
+  <AlertTitle>Something went wrong</AlertTitle>
+  <AlertDescription>Your payment could not be processed.</AlertDescription>
+</Alert>`} className="flex-col items-stretch">
+  <Alert variant="success" className="w-96">
+    <CheckCircle2 />
+    <AlertTitle>Order confirmed</AlertTitle>
+    <AlertDescription>Your order has been placed successfully.</AlertDescription>
+  </Alert>
+  <Alert variant="destructive" className="w-96">
+    <AlertTriangle />
+    <AlertTitle>Something went wrong</AlertTitle>
+    <AlertDescription>Your payment could not be processed.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Tutte le varianti
+
+Oltre a `default`/`destructive`/`success`/`warning`, `info` e `highlight` coprono i due toni semantici rimanenti:
+
+<ComponentPreview code={`<Alert variant="info">
+  <InfoIcon />
+  <AlertTitle>Maintenance scheduled</AlertTitle>
+  <AlertDescription>The API will be briefly unavailable Sunday at 2am UTC.</AlertDescription>
+</Alert>
+<Alert variant="highlight">
+  <SparklesIcon />
+  <AlertTitle>New: dark mode</AlertTitle>
+  <AlertDescription>Switch themes from the settings menu.</AlertDescription>
+</Alert>`} className="flex-col items-stretch">
+  <Alert variant="info" className="w-96">
+    <InfoIcon />
+    <AlertTitle>Maintenance scheduled</AlertTitle>
+    <AlertDescription>The API will be briefly unavailable Sunday at 2am UTC.</AlertDescription>
+  </Alert>
+  <Alert variant="highlight" className="w-96">
+    <SparklesIcon />
+    <AlertTitle>New: dark mode</AlertTitle>
+    <AlertDescription>Switch themes from the settings menu.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Aspetto "soft"
+
+`appearance="soft"` sostituisce il colore della variante con contorno con uno sfondo tenue — un callout in stile dashboard invece di un banner di avviso. Ogni variante sopra lo supporta.
+
+<ComponentPreview code={`<Alert variant="warning" appearance="soft">
+  <AlertTriangle />
+  <AlertTitle>Usage approaching limit</AlertTitle>
+  <AlertDescription>85% of your monthly quota has been used.</AlertDescription>
+</Alert>`}>
+  <Alert variant="warning" appearance="soft" className="w-96">
+    <AlertTriangle />
+    <AlertTitle>Usage approaching limit</AlertTitle>
+    <AlertDescription>85% of your monthly quota has been used.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## Senza icona
+
+L'icona non è obbligatoria — `AlertTitle`/`AlertDescription` si spostano a sinistra per riempire lo spazio quando non c'è un figlio `<svg>` (il layout è guidato da un selettore `has-[>svg]`, non da una prop):
+
+<ComponentPreview code={`<Alert variant="destructive">
+  <AlertTitle>Session expired</AlertTitle>
+  <AlertDescription>Sign in again to continue.</AlertDescription>
+</Alert>`}>
+  <Alert variant="destructive" className="w-96">
+    <AlertTitle>Session expired</AlertTitle>
+    <AlertDescription>Sign in again to continue.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
+## API
+
+**Alert**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "destructive" \| "success" \| "warning" \| "info" \| "highlight"` | `"default"` | Tono semantico — colora l'icona e `AlertTitle`. |
+| `appearance` | `"outline" \| "soft"` | `"outline"` | `"outline"`: una card con bordo su `bg-card`. `"soft"`: nessun bordo, sfondo tenue che corrisponde alla variante. |
+
+Più ogni prop nativa di `<div>` (`role="alert"` è già impostato).
+
+**AlertTitle** / **AlertDescription** — ogni prop nativa di `<div>`; nessuna prop propria oltre agli aggancci di stile.
+
+### Accessibilità
+
+La radice porta `role="alert"`, quindi gli screen reader lo annunciano appena viene montato (una [regione live ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alert_role), priorità assertiva) — riservalo a messaggi che l'utente ha davvero bisogno di veder interrompere il flusso. Per un messaggio che non ha bisogno di interrompere (una nota statica inline, non un cambio di stato live), considera invece un semplice `<div>` stilizzato e usa `Alert` specificamente quando il contenuto appare dinamicamente in risposta a qualcosa che l'utente ha appena fatto.

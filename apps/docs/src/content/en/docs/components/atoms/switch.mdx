@@ -1,0 +1,70 @@
+---
+title: Switch
+---
+
+# Switch
+
+A Radix `Switch.Root` — an on/off toggle, styled like iOS's.
+
+```tsx
+import { Switch } from "@pompeitech/vesuvius-ui";
+```
+
+## With a label
+
+<ComponentPreview code={`<div className="flex items-center gap-2">
+  <Switch id="airplane-mode" />
+  <Label htmlFor="airplane-mode">Airplane mode</Label>
+</div>`}>
+  <div className="flex items-center gap-2">
+    <Switch id="docs-airplane-mode" />
+    <Label htmlFor="docs-airplane-mode">Airplane mode</Label>
+  </div>
+</ComponentPreview>
+
+## Checked / disabled
+
+<ComponentPreview code={`<Switch defaultChecked aria-label="Checked" />
+<Switch disabled aria-label="Disabled" />`}>
+  <Switch defaultChecked aria-label="Checked" />
+  <Switch disabled aria-label="Disabled" />
+</ComponentPreview>
+
+## In a settings row
+
+The most common real-world placement — label and description on the left, switch pinned right:
+
+<ComponentPreview code={`<div className="flex w-80 items-center justify-between">
+  <div>
+    <p className="text-sm font-medium">Email notifications</p>
+    <p className="text-sm text-muted-foreground">Get notified about account activity.</p>
+  </div>
+  <Switch defaultChecked aria-label="Email notifications" />
+</div>`}>
+  <div className="flex w-80 items-center justify-between">
+    <div>
+      <p className="text-sm font-medium">Email notifications</p>
+      <p className="text-sm text-muted-foreground">Get notified about account activity.</p>
+    </div>
+    <Switch defaultChecked aria-label="Email notifications" />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Switch**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | | Controlled state. |
+| `defaultChecked` | `boolean` | `false` | Initial state, uncontrolled. |
+| `onCheckedChange` | `(checked: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+| `required` | `boolean` | `false` | Marks the field required for native form validation. |
+| `name` / `value` | `string` | | For plain (non-JS) form submission — renders a hidden native checkbox input alongside the styled button. |
+
+Plus every other native `<button>` prop (Radix's `Switch.Root` renders a `<button role="switch">`).
+
+### Accessibility
+
+<kbd>Tab</kbd> to focus, <kbd>Space</kbd> to toggle — same as [`Checkbox`](/docs/components/atoms/checkbox), the rendered element is a `<button>`, so it needs a `<Label htmlFor>` or `aria-label` of its own rather than relying on an implicit native association.

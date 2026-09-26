@@ -1,0 +1,38 @@
+---
+title: Toggle
+---
+
+# Toggle
+
+A Radix `Toggle` — a two-state (pressed/not) button, `aria-pressed` not `aria-checked`. For a row of these acting as one control, see `ToggleGroup`.
+
+```tsx
+import { Toggle } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Toggle aria-label="Toggle bold"><Bold /></Toggle>
+<Toggle variant="outline" aria-label="Toggle bold"><Bold />Bold</Toggle>`}>
+  <Toggle aria-label="Toggle bold"><Bold /></Toggle>
+  <Toggle variant="outline" aria-label="Toggle bold"><Bold />Bold</Toggle>
+</ComponentPreview>
+
+## API
+
+**Toggle**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "outline"` | `"default"` | |
+| `size` | `"default" \| "sm" \| "lg"` | `"default"` | |
+| `pressed` | `boolean` | | Controlled pressed state. |
+| `defaultPressed` | `boolean` | `false` | Initial state, uncontrolled. |
+| `onPressedChange` | `(pressed: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+
+Plus every other native `<button>` prop.
+
+### Accessibility
+
+Renders `aria-pressed` (a true/false toggle state), not `aria-checked` — the correct semantics for a standalone on/off control like "bold" in a toolbar, distinct from a checkbox or radio. Always give it an accessible name via `aria-label` when it holds only an icon, as in the first example above.

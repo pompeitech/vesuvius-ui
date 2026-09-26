@@ -1,0 +1,83 @@
+---
+title: Context Menu
+---
+
+# Context Menu
+
+Un `ContextMenu` di Radix — si apre con il click destro, stesse parti-elemento di `DropdownMenu`.
+
+```tsx
+import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuLabel, ContextMenuSeparator, ContextMenuItem, ContextMenuShortcut } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<ContextMenu>
+  <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+    Right click here
+  </ContextMenuTrigger>
+  <ContextMenuContent className="w-56">
+    <ContextMenuLabel>Actions</ContextMenuLabel>
+    <ContextMenuSeparator />
+    <ContextMenuItem>
+      Back
+      <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+    </ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem variant="destructive">Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`}>
+  <ContextMenu>
+    <ContextMenuTrigger className="flex h-32 w-64 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
+      Clicca col destro qui
+    </ContextMenuTrigger>
+    <ContextMenuContent className="w-56">
+      <ContextMenuLabel>Azioni</ContextMenuLabel>
+      <ContextMenuSeparator />
+      <ContextMenuItem>
+        Indietro
+        <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+      </ContextMenuItem>
+      <ContextMenuSeparator />
+      <ContextMenuItem variant="destructive">Elimina</ContextMenuItem>
+    </ContextMenuContent>
+  </ContextMenu>
+</ComponentPreview>
+
+## API
+
+Stessa struttura di `DropdownMenu`, attivato dal click destro invece che da un click sul trigger.
+
+**ContextMenu**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `modal` | `boolean` | `true` | Se l'interazione fuori dal menu è bloccata mentre è aperto. |
+
+**ContextMenuTrigger** — ogni prop nativa di `<div>` (o `asChild` per avvolgere un altro elemento); la regione che apre il menu al click destro.
+
+**ContextMenuContent** — ogni prop nativa di `<div>`; posizionato al cursore, non relativo al trigger.
+
+**ContextMenuLabel** — ogni prop nativa di `<div>`; intestazione di sezione non interattiva.
+
+**ContextMenuSeparator** — ogni prop nativa di `<div>`; divisore visivo.
+
+**ContextMenuItem**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `variant` | `"default" \| "destructive"` | `"default"` | `"destructive"` tinge l'elemento di rosso, per azioni in stile eliminazione. |
+| `disabled` | `boolean` | `false` | |
+| `onSelect` | `(event: Event) => void` | | Chiamata al click o su <kbd>Invio</kbd> mentre è evidenziato. |
+
+**ContextMenuCheckboxItem** — aggiunge `checked`/`onCheckedChange`, stessa forma di [`Checkbox`](/docs/components/atoms/checkbox).
+
+**ContextMenuRadioGroup** / **ContextMenuRadioItem** — `value`/`onValueChange` sul gruppo, `value` su ogni elemento, stessa forma a selezione singola di `RadioGroup`.
+
+**ContextMenuShortcut** — ogni prop nativa di `<span>`; testo allineato a destra con l'indicazione della scorciatoia dentro un elemento.
+
+### Accessibilità
+
+Si apre con il click destro (o il tasto tastiera menu contestuale / <kbd>Shift</kbd>+<kbd>F10</kbd>) con `role="menu"` e `tabIndex` roving tra gli elementi — le frecce navigano, <kbd>Invio</kbd>/<kbd>Spazio</kbd> selezionano, <kbd>Esc</kbd> chiude. Dato che il click destro non ha un'affordance visibile, abbina sempre la regione trigger a qualche altro modo scopribile per raggiungere le stesse azioni (un pulsante visibile, un `DropdownMenu`) invece di affidarti solo al menu contestuale.

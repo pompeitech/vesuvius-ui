@@ -1,0 +1,57 @@
+---
+title: Skeleton
+---
+
+# Skeleton
+
+Un blocco segnaposto pulsante per gli stati di caricamento — semplicemente un `<div>` stilizzato, dimensionato via `className`.
+
+```tsx
+import { Skeleton } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="flex items-center gap-4">
+  <Skeleton className="size-12 rounded-full" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-40" />
+    <Skeleton className="h-4 w-24" />
+  </div>
+</div>`}>
+  <div className="flex items-center gap-4">
+    <Skeleton className="size-12 rounded-full" />
+    <div className="space-y-2">
+      <Skeleton className="h-4 w-40" />
+      <Skeleton className="h-4 w-24" />
+    </div>
+  </div>
+</ComponentPreview>
+
+## Uno skeleton per card
+
+<ComponentPreview code={`<div className="w-72 space-y-3">
+  <Skeleton className="h-32 w-full rounded-xl" />
+  <Skeleton className="h-4 w-3/4" />
+  <Skeleton className="h-4 w-1/2" />
+</div>`}>
+  <div className="w-72 space-y-3">
+    <Skeleton className="h-32 w-full rounded-xl" />
+    <Skeleton className="h-4 w-3/4" />
+    <Skeleton className="h-4 w-1/2" />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Skeleton**
+
+Ogni prop nativa di `<div>` — forma e dimensione derivano interamente da `className` (un placeholder circolare per avatar è `size-12 rounded-full`, una riga di testo è `h-4 w-40`, e così via). Nessuna prop `variant`/`shape`, per scelta progettuale, dato che le forme necessarie sono illimitate.
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `className` | `string` | Ogni proprietà visiva — dimensione, raggio, spaziatura — viene espressa qui invece che tramite prop dedicate. |
+
+### Accessibilità
+
+Puramente visivo — non ha un proprio ruolo ARIA. Avvolgi la regione in caricamento con `aria-busy="true"` sul suo contenitore (e rimuovilo una volta che il contenuto reale sostituisce gli skeleton) se vuoi che la tecnologia assistiva sappia che uno stato di caricamento è in corso, invece di vedere silenziosamente blocchi placeholder vuoti.

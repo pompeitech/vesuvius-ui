@@ -1,0 +1,50 @@
+---
+title: Sparkline
+---
+
+# Sparkline
+
+A tiny inline trend line — plain SVG (auto-scaled min/max, no axes/ticks/tooltip), not a [`Charts`](/docs/components/organisms/charts) composition: at this size, Recharts' responsive-container/tooltip machinery is pure overhead for "line go up or down." Renders nothing for fewer than 2 points. Drops straight into `StatCard`'s `trend` prop or `ChartCard`.
+
+```tsx
+import { Sparkline } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} />`}>
+  <div className="w-32 text-primary">
+    <Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} />
+  </div>
+</ComponentPreview>
+
+## Filled
+
+<ComponentPreview code={`<Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} filled />`}>
+  <div className="w-32 text-success-emphasis">
+    <Sparkline data={[12, 18, 14, 22, 19, 27, 24, 31]} filled />
+  </div>
+</ComponentPreview>
+
+## Trending down
+
+<ComponentPreview code={`<Sparkline data={[31, 27, 29, 22, 20, 18, 15, 12]} />`}>
+  <div className="w-32 text-destructive">
+    <Sparkline data={[31, 27, 29, 22, 20, 18, 15, 12]} />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Sparkline**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `data` | `number[]` | | Required. Renders nothing for fewer than 2 points. |
+| `width` / `height` | `number` | `100` / `32` | SVG viewport dimensions — the element itself still scales to its container via `viewBox`, so pixel width/height mainly affects the aspect ratio. |
+| `color` | `string` | `"currentColor"` | Set `text-*` on a wrapper (as in every example above) to theme it, rather than passing a literal color value. |
+| `filled` | `boolean` | `false` | Adds a soft gradient fill under the line. |
+
+### Accessibility
+
+Purely decorative SVG with no text alternative of its own — when the trend it shows conveys information not available elsewhere (not just a visual accent next to a number that already states the change), give its wrapper an `aria-label` summarizing the trend, or ensure the surrounding text (as in `StatCard`'s `changePct`) already covers it.

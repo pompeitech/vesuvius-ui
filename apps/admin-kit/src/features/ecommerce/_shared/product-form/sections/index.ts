@@ -1,0 +1,6 @@
+export { MediaSection } from './media-section'
+export { OrganizationSection } from './organization-section'
+export { PricingSection } from './pricing-section'
+export { ProductInfoSection } from './product-info-section'
+export { StatusSection } from './status-section'
+export { VariantsSection } from './variants-section'

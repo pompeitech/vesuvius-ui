@@ -1,0 +1,128 @@
+---
+title: Tooltip
+---
+
+# Tooltip
+
+A Radix `Tooltip` — a short label shown on hover/focus. Needs one `TooltipProvider` mounted once near your app's root (it controls the shared open/close delay).
+
+```tsx
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Hover me</Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Add to library</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## Placement
+
+`TooltipContent`'s `side`/`align` control where it renders relative to the trigger — it also auto-flips to stay on-screen near a viewport edge, same collision handling as [`Popover`](/docs/components/molecules/popover):
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Top</Button>
+    </TooltipTrigger>
+    <TooltipContent side="top">Shown above</TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="outline">Top</Button>
+      </TooltipTrigger>
+      <TooltipContent side="top">Shown above</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## On an icon button
+
+The most common real use — labeling an icon-only button that has no visible text of its own:
+
+<ComponentPreview code={`<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" size="icon" aria-label="Settings">
+        <SettingsIcon />
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>Settings</TooltipContent>
+  </Tooltip>
+</TooltipProvider>`}>
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" size="icon" aria-label="Settings">
+          <SettingsIcon />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>Settings</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+</ComponentPreview>
+
+## Custom open delay
+
+`TooltipProvider`'s `delayDuration` (ms) applies to every `Tooltip` beneath it — shorten it for a snappier feel, or set it to `0` to show instantly:
+
+```tsx
+<TooltipProvider delayDuration={100}>
+  {/* every Tooltip in here opens after 100ms of hover, instead of the 700ms default */}
+</TooltipProvider>
+```
+
+## API
+
+**TooltipProvider**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delayDuration` | `number` (ms) | `700` | Hover delay before showing. |
+| `skipDelayDuration` | `number` (ms) | `300` | After closing one tooltip, how long a fast-moving hover onto another trigger keeps skipping the delay. |
+
+Mount **once**, near the app root — it coordinates timing across every tooltip on the page, not just its own children.
+
+**Tooltip**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `open` | `boolean` | Controlled open state — rare, usually left uncontrolled. |
+| `defaultOpen` | `boolean` | |
+| `onOpenChange` | `(open: boolean) => void` | |
+
+**TooltipTrigger** — every native `<button>` prop, plus `asChild` (`boolean`, default `false`) to attach the tooltip to your own element instead of wrapping it in an extra one.
+
+**TooltipContent**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | |
+| `sideOffset` | `number` (px) | `4` | |
+
+Plus every native `<div>` prop; rendered in a Portal.
+
+### Accessibility
+
+Shows on hover *and* keyboard focus (not hover-only), and dismisses on <kbd>Esc</kbd> — so it's reachable without a mouse. It is **not** a substitute for a real accessible name — content that's genuinely needed to understand a control (not just a nice-to-have hint) belongs in `aria-label`, since tooltip content isn't reliably announced by every screen reader in every mode.

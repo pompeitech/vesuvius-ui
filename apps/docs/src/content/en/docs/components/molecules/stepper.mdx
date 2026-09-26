@@ -1,0 +1,79 @@
+---
+title: Stepper
+---
+
+# Stepper
+
+A step-by-step progress indicator — horizontal or vertical, optionally clickable to jump between visited steps. Pairs with [`Wizard`](/docs/components/organisms/wizard) for the full flow (content + Back/Next navigation), or use standalone as a status display.
+
+```tsx
+import { Stepper, type StepperStep } from "@pompeitech/vesuvius-ui";
+```
+
+## Horizontal
+
+<ComponentPreview code={`const steps: StepperStep[] = [
+  { title: "Account", description: "Create your account" },
+  { title: "Profile", description: "Tell us about yourself" },
+  { title: "Payment", description: "Add a payment method" },
+  { title: "Review", description: "Confirm and finish" },
+];
+
+<Stepper steps={steps} activeStep={1} />`}>
+  <div className="w-full">
+    <Stepper
+      steps={[
+        { title: "Account", description: "Create your account" },
+        { title: "Profile", description: "Tell us about yourself" },
+        { title: "Payment", description: "Add a payment method" },
+        { title: "Review", description: "Confirm and finish" },
+      ]}
+      activeStep={1}
+    />
+  </div>
+</ComponentPreview>
+
+## Clickable (non-linear)
+
+<ComponentPreview code={`<Stepper steps={steps} activeStep={active} onStepClick={setActive} />`}>
+  <Demo name="stepper-clickable" />
+</ComponentPreview>
+
+## With an error
+
+<ComponentPreview code={`<Stepper
+  steps={[{ title: "Account" }, { title: "Profile", status: "error" }, { title: "Payment" }, { title: "Review" }]}
+  activeStep={1}
+/>`}>
+  <div className="w-full">
+    <Stepper
+      steps={[{ title: "Account" }, { title: "Profile", status: "error" }, { title: "Payment" }, { title: "Review" }]}
+      activeStep={1}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Stepper**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `steps` | `StepperStep[]` | | Required. |
+| `activeStep` | `number` | | Required — the current step's index. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | |
+| `onStepClick` | `(index: number) => void` | | Omit to make it a read-only status display — steps then aren't focusable/clickable at all. |
+
+Plus every native `<div>` prop.
+
+**StepperStep**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `title` | `string` | Required. |
+| `description` | `string` | Optional line under the title. |
+| `status` | `"upcoming" \| "active" \| "completed" \| "error"` | Overrides the status this step would otherwise get by comparing its index to `activeStep` — use `"error"` to flag a step that failed validation, regardless of where the user currently is. When omitted, status is derived automatically: steps before `activeStep` are `"completed"`, the one at `activeStep` is `"active"`, and the rest are `"upcoming"`. |
+
+### Accessibility
+
+Each step renders with `role="tab"` and `aria-selected` reflecting whether it's the active one. When `onStepClick` is provided, steps become real interactive controls reachable by keyboard; without it, they're purely a status display and aren't part of the tab order — don't pass a no-op `onStepClick` just to make steps look clickable when they shouldn't be.

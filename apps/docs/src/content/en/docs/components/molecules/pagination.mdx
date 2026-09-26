@@ -1,0 +1,51 @@
+---
+title: Pagination
+---
+
+# Pagination
+
+A `nav[aria-label="pagination"]` built from plain links — bring your own page-state/routing, this just renders the control and marks the active page with `aria-current="page"`.
+
+```tsx
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Pagination>
+  <PaginationContent>
+    <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+    <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationEllipsis /></PaginationItem>
+    <PaginationItem><PaginationNext href="#" /></PaginationItem>
+  </PaginationContent>
+</Pagination>`}>
+  <Pagination>
+    <PaginationContent>
+      <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+      <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationLink href="#" isActive>2</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
+      <PaginationItem><PaginationEllipsis /></PaginationItem>
+      <PaginationItem><PaginationNext href="#" /></PaginationItem>
+    </PaginationContent>
+  </Pagination>
+</ComponentPreview>
+
+## API
+
+| Component | Renders | Props |
+| --- | --- | --- |
+| `Pagination` | `<nav aria-label="pagination">` | Every native `<nav>` prop. |
+| `PaginationContent` | `<ul>` | Every native `<ul>` prop. |
+| `PaginationItem` | `<li>` | Every native `<li>` prop. |
+| `PaginationLink` | `<a>` | `href`, `isActive` (`boolean`, default `false` — sets `aria-current="page"` and active styling), plus every native `<a>` prop. |
+| `PaginationPrevious` | `<a>` (styled `PaginationLink`) | Same as `PaginationLink` minus `isActive`; pre-labeled "Previous" with a chevron, `aria-label="Go to previous page"`. |
+| `PaginationNext` | `<a>` (styled `PaginationLink`) | Same as `PaginationLink` minus `isActive`; pre-labeled "Next" with a chevron, `aria-label="Go to next page"`. |
+| `PaginationEllipsis` | `<span>` | A visual "…" for skipped page ranges, with a `sr-only "More pages"` label; no custom props. |
+
+### Accessibility
+
+The active page's `PaginationLink` carries `aria-current="page"` via `isActive` — set it on exactly one link per render. Since every link is a plain `<a href>`, wire `href` to your actual routing (or intercept `onClick` for client-side pagination) rather than leaving every link pointing at the same URL, which breaks both keyboard "open in new tab" and screen-reader link-list navigation.

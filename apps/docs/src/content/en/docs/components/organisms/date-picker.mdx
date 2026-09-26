@@ -1,0 +1,48 @@
+---
+title: Date Picker
+---
+
+# Date Picker
+
+A button trigger showing the formatted date, opening a [`Popover`](/docs/components/molecules/popover) with a [`Calendar`](/docs/components/organisms/calendar) — MUI-style month/year dropdown navigation built in.
+
+```tsx
+import { DatePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DatePicker />`}>
+  <DatePicker />
+</ComponentPreview>
+
+## With a default value
+
+<ComponentPreview code={`<DatePicker defaultValue={new Date()} />`}>
+  <DatePicker defaultValue={new Date()} />
+</ComponentPreview>
+
+## Disabled
+
+<ComponentPreview code={`<DatePicker disabled />`}>
+  <DatePicker disabled />
+</ComponentPreview>
+
+## API
+
+**DatePicker**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` / `defaultValue` | `Date` | | Controlled/uncontrolled selected date. |
+| `onChange` | `(date: Date \| undefined) => void` | | |
+| `placeholder` | `string` | `"Pick a date"` | Shown on the trigger when nothing's selected. |
+| `dateFormat` | `string` | `"PPP"` | A date-fns format string, controlling the trigger's displayed text. |
+| `disabled` | `boolean` | `false` | |
+| `fromYear` / `toYear` | `number` | | Bounds for the year dropdown. |
+
+Plus every native prop of the underlying trigger button.
+
+### Accessibility
+
+The trigger is a real button announcing the currently selected date (or the placeholder) as its text content — no separate `aria-label` needed. Once open, the calendar grid follows the same keyboard model as [`Calendar`](/docs/components/organisms/calendar) itself (arrow keys move by day, <kbd>Enter</kbd> selects).

@@ -1,0 +1,59 @@
+---
+title: Aspect Ratio
+---
+
+# Aspect Ratio
+
+Un `AspectRatio.Root` di Radix — vincola il proprio contenuto a un rapporto larghezza/altezza fisso (un'immagine, un embed video, una mappa) indipendentemente dalla dimensione naturale del contenuto.
+
+```tsx
+import { AspectRatio } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="w-72">
+  <AspectRatio ratio={16 / 9} className="flex items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+    16:9
+  </AspectRatio>
+</div>`}>
+  <div className="w-72">
+    <AspectRatio ratio={16 / 9} className="flex items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+      16:9
+    </AspectRatio>
+  </div>
+</ComponentPreview>
+
+## Un'immagine
+
+Il caso più comune — un `ratio` che riserva lo spazio giusto prima ancora che l'immagine sia caricata, così nulla si sposta intorno ad essa:
+
+<ComponentPreview code={`<div className="w-72">
+  <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md">
+    <img
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+      alt="A mountain landscape"
+      className="size-full object-cover"
+    />
+  </AspectRatio>
+</div>`}>
+  <div className="w-72">
+    <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md">
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+        alt="A mountain landscape"
+        className="size-full object-cover"
+      />
+    </AspectRatio>
+  </div>
+</ComponentPreview>
+
+## API
+
+**AspectRatio**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `ratio` | `number` | `1` (quadrato) | Larghezza divisa per altezza — `16 / 9`, `4 / 3`, `1` per un quadrato, `9 / 16` per un formato ritratto/storia. |
+
+Più ogni prop nativa di `<div>` sulla radice, e il comportamento sottostante di `AspectRatio.Root` di Radix: si dimensiona internamente tramite il trucco della percentuale `padding-bottom`, quindi il suo unico figlio dovrebbe essere un elemento capace di espandersi per riempirlo (`className="size-full object-cover"` su un `<img>`, come sopra).

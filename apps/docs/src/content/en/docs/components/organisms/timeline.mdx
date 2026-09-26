@@ -1,0 +1,81 @@
+---
+title: Timeline
+---
+
+# Timeline
+
+A vertical sequence for releases, project activity, milestones and other ordered events. Use `variant="roadmap"` when each step needs a stronger card treatment and a separate period column.
+
+```tsx
+import { Timeline } from "@pompeitech/vesuvius-ui";
+```
+
+## Roadmap
+
+<ComponentPreview code={`<Timeline
+  variant="roadmap"
+  items={[
+    { id: "one", date: "Q1", title: "Foundations", status: "success" },
+    { id: "two", date: "Q2", title: "Compositions", status: "active" },
+    { id: "three", date: "Q3", title: "Admin Kit" },
+  ]}
+/>`}>
+  <div className="max-w-2xl">
+    <Timeline
+      variant="roadmap"
+      items={[
+        { id: 'one', date: 'Q1', title: 'Foundations', description: 'Tokens, accessibility and primitives.', status: 'success' },
+        { id: 'two', date: 'Q2', title: 'Compositions', description: 'Dashboard-ready organisms.', status: 'active' },
+        { id: 'three', date: 'Q3', title: 'Admin Kit', description: 'A complete product shell.' }
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## Activity
+
+<ComponentPreview code={`<Timeline
+  items={[
+    { id: "one", title: "Project created", date: "10:42", status: "success" },
+    { id: "two", title: "Review requested", date: "Yesterday", status: "active" },
+    { id: "three", title: "Deployment scheduled", date: "Tomorrow", status: "muted" },
+  ]}
+/>`}>
+  <div className="max-w-xl">
+    <Timeline
+      items={[
+        { id: 'one', title: 'Project created', date: '10:42', description: 'Workspace initialized.', status: 'success' },
+        { id: 'two', title: 'Review requested', date: 'Yesterday', description: 'Waiting for feedback.', status: 'active' },
+        { id: 'three', title: 'Deployment scheduled', date: 'Tomorrow', status: 'muted' }
+      ]}
+    />
+  </div>
+</ComponentPreview>
+
+## API
+
+**Timeline**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `TimelineItem[]` | | Ordered events to render. |
+| `variant` | `"default" \| "roadmap"` | `"default"` | Uses compact activity styling or milestone cards with a period column. |
+| `className` | `string` | | Additional classes for the root list. |
+| `aria-label` | `string` | `"Timeline"` | Accessible name for the ordered list. |
+
+**TimelineItem**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Stable key for the item. |
+| `title` | `string` | Primary event label. |
+| `description` | `ReactNode` | Supporting content. |
+| `date` | `ReactNode` | Date, time or period. In roadmap mode it is shown in the period column. |
+| `meta` | `ReactNode` | Optional secondary metadata. |
+| `icon` | `ReactNode` | Optional content inside the marker. |
+| `status` | `"default" \| "active" \| "success" \| "warning" \| "destructive" \| "muted"` | Marker semantic state. |
+| `onClick` | `() => void` | Makes the event content an accessible button. |
+
+### Accessibility
+
+The component renders an ordered list, keeps the connector decorative, and exposes the timeline label through `aria-label`. Use `onClick` only when an event is actionable; otherwise keep items informational. Status is visual context, so include the same state in the title or description when it matters.

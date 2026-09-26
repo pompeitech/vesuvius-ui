@@ -1,0 +1,47 @@
+---
+title: Collapsible
+---
+
+# Collapsible
+
+A Radix `Collapsible` — a single expandable/collapsible section (for a set of mutually-exclusive ones, see [`Accordion`](/docs/components/molecules/accordion)).
+
+```tsx
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Collapsible open={open} onOpenChange={setOpen} className="w-72 space-y-2">
+  <div className="flex items-center justify-between gap-4 px-1">
+    <span className="text-sm font-semibold">Starred repos</span>
+    <CollapsibleTrigger asChild>
+      <Button variant="ghost" size="icon" className="size-8"><ChevronsUpDown className="size-4" /></Button>
+    </CollapsibleTrigger>
+  </div>
+  <div className="rounded-md border px-4 py-2 text-sm shadow-xs">@radix-ui/primitives</div>
+  <CollapsibleContent className="space-y-2">
+    <div className="rounded-md border px-4 py-2 text-sm shadow-xs">@tanstack/react-table</div>
+  </CollapsibleContent>
+</Collapsible>`}>
+  <Demo name="collapsible-starred-repos" />
+</ComponentPreview>
+
+## API
+
+**Collapsible**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Controlled open state. |
+| `defaultOpen` | `boolean` | `false` | Initial state, uncontrolled. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `disabled` | `boolean` | `false` | |
+
+**CollapsibleTrigger** — every native `<button>` prop, plus `asChild` (`boolean`, default `false`) to render on a single child instead of a `<button>`.
+
+**CollapsibleContent** — every native `<div>` prop. Animates open/closed height via CSS custom properties Radix sets (`--radix-collapsible-content-height`), not JavaScript. Stays mounted (hidden) after closing by default unless `forceMount` is used elsewhere in your composition.
+
+### Accessibility
+
+The trigger is a real `<button>` with `aria-expanded`, and content is linked to it via `aria-controls` — no custom keyboard handling needed, <kbd>Tab</kbd> then <kbd>Space</kbd>/<kbd>Enter</kbd> operates it like any button.

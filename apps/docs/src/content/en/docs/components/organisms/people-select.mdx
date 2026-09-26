@@ -1,0 +1,51 @@
+---
+title: People Select
+---
+
+# People Select
+
+A single-person picker — a searchable combobox showing each option's `UserAvatar`, name, and an optional description (a role, a team). Built for assignee fields ("Assigned to", "Reviewer").
+
+```tsx
+import { PeopleSelect, type PeopleSelectOption } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`const [value, setValue] = useState<string | undefined>("ada");
+
+<PeopleSelect options={people} value={value} onChange={setValue} />`}>
+  <Demo name="people-select" />
+</ComponentPreview>
+
+## Clearable ("Unassigned")
+
+<ComponentPreview code={`<PeopleSelect options={people} value={value} onChange={setValue} clearable />`}>
+  <Demo name="people-select" clearable />
+</ComponentPreview>
+
+## API
+
+**PeopleSelect**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | `PeopleSelectOption[]` | | Required. |
+| `value` / `defaultValue` | `string` | | Controlled/uncontrolled selected `value`. |
+| `onChange` | `(value: string \| undefined) => void` | | |
+| `clearable` | `boolean` | `false` | Adds an "Unassigned" option that clears the selection. |
+| `unassignedLabel` | `string` | `"Unassigned"` | |
+| `disabled` | `boolean` | `false` | |
+
+**PeopleSelectOption**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | Required — unique identifier. |
+| `label` | `string` | Required — the person's display name. |
+| `description` | `string` | Optional second line (role, team). |
+| `avatarSrc` | `string` | Optional image URL — falls back to initials via `UserAvatar` when absent or on load failure. |
+
+### Accessibility
+
+Built on the same combobox pattern as [`Select`](/docs/components/molecules/select)/[`Command`](/docs/components/molecules/command) — type to filter, arrow keys move the highlight, <kbd>Enter</kbd> selects, <kbd>Esc</kbd> closes without changing the selection. Each option has no separate `aria-label`, so its accessible name is computed from its visible text content — label and description together (e.g. "Ada Lovelace Engineering") — while filtering itself matches on `label` alone, not the description.

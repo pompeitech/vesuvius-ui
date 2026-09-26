@@ -1,0 +1,30 @@
+---
+title: Input Group
+---
+
+# Input Group
+
+Compose an input with a leading icon, unit, suffix or action while keeping one visual control boundary.
+
+<ComponentPreview code={`<InputGroup>
+  <InputGroupAddon><SearchIcon className="size-4" /></InputGroupAddon>
+  <InputGroupInput aria-label="Search orders" placeholder="Search orders..." />
+</InputGroup>`}>
+  <InputGroup className="w-full max-w-sm">
+    <InputGroupAddon><SearchIcon className="size-4" /></InputGroupAddon>
+    <InputGroupInput aria-label="Search orders" placeholder="Search orders..." />
+  </InputGroup>
+</ComponentPreview>
+
+`InputGroupButton` is available for trailing actions such as filters, clear or reveal-password controls.
+
+## API
+
+| Component          | Description                                                 |
+| ------------------ | ----------------------------------------------------------- |
+| `InputGroup`       | Root wrapper with border, focus ring and overflow handling. |
+| `InputGroupAddon`  | Non-editable prefix/suffix content.                         |
+| `InputGroupInput`  | Borderless input that fills the available space.            |
+| `InputGroupButton` | Compact accessible action button.                           |
+
+All components accept their corresponding native HTML props.

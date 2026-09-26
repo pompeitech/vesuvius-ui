@@ -1,0 +1,80 @@
+---
+title: Popover
+---
+
+# Popover
+
+Un `Popover` di Radix — contenuto fluttuante, non modale, ancorato a un trigger, chiuso da un click esterno. La base per [`Select`](/docs/components/molecules/select), `DateRangePicker` e altri.
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="outline">Open popover</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <div className="grid gap-4">
+      <div className="space-y-1">
+        <h4 className="font-medium leading-none">Dimensions</h4>
+        <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+      </div>
+      <div className="grid gap-2">
+        <div className="grid grid-cols-3 items-center gap-4">
+          <Label htmlFor="width">Width</Label>
+          <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+        </div>
+      </div>
+    </div>
+  </PopoverContent>
+</Popover>`}>
+  <Popover>
+    <PopoverTrigger asChild>
+      <Button variant="outline">Apri popover</Button>
+    </PopoverTrigger>
+    <PopoverContent>
+      <div className="grid gap-4">
+        <div className="space-y-1">
+          <h4 className="font-medium leading-none">Dimensioni</h4>
+          <p className="text-sm text-muted-foreground">Imposta le dimensioni per il layer.</p>
+        </div>
+        <div className="grid gap-2">
+          <div className="grid grid-cols-3 items-center gap-4">
+            <Label htmlFor="docs-popover-width-it">Larghezza</Label>
+            <Input id="docs-popover-width-it" defaultValue="100%" className="col-span-2 h-8" />
+          </div>
+        </div>
+      </div>
+    </PopoverContent>
+  </Popover>
+</ComponentPreview>
+
+## API
+
+**Popover**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `open` | `boolean` | | Stato aperto controllato. |
+| `defaultOpen` | `boolean` | `false` | Stato iniziale, non controllato. |
+| `onOpenChange` | `(open: boolean) => void` | | |
+| `modal` | `boolean` | `false` | `true` intrappola il focus e blocca l'interazione esterna come un dialog; il default `false` lascia che focus e interazione passino al resto della pagina. |
+
+**PopoverTrigger** — ogni prop nativa di `<button>`, più `asChild` (`boolean`, default `false`).
+
+**PopoverContent**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` | Su quale lato del trigger renderizzare. |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Allineamento lungo quel lato. |
+| `sideOffset` | `number` | `4` | Distanza dal trigger, in px. |
+
+Più ogni prop nativa di `<div>`; renderizzato in un Portal, e si riposiziona automaticamente per restare dentro il viewport.
+
+### Accessibilità
+
+Si chiude con <kbd>Esc</kbd> o un click/focus esterno per default e restituisce il focus al trigger. A differenza di [`Dialog`](/docs/components/molecules/dialog), è non modale per default (`modal={false}`) — il focus non è intrappolato, quindi il contenuto fuori da esso resta operabile mentre è aperto; usalo per contenuto ausiliario (un form di filtro, un editor inline), non per un flusso di conferma completo.

@@ -1,0 +1,59 @@
+---
+title: Aspect Ratio
+---
+
+# Aspect Ratio
+
+A Radix `AspectRatio.Root` — constrains its content to a fixed width/height ratio (an image, a video embed, a map) regardless of the content's own natural size.
+
+```tsx
+import { AspectRatio } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<div className="w-72">
+  <AspectRatio ratio={16 / 9} className="flex items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+    16:9
+  </AspectRatio>
+</div>`}>
+  <div className="w-72">
+    <AspectRatio ratio={16 / 9} className="flex items-center justify-center rounded-md bg-muted text-sm text-muted-foreground">
+      16:9
+    </AspectRatio>
+  </div>
+</ComponentPreview>
+
+## An image
+
+The most common case — a `ratio` that reserves the right amount of space before the image has even loaded, so nothing shifts around it:
+
+<ComponentPreview code={`<div className="w-72">
+  <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md">
+    <img
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+      alt="A mountain landscape"
+      className="size-full object-cover"
+    />
+  </AspectRatio>
+</div>`}>
+  <div className="w-72">
+    <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md">
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+        alt="A mountain landscape"
+        className="size-full object-cover"
+      />
+    </AspectRatio>
+  </div>
+</ComponentPreview>
+
+## API
+
+**AspectRatio**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `ratio` | `number` | `1` (square) | Width divided by height — `16 / 9`, `4 / 3`, `1` for a square, `9 / 16` for a portrait/story format. |
+
+Plus every native `<div>` prop on the root, and Radix's underlying `AspectRatio.Root` behavior: it sizes itself via a `padding-bottom` percentage trick internally, so its single child should be an element that can stretch to fill it (`className="size-full object-cover"` on an `<img>`, as above).

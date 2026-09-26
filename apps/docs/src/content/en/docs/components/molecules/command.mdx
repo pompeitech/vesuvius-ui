@@ -1,0 +1,79 @@
+---
+title: Command
+---
+
+# Command
+
+A [`cmdk`](https://cmdk.paco.me/)-based command palette — fuzzy-filterable list of actions. The base for `ThemePalettePicker` and the global command-K search pattern.
+
+```tsx
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator, CommandShortcut } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Command className="w-96 rounded-lg border shadow-md">
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem><Calendar />Calendar</CommandItem>
+      <CommandItem><Smile />Search Emoji</CommandItem>
+      <CommandItem><Calculator />Calculator</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>
+        <User />Profile
+        <CommandShortcut>⌘P</CommandShortcut>
+      </CommandItem>
+      <CommandItem>
+        <CreditCard />Billing
+        <CommandShortcut>⌘B</CommandShortcut>
+      </CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>`}>
+  <Demo name="command-palette" />
+</ComponentPreview>
+
+## API
+
+**Command**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `filter` | `(value: string, search: string, keywords?: string[]) => number` | `cmdk`'s built-in fuzzy matcher | Override to customize ranking, or return a fixed `1`/`0` to disable fuzzy matching entirely. |
+| `shouldFilter` | `boolean` | `true` | Set `false` if you filter the item list yourself (e.g. server-side search) instead of letting `cmdk` do it client-side. |
+| `value` / `onValueChange` | `string` / `(value: string) => void` | | Controlled/uncontrolled currently-highlighted item. |
+| `loop` | `boolean` | `false` | Whether arrow-key navigation wraps around at the ends of the list. |
+
+**CommandInput** — every native `<input>` prop; automatically wired to filter the list as the user types.
+
+**CommandList** — every native `<div>` prop; the scrollable viewport containing groups/items.
+
+**CommandEmpty** — every native `<div>` prop; renders only when no item matches the current search.
+
+**CommandGroup**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `heading` | `ReactNode` | Label rendered above the group's items. |
+
+**CommandItem**
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `value` | `string` | What's matched against the search query — defaults to the item's text content if omitted. |
+| `onSelect` | `(value: string) => void` | Fires on click or <kbd>Enter</kbd> while highlighted. |
+| `disabled` | `boolean` | Excludes the item from keyboard navigation and filters it out of selection. |
+
+**CommandSeparator** — every native `<div>` prop; a visual divider between groups.
+
+**CommandShortcut** — every native `<span>` prop; right-aligned keyboard-hint text (`⌘P`, `⌘B`, ...) inside a `CommandItem`.
+
+For a version opened from anywhere in the app via a keyboard shortcut, wrap `Command` in a [`Dialog`](/docs/components/molecules/dialog).
+
+### Accessibility
+
+`cmdk` implements the ARIA combobox/listbox pattern automatically — <kbd>↑</kbd>/<kbd>↓</kbd> move the highlight, <kbd>Enter</kbd> selects, typing filters live, and the highlighted item is announced to screen readers via `aria-activedescendant`. No manual ARIA wiring needed on your part.

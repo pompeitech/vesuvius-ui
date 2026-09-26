@@ -1,0 +1,63 @@
+---
+title: Toast
+---
+
+# Toast
+
+A [Sonner](https://sonner.emilkowal.ski/)-based toast — call `toast()` from anywhere, no local state needed. Mount one `<Toaster />` near your app's root (inside `ThemeProvider`, since it reads light/dark mode from it) — this site already does, so every button below is a genuinely working demo.
+
+```tsx
+import { ThemeProvider, Toaster, toast, Button } from "@pompeitech/vesuvius-ui";
+
+function App() {
+  return (
+    <ThemeProvider>
+      {/* ... */}
+      <Toaster />
+    </ThemeProvider>
+  );
+}
+```
+
+## Default
+
+<ComponentPreview code={`<Button
+  onClick={() =>
+    toast("Event has been created", {
+      description: "Sunday, December 3rd at 9:00am",
+      action: { label: "Undo", onClick: () => {} },
+    })
+  }
+>
+  Show toast
+</Button>`}>
+  <Demo name="toast-default" />
+</ComponentPreview>
+
+## Variants
+
+<ComponentPreview code={`<Button variant="outline" onClick={() => toast.success("Saved successfully")}>Success</Button>
+<Button variant="outline" onClick={() => toast.error("Something went wrong")}>Error</Button>
+<Button variant="outline" onClick={() => toast.warning("Check your input")}>Warning</Button>
+<Button variant="outline" onClick={() => toast.info("New update available")}>Info</Button>`}>
+  <Demo name="toast-variants" />
+</ComponentPreview>
+
+## API
+
+**toast(message, options)**
+
+| Argument | Type | Description |
+| --- | --- | --- |
+| `message` | `ReactNode` | |
+| `options.description` | `ReactNode` | |
+| `options.action` | `{ label: string, onClick: () => void }` | Renders an inline action button on the toast. |
+| ...rest | | Everything Sonner's own `toast()` accepts (`duration`, `id`, `onDismiss`, `position` overrides, ...) — this is a direct re-export, not a wrapper that limits the API. |
+
+**toast.success / toast.error / toast.warning / toast.info** — same signature as `toast()`, pre-styled with the matching semantic color and icon.
+
+**Toaster** — every prop Sonner's own `<Toaster>` accepts (`position`, `richColors`, `closeButton`, `duration`, ...), forwarded straight through; pre-wired to read light/dark mode from the ancestor `ThemeProvider` so toasts always match the active theme without a `theme` prop of your own.
+
+### Accessibility
+
+Sonner renders toasts in an `aria-live` region, so screen readers announce new ones without the page needing to shift focus. Keep `message` concise and put anything non-essential in `description` — a screen reader announces both, but a long `message` alone is harder to parse at a glance for sighted users too.

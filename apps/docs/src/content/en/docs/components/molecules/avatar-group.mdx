@@ -1,0 +1,68 @@
+---
+title: Avatar Group
+---
+
+# Avatar Group
+
+A stack of overlapping avatars (assignees, participants, collaborators) that fans out on hover, with overflow collapsed into a "+N" badge.
+
+```tsx
+import { AvatarGroup, UserAvatar } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<AvatarGroup max={4}>
+  {team.map((name) => <UserAvatar key={name} name={name} />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4}>
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton", "Barbara Liskov", "Katherine Johnson"].map((name) => (
+      <UserAvatar key={name} name={name} />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## Square, large
+
+<ComponentPreview code={`<AvatarGroup max={4} shape="square" size="lg">
+  {team.map((name) => <UserAvatar key={name} name={name} shape="square" size="lg" />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4} shape="square" size="lg">
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton", "Barbara Liskov"].map((name) => (
+      <UserAvatar key={name} name={name} shape="square" size="lg" />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## Custom spacing
+
+Both the resting overlap and the hover fan-out amount are tunable — a tighter, non-expanding group for a compact table row:
+
+<ComponentPreview code={`<AvatarGroup max={4} spacing={-8} expandedSpacing={-8}>
+  {team.map((name) => <UserAvatar key={name} name={name} size="sm" />)}
+</AvatarGroup>`}>
+  <AvatarGroup max={4} spacing={-8} expandedSpacing={-8}>
+    {["Ada Lovelace", "Grace Hopper", "Alan Turing", "Margaret Hamilton"].map((name) => (
+      <UserAvatar key={name} name={name} size="sm" />
+    ))}
+  </AvatarGroup>
+</ComponentPreview>
+
+## API
+
+**AvatarGroup**
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `max` | `number` | `5` | Avatars shown before the rest collapse into a "+N" badge. |
+| `size` | matches `UserAvatar`'s `size` | `"default"` | Only sizes the "+N" overflow badge — pass the same size to each child avatar yourself, so they visually match. |
+| `shape` | `"circle" \| "square"` | `"circle"` | Same caveat — sizes the overflow badge only, match it on your children too. |
+| `spacing` | `number` | `-12` | Overlap at rest, in px (negative = overlapping). |
+| `expandedSpacing` | `number` | `4` | Spacing once hovered — the whole group listens for `onMouseEnter`/`onMouseLeave` on its own root. |
+| `children` | `ReactNode` | | The individual avatars — typically `UserAvatar`, but any avatar-shaped element works. |
+
+Plus every native `<div>` prop.
+
+### Accessibility
+
+The overflow "+N" badge is a plain visual element with no interactive affordance by default — if it needs to be actionable (opening a full member list, for instance), wrap it yourself in a focusable element rather than relying on hover alone, since hover fan-out isn't reachable by keyboard.

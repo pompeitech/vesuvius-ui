@@ -1,0 +1,78 @@
+---
+title: Sidebar Nav
+---
+
+# Sidebar Nav
+
+Renderizza l'albero `SidebarMenu` di una [`Sidebar`](/docs/components/molecules/sidebar) a partire da semplici dati invece di annidare a mano `SidebarMenuItem`/`SidebarMenuSub` — icona + etichetta (+ descrizione, + badge), con i sottomenu come sezioni comprimibili. Volutamente agnostico rispetto al framework: dagli `onNavigate` e chiama da lì il tuo router invece di renderizzare direttamente `<a>`/`<Link>`.
+
+```tsx
+import { SidebarNav, type SidebarNavItem } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+Mostrato qui dentro la modalità `collapsible="none"` di [`Sidebar`](/docs/components/molecules/sidebar), che renderizza inline invece che con `position: fixed` — l'unica modalità incorporabile in un riquadro delimitato come questa anteprima (vedi `Sidebar` per la versione completa e reale del guscio dell'app):
+
+<ComponentPreview code={`const items: SidebarNavItem[] = [
+  { id: "overview", label: "Overview", icon: LayoutDashboardIcon, active: true },
+  {
+    id: "orders",
+    label: "Orders",
+    icon: ShoppingCartIcon,
+    badge: 12,
+    items: [
+      { id: "orders-all", label: "All orders" },
+      { id: "orders-returns", label: "Returns" },
+    ],
+  },
+];
+
+<SidebarProvider className="h-full min-h-0 w-auto">
+  <Sidebar collapsible="none" className="h-full">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Ecommerce</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarNav
+            items={items}
+            defaultOpenIds={["orders"]}
+            onNavigate={(item) => navigate(item.href!)}
+          />
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+</SidebarProvider>`}>
+  <Demo name="sidebar-nav" />
+</ComponentPreview>
+
+Usato dentro il `SidebarGroupContent` di una [`Sidebar`](/docs/components/molecules/sidebar), come qualsiasi `SidebarMenu` costruito a mano — vedi `Sidebar` per la struttura completa.
+
+## API
+
+**SidebarNav**
+
+| Prop | Tipo | Default | Descrizione |
+| --- | --- | --- | --- |
+| `items` | `SidebarNavItem[]` | | L'albero da renderizzare — obbligatorio. |
+| `onNavigate` | `(item: SidebarNavItem) => void` | | Chiamata quando un elemento foglia (senza `items`) viene attivato — chiama da qui il tuo router (`navigate(item.href)`, `router.push(item.href)`, ...) dato che questo componente non renderizza alcun `<a>`/`<Link>` proprio. |
+| `defaultOpenIds` | `string[]` | `[]` | Id degli elementi sottomenu espansi al primo render. |
+
+**SidebarNavItem**
+
+| Campo | Tipo | Descrizione |
+| --- | --- | --- |
+| `id` | `string` | Obbligatorio — univoco tra i suoi fratelli; usato da `defaultOpenIds`. |
+| `label` | `string` | Obbligatorio. |
+| `description` | `string` | Seconda riga opzionale sotto l'etichetta (nascosta quando la sidebar è compressa a sola icona). |
+| `icon` | `LucideIcon` | Icona iniziale opzionale. |
+| `href` | `string` | Non usato internamente — leggilo tu stesso in `onNavigate`. |
+| `badge` | `ReactNode` | Badge/conteggio finale. |
+| `active` | `boolean` | Evidenzia l'elemento come pagina corrente. |
+| `disabled` | `boolean` | |
+| `items` | `SidebarNavItem[]` | Figli annidati — la presenza di questo campo (anche un array vuoto) trasforma l'elemento in un trigger di sottomenu comprimibile invece che in un link foglia. |
+
+### Accessibilità
+
+Renderizza sotto veri primitivi `SidebarMenuButton`/`SidebarMenuSub`, quindi la navigazione da tastiera e lo stile del focus sono ereditati automaticamente — vedi le note sull'accessibilità di `Sidebar` stessa per i primitivi sottostanti.

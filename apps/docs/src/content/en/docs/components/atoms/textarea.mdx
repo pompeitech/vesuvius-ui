@@ -1,0 +1,61 @@
+---
+title: Textarea
+---
+
+# Textarea
+
+A styled `<textarea>`.
+
+```tsx
+import { Textarea } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<Textarea placeholder="Type your message here." />`}>
+  <Textarea placeholder="Type your message here." className="max-w-sm" />
+</ComponentPreview>
+
+## Disabled
+
+<ComponentPreview code={`<Textarea placeholder="Type your message here." disabled />`}>
+  <Textarea placeholder="Type your message here." disabled className="max-w-sm" />
+</ComponentPreview>
+
+## With a label
+
+<ComponentPreview code={`<div className="grid w-full max-w-sm gap-1.5">
+  <Label htmlFor="message">Your message</Label>
+  <Textarea id="message" placeholder="Type your message here." />
+</div>`}>
+  <div className="grid w-full max-w-sm gap-1.5">
+    <Label htmlFor="docs-message">Your message</Label>
+    <Textarea id="docs-message" placeholder="Type your message here." />
+  </div>
+</ComponentPreview>
+
+## Fixed size (no resize handle)
+
+The browser's default resize handle is left on — turn it off with `resize-none` when a fixed layout matters more than letting the user resize it:
+
+<ComponentPreview code={`<Textarea placeholder="Fixed height, no resize handle." className="resize-none" />`}>
+  <Textarea placeholder="Fixed height, no resize handle." className="max-w-sm resize-none" />
+</ComponentPreview>
+
+## API
+
+**Textarea**
+
+Every native `<textarea>` prop, including `ref`, `rows`, and `maxLength`.
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `rows` | `number` | Visible text-line height. |
+| `maxLength` | `number` | Native character cap, enforced by the browser. |
+| `disabled` | `boolean` | |
+
+No extras — the component adds styling only, no auto-resize-to-content behavior (add that yourself via a library like `react-textarea-autosize` if you need it; `Textarea` forwards `ref`, so it composes with one directly).
+
+### Accessibility
+
+Same as [`Input`](/docs/components/atoms/input) — always pair with a `<Label htmlFor>` or `aria-label`.

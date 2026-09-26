@@ -1,0 +1,63 @@
+---
+title: Date Time Range Picker
+---
+
+# Date Time Range Picker
+
+A range picker for appointments, filters, and reporting periods. It combines a range calendar with independent start and end time columns. Changes are staged locally and committed only with **Apply**; **Cancel** discards the draft.
+
+```tsx
+import { DateTimeRangePicker } from "@pompeitech/vesuvius-ui";
+```
+
+## Default
+
+<ComponentPreview code={`<DateTimeRangePicker />`}>
+  <DateTimeRangePicker />
+</ComponentPreview>
+
+## With a default range
+
+<ComponentPreview
+  code={`<DateTimeRangePicker
+  defaultValue={{
+    from: new Date(2026, 8, 12, 9, 30),
+    to: new Date(2026, 8, 15, 17, 0),
+  }}
+/>`}
+>
+  <DateTimeRangePicker
+    defaultValue={{
+      from: new Date(2026, 8, 12, 9, 30),
+      to: new Date(2026, 8, 15, 17, 0),
+    }}
+  />
+</ComponentPreview>
+
+## 24-hour format with seconds
+
+<ComponentPreview code={`<DateTimeRangePicker hourFormat="24" showSeconds />`}>
+  <DateTimeRangePicker hourFormat="24" showSeconds />
+</ComponentPreview>
+
+## API
+
+**DateTimeRangePicker**
+
+| Prop                           | Type                                      | Default                        | Description                                                             |
+| ------------------------------ | ----------------------------------------- | ------------------------------ | ----------------------------------------------------------------------- |
+| `value` / `defaultValue`       | `{ from?: Date; to?: Date }`              |                                | Controlled/uncontrolled selected range, including each endpoint's time. |
+| `onChange`                     | `(range: DateRange \| undefined) => void` |                                | Called only after **Apply**.                                            |
+| `placeholder`                  | `string`                                  | `"Pick a date and time range"` | Trigger text when no range is selected.                                 |
+| `dateFormat`                   | `string`                                  |                                | date-fns format used for both endpoints.                                |
+| `hourFormat`                   | `"12" \| "24"`                            | `"12"`                         | Hour column format.                                                     |
+| `minuteStep`                   | `number`                                  | `5`                            | Minute column granularity.                                              |
+| `showSeconds`                  | `boolean`                                 | `false`                        | Adds seconds to both endpoints.                                         |
+| `numberOfMonths`               | `number`                                  | `2`                            | Number of calendar months shown.                                        |
+| `disabled`                     | `boolean`                                 | `false`                        | Disables the trigger.                                                   |
+| `fromYear` / `toYear`          | `number`                                  |                                | Bounds for the year dropdown.                                           |
+| `confirmLabel` / `cancelLabel` | `string`                                  | `"Apply"` / `"Cancel"`         | Footer action labels.                                                   |
+
+### Accessibility
+
+The trigger is a real button. The calendar keeps the keyboard behavior of `react-day-picker`, while each time column exposes a labeled listbox with keyboard-focusable options. The committed value does not change until **Apply** is activated.
