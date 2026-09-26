@@ -3,7 +3,10 @@
     "docs": "Docs",
     "themes": "Themes",
     "liveDemo": "Live Demo",
-    "github": "GitHub"
+    "github": "GitHub",
+    "adminKit": "Admin Kit",
+    "menu": "Menu",
+    "theme": "Theme"
   },
   "search": {
     "placeholder": "Search documentation...",

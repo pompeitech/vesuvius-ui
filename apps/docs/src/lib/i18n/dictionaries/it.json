@@ -3,7 +3,10 @@
     "docs": "Documentazione",
     "themes": "Temi",
     "liveDemo": "Demo live",
-    "github": "GitHub"
+    "github": "GitHub",
+    "adminKit": "Admin Kit",
+    "menu": "Menu",
+    "theme": "Tema"
   },
   "search": {
     "placeholder": "Cerca nella documentazione...",

@@ -42,7 +42,7 @@ export function SearchTrigger({ locale, dict }: { locale: Locale; dict: Dictiona
     <>
       <Button
         variant="outline"
-        className="hidden w-64 justify-start gap-2 text-muted-foreground sm:flex"
+        className="hidden w-48 justify-start xl:w-64 gap-2 text-muted-foreground sm:flex"
         onClick={() => setOpen(true)}
       >
         <SearchIcon className="size-4" />
