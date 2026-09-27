@@ -1,6 +1,6 @@
 {
   "name": "@pompeitech/vesuvius-ui",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Vesuvius UI — a React + TypeScript component kit built on Radix UI and Tailwind CSS v4, with 11 named color themes shipped as individually-importable subpaths.",
   "keywords": [
     "react",

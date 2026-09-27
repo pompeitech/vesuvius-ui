@@ -1,5 +1,11 @@
 # @pompeitech/vesuvius-ui
 
+## 0.21.0
+
+### Minor Changes
+
+- c9bdf21: Add the Plinio built-in theme with complete light and dark palettes, neon elevation tokens, theme picker support, and documentation.
+
 ## 0.20.0
 
 ### Minor Changes
