@@ -1,7 +1,12 @@
 'use client'
 
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
+  AlertDescription,
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -11,16 +16,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-  AlertDescription,
   AlertTitle,
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
   Avatar,
   AvatarFallback,
   Badge,
   Button,
+  Calendar,
   Card,
   CardAction,
   CardContent,
@@ -30,12 +31,11 @@ import {
   Checkbox,
   EmptyState,
   IconButton,
-  Calendar,
   Input,
   Label,
+  Progress,
   RadioGroup,
   RadioGroupItem,
-  Progress,
   Select,
   SelectContent,
   SelectItem,
@@ -76,10 +76,10 @@ import {
   WalletIcon
 } from 'lucide-react'
 import Image from 'next/image'
-import { ThemeLogo } from './theme-logo'
 import Link from 'next/link'
 import type { Dictionary } from '@/lib/i18n/get-dictionary'
 import type { Locale } from '@/lib/i18n/locales'
+import { ThemeLogo } from './theme-logo'
 
 const REVENUE_DATA = [
   { month: 'Apr', revenue: 32 },
@@ -997,7 +997,7 @@ export function HomeContent({ locale, dict }: { locale: Locale; dict: Dictionary
     <>
       <main className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 py-24 text-center">
         <ThemeLogo className="h-auto max-w-full" />
-        <Badge variant="outline">v0.1.0</Badge>
+        <Badge variant="outline">v0.20.0</Badge>
         <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
           {dict.home.hero.title}
         </h1>
@@ -1007,7 +1007,7 @@ export function HomeContent({ locale, dict }: { locale: Locale; dict: Dictionary
             <Link href={`/${locale}/docs/intro`}>{dict.nav.docs}</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="https://github.com" target="_blank" rel="noreferrer">
+            <a href="https://github.com/pompeitech/vesuvius-ui" target="_blank" rel="noreferrer">
               {dict.nav.github}
             </a>
           </Button>
