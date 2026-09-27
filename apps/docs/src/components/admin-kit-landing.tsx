@@ -318,7 +318,7 @@ export function AdminKitLanding({ locale }: { locale: string }) {
         'A complete React application kit for building dashboards, ecommerce experiences and operational workspaces with product-grade quality.',
       preview: 'Open live preview',
       download: 'Download Admin Kit',
-      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 themes'],
+      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '11 themes'],
       builtFor: 'Built for momentum',
       seriousStart: 'Not a template. A serious starting point.',
       seriousDescription:
@@ -338,7 +338,7 @@ export function AdminKitLanding({ locale }: { locale: string }) {
         'Un application kit React completo per costruire dashboard, ecommerce e workspace operativi con una qualità da prodotto finito.',
       preview: 'Apri la live preview',
       download: 'Scarica Admin Kit',
-      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '10 temi'],
+      features: ['React + TypeScript', 'Tailwind v4', 'Dark mode', '11 temi'],
       builtFor: 'Built for momentum',
       seriousStart: 'Non è un template. È un punto di partenza serio.',
       seriousDescription:

@@ -22,7 +22,7 @@ import { ThemeProvider } from "@pompeitech/vesuvius-ui";
 | ---------------------- | ------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `defaultTheme`         | `"light" \| "dark" \| "system"` | `"system"`                  | Mode applied before the user picks one. `"system"` follows `prefers-color-scheme` and keeps listening for OS-level changes.                                                                        |
 | `defaultColorTheme`    | `ColorTheme`                    | `"lava"`                    | Color theme applied before the user picks one.                                                                                                                                                     |
-| `colorThemes`          | `readonly ColorTheme[]`         | all 10 built-ins            | The full set of selectable color themes — pass a subset to restrict what `ThemePalettePicker`/`ThemeSwitcher` offer, or append your own custom theme name (see [A custom theme](#a-custom-theme)). |
+| `colorThemes`          | `readonly ColorTheme[]`         | all 11 built-ins            | The full set of selectable color themes — pass a subset to restrict what `ThemePalettePicker`/`ThemeSwitcher` offer, or append your own custom theme name (see [A custom theme](#a-custom-theme)). |
 | `storageKey`           | `string`                        | `"vesuvius-ui-theme"`       | `localStorage` key for the mode choice.                                                                                                                                                            |
 | `colorThemeStorageKey` | `string`                        | `"vesuvius-ui-color-theme"` | `localStorage` key for the color theme choice.                                                                                                                                                     |
 
@@ -129,7 +129,7 @@ Override any of these at `:root` (and `.dark` for the dark-mode value) in your o
 }
 ```
 
-## The 10 built-in themes
+## The 11 built-in themes
 
 The visual catalog lives at [/themes](/themes), with a dedicated detail page for every palette. Every theme is also its own `exports` subpath under `themes/` — import only the ones you offer, to ship a smaller CSS bundle:
 
@@ -222,9 +222,17 @@ A Slack-inspired palette with an aubergine sidebar, expressive violet surfaces a
 @import "@pompeitech/vesuvius-ui/themes/aubergine.css";
 ```
 
+### plinio
+
+A futuristic control-room palette with electric cyan actions, ultraviolet depth, acid-green telemetry and a scoped neon glow. Light mode keeps the same technical character on crisp, icy surfaces.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/plinio.css";
+```
+
 ## What a theme actually overrides
 
-A theme file is CSS custom properties scoped under `[data-theme="<name>"]` (and `[data-theme="<name>"].dark` for its dark variant). All ten built-in themes provide a complete light/dark palette: surfaces, text, actions, semantic statuses, chart colors and sidebar tokens.
+A theme file is CSS custom properties scoped under `[data-theme="<name>"]` (and `[data-theme="<name>"].dark` for its dark variant). All eleven built-in themes provide a complete light/dark palette: surfaces, text, actions, semantic statuses, chart colors and sidebar tokens.
 
 Every component reads these as Tailwind utilities (`bg-primary`, `text-muted-foreground`, `border-border`, …) generated from the `@theme inline` block in `base.css` — components never hardcode a color, so a theme swap needs no component-level changes at all.
 
@@ -294,7 +302,7 @@ import { ThemeProvider, COLOR_THEMES } from "@pompeitech/vesuvius-ui";
 </ThemeProvider>;
 ```
 
-`colorTheme`'s type (`ColorTheme`) is the 10 built-in names widened with `string & {}` specifically so a custom name like `"acme"` type-checks without needing to fork or extend the package's own types.
+`colorTheme`'s type (`ColorTheme`) is the 11 built-in names widened with `string & {}` specifically so a custom name like `"acme"` type-checks without needing to fork or extend the package's own types.
 
 Prefer `oklch()` over `hsl()`/`rgb()` when writing new token values — every built-in theme is authored in `oklch()` specifically because it keeps perceived lightness consistent across hues, which is what makes a light/dark pair for the same theme feel like a matched set instead of two unrelated colors.
 

@@ -43,7 +43,7 @@
   "themePages": {
     "listTitle": "Temi con una personalità.",
     "listDescription": "Scegli un linguaggio visivo completo per il tuo prodotto. Ogni tema Vesuvius include token chiari e scuri, colori semantici per gli stati e un'interfaccia coordinata.",
-    "badge": "10 temi integrati · chiaro + scuro",
+    "badge": "11 temi integrati · chiaro + scuro",
     "builtIn": "Tema integrato",
     "detailDescription": "Un linguaggio visivo completo per superfici di prodotto, stati di interazione e chrome dell'interfaccia.",
     "viewSource": "Vedi il sorgente",
@@ -104,6 +104,10 @@
     "aubergine": {
       "mood": "Energia collaborativa e accogliente",
       "description": "Navigazione ispirata all'aubergine di Slack, superfici viola espressive e azioni blu brillanti."
+    },
+    "plinio": {
+      "mood": "Una control room al neon per il prossimo futuro",
+      "description": "Segnali ciano elettrico, profondità ultravioletta e telemetria verde acido su superfici tecniche precise."
     }
   },
   "notFound": {
@@ -116,7 +120,7 @@
   },
   "home": {
     "hero": {
-      "title": "Un kit completo di componenti React + TypeScript — Radix UI sotto, Tailwind CSS sopra, dieci temi colore pronti all'uso.",
+      "title": "Un kit completo di componenti React + TypeScript — Radix UI sotto, Tailwind CSS sopra, undici temi colore pronti all'uso.",
       "description": "65 componenti, anteprime live e documentazione completa — costruiti interamente con Vesuvius UI."
     },
     "tabs": {

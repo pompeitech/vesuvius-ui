@@ -21,7 +21,8 @@ const DEFAULT_SWATCH_COLORS: Record<string, string> = {
   'amber-minimal': '#f49f1e',
   claymorphism: '#8b5cf6',
   alpine: '#3158d9',
-  aubergine: '#3f0e40'
+  aubergine: '#3f0e40',
+  plinio: '#37e7ff'
 }
 
 const FALLBACK_SWATCH_COLOR = '#71717a'

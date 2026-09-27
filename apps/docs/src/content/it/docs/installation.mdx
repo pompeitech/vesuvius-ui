@@ -84,14 +84,14 @@ Dopo aver abilitato Tailwind v4, importa una sola volta il foglio di stile nel p
 import "@pompeitech/vesuvius-ui/styles.css";
 ```
 
-`styles.css` include i token base (chiaro e scuro), `lava` e gli altri 9 temi colore con nome. Per ottenere un bundle più piccolo con i soli temi che vuoi offrire, importa `base.css` insieme ai singoli file `themes/<nome>.css`:
+`styles.css` include i token base (chiaro e scuro), `lava` e gli altri 10 temi colore con nome. Per ottenere un bundle più piccolo con i soli temi che vuoi offrire, importa `base.css` insieme ai singoli file `themes/<nome>.css`:
 
 ```ts
 import "@pompeitech/vesuvius-ui/base.css";
 import "@pompeitech/vesuvius-ui/themes/lava.css";
 ```
 
-Ogni tema è disponibile come subpath in `exports` (`themes/lava.css`, `themes/stripe.css`, `themes/vercel.css`, `themes/supabase.css`, `themes/linear.css`, `themes/claude.css`, `themes/amber-minimal.css`, `themes/claymorphism.css`, `themes/alpine.css`, `themes/aubergine.css`): importane quanti ne vuoi rendere selezionabili.
+Ogni tema è disponibile come subpath in `exports` (`themes/lava.css`, `themes/stripe.css`, `themes/vercel.css`, `themes/supabase.css`, `themes/linear.css`, `themes/claude.css`, `themes/amber-minimal.css`, `themes/claymorphism.css`, `themes/alpine.css`, `themes/aubergine.css`, `themes/plinio.css`): importane quanti ne vuoi rendere selezionabili.
 
 ## 3. Avvolgi l'applicazione in `ThemeProvider`
 

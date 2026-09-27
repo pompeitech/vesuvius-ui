@@ -15,7 +15,8 @@ export const DEFAULT_THEME_SWATCHES: Record<string, ThemeSwatch> = {
   'amber-minimal': ['#f49f1e', '#15803d', '#2563eb', '#9333ea'],
   claymorphism: ['#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899'],
   alpine: ['#3158d9', '#f07b68', '#e9a9b5', '#5b7ce2'],
-  aubergine: ['#3f0e40', '#611f69', '#1264a3', '#36c5f0']
+  aubergine: ['#3f0e40', '#611f69', '#1264a3', '#36c5f0'],
+  plinio: ['#37e7ff', '#b66cff', '#34f5a3', '#ff4dcb']
 }
 
 export const FALLBACK_THEME_SWATCH: ThemeSwatch = [
@@ -36,7 +37,8 @@ export function formatThemeName(theme: string) {
     'amber-minimal': 'Amber Minimal',
     claymorphism: 'Claymorphism',
     alpine: 'Alpine',
-    aubergine: 'Aubergine'
+    aubergine: 'Aubergine',
+    plinio: 'Plinio'
   }
   if (labels[theme]) return labels[theme]
 

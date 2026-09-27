@@ -2,7 +2,7 @@
 
 The Vesuvius UI component kit: React 19 + TypeScript, built on Radix UI primitives and Tailwind
 CSS v4. Ships as a real, versioned, publishable package — compiled ESM + full `.d.ts` type
-declarations (see [`tsup.config.ts`](./tsup.config.ts)), not raw source. Design tokens and 10
+declarations (see [`tsup.config.ts`](./tsup.config.ts)), not raw source. Design tokens and 11
 named color themes ship as part of the same package, each individually importable.
 
 > **This is `0.20.0`** — the full component roadmap, shipped: all 20 atoms, all forty molecules
@@ -42,7 +42,7 @@ component output as a Tailwind source automatically; consumers do not need a pac
 **2. Import styles once**, in your app's global CSS entry — pick one:
 
 ```css
-/* Everything: tokens + all 10 named color themes. Simplest default. */
+/* Everything: tokens + all 11 named color themes. Simplest default. */
 @import "@pompeitech/vesuvius-ui/styles.css";
 ```
 
@@ -53,7 +53,8 @@ component output as a Tailwind source automatically; consumers do not need a pac
 
 Every theme lives at its own `./themes/<name>.css` subpath — see
 [`src/styles/themes`](./src/styles/themes) for the full list: `lava` (Vesuvius UI's own), `stripe`,
-`vercel`, `supabase`, `linear`, `claude`, `amber-minimal`, `claymorphism`, `alpine`, `aubergine`.
+`vercel`, `supabase`, `linear`, `claude`, `amber-minimal`, `claymorphism`, `alpine`, `aubergine`,
+`plinio`.
 `./themes.css` bundles all of them in one import, same as `./styles.css` minus the base tokens.
 
 **3. Wrap your app in `ThemeProvider`**:

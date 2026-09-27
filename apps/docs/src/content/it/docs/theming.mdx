@@ -22,7 +22,7 @@ import { ThemeProvider } from "@pompeitech/vesuvius-ui";
 | ---------------------- | ------------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `defaultTheme`         | `"light" \| "dark" \| "system"` | `"system"`                  | Modalità applicata prima che l'utente ne scelga una. `"system"` segue `prefers-color-scheme` e continua ad ascoltare i cambi a livello di sistema operativo.                                                                                             |
 | `defaultColorTheme`    | `ColorTheme`                    | `"lava"`                    | Tema colore applicato prima che l'utente ne scelga uno.                                                                                                                                                                                                  |
-| `colorThemes`          | `readonly ColorTheme[]`         | tutti e 10 i predefiniti    | L'insieme completo dei temi colore selezionabili — passa un sottoinsieme per limitare cosa `ThemePalettePicker`/`ThemeSwitcher` offrono, oppure aggiungi il nome di un tuo tema personalizzato (vedi [Un tema personalizzato](#un-tema-personalizzato)). |
+| `colorThemes`          | `readonly ColorTheme[]`         | tutti e 11 i predefiniti    | L'insieme completo dei temi colore selezionabili — passa un sottoinsieme per limitare cosa `ThemePalettePicker`/`ThemeSwitcher` offrono, oppure aggiungi il nome di un tuo tema personalizzato (vedi [Un tema personalizzato](#un-tema-personalizzato)). |
 | `storageKey`           | `string`                        | `"vesuvius-ui-theme"`       | Chiave `localStorage` per la scelta della modalità.                                                                                                                                                                                                      |
 | `colorThemeStorageKey` | `string`                        | `"vesuvius-ui-color-theme"` | Chiave `localStorage` per la scelta del tema colore.                                                                                                                                                                                                     |
 
@@ -129,7 +129,7 @@ Sovrascrivi uno qualsiasi di questi token su `:root` (e `.dark` per il valore in
 }
 ```
 
-## I 10 temi predefiniti
+## Gli 11 temi predefiniti
 
 Il catalogo visuale è disponibile su [/themes](/themes), con una pagina di dettaglio dedicata a ogni palette. Ogni tema è anche il proprio `exports` subpath sotto `themes/` — importa solo quelli che offri, per uno stile CSS più leggero:
 
@@ -222,9 +222,17 @@ Una palette ispirata a Slack, con sidebar aubergine, superfici viola espressive 
 @import "@pompeitech/vesuvius-ui/themes/aubergine.css";
 ```
 
+### plinio
+
+Una palette futuristica da control room, con azioni ciano elettrico, profondità ultravioletta, telemetria verde acido e un alone neon circoscritto. La modalità chiara mantiene lo stesso carattere tecnico su superfici nitide e glaciali.
+
+```css
+@import "@pompeitech/vesuvius-ui/themes/plinio.css";
+```
+
 ## Cosa sovrascrive davvero un tema
 
-Un file di tema è composto da custom property CSS sotto `[data-theme="<nome>"]` (e `[data-theme="<nome>"].dark` per la sua variante scura). Tutti e dieci i temi predefiniti forniscono una palette completa chiara/scura: superfici, testi, azioni, stati semantici, grafici e sidebar.
+Un file di tema è composto da custom property CSS sotto `[data-theme="<nome>"]` (e `[data-theme="<nome>"].dark` per la sua variante scura). Tutti e undici i temi predefiniti forniscono una palette completa chiara/scura: superfici, testi, azioni, stati semantici, grafici e sidebar.
 
 Ogni componente legge questi valori come utility Tailwind (`bg-primary`, `text-muted-foreground`, `border-border`, …) generate dal blocco `@theme inline` in `base.css` — i componenti non hardcodano mai un colore, quindi un cambio di tema non richiede alcuna modifica a livello di componente.
 

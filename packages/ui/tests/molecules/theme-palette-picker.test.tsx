@@ -19,10 +19,10 @@ describe('ThemePalettePicker', () => {
       </ThemeProvider>
     )
     await user.click(screen.getByRole('button', { name: /theme: lava/i }))
-    await user.type(screen.getByPlaceholderText('Search themes...'), 'Supabase')
+    await user.type(screen.getByPlaceholderText('Search themes...'), 'Plinio')
     const listbox = await screen.findByRole('listbox')
-    await user.click(within(listbox).getByText('Supabase'))
-    expect(document.documentElement.dataset.theme).toBe('supabase')
+    await user.click(within(listbox).getByText('Plinio'))
+    expect(document.documentElement.dataset.theme).toBe('plinio')
   })
 
   test('shows an empty state for an unknown theme query', async () => {

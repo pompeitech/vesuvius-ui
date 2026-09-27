@@ -27,7 +27,7 @@ const themeInitScript = `
       ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
       : theme;
     var storedColorTheme = localStorage.getItem("vesuvius-ui-color-theme");
-    var colorTheme = ["lava", "stripe", "vercel", "supabase", "linear", "claude", "amber-minimal", "claymorphism", "alpine", "aubergine"].includes(storedColorTheme)
+    var colorTheme = ["lava", "stripe", "vercel", "supabase", "linear", "claude", "amber-minimal", "claymorphism", "alpine", "aubergine", "plinio"].includes(storedColorTheme)
       ? storedColorTheme
       : "lava";
     var root = document.documentElement;

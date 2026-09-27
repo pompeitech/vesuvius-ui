@@ -53,7 +53,7 @@ Alert · Aspect Ratio · Avatar · Badge · Button · Card · Checkbox · Icon B
 Number Input · Password Input · Progress · Radio Group · Separator · Skeleton · Slider · Switch ·
 Textarea · Typography
 
-Plus the theming system (`ThemeProvider`, `useTheme`, 10 named color themes) and a couple of shared
+Plus the theming system (`ThemeProvider`, `useTheme`, 11 named color themes) and a couple of shared
 utilities (`cn`, `useIsMobile`).
 
 ### Molecules shipped in `0.2.0` – `0.13.0`
@@ -144,9 +144,9 @@ import { Button } from '@pompeitech/vesuvius-ui/atoms/button'
 
 ### Themes
 
-10 named color themes ship as individual CSS subpaths, so you only pull in the ones you use:
+11 named color themes ship as individual CSS subpaths, so you only pull in the ones you use:
 `lava` (Vesuvius UI's own), `stripe`, `vercel`, `supabase`, `linear`, `claude`, `amber-minimal`,
-`claymorphism`, `alpine`, `aubergine`. Each one supports light and dark mode out of the box via
+`claymorphism`, `alpine`, `aubergine`, `plinio`. Each one supports light and dark mode out of the box via
 `ThemeProvider`'s `defaultTheme` (`light` / `dark` / `system`) prop.
 
 ## Exploring the components

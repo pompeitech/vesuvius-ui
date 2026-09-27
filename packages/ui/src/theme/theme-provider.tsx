@@ -20,7 +20,8 @@ export const COLOR_THEMES = [
   'amber-minimal',
   'claymorphism',
   'alpine',
-  'aubergine'
+  'aubergine',
+  'plinio'
 ] as const
 
 export type ColorTheme = (typeof COLOR_THEMES)[number] | (string & {})

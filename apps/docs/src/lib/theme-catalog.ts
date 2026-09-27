@@ -133,6 +133,19 @@ export const THEME_CATALOG: readonly ThemeCatalogEntry[] = [
     displayFont: 'Slack-Lato, Lato',
     bodyFont: 'Slack-Lato, Lato',
     monoFont: 'ui-monospace'
+  },
+  {
+    name: 'plinio',
+    label: 'Plinio',
+    description:
+      'Electric cyan signals, ultraviolet depth and acid-green telemetry on precise technical surfaces.',
+    mood: 'A neon control room for the near future',
+    primary: '#37e7ff',
+    secondary: '#b66cff',
+    swatch: ['#37e7ff', '#b66cff', '#34f5a3', '#ff4dcb'],
+    displayFont: 'Space Grotesk',
+    bodyFont: 'Inter',
+    monoFont: 'JetBrains Mono'
   }
 ]
 

@@ -84,14 +84,14 @@ Once Tailwind v4 is enabled, import the stylesheet once at your app's entry poin
 import "@pompeitech/vesuvius-ui/styles.css";
 ```
 
-`styles.css` includes the base tokens (light + dark), `lava`, and all 8 additional named color themes. To ship a smaller bundle with only the named themes you actually offer, import `base.css` plus individual `themes/<name>.css` files instead:
+`styles.css` includes the base tokens (light + dark), `lava`, and all 10 additional named color themes. To ship a smaller bundle with only the named themes you actually offer, import `base.css` plus individual `themes/<name>.css` files instead:
 
 ```ts
 import "@pompeitech/vesuvius-ui/base.css";
 import "@pompeitech/vesuvius-ui/themes/lava.css";
 ```
 
-Each theme is its own `exports` subpath (`themes/lava.css`, `themes/stripe.css`, `themes/vercel.css`, `themes/supabase.css`, `themes/linear.css`, `themes/claude.css`, `themes/amber-minimal.css`, `themes/claymorphism.css`, `themes/alpine.css`, `themes/aubergine.css`) — import as many as you plan to let users switch between.
+Each theme is its own `exports` subpath (`themes/lava.css`, `themes/stripe.css`, `themes/vercel.css`, `themes/supabase.css`, `themes/linear.css`, `themes/claude.css`, `themes/amber-minimal.css`, `themes/claymorphism.css`, `themes/alpine.css`, `themes/aubergine.css`, `themes/plinio.css`) — import as many as you plan to let users switch between.
 
 ## 3. Wrap your app in a `ThemeProvider`
 

@@ -43,7 +43,7 @@
   "themePages": {
     "listTitle": "Themes with a point of view.",
     "listDescription": "Choose a complete visual language for your product. Every Vesuvius theme ships with light and dark tokens, semantic status colors and matching UI chrome.",
-    "badge": "10 built-in themes · light + dark",
+    "badge": "11 built-in themes · light + dark",
     "builtIn": "Built-in theme",
     "detailDescription": "A complete visual language for product surfaces, interaction states and interface chrome.",
     "viewSource": "View source",
@@ -104,6 +104,10 @@
     "aubergine": {
       "mood": "Collaborative energy with a friendly edge",
       "description": "Slack-inspired aubergine navigation, expressive violet surfaces and bright blue actions."
+    },
+    "plinio": {
+      "mood": "A neon control room for the near future",
+      "description": "Electric cyan signals, ultraviolet depth and acid-green telemetry on precise technical surfaces."
     }
   },
   "notFound": {
@@ -116,7 +120,7 @@
   },
   "home": {
     "hero": {
-      "title": "A complete React + TypeScript component kit — Radix UI underneath, Tailwind CSS on top, ten color themes out of the box.",
+      "title": "A complete React + TypeScript component kit — Radix UI underneath, Tailwind CSS on top, eleven color themes out of the box.",
       "description": "65 components, live previews, and full documentation — built entirely with Vesuvius UI."
     },
     "tabs": {
