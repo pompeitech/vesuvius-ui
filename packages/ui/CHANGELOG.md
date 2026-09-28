@@ -1,5 +1,11 @@
 # @pompeitech/vesuvius-ui
 
+## 0.21.1
+
+### Patch Changes
+
+- 1ec8ba8: Restore the documented Form integration, including useZodForm and FieldNumberInput exports.
+
 ## 0.21.0
 
 ### Minor Changes
