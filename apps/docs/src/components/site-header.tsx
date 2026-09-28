@@ -26,6 +26,8 @@ import { SearchTrigger } from './search-dialog'
 import { LocaleSwitcher } from './locale-switcher'
 import { ThemeLogo } from './theme-logo'
 
+const repositoryUrl = 'https://github.com/pompeitech/vesuvius-ui'
+
 function navLinks(locale: Locale, dict: Dictionary) {
   return [
     { href: `/${locale}/docs/intro`, label: dict.nav.docs },
@@ -60,7 +62,7 @@ function MobileMenu({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             </Link>
           ))}
           <a
-            href="https://github.com"
+            href={repositoryUrl}
             target="_blank"
             rel="noreferrer"
             className="text-muted-foreground hover:bg-accent hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors"
@@ -120,7 +122,7 @@ export function SiteHeader({
         <ThemePalettePicker className="hidden lg:flex" />
         <ThemeModeToggle />
         <Button variant="ghost" size="sm" className="hidden lg:inline-flex" asChild>
-          <a href="https://github.com" target="_blank" rel="noreferrer">
+          <a href={repositoryUrl} target="_blank" rel="noreferrer">
             {dict.nav.github}
           </a>
         </Button>

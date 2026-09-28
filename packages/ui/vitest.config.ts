@@ -46,6 +46,7 @@ export default defineConfig({
       'tests/molecules/file-uploader.test.{ts,tsx}',
       'tests/molecules/filter-bar.test.{ts,tsx}',
       'tests/molecules/form-helper-text.test.{ts,tsx}',
+      'tests/molecules/form.test.{ts,tsx}',
       'tests/molecules/grid.test.{ts,tsx}',
       'tests/molecules/header.test.{ts,tsx}',
       'tests/molecules/input-group.test.{ts,tsx}',

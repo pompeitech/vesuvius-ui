@@ -26,6 +26,7 @@ export default defineConfig({
     'src/molecules/file-uploader/index.ts',
     'src/molecules/filter-bar/index.ts',
     'src/molecules/form-helper-text/index.ts',
+    'src/molecules/form/index.ts',
     'src/molecules/grid/index.ts',
     'src/molecules/header/index.ts',
     'src/molecules/input-group/index.ts',

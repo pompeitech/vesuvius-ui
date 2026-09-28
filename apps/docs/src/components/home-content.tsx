@@ -992,12 +992,20 @@ function _ComponentCatalogShowcase({ dict }: { dict: Dictionary }) {
   )
 }
 
-export function HomeContent({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+export function HomeContent({
+  locale,
+  dict,
+  version
+}: {
+  locale: Locale
+  dict: Dictionary
+  version: string
+}) {
   return (
     <>
       <main className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 py-24 text-center">
         <ThemeLogo className="h-auto max-w-full" />
-        <Badge variant="outline">v0.20.0</Badge>
+        <Badge variant="outline">v{version}</Badge>
         <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
           {dict.home.hero.title}
         </h1>

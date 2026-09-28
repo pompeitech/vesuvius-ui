@@ -74,7 +74,12 @@ function ProfileForm() {
 `FieldNumberInput` collega un input numerico al valore e agli errori di react-hook-form:
 
 <ComponentPreview code={`<FieldNumberInput name="amount" label="Importo" description="Inserisci un importo in euro." />`}>
-  <Demo name="form-number-input" label="Importo" description="Inserisci un importo in euro." />
+  <Demo
+    name="form-number-input"
+    label="Importo"
+    description="Inserisci un importo in euro."
+    requiredMessage="Inserisci un importo."
+  />
 </ComponentPreview>
 
 `FormMessage` renderizza automaticamente l'effettivo errore di validazione di react-hook-form del campo — nessun collegamento manuale necessario. Ti serve invece uno stato di successo/info/warning, o un testo di aiuto completamente fuori da RHF? Usa `FormHelperText`.

@@ -950,6 +950,95 @@ function KanbanBoardDemo() {
   )
 }
 
+// ---------- form: schema validation ----------
+function FormProfile({
+  usernameLabel = 'Username',
+  usernameDesc = 'Your public display name.',
+  usernameMin = 'Username must be at least 2 characters.',
+  emailLabel = 'Email',
+  emailInvalid = 'Enter a valid email address.',
+  emailPlaceholder = 'you@example.com',
+  submitLabel = 'Submit'
+}: {
+  usernameLabel?: string
+  usernameDesc?: string
+  usernameMin?: string
+  emailLabel?: string
+  emailInvalid?: string
+  emailPlaceholder?: string
+  submitLabel?: string
+}) {
+  const schema = z.object({
+    username: z.string().min(2, usernameMin),
+    email: z.email(emailInvalid)
+  })
+  const form = V.useZodForm(schema, { defaultValues: { username: '', email: '' } })
+
+  return (
+    <V.Form {...form}>
+      <form onSubmit={form.handleSubmit(() => undefined)} className="w-full max-w-md space-y-6">
+        <V.FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <V.FormItem>
+              <V.FormLabel>{usernameLabel}</V.FormLabel>
+              <V.FormControl>
+                <V.Input placeholder="admin" {...field} />
+              </V.FormControl>
+              <V.FormDescription>{usernameDesc}</V.FormDescription>
+              <V.FormMessage />
+            </V.FormItem>
+          )}
+        />
+        <V.FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <V.FormItem>
+              <V.FormLabel>{emailLabel}</V.FormLabel>
+              <V.FormControl>
+                <V.Input type="email" placeholder={emailPlaceholder} {...field} />
+              </V.FormControl>
+              <V.FormMessage />
+            </V.FormItem>
+          )}
+        />
+        <V.Button type="submit">{submitLabel}</V.Button>
+      </form>
+    </V.Form>
+  )
+}
+
+function FormNumberInputDemo({
+  label = 'Amount',
+  description = 'Enter an amount in euros.',
+  requiredMessage = 'Enter an amount.'
+}: {
+  label?: string
+  description?: string
+  requiredMessage?: string
+}) {
+  const schema = z.object({ amount: z.string().min(1, requiredMessage) })
+  const form = V.useZodForm(schema, { defaultValues: { amount: '' } })
+
+  return (
+    <V.Form {...form}>
+      <form onSubmit={form.handleSubmit(() => undefined)} className="w-full max-w-md space-y-6">
+        <V.FieldNumberInput
+          name="amount"
+          label={label}
+          description={description}
+          placeholder="0.00"
+          min="0"
+          step="0.01"
+        />
+        <V.Button type="submit">Submit</V.Button>
+      </form>
+    </V.Form>
+  )
+}
+
 const DEMOS: Record<string, (props: Record<string, unknown>) => ReactNode> = {
   'command-palette': CommandPaletteDemo,
   'sheet-right': SheetRight as (props: Record<string, unknown>) => ReactNode,
@@ -978,6 +1067,8 @@ const DEMOS: Record<string, (props: Record<string, unknown>) => ReactNode> = {
   'empty-state-default': EmptyStateDefault,
   'wizard-default': WizardDefault as (props: Record<string, unknown>) => ReactNode,
   'wizard-validated': WizardValidated as (props: Record<string, unknown>) => ReactNode,
+  'form-profile': FormProfile as (props: Record<string, unknown>) => ReactNode,
+  'form-number-input': FormNumberInputDemo as (props: Record<string, unknown>) => ReactNode,
   'data-table': DataTableDemo as (props: Record<string, unknown>) => ReactNode,
   'kanban-board': KanbanBoardDemo
 }

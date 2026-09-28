@@ -25,6 +25,7 @@
     "tests/molecules/file-uploader.test.tsx",
     "tests/molecules/filter-bar.test.tsx",
     "tests/molecules/form-helper-text.test.tsx",
+    "tests/molecules/form.test.tsx",
     "tests/molecules/grid.test.tsx",
     "tests/molecules/header.test.tsx",
     "tests/molecules/input-group.test.tsx",

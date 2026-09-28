@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ThemeProvider, Toaster } from '@/components/app-theme-provider'
+import { SiteFooter } from '@/components/site-footer'
 import { LOCALES, isLocale, type Locale } from '@/lib/i18n/locales'
 import '../globals.css'
 
@@ -56,6 +57,7 @@ export default async function LocaleLayout({
       <body className="bg-background text-foreground min-h-svh antialiased">
         <ThemeProvider>
           {children}
+          <SiteFooter />
           <Toaster />
         </ThemeProvider>
       </body>
