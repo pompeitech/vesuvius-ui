@@ -4,7 +4,7 @@ title: Form Helper Text
 
 # Form Helper Text
 
-Field-level helper text with a state — info/success/warning/error, not just neutral-or-error like plain form descriptions. Inside an RHF-managed `FormField`, prefer [`FormMessage`](/docs/components/molecules/form) (renders the actual validation error automatically); reach for this when you need success/info states, or a helper text outside that context.
+Field-level helper text with a state — info/success/warning/error, not just neutral-or-error like plain form descriptions. For a field's validation error, prefer [`FieldError`](/docs/components/molecules/field) (it also wires `aria-invalid`/`aria-describedby`); reach for this when you need success/info states, or a helper text outside a `Field`.
 
 ```tsx
 import { FormHelperText } from "@pompeitech/vesuvius-ui";
@@ -51,4 +51,4 @@ Plus every native `<p>` prop.
 
 ### Accessibility
 
-Purely visual coloring/iconography — it carries no ARIA role of its own. When paired with a field outside RHF, associate it via `aria-describedby` pointing at its `id` so assistive tech reads it alongside the field; inside an RHF `FormField`, prefer `FormMessage`/`FormDescription`, which wire this automatically.
+Purely visual coloring/iconography — it carries no ARIA role of its own. When paired with a field, associate it via `aria-describedby` pointing at its `id` so assistive tech reads it alongside the field; inside a `Field`, prefer `FieldError`/`FieldDescription`, which wire this automatically.

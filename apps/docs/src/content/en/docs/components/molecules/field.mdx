@@ -1,0 +1,122 @@
+---
+title: Field
+---
+
+# Field
+
+Label, control, description and error message for a single form field, wired together and announced correctly to assistive tech. `Field` doesn't depend on any form library: it takes its validation state from props, so it works the same with `useState`, react-hook-form, TanStack Form, Conform or server actions.
+
+```tsx
+import { Field, FieldLabel, FieldControl, FieldDescription, FieldError } from "@pompeitech/vesuvius-ui";
+```
+
+## Example
+
+<ComponentPreview code={`<Field>
+  <FieldLabel>Email</FieldLabel>
+  <FieldControl>
+    <Input type="email" placeholder="you@example.com" />
+  </FieldControl>
+  <FieldDescription>We'll never share your email.</FieldDescription>
+</Field>`} className="w-full">
+  <Field className="w-full max-w-md">
+    <FieldLabel>Email</FieldLabel>
+    <FieldControl>
+      <Input type="email" placeholder="you@example.com" />
+    </FieldControl>
+    <FieldDescription>We'll never share your email.</FieldDescription>
+  </Field>
+</ComponentPreview>
+
+## Validation
+
+Put the error message inside `FieldError`. When it has content, the field becomes invalid: the label turns red, the control gets `aria-invalid`, and the message is added to its `aria-describedby`. When it's empty, `FieldError` renders nothing. Submit empty or with a single character:
+
+<ComponentPreview code={`function ProfileForm() {
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState<string>();
+
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        setError(username.trim().length < 2 ? "Username must be at least 2 characters." : undefined);
+      }}
+      className="space-y-6"
+    >
+      <Field required>
+        <FieldLabel>Username</FieldLabel>
+        <FieldControl>
+          <Input placeholder="admin" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </FieldControl>
+        <FieldDescription>Your public display name.</FieldDescription>
+        <FieldError>{error}</FieldError>
+      </Field>
+      <Button type="submit">Submit</Button>
+    </form>
+  );
+}`} className="w-full">
+  <Demo name="field-validation" />
+</ComponentPreview>
+
+## With react-hook-form
+
+The design system doesn't ship a react-hook-form integration: connecting it takes a few lines in your app. Pass the field's error to `FieldError` and spread `field` onto the control:
+
+```tsx
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.email("Enter a valid email address."),
+});
+
+function NewsletterForm() {
+  const form = useForm({ resolver: zodResolver(schema), defaultValues: { email: "" } });
+
+  return (
+    <form onSubmit={form.handleSubmit((values) => console.log(values))} className="space-y-6">
+      <Controller
+        control={form.control}
+        name="email"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl>
+              <Input type="email" {...field} />
+            </FieldControl>
+            <FieldError>{fieldState.error?.message}</FieldError>
+          </Field>
+        )}
+      />
+      <Button type="submit">Subscribe</Button>
+    </form>
+  );
+}
+```
+
+The same pattern works with any other library: all `Field` needs is the current error message (or `invalid`).
+
+Need a success/info/warning state, or helper text outside a `Field`? Use [`FormHelperText`](/docs/components/molecules/form-helper-text).
+
+## API
+
+**Field** — every native `<div>` prop, plus:
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `invalid` | `boolean` | Marks the field invalid. Defaults to whether a non-empty `FieldError` is rendered, so you only need it to force the state. |
+| `required` | `boolean` | Adds `aria-required` to the control and a `*` to the label. |
+
+**FieldLabel** — every `Label` prop, plus `required` to override the `*` set by `Field`. Turns red when the field is invalid.
+
+**FieldControl** — a `Slot` (renders no element of its own) that forwards `id`, `aria-invalid`, `aria-required` and `aria-describedby` onto its single child: the actual input, select, textarea, etc.
+
+**FieldDescription** — every native `<p>` prop; static helper text.
+
+**FieldError** — every native `<p>` prop; renders its children as the error message, or nothing at all when they're empty (`undefined`, `null`, `false` or `""`).
+
+### Accessibility
+
+`Field` generates an id that links `FieldLabel`'s `htmlFor` to the control's `id`. `aria-describedby` only points at a `FieldDescription` or `FieldError` that's actually rendered, so screen readers never get a reference to a missing element.
