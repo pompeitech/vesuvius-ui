@@ -13,9 +13,9 @@ describe('PasswordInput', () => {
     expect(input).toHaveAttribute('type', 'text')
   })
 
-  test('sizes its eye-toggle button to match the input size', () => {
+  test('sizes its eye-toggle button one step below the input so it stays inside the border', () => {
     render(<PasswordInput aria-label="Password" size="lg" />)
     expect(screen.getByLabelText('Password')).toHaveClass('h-10')
-    expect(screen.getByRole('button', { name: 'Show password' })).toHaveClass('size-10')
+    expect(screen.getByRole('button', { name: 'Show password' })).toHaveClass('size-8')
   })
 })
