@@ -1,0 +1,128 @@
+---
+title: Field
+---
+
+# Field
+
+Etichetta, controllo, descrizione e messaggio di errore di un singolo campo, collegati tra loro e annunciati correttamente alle tecnologie assistive. `Field` non dipende da nessuna libreria di form: riceve lo stato di validazione dalle props, quindi funziona allo stesso modo con `useState`, react-hook-form, TanStack Form, Conform o le server action.
+
+```tsx
+import { Field, FieldLabel, FieldControl, FieldDescription, FieldError } from "@pompeitech/vesuvius-ui";
+```
+
+## Esempio
+
+<ComponentPreview code={`<Field>
+  <FieldLabel>Email</FieldLabel>
+  <FieldControl>
+    <Input type="email" placeholder="tu@esempio.com" />
+  </FieldControl>
+  <FieldDescription>Non condivideremo mai la tua email.</FieldDescription>
+</Field>`} className="w-full">
+  <Field className="w-full max-w-md">
+    <FieldLabel>Email</FieldLabel>
+    <FieldControl>
+      <Input type="email" placeholder="tu@esempio.com" />
+    </FieldControl>
+    <FieldDescription>Non condivideremo mai la tua email.</FieldDescription>
+  </Field>
+</ComponentPreview>
+
+## Validazione
+
+Metti il messaggio di errore dentro `FieldError`. Quando ha un contenuto, il campo diventa non valido: l'etichetta diventa rossa, il controllo riceve `aria-invalid` e il messaggio viene aggiunto al suo `aria-describedby`. Quando è vuoto, `FieldError` non renderizza nulla. Prova a inviare vuoto o con un solo carattere:
+
+<ComponentPreview code={`function ProfileForm() {
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState<string>();
+
+  return (
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        setError(username.trim().length < 2 ? "Lo username deve avere almeno 2 caratteri." : undefined);
+      }}
+      className="space-y-6"
+    >
+      <Field required>
+        <FieldLabel>Username</FieldLabel>
+        <FieldControl>
+          <Input placeholder="admin" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </FieldControl>
+        <FieldDescription>Il tuo nome pubblico.</FieldDescription>
+        <FieldError>{error}</FieldError>
+      </Field>
+      <Button type="submit">Invia</Button>
+    </form>
+  );
+}`} className="w-full">
+  <Demo
+    name="field-validation"
+    label="Username"
+    description="Il tuo nome pubblico."
+    minMessage="Lo username deve avere almeno 2 caratteri."
+    submitLabel="Invia"
+  />
+</ComponentPreview>
+
+## Con react-hook-form
+
+Il design system non include un'integrazione con react-hook-form: collegarla richiede poche righe nella tua app. Passa l'errore del campo a `FieldError` e fai lo spread di `field` sul controllo:
+
+```tsx
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.email("Inserisci un indirizzo email valido."),
+});
+
+function NewsletterForm() {
+  const form = useForm({ resolver: zodResolver(schema), defaultValues: { email: "" } });
+
+  return (
+    <form onSubmit={form.handleSubmit((values) => console.log(values))} className="space-y-6">
+      <Controller
+        control={form.control}
+        name="email"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <FieldControl>
+              <Input type="email" {...field} />
+            </FieldControl>
+            <FieldError>{fieldState.error?.message}</FieldError>
+          </Field>
+        )}
+      />
+      <Button type="submit">Iscriviti</Button>
+    </form>
+  );
+}
+```
+
+Lo stesso schema funziona con qualsiasi altra libreria: a `Field` basta il messaggio di errore corrente (oppure `invalid`).
+
+Ti serve uno stato di successo/info/warning, o un testo di aiuto fuori da un `Field`? Usa [`FormHelperText`](/docs/components/molecules/form-helper-text).
+
+## API
+
+**Field** — tutte le props native di `<div>`, più:
+
+| Prop | Tipo | Descrizione |
+| --- | --- | --- |
+| `invalid` | `boolean` | Segna il campo come non valido. Di default è vero quando viene renderizzato un `FieldError` non vuoto, quindi serve solo per forzare lo stato. |
+| `required` | `boolean` | Aggiunge `aria-required` al controllo e un `*` all'etichetta. |
+
+**FieldLabel** — tutte le props di `Label`, più `required` per sovrascrivere l'`*` impostato da `Field`. Diventa rossa quando il campo non è valido.
+
+**FieldControl** — uno `Slot` (non renderizza un elemento proprio) che inoltra `id`, `aria-invalid`, `aria-required` e `aria-describedby` al suo unico figlio: l'input, la select, la textarea, ecc.
+
+**FieldDescription** — tutte le props native di `<p>`; testo di aiuto statico.
+
+**FieldError** — tutte le props native di `<p>`; renderizza i suoi children come messaggio di errore, oppure niente quando sono vuoti (`undefined`, `null`, `false` o `""`).
+
+### Accessibilità
+
+`Field` genera un id che collega l'`htmlFor` di `FieldLabel` all'`id` del controllo. `aria-describedby` punta solo a un `FieldDescription` o `FieldError` effettivamente renderizzato, così gli screen reader non ricevono mai il riferimento a un elemento assente.

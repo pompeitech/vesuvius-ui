@@ -13,8 +13,3 @@
 // called live in content; components (anything used as `<Tag/>`) never
 // need this, only bare function calls do.
 export { navigationMenuTriggerStyle } from '../../../../packages/ui/src/molecules/navigation-menu/navigation-menu.variants'
-
-// `z` (zod) needs to be in scope for any live Form demo that builds a
-// schema inline (`z.object({...})`) — it's plain JS, no client boundary
-// issue, so a direct package import is enough.
-export { z } from 'zod'
