@@ -1,5 +1,11 @@
 # @pompeitech/vesuvius-ui
 
+## 0.21.2
+
+### Patch Changes
+
+- b335ca0: Fix `PasswordInput`'s show/hide toggle covering the input's right border. The toggle is now one size step smaller than the input (`size-5`/`6`/`7`/`8` for `xs`/`sm`/`default`/`lg`), with a transparent background and muted icon color, so it sits inside the border at every size.
+
 ## 0.21.1
 
 ### Patch Changes
