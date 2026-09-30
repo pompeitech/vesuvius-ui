@@ -1,5 +1,5 @@
 ---
-"@pompeitech/vesuvius-ui": patch
+"@pompeitech/vesuvius-ui": minor
 ---
 
 Replace the react-hook-form-based `Form` molecule with a library-agnostic `Field` molecule, and drop `react-hook-form`, `@hookform/resolvers` and `zod` from the package's dependencies.
