@@ -1,5 +1,11 @@
 # @pompeitech/vesuvius-ui
 
+## 0.22.2
+
+### Patch Changes
+
+- 68fa287: `Badge` `success` and `info` variants now use white text instead of near-black, matching `destructive`. `warning` and `highlight` keep dark text for contrast on their amber backgrounds.
+
 ## 0.22.1
 
 ### Patch Changes
