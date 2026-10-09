@@ -2,8 +2,11 @@ import { cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
 import { afterEach, vi } from 'vitest'
 
-afterEach(() => {
+afterEach(async () => {
   cleanup()
+  // Recharts' ResponsiveContainer debounces its ResizeObserver callback with a
+  // timer; flush it while jsdom is still alive or it fires after teardown.
+  await new Promise((resolve) => setTimeout(resolve, 0))
 })
 
 // jsdom doesn't implement these — Radix (Select, Dialog, DropdownMenu, …)
