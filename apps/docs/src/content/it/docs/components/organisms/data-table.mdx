@@ -33,6 +33,9 @@ import {
   <Demo name="data-table" orderCol="Ordine" customerCol="Cliente" statusCol="Stato" amountCol="Importo" />
 </ComponentPreview>
 
+Le colonne possono essere oggetti semplici o create con `createColumnHelper<TData>()`; entrambe passano il type-check su `columns`.
+
+
 Clicca un'intestazione di colonna per ordinare — cicla tra ascendente → discendente → non ordinato.
 
 ## Costruirci sopra
@@ -52,7 +55,7 @@ Clicca un'intestazione di colonna per ordinare — cicla tra ascendente → disc
 
 | Prop                                | Tipo                                          | Descrizione                                                                                                                                                                                  |
 | ----------------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `columns`                           | `ColumnDef<TData>[]`                          | Obbligatorio — la forma di definizione colonna propria di TanStack.                                                                                                                          |
+| `columns`                           | `ColumnDef<TData, any>[]`                     | Obbligatorio — la forma di definizione colonna propria di TanStack.                                                                                                                          |
 | `data`                              | `TData[]`                                     | Obbligatorio.                                                                                                                                                                                |
 | `getRowId`                          | `(row: TData) => string`                      | Identità di riga stabile tra ri-ordinamenti/ri-filtri — senza, TanStack ripiega sull'indice di riga, il che rompe lo stato di selezione/pinning quando l'ordine delle righe cambia.          |
 | `enableRowSelection`                | `boolean`                                     | Necessario insieme a `createSelectionColumn()` perché le checkbox commutino davvero.                                                                                                         |

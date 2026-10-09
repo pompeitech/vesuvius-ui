@@ -17,7 +17,7 @@ import type {
 export type Density = 'compact' | 'comfortable' | 'spacious'
 
 export type DataTableProps<TData extends RowData> = {
-  columns: ColumnDef<TData, unknown>[]
+  columns: ColumnDef<TData, any>[]
   data: TData[]
   getRowId?: (row: TData, index: number) => string
 

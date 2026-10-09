@@ -150,8 +150,9 @@ Non esiste una prop `loading` — componila a partire da `disabled` (per preveni
 | `variant` | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"`        | `"default"` | Stile visivo.                                                                                                                                                      |
 | `size`    | `"xs" \| "sm" \| "default" \| "lg" \| "icon-xs" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` | Le dimensioni `icon-*` sono pulsanti quadrati solo-icona che abbinano l'altezza di ogni dimensione di testo (abbinale ad `aria-label` — vedi Accessibilità sotto). |
 | `asChild` | `boolean`                                                                            | `false`     | Renderizza come il singolo elemento figlio invece che come `<button>`.                                                                                             |
+| `type`    | `"button" \| "submit" \| "reset"`                                                  | `"button"` | Predefinito `"button"`, quindi un Button dentro un `<form>` non lo invia. Passa `type="submit"` per l'azione di invio. Non applicato con `asChild`. |
 
-Più ogni prop nativa di `<button>` (`onClick`, `disabled`, `type`, `form`, …), e `ref` (inoltrato all'elemento `<button>` sottostante, o a qualsiasi elemento renderizzi il figlio di `asChild`).
+Più ogni altra prop nativa di `<button>` (`onClick`, `disabled`, `form`, …), e `ref` (inoltrato all'elemento `<button>` sottostante, o a qualsiasi elemento renderizzi il figlio di `asChild`).
 
 ### Accessibilità
 

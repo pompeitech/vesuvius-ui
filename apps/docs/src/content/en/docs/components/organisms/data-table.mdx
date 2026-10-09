@@ -33,6 +33,9 @@ import {
   <Demo name="data-table" />
 </ComponentPreview>
 
+Columns can be plain objects or built with `createColumnHelper<TData>()`; both type-check against `columns`.
+
+
 Click a column header to sort — it cycles ascending → descending → unsorted.
 
 ## Building on it
@@ -52,7 +55,7 @@ Click a column header to sort — it cycles ascending → descending → unsorte
 
 | Prop                                | Type                                          | Description                                                                                                                                                     |
 | ----------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `columns`                           | `ColumnDef<TData>[]`                          | Required — TanStack's own column definition shape.                                                                                                              |
+| `columns`                           | `ColumnDef<TData, any>[]`                     | Required — TanStack's own column definition shape.                                                                                                              |
 | `data`                              | `TData[]`                                     | Required.                                                                                                                                                       |
 | `getRowId`                          | `(row: TData) => string`                      | Stable row identity across re-sorts/re-filters — without it, TanStack falls back to row index, which breaks selection/pinning state when the row order changes. |
 | `enableRowSelection`                | `boolean`                                     | Required alongside `createSelectionColumn()` for checkboxes to actually toggle.                                                                                 |
