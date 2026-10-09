@@ -1,5 +1,12 @@
 # @pompeitech/vesuvius-ui
 
+## 0.22.1
+
+### Patch Changes
+
+- 2256e3a: `Badge` `success` and `info` variants now use white text instead of near-black, matching `destructive`. `warning` and `highlight` keep dark text for contrast on their amber backgrounds.
+- 09d3b5f: `Button` now defaults to `type="button"`, so it no longer submits a surrounding `<form>` unless you pass `type="submit"` (an explicit `type` always wins; it is left untouched with `asChild`). `DataTable`'s `columns` prop now accepts columns built with `createColumnHelper().accessor()`, which previously failed to type-check.
+
 ## 0.22.0
 
 ### Minor Changes
