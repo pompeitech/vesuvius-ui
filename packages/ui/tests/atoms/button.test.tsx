@@ -15,4 +15,19 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled()
     expect(screen.getByRole('link', { name: 'Settings' })).toHaveAttribute('data-slot', 'button')
   })
+
+  test('defaults to type="button" but honours an explicit type', () => {
+    render(
+      <>
+        <Button>Plain</Button>
+        <Button type="submit">Send</Button>
+        <Button asChild>
+          <a href="/x">Link</a>
+        </Button>
+      </>
+    )
+    expect(screen.getByRole('button', { name: 'Plain' })).toHaveAttribute('type', 'button')
+    expect(screen.getByRole('button', { name: 'Send' })).toHaveAttribute('type', 'submit')
+    expect(screen.getByRole('link', { name: 'Link' })).not.toHaveAttribute('type')
+  })
 })

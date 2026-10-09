@@ -148,8 +148,9 @@ There's no `loading` prop — compose it from `disabled` (to prevent a second su
 | `variant` | `"default" \| "secondary" \| "destructive" \| "outline" \| "ghost" \| "link"`        | `"default"` | Visual style.                                                                                                                        |
 | `size`    | `"xs" \| "sm" \| "default" \| "lg" \| "icon-xs" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` | The `icon-*` sizes are square icon-only buttons matching each text size's height (pair with `aria-label` — see Accessibility below). |
 | `asChild` | `boolean`                                                                            | `false`     | Render as the single child element instead of a `<button>`.                                                                          |
+| `type`    | `"button" \| "submit" \| "reset"`                                                  | `"button"` | Defaults to `"button"`, so a Button inside a `<form>` does not submit it. Pass `type="submit"` for the submit action. Not applied when `asChild` is set. |
 
-Plus every native `<button>` prop (`onClick`, `disabled`, `type`, `form`, …), and `ref` (forwarded to the underlying `<button>`, or to whatever element `asChild`'s child renders as).
+Plus every other native `<button>` prop (`onClick`, `disabled`, `form`, …), and `ref` (forwarded to the underlying `<button>`, or to whatever element `asChild`'s child renders as).
 
 ### Accessibility
 

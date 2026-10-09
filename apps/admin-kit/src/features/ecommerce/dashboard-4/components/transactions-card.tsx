@@ -1,22 +1,22 @@
-import type { FinanceDashboardStats, Transaction, TransactionStatus } from '@pompeitech/mock-data'
+import type { FinanceDashboardStats, Transaction } from '@pompeitech/mock-data'
 import {
   Badge,
   ChartCard,
   DataTable,
   DataTableColumnHeader,
   UserAvatar,
-  type DataTableColumnDef
+  createColumnHelper
 } from '@pompeitech/vesuvius-ui'
 import { currency, dateFormatter, STATUS_VARIANT } from '../format'
 
-const columns: DataTableColumnDef<Transaction>[] = [
-  {
-    accessorKey: 'id',
+const column = createColumnHelper<Transaction>()
+
+const columns = [
+  column.accessor('id', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Transaction ID" />,
-    cell: ({ getValue }) => <span className="font-medium">{getValue<string>()}</span>
-  },
-  {
-    accessorKey: 'customerName',
+    cell: ({ getValue }) => <span className="font-medium">{getValue()}</span>
+  }),
+  column.accessor('customerName', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Customer" />,
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
@@ -28,41 +28,36 @@ const columns: DataTableColumnDef<Transaction>[] = [
         <span className="truncate">{row.original.customerName}</span>
       </div>
     )
-  },
-  {
-    accessorKey: 'amount',
+  }),
+  column.accessor('amount', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Amount" />,
     cell: ({ getValue }) => (
-      <span className="tabular-nums">{currency.format(getValue<number>())}</span>
+      <span className="tabular-nums">{currency.format(getValue())}</span>
     )
-  },
-  {
-    accessorKey: 'type',
+  }),
+  column.accessor('type', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Type" />,
-    cell: ({ getValue }) => <Badge variant="outline">{getValue<string>()}</Badge>
-  },
-  {
-    accessorKey: 'paymentMethod',
+    cell: ({ getValue }) => <Badge variant="outline">{getValue()}</Badge>
+  }),
+  column.accessor('paymentMethod', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Payment Method" />,
-    cell: ({ getValue }) => <span className="text-muted-foreground">{getValue<string>()}</span>
-  },
-  {
-    accessorKey: 'date',
+    cell: ({ getValue }) => <span className="text-muted-foreground">{getValue()}</span>
+  }),
+  column.accessor('date', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Date" />,
     cell: ({ getValue }) => (
       <span className="text-muted-foreground">
-        {dateFormatter.format(new Date(getValue<string>()))}
+        {dateFormatter.format(new Date(getValue()))}
       </span>
     )
-  },
-  {
-    accessorKey: 'status',
+  }),
+  column.accessor('status', {
     header: ({ header }) => <DataTableColumnHeader header={header} title="Status" />,
     cell: ({ getValue }) => {
-      const status = getValue<TransactionStatus>()
+      const status = getValue()
       return <Badge variant={STATUS_VARIANT[status]}>{status}</Badge>
     }
-  }
+  })
 ]
 
 /** The full transaction ledger, sortable/paginated via DataTable. */
