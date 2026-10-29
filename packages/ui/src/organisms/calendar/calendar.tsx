@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { DayPicker, type DayPickerProps, getDefaultClassNames } from 'react-day-picker'
 import { buttonVariants } from '../../atoms/button/button.variants'
 import { cn } from '../../lib/utils'
+import { useDateLocale } from './date-locale-provider'
 
 export type CalendarProps = DayPickerProps & {
   buttonVariant?: 'ghost' | 'outline'
@@ -16,21 +17,31 @@ export function Calendar({
   buttonVariant = 'ghost',
   formatters,
   components,
+  locale: localeProp,
+  weekStartsOn: weekStartsOnProp,
   ...props
 }: CalendarProps) {
   const defaultClassNames = useMemo(() => getDefaultClassNames(), [])
+  const context = useDateLocale()
+  const locale = localeProp ?? context.locale
+  const weekStartsOn = weekStartsOnProp ?? context.weekStartsOn
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       captionLayout={captionLayout}
+      locale={locale}
+      weekStartsOn={weekStartsOn}
       className={cn(
         'bg-background group/calendar p-2 [--cell-size:1.75rem]',
         '[[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
         className
       )}
       formatters={{
-        formatMonthDropdown: date => date.toLocaleString('default', { month: 'short' }),
+        formatMonthDropdown: (month, dateLib) =>
+          dateLib
+            ? dateLib.format(month, 'LLL')
+            : month.toLocaleString('default', { month: 'short' }),
         ...formatters
       }}
       classNames={{

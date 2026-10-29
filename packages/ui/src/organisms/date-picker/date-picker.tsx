@@ -6,6 +6,7 @@ import { cn } from '../../lib/utils'
 import { Button } from '../../atoms/button/button'
 import type { ControlSize } from '../../lib/control-size'
 import { Calendar } from '../calendar/calendar'
+import { type DateLocaleOptions, useDateLocale } from '../calendar/date-locale-provider'
 
 export type DatePickerProps = {
   value?: Date
@@ -18,7 +19,7 @@ export type DatePickerProps = {
   fromYear?: number
   toYear?: number
   size?: ControlSize
-}
+} & DateLocaleOptions
 
 export function DatePicker({
   value,
@@ -30,8 +31,10 @@ export function DatePicker({
   className,
   fromYear = new Date().getFullYear() - 100,
   toYear = new Date().getFullYear() + 50,
-  size = 'default'
+  size = 'default',
+  ...localeOptions
 }: DatePickerProps) {
+  const { locale, weekStartsOn } = useDateLocale(localeOptions)
   const [open, setOpen] = useState(false)
   const [internalDate, setInternalDate] = useState<Date | undefined>(defaultValue)
   const date = value ?? internalDate
@@ -57,7 +60,7 @@ export function DatePicker({
           )}
         >
           <CalendarIcon className="mr-2 size-4" />
-          {date ? format(date, dateFormat) : placeholder}
+          {date ? format(date, dateFormat, { locale }) : placeholder}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
@@ -66,6 +69,8 @@ export function DatePicker({
           selected={date}
           onSelect={handleSelect}
           captionLayout="dropdown"
+          locale={locale}
+          weekStartsOn={weekStartsOn}
           startMonth={new Date(fromYear, 0)}
           endMonth={new Date(toYear, 11)}
           autoFocus

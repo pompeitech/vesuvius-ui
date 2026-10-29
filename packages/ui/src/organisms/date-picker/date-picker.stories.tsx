@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { it } from 'date-fns/locale'
 import { DatePicker } from './date-picker'
 
 const meta = {
@@ -18,4 +19,9 @@ export const WithDefaultValue: Story = {
 
 export const Disabled: Story = {
   args: { disabled: true }
+}
+
+export const Localized: Story = {
+  name: 'Localized (Italian, Monday first)',
+  args: { locale: it, weekStartsOn: 1, placeholder: 'Scegli una data', defaultValue: new Date() }
 }
