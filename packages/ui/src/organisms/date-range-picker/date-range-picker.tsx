@@ -7,6 +7,7 @@ import { cn } from '../../lib/utils'
 import { Button } from '../../atoms/button/button'
 import type { ControlSize } from '../../lib/control-size'
 import { Calendar } from '../calendar/calendar'
+import { type DateLocaleOptions, useDateLocale } from '../calendar/date-locale-provider'
 
 export type { DateRange }
 
@@ -23,7 +24,7 @@ export type DateRangePickerProps = {
   toYear?: number
   confirmLabel?: string
   size?: ControlSize
-}
+} & DateLocaleOptions
 
 export function DateRangePicker({
   value,
@@ -37,8 +38,10 @@ export function DateRangePicker({
   fromYear = new Date().getFullYear() - 100,
   toYear = new Date().getFullYear() + 50,
   confirmLabel = 'Apply',
-  size = 'default'
+  size = 'default',
+  ...localeOptions
 }: DateRangePickerProps) {
+  const { locale, weekStartsOn } = useDateLocale(localeOptions)
   const [open, setOpen] = useState(false)
   const [internalRange, setInternalRange] = useState<DateRange | undefined>(defaultValue)
   const range = value ?? internalRange
@@ -62,8 +65,8 @@ export function DateRangePicker({
 
   const label = (() => {
     if (!range?.from) return placeholder
-    if (!range.to) return format(range.from, dateFormat)
-    return `${format(range.from, dateFormat)} – ${format(range.to, dateFormat)}`
+    if (!range.to) return format(range.from, dateFormat, { locale })
+    return `${format(range.from, dateFormat, { locale })} – ${format(range.to, dateFormat, { locale })}`
   })()
 
   return (
@@ -97,6 +100,8 @@ export function DateRangePicker({
           onSelect={handleSelect}
           numberOfMonths={numberOfMonths}
           captionLayout="dropdown"
+          locale={locale}
+          weekStartsOn={weekStartsOn}
           startMonth={new Date(fromYear, 0)}
           endMonth={new Date(toYear, 11)}
           autoFocus

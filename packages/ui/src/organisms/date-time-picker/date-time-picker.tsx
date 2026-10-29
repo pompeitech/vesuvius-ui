@@ -4,6 +4,7 @@ import { Button } from '../../atoms/button/button'
 import { Separator } from '../../atoms/separator/separator'
 import { Popover, PopoverContent, PopoverTrigger } from '../../molecules/popover/popover'
 import { Calendar } from '../calendar/calendar'
+import { type DateLocaleOptions, useDateLocale } from '../calendar/date-locale-provider'
 import { DateField } from './date-field'
 import { TimeColumn } from './time-column'
 import {
@@ -30,7 +31,9 @@ export type DateTimePickerProps = {
   className?: string
   fromYear?: number
   toYear?: number
-}
+  confirmLabel?: string
+  cancelLabel?: string
+} & DateLocaleOptions
 
 const range = (length: number, step = 1, start = 0) =>
   Array.from({ length }, (_, i) => start + i * step)
@@ -48,8 +51,12 @@ export function DateTimePicker({
   disabled,
   className,
   fromYear = new Date().getFullYear() - 100,
-  toYear = new Date().getFullYear() + 50
+  toYear = new Date().getFullYear() + 50,
+  confirmLabel = 'OK',
+  cancelLabel = 'Cancel',
+  ...localeOptions
 }: DateTimePickerProps) {
+  const { locale, weekStartsOn } = useDateLocale(localeOptions)
   const [open, setOpen] = useState(false)
   const [committed, setCommitted] = useState<Date | undefined>(defaultValue)
   const date = value ?? committed
@@ -119,7 +126,7 @@ export function DateTimePicker({
 
   const effectiveFormat =
     dateFormat ??
-    `MM/dd/yyyy ${hourFormat === '12' ? 'hh:mm' : 'HH:mm'}${showSeconds ? ':ss' : ''}${
+    `P ${hourFormat === '12' ? 'hh:mm' : 'HH:mm'}${showSeconds ? ':ss' : ''}${
       hourFormat === '12' ? ' a' : ''
     }`
 
@@ -128,7 +135,7 @@ export function DateTimePicker({
       <PopoverTrigger asChild>
         <DateField
           label={label}
-          value={date ? format(date, effectiveFormat) : ''}
+          value={date ? format(date, effectiveFormat, { locale }) : ''}
           placeholder={placeholder}
           disabled={disabled}
           className={className}
@@ -147,6 +154,8 @@ export function DateTimePicker({
               selected={draft}
               onSelect={handleDaySelect}
               captionLayout="dropdown"
+              locale={locale}
+              weekStartsOn={weekStartsOn}
               startMonth={new Date(fromYear, 0)}
               endMonth={new Date(toYear, 11)}
               // See DatePicker for the rationale (Radix Popover already
@@ -207,7 +216,7 @@ export function DateTimePicker({
             className="text-primary-emphasis uppercase"
             onClick={handleCancel}
           >
-            Cancel
+            {cancelLabel}
           </Button>
           <Button
             type="button"
@@ -215,7 +224,7 @@ export function DateTimePicker({
             className="text-primary-emphasis uppercase"
             onClick={handleOk}
           >
-            OK
+            {confirmLabel}
           </Button>
         </div>
       </PopoverContent>

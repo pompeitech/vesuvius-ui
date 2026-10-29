@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { it } from 'date-fns/locale'
 import { useState } from 'react'
 import { Calendar } from './calendar'
+import { DateLocaleProvider } from './date-locale-provider'
 
 const meta = {
   title: 'Organisms/Calendar',
@@ -52,6 +54,24 @@ export const Range: Story = {
         captionLayout="dropdown"
         className="rounded-md border"
       />
+    )
+  }
+}
+
+export const Localized: Story = {
+  name: 'Localized (Italian, Monday first)',
+  render: function Render() {
+    const [date, setDate] = useState<Date | undefined>(new Date())
+    return (
+      <DateLocaleProvider locale={it} weekStartsOn={1}>
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          captionLayout="dropdown"
+          className="rounded-md border"
+        />
+      </DateLocaleProvider>
     )
   }
 }

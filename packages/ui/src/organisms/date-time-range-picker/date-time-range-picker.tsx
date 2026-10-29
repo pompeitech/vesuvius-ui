@@ -7,6 +7,7 @@ import type { ControlSize } from '../../lib/control-size'
 import { cn } from '../../lib/utils'
 import { Popover, PopoverContent, PopoverTrigger } from '../../molecules/popover/popover'
 import { Calendar } from '../calendar/calendar'
+import { type DateLocaleOptions, useDateLocale } from '../calendar/date-locale-provider'
 import { TimeColumn } from '../date-time-picker/time-column'
 import {
   convert12To24Hour,
@@ -36,8 +37,10 @@ export type DateTimeRangePickerProps = {
   toYear?: number
   confirmLabel?: string
   cancelLabel?: string
+  startTimeLabel?: string
+  endTimeLabel?: string
   size?: ControlSize
-}
+} & DateLocaleOptions
 
 const range = (length: number, step = 1, start = 0) =>
   Array.from({ length }, (_, index) => start + index * step)
@@ -129,8 +132,12 @@ export function DateTimeRangePicker({
   toYear = new Date().getFullYear() + 50,
   confirmLabel = 'Apply',
   cancelLabel = 'Cancel',
-  size = 'default'
+  startTimeLabel = 'Start time',
+  endTimeLabel = 'End time',
+  size = 'default',
+  ...localeOptions
 }: DateTimeRangePickerProps) {
+  const { locale, weekStartsOn } = useDateLocale(localeOptions)
   const [open, setOpen] = useState(false)
   const [committed, setCommitted] = useState<DateRange | undefined>(defaultValue)
   const rangeValue = value ?? committed
@@ -138,7 +145,7 @@ export function DateTimeRangePicker({
 
   const effectiveFormat =
     dateFormat ??
-    `MM/dd/yyyy ${hourFormat === '12' ? 'hh:mm' : 'HH:mm'}${showSeconds ? ':ss' : ''}${hourFormat === '12' ? ' a' : ''}`
+    `P ${hourFormat === '12' ? 'hh:mm' : 'HH:mm'}${showSeconds ? ':ss' : ''}${hourFormat === '12' ? ' a' : ''}`
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (nextOpen) setDraft(rangeValue)
@@ -172,8 +179,8 @@ export function DateTimeRangePicker({
 
   const label = (() => {
     if (!rangeValue?.from) return placeholder
-    const from = format(rangeValue.from, effectiveFormat)
-    return rangeValue.to ? `${from} – ${format(rangeValue.to, effectiveFormat)}` : from
+    const from = format(rangeValue.from, effectiveFormat, { locale })
+    return rangeValue.to ? `${from} – ${format(rangeValue.to, effectiveFormat, { locale })}` : from
   })()
 
   return (
@@ -203,6 +210,8 @@ export function DateTimeRangePicker({
             onSelect={handleSelect}
             numberOfMonths={numberOfMonths}
             captionLayout="dropdown"
+            locale={locale}
+            weekStartsOn={weekStartsOn}
             startMonth={new Date(fromYear, 0)}
             endMonth={new Date(toYear, 11)}
             autoFocus
@@ -211,7 +220,7 @@ export function DateTimeRangePicker({
             <div className="border-border grid shrink-0 gap-3 border-l p-3 sm:grid-cols-2">
               {draft.from && (
                 <div className="min-w-0 space-y-1.5">
-                  <p className="text-muted-foreground text-xs font-medium">Start time</p>
+                  <p className="text-muted-foreground text-xs font-medium">{startTimeLabel}</p>
                   <TimeColumns
                     value={draft.from}
                     onChange={next => updateDate('from', next)}
@@ -223,7 +232,7 @@ export function DateTimeRangePicker({
               )}
               {draft.to && (
                 <div className="min-w-0 space-y-1.5">
-                  <p className="text-muted-foreground text-xs font-medium">End time</p>
+                  <p className="text-muted-foreground text-xs font-medium">{endTimeLabel}</p>
                   <TimeColumns
                     value={draft.to}
                     onChange={next => updateDate('to', next)}
