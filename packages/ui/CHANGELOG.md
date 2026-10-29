@@ -1,5 +1,11 @@
 # @pompeitech/vesuvius-ui
 
+## 0.24.0
+
+### Minor Changes
+
+- c44fbf3: `PasswordInput`: add `showPasswordLabel` and `hidePasswordLabel` props to localise the eye-toggle's accessible name (defaults stay "Show password" / "Hide password").
+
 ## 0.23.0
 
 ### Minor Changes
