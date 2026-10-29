@@ -18,4 +18,18 @@ describe('PasswordInput', () => {
     expect(screen.getByLabelText('Password')).toHaveClass('h-10')
     expect(screen.getByRole('button', { name: 'Show password' })).toHaveClass('size-8')
   })
+
+  test('uses custom labels for the eye-toggle in both states', async () => {
+    const user = userEvent.setup()
+    render(
+      <PasswordInput
+        aria-label="Password"
+        showPasswordLabel="Mostra password"
+        hidePasswordLabel="Nascondi password"
+      />
+    )
+    await user.click(screen.getByRole('button', { name: 'Mostra password' }))
+    expect(screen.getByLabelText('Password')).toHaveAttribute('type', 'text')
+    expect(screen.getByRole('button', { name: 'Nascondi password' })).toBeInTheDocument()
+  })
 })

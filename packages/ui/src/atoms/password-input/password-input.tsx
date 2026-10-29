@@ -14,10 +14,23 @@ const toggleSizeClassNames = {
 } satisfies Record<ControlSize, string>
 
 export type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> &
-  Pick<InputProps, 'size'>
+  Pick<InputProps, 'size'> & {
+    /** Accessible name of the toggle while the password is hidden. */
+    showPasswordLabel?: string
+    /** Accessible name of the toggle while the password is visible. */
+    hidePasswordLabel?: string
+  }
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ size = 'default', ...props }, ref) => {
+  (
+    {
+      size = 'default',
+      showPasswordLabel = 'Show password',
+      hidePasswordLabel = 'Hide password',
+      ...props
+    },
+    ref
+  ) => {
     const [visible, setVisible] = useState(false)
     return (
       <div className="relative">
@@ -31,7 +44,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         <IconButton
           type="button"
           size={size}
-          aria-label={visible ? 'Hide password' : 'Show password'}
+          aria-label={visible ? hidePasswordLabel : showPasswordLabel}
           onClick={() => setVisible(!visible)}
           className={cn(
             'absolute right-1 top-1/2 -translate-y-1/2 rounded-sm border-0 bg-transparent text-muted-foreground shadow-none',

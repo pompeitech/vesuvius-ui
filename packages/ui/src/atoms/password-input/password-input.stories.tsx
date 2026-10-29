@@ -29,6 +29,15 @@ export const Sizes: Story = {
   )
 }
 
+export const CustomToggleLabels: Story = {
+  args: {
+    'aria-label': 'Password',
+    defaultValue: 'super-secret',
+    showPasswordLabel: 'Mostra password',
+    hidePasswordLabel: 'Nascondi password'
+  }
+}
+
 export const Disabled: Story = {
   args: { defaultValue: 'super-secret', disabled: true }
 }
