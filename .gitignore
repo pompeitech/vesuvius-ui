@@ -56,3 +56,8 @@ pnpm-debug.log*
 
 # testing / coverage
 coverage/
+
+# design-sync (claude.ai/design): config, cache, staged scripts, build output
+.design-sync/
+.ds-sync/
+ds-bundle/
