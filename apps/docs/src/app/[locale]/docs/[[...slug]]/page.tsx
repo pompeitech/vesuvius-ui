@@ -5,7 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import { getAllDocSlugs, getDocPage } from '@/lib/content'
 import { isLocale, LOCALES, type Locale } from '@/lib/i18n/locales'
-import { getDictionary } from '@/lib/i18n/get-dictionary'
+import { getDictionary, type Dictionary } from '@/lib/i18n/get-dictionary'
 import { getSidebarSections, flattenLeaves } from '@/lib/sidebar-tree'
 import { extractToc } from '@/lib/toc'
 import type { MDXComponents } from 'mdx/types'
@@ -92,6 +92,11 @@ export default async function DocPage({
   const page = getDocPage(locale, slug)
   if (!page) notFound()
   const toc = extractToc(page.content)
+  const tierKey = slug[0] === 'components' ? slug[1] : undefined
+  const eyebrow =
+    tierKey && tierKey in dict.sidebar
+      ? dict.sidebar[tierKey as keyof Dictionary['sidebar']]
+      : dict.sidebar.gettingStarted
   const sections = getSidebarSections(locale, dict)
   const leaves = flattenLeaves(sections)
   const currentIndex = leaves.findIndex(leaf => leaf.slug.join('/') === slug.join('/'))
@@ -107,10 +112,17 @@ export default async function DocPage({
             {dict.fallback.notice}
           </div>
         )}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">{page.frontmatter.title}</h1>
+        <div className="border-border mb-10 border-b pb-8">
+          <p className="text-primary-emphasis mb-3 font-mono text-xs font-medium tracking-[0.12em] uppercase">
+            {eyebrow}
+          </p>
+          <h1 className="font-heading text-4xl font-bold tracking-[-0.035em] sm:text-5xl">
+            {page.frontmatter.title}
+          </h1>
           {page.frontmatter.description && (
-            <p className="text-muted-foreground mt-2 text-lg">{page.frontmatter.description}</p>
+            <p className="text-muted-foreground mt-3 max-w-3xl text-lg leading-8">
+              {page.frontmatter.description}
+            </p>
           )}
         </div>
         <div className="prose prose-neutral dark:prose-invert max-w-none">
@@ -126,36 +138,32 @@ export default async function DocPage({
           />
         </div>
         {(prev || next) && (
-          <div className="border-border mt-12 flex items-center justify-between border-t pt-6 text-sm">
-            {prev ? (
+          <nav className="border-border mt-16 grid gap-3 border-t pt-8 sm:grid-cols-2">
+            {prev && (
               <Link
                 href={`/${locale}/docs/${prev.slug.join('/')}`}
-                className="text-muted-foreground hover:text-foreground flex items-center gap-2 transition-colors"
+                className="hover:border-primary flex flex-col gap-1 rounded-xl border p-4 transition-colors"
               >
-                <ArrowLeftIcon className="size-4" />
-                <span>
-                  <span className="block text-xs">{dict.page.previous}</span>
-                  {prev.title}
+                <span className="text-muted-foreground flex items-center gap-1.5 text-xs">
+                  <ArrowLeftIcon className="size-3.5" />
+                  {dict.page.previous}
                 </span>
+                <span className="font-heading font-semibold">{prev.title}</span>
               </Link>
-            ) : (
-              <span />
             )}
-            {next ? (
+            {next && (
               <Link
                 href={`/${locale}/docs/${next.slug.join('/')}`}
-                className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-right transition-colors"
+                className="hover:border-primary flex flex-col items-end gap-1 rounded-xl border p-4 text-right transition-colors sm:col-start-2"
               >
-                <span>
-                  <span className="block text-xs">{dict.page.next}</span>
-                  {next.title}
+                <span className="text-muted-foreground flex items-center gap-1.5 text-xs">
+                  {dict.page.next}
+                  <ArrowRightIcon className="size-3.5" />
                 </span>
-                <ArrowRightIcon className="size-4" />
+                <span className="font-heading font-semibold">{next.title}</span>
               </Link>
-            ) : (
-              <span />
             )}
-          </div>
+          </nav>
         )}
       </article>
       <TocNav entries={toc} title={dict.toc.onThisPage} />

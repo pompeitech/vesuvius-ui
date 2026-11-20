@@ -1,9 +1,26 @@
 import type { Metadata } from 'next'
+import { DM_Sans, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { ThemeProvider, Toaster } from '@/components/app-theme-provider'
 import { SiteFooter } from '@/components/site-footer'
 import { LOCALES, isLocale, type Locale } from '@/lib/i18n/locales'
 import '../globals.css'
+
+// Brand typography for the docs site (pompeitech.com uses the same trio).
+// Exposed as CSS variables and wired to Vesuvius's --font-sans /
+// --font-heading / --font-mono tokens in globals.css.
+const fontSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' })
+const fontHeading = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-space-grotesk',
+  display: 'swap'
+})
+const fontMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap'
+})
 
 export function generateStaticParams() {
   return LOCALES.map(locale => ({ locale }))
@@ -49,7 +66,11 @@ export default async function LocaleLayout({
   if (!isLocale(locale)) notFound()
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${fontSans.variable} ${fontHeading.variable} ${fontMono.variable}`}
+    >
       <head>
         {/* dangerouslySetInnerHTML: static, no user input */}
         <script id="theme-init" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
@@ -57,7 +78,7 @@ export default async function LocaleLayout({
       <body className="bg-background text-foreground min-h-svh antialiased">
         <ThemeProvider>
           {children}
-          <SiteFooter />
+          <SiteFooter locale={locale} />
           <Toaster />
         </ThemeProvider>
       </body>

@@ -12,8 +12,8 @@ export default function NotFound() {
   const dict = getDictionary(DEFAULT_LOCALE)
   return (
     <main className="flex min-h-svh flex-col items-center justify-center gap-4 px-6 text-center">
-      <h1 className="text-4xl font-bold">404</h1>
-      <p className="text-lg font-medium">{dict.notFound.title}</p>
+      <h1 className="font-heading text-primary text-8xl font-bold tracking-[-0.06em] sm:text-9xl">404</h1>
+      <p className="font-heading text-2xl font-semibold tracking-tight">{dict.notFound.title}</p>
       <p className="text-muted-foreground">{dict.notFound.description}</p>
       <Button asChild>
         <Link href={`/${DEFAULT_LOCALE}/docs`}>{dict.notFound.backHome}</Link>

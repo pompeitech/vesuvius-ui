@@ -120,8 +120,50 @@
   },
   "home": {
     "hero": {
-      "title": "Un kit completo di componenti React + TypeScript — Radix UI sotto, Tailwind CSS sopra, undici temi colore pronti all'uso.",
-      "description": "65 componenti, anteprime live e documentazione completa — costruiti interamente con Vesuvius UI."
+      "eyebrow": "Open source · React + TypeScript · 11 temi",
+      "titleLead": "Il design system che dà forma ai tuoi",
+      "titleAccent": "prodotti.",
+      "description": "Vesuvius è il kit di interfaccia open source di Pompei Tech: componenti accessibili, temi flessibili e una base tecnica pronta per applicazioni moderne — Radix UI sotto, Tailwind CSS sopra.",
+      "primaryCta": "Inizia ora",
+      "secondaryCta": "Esplora i temi",
+      "installLabel": "Installa"
+    },
+    "why": {
+      "eyebrow": "Perché Vesuvius",
+      "title": "Una base comune. Più tempo per ciò che conta.",
+      "items": [
+        {
+          "icon": "Blocks",
+          "title": "Componenti pronti",
+          "description": "Una libreria solida di componenti accessibili per costruire prodotti reali più velocemente."
+        },
+        {
+          "icon": "Palette",
+          "title": "Token e temi",
+          "description": "Colori, tipografia e spaziature coerenti, con supporto nativo ai temi chiaro e scuro."
+        },
+        {
+          "icon": "Code",
+          "title": "TypeScript first",
+          "description": "API tipizzate, composizione React e una base pensata per mantenere il codice leggibile."
+        },
+        {
+          "icon": "Sparkles",
+          "title": "Esperienza curata",
+          "description": "Stati, interazioni e dettagli visivi progettati per dare qualità a ogni interfaccia."
+        }
+      ]
+    },
+    "themesSection": {
+      "eyebrow": "11 temi, un'API",
+      "title": "Cambia tema. Questa pagina cambia con lui.",
+      "description": "Lava è il tema del brand. Scegline un altro dalla palette: tutti i componenti di questa pagina sono reali e si aggiornano dal vivo.",
+      "cta": "Tutti i temi"
+    },
+    "cta": {
+      "eyebrow": "Costruisci con Vesuvius",
+      "title": "Dal primo bottone a un prodotto completo.",
+      "button": "Leggi la documentazione"
     },
     "tabs": {
       "atoms": "Atomi",
@@ -201,5 +243,13 @@
         "image": "/img/showcase/inbox.jpg"
       }
     ]
+  },
+  "footer": {
+    "tagline": "Il design system open source di Pompei Tech: componenti React accessibili, undici temi colore, un'unica API.",
+    "explore": "Esplora",
+    "project": "Progetto",
+    "craftedWith": "Fatto con",
+    "by": "da",
+    "love": "amore"
   }
 }

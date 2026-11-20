@@ -365,7 +365,7 @@ export function AdminKitLanding({ locale }: { locale: string }) {
             <Badge variant="outline" className="mb-6 gap-2 rounded-full px-3 py-1">
               <Sparkles className="size-3.5 text-primary" /> Vesuvius Admin Kit
             </Badge>
-            <h1 className="max-w-3xl text-5xl font-black tracking-[-0.06em] sm:text-7xl">
+            <h1 className="font-heading max-w-3xl text-5xl font-black tracking-[-0.06em] sm:text-7xl">
               {copy.heroTitle}
             </h1>
             <p className="text-muted-foreground mt-6 max-w-xl text-lg leading-8 sm:text-xl">
@@ -449,7 +449,7 @@ export function AdminKitLanding({ locale }: { locale: string }) {
           <p className="text-primary text-xs font-bold uppercase tracking-[0.22em]">
             {copy.builtFor}
           </p>
-          <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">
+          <h2 className="font-heading mt-4 text-3xl font-black tracking-tight sm:text-5xl">
             {copy.seriousStart}
           </h2>
           <p className="text-muted-foreground mt-5 text-lg leading-8">{copy.seriousDescription}</p>
@@ -508,7 +508,7 @@ export function AdminKitLanding({ locale }: { locale: string }) {
             <p className="text-primary text-xs font-bold uppercase tracking-[0.22em]">
               {copy.ready}
             </p>
-            <h2 className="mt-4 max-w-2xl text-3xl font-black tracking-tight sm:text-5xl">
+            <h2 className="font-heading mt-4 max-w-2xl text-3xl font-black tracking-tight sm:text-5xl">
               {copy.finalTitle}
             </h2>
             <p className="text-muted-foreground mt-5 max-w-xl text-lg leading-8">
