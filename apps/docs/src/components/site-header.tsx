@@ -100,7 +100,9 @@ export function SiteHeader({
         {showSidebarTrigger && <SidebarTrigger className="md:hidden" />}
         <Link href={`/${locale}`} className="flex shrink-0 items-center gap-2">
           <ThemeLogo mark width={24} height={24} className="size-6" />
-          <span className="hidden font-semibold whitespace-nowrap sm:inline">Vesuvius UI</span>
+          <span className="font-heading hidden font-bold tracking-tight whitespace-nowrap sm:inline">
+            Vesuvius <span className="text-primary">UI</span>
+          </span>
         </Link>
         <nav className="ml-4 hidden items-center gap-4 text-sm whitespace-nowrap lg:flex">
           {navLinks(locale, dict).map(link => (

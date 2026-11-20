@@ -16,7 +16,7 @@ export default async function ThemesPage({ params }: { params: Promise<{ locale:
       <main className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <section className="mx-auto max-w-3xl text-center">
           <BadgeLine label={dict.themePages.badge} />
-          <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">
+          <h1 className="font-heading mt-5 text-4xl font-bold tracking-[-0.04em] text-balance sm:text-6xl lg:text-7xl">
             {dict.themePages.listTitle}
           </h1>
           <p className="text-muted-foreground mx-auto mt-5 max-w-2xl text-lg leading-8">

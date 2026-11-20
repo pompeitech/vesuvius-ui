@@ -1,8 +1,13 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ChevronRightIcon } from 'lucide-react'
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -46,25 +51,62 @@ function NodeItem({
     )
   }
 
+  return <CategoryItem locale={locale} node={node} pathname={pathname} />
+}
+
+/** A component tier (Atoms / Molecules / Organisms) as an expandable group —
+ * same Collapsible + SidebarMenuButton composition as the kit's own
+ * SidebarNav. Starts open only for the tier holding the current page, and
+ * re-opens when navigation lands inside a closed one. */
+function CategoryItem({
+  locale,
+  node,
+  pathname
+}: {
+  locale: Locale
+  node: Extract<SidebarNode, { type: 'category' }>
+  pathname: string
+}) {
+  const containsActive = node.items.some(
+    child => child.type === 'leaf' && pathname === slugHref(locale, child.slug)
+  )
+  const [open, setOpen] = useState(containsActive)
+
+  useEffect(() => {
+    if (containsActive) setOpen(true)
+  }, [containsActive])
+
   return (
-    <SidebarMenuItem>
-      <span className="px-2 py-1 text-xs font-semibold text-muted-foreground">{node.label}</span>
-      <SidebarMenuSub>
-        {node.items.map(child =>
-          child.type === 'leaf' ? (
-            <SidebarMenuSubItem key={child.slug.join('/')}>
-              <SidebarMenuSubButton
-                asChild
-                isActive={pathname === slugHref(locale, child.slug)}
-                className="data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-medium"
-              >
-                <Link href={slugHref(locale, child.slug)}>{child.title}</Link>
-              </SidebarMenuSubButton>
-            </SidebarMenuSubItem>
-          ) : null
-        )}
-      </SidebarMenuSub>
-    </SidebarMenuItem>
+    <Collapsible asChild open={open} onOpenChange={setOpen} className="group/collapsible">
+      <SidebarMenuItem>
+        <CollapsibleTrigger asChild>
+          <SidebarMenuButton className="font-medium">
+            <span className="truncate">{node.label}</span>
+            <span className="text-muted-foreground ml-auto text-xs tabular-nums">
+              {node.items.length}
+            </span>
+            <ChevronRightIcon className="text-muted-foreground transition-transform group-data-[state=open]/collapsible:rotate-90" />
+          </SidebarMenuButton>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <SidebarMenuSub>
+            {node.items.map(child =>
+              child.type === 'leaf' ? (
+                <SidebarMenuSubItem key={child.slug.join('/')}>
+                  <SidebarMenuSubButton
+                    asChild
+                    isActive={pathname === slugHref(locale, child.slug)}
+                    className="data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground data-[active=true]:font-medium"
+                  >
+                    <Link href={slugHref(locale, child.slug)}>{child.title}</Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              ) : null
+            )}
+          </SidebarMenuSub>
+        </CollapsibleContent>
+      </SidebarMenuItem>
+    </Collapsible>
   )
 }
 

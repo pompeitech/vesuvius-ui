@@ -120,8 +120,50 @@
   },
   "home": {
     "hero": {
-      "title": "A complete React + TypeScript component kit — Radix UI underneath, Tailwind CSS on top, eleven color themes out of the box.",
-      "description": "65 components, live previews, and full documentation — built entirely with Vesuvius UI."
+      "eyebrow": "Open source · React + TypeScript · 11 themes",
+      "titleLead": "The design system that shapes your",
+      "titleAccent": "products.",
+      "description": "Vesuvius is Pompei Tech's open source UI kit: accessible components, flexible themes and a solid technical foundation for modern applications — Radix UI underneath, Tailwind CSS on top.",
+      "primaryCta": "Get started",
+      "secondaryCta": "Browse themes",
+      "installLabel": "Install"
+    },
+    "why": {
+      "eyebrow": "Why Vesuvius",
+      "title": "A shared foundation. More time for what matters.",
+      "items": [
+        {
+          "icon": "Blocks",
+          "title": "Ready-made components",
+          "description": "A solid library of accessible components to build real products faster."
+        },
+        {
+          "icon": "Palette",
+          "title": "Tokens and themes",
+          "description": "Consistent colors, typography and spacing, with native light and dark support."
+        },
+        {
+          "icon": "Code",
+          "title": "TypeScript first",
+          "description": "Typed APIs, React composition and a foundation designed to keep code readable."
+        },
+        {
+          "icon": "Sparkles",
+          "title": "Crafted experience",
+          "description": "States, interactions and visual details designed to bring quality to every interface."
+        }
+      ]
+    },
+    "themesSection": {
+      "eyebrow": "11 themes, one API",
+      "title": "Switch the theme. This page switches with it.",
+      "description": "Lava is the brand theme. Pick another one from the palette: every component on this page is real and updates live.",
+      "cta": "See all themes"
+    },
+    "cta": {
+      "eyebrow": "Build with Vesuvius",
+      "title": "From the first button to a complete product.",
+      "button": "Read the docs"
     },
     "tabs": {
       "atoms": "Atoms",
@@ -201,5 +243,13 @@
         "image": "/img/showcase/inbox.jpg"
       }
     ]
+  },
+  "footer": {
+    "tagline": "Pompei Tech's open source design system: accessible React components, eleven color themes, one API.",
+    "explore": "Explore",
+    "project": "Project",
+    "craftedWith": "Crafted with",
+    "by": "by",
+    "love": "love"
   }
 }

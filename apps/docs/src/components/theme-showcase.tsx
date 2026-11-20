@@ -491,7 +491,7 @@ export function ThemeCard({
         <CardContent className="space-y-3 p-4">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="font-semibold tracking-tight">{theme.label}</h2>
+              <h2 className="font-heading font-semibold tracking-tight">{theme.label}</h2>
               <p className="text-muted-foreground mt-1 text-xs">
                 {getCatalogCopy(dict, theme).mood}
               </p>
@@ -571,7 +571,7 @@ export function ThemeDetail({
             {dict.themePages.builtIn}
           </Badge>
           <div>
-            <h1 className="text-5xl font-semibold tracking-tight sm:text-7xl">{theme.label}</h1>
+            <h1 className="font-heading text-5xl font-semibold tracking-tight sm:text-7xl">{theme.label}</h1>
             <p className="text-muted-foreground mt-5 max-w-2xl text-xl leading-9">
               {getCatalogCopy(dict, theme).description}
             </p>
@@ -626,7 +626,7 @@ export function ThemeDetail({
       <section className="space-y-5">
         <div>
           <p className="text-primary text-sm font-medium">{dict.themePages.colorSystem}</p>
-          <h2 className="mt-1 text-3xl font-semibold tracking-tight">
+          <h2 className="font-heading mt-1 text-3xl font-semibold tracking-tight">
             {dict.themePages.liveTokens}
           </h2>
         </div>
@@ -695,7 +695,7 @@ export function ThemeDetail({
       <section className="space-y-5">
         <div>
           <p className="text-primary text-sm font-medium">{dict.themePages.showcase}</p>
-          <h2 className="mt-1 text-3xl font-semibold tracking-tight">
+          <h2 className="font-heading mt-1 text-3xl font-semibold tracking-tight">
             {dict.themePages.showcaseTitle}
           </h2>
         </div>

@@ -25,10 +25,12 @@ import {
   Card,
   CardAction,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
   ChartCard,
   Checkbox,
+  CopyButton,
   EmptyState,
   IconButton,
   Input,
@@ -47,7 +49,8 @@ import {
   Tabs,
   TabsList,
   TabsTrigger,
-  Textarea
+  Textarea,
+  ThemePalettePicker
 } from '@pompeitech/vesuvius-ui'
 // Same reasoning as mdx-components.tsx / site-header.tsx: this whole file is
 // already "use client", so importing the package directly (rather than
@@ -59,9 +62,11 @@ import {
   ArrowRightIcon,
   BarChart3Icon,
   BellIcon,
+  BlocksIcon,
   BookOpenIcon,
   CalendarIcon,
   ChevronUpIcon,
+  CodeIcon,
   CreditCardIcon,
   FileTextIcon,
   LifeBuoyIcon,
@@ -77,9 +82,10 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 import type { Dictionary } from '@/lib/i18n/get-dictionary'
 import type { Locale } from '@/lib/i18n/locales'
-import { ThemeLogo } from './theme-logo'
+import { THEME_CATALOG } from '@/lib/theme-catalog'
 
 const REVENUE_DATA = [
   { month: 'Apr', revenue: 32 },
@@ -992,6 +998,179 @@ function _ComponentCatalogShowcase({ dict }: { dict: Dictionary }) {
   )
 }
 
+const INSTALL_COMMAND = 'npm i @pompeitech/vesuvius-ui'
+
+const WHY_ICONS = {
+  Blocks: BlocksIcon,
+  Palette: AppearanceIcon,
+  Code: CodeIcon,
+  Sparkles: SparklesIcon
+} as const
+
+/** Decorative volcano outline behind the hero — strokes and lava come from
+ * theme tokens, so it follows every color theme and light/dark mode. */
+function HeroVolcano() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 1440 420"
+      preserveAspectRatio="xMidYMax slice"
+      className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px] w-full"
+    >
+      <g fill="none" stroke="var(--border)" strokeWidth="1">
+        <path d="M0 420 L420 420 L640 160 Q680 120 720 132 Q760 120 800 160 L1020 420 L1440 420" />
+        <path
+          d="M160 420 L480 420 L660 200 Q700 160 720 168 Q740 160 780 200 L960 420 L1280 420"
+          opacity="0.7"
+        />
+        <path d="M320 420 L560 420 L690 250 Q712 222 720 224 Q728 222 750 250 L880 420 L1120 420" opacity="0.45" />
+      </g>
+      <path d="M686 138 Q720 120 754 138 L742 148 Q720 138 698 148 Z" fill="var(--primary)" />
+      <path
+        d="M716 146 C710 200 728 236 708 300 C694 350 716 390 704 420"
+        stroke="var(--primary)"
+        strokeWidth="3"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.85"
+      />
+      <path
+        d="M730 148 C744 210 726 260 748 320 C760 370 738 400 750 420"
+        stroke="var(--chart-2)"
+        strokeWidth="2"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+      <g fill="var(--primary)">
+        <circle cx="704" cy="96" r="3" />
+        <circle cx="724" cy="64" r="2.5" />
+        <circle cx="690" cy="72" r="1.5" />
+      </g>
+      <g fill="var(--chart-2)">
+        <circle cx="742" cy="84" r="2" />
+        <circle cx="758" cy="108" r="1.5" />
+      </g>
+    </svg>
+  )
+}
+
+function SectionEyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="text-primary-emphasis mb-4 font-mono text-xs font-medium tracking-[0.12em] uppercase">
+      {children}
+    </p>
+  )
+}
+
+function WhySection({ dict }: { dict: Dictionary }) {
+  const why = dict.home.why
+  return (
+    <section className="border-t px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl">
+        <SectionEyebrow>{why.eyebrow}</SectionEyebrow>
+        <h2 className="font-heading mb-12 max-w-3xl text-4xl leading-none font-semibold tracking-[-0.035em] text-balance sm:text-6xl">
+          {why.title}
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {why.items.map(item => {
+            const Icon = WHY_ICONS[item.icon as keyof typeof WHY_ICONS] ?? SparklesIcon
+            return (
+              <Card key={item.title}>
+                <CardHeader>
+                  <div className="bg-accent text-primary-emphasis mb-3 flex size-10 items-center justify-center rounded-lg">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </div>
+                  <CardTitle className="font-heading text-lg">{item.title}</CardTitle>
+                  <CardDescription className="leading-6">{item.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ThemesSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const section = dict.home.themesSection
+  return (
+    <section className="px-6 pb-24 lg:px-10">
+      <div className="bg-card mx-auto grid max-w-7xl gap-10 rounded-2xl border p-6 shadow-sm sm:p-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:p-12">
+        <div className="flex flex-col items-start gap-4">
+          <SectionEyebrow>{section.eyebrow}</SectionEyebrow>
+          <h2 className="font-heading -mt-4 text-3xl leading-none font-semibold tracking-[-0.035em] text-balance sm:text-5xl">
+            {section.title}
+          </h2>
+          <p className="text-muted-foreground text-base leading-7">{section.description}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-3">
+            <ThemePalettePicker />
+            <Button variant="outline" asChild>
+              <Link href={`/${locale}/themes`}>
+                {section.cta}
+                <ArrowRightIcon />
+              </Link>
+            </Button>
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {THEME_CATALOG.map(theme => {
+            const copy = dict.themeCatalog[theme.name as keyof Dictionary['themeCatalog']]
+            return (
+              <Link
+                key={theme.name}
+                href={`/${locale}/themes/${theme.name}`}
+                className="bg-background hover:border-primary focus-visible:ring-ring/50 flex items-center gap-3 rounded-xl border p-3 transition-colors outline-none focus-visible:ring-[3px]"
+              >
+                <span className="flex shrink-0 -space-x-1.5" aria-hidden="true">
+                  {theme.swatch.map(color => (
+                    <span
+                      key={color}
+                      className="border-background size-5 rounded-full border-2"
+                      style={{ background: color }}
+                    />
+                  ))}
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold">{theme.label}</span>
+                  <span className="text-muted-foreground block truncate text-xs">
+                    {copy?.mood ?? theme.mood}
+                  </span>
+                </span>
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function CtaSection({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const cta = dict.home.cta
+  return (
+    <section className="px-6 pb-24 lg:px-10">
+      <div className="bg-primary text-primary-foreground mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-8 rounded-2xl p-8 sm:p-12 lg:p-16">
+        <div className="max-w-3xl">
+          <p className="mb-4 font-mono text-xs font-medium tracking-[0.12em] uppercase opacity-90">
+            {cta.eyebrow}
+          </p>
+          <h2 className="font-heading text-4xl leading-[0.95] font-bold tracking-[-0.045em] text-balance sm:text-6xl lg:text-7xl">
+            {cta.title}
+          </h2>
+        </div>
+        <Button size="lg" variant="secondary" asChild>
+          <Link href={`/${locale}/docs/intro`}>
+            {cta.button}
+            <ArrowRightIcon />
+          </Link>
+        </Button>
+      </div>
+    </section>
+  )
+}
+
 export function HomeContent({
   locale,
   dict,
@@ -1001,27 +1180,44 @@ export function HomeContent({
   dict: Dictionary
   version: string
 }) {
+  const hero = dict.home.hero
   return (
     <>
-      <main className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 py-24 text-center">
-        <ThemeLogo className="h-auto max-w-full" />
-        <Badge variant="outline">v{version}</Badge>
-        <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">
-          {dict.home.hero.title}
-        </h1>
-        <p className="text-muted-foreground max-w-xl text-lg">{dict.home.hero.description}</p>
-        <div className="flex gap-3">
-          <Button size="lg" asChild>
-            <Link href={`/${locale}/docs/intro`}>{dict.nav.docs}</Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild>
-            <a href="https://github.com/pompeitech/vesuvius-ui" target="_blank" rel="noreferrer">
-              {dict.nav.github}
-            </a>
-          </Button>
+      <section className="relative overflow-hidden border-b">
+        <HeroVolcano />
+        <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start gap-6 px-6 pt-20 pb-40 sm:pt-28 lg:px-10 lg:pt-32 lg:pb-56">
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="outline">v{version}</Badge>
+            <Badge variant="secondary">{hero.eyebrow}</Badge>
+          </div>
+          <h1 className="font-heading max-w-5xl text-5xl leading-[0.95] font-bold tracking-[-0.045em] text-balance sm:text-7xl lg:text-8xl">
+            {hero.titleLead} <span className="text-primary">{hero.titleAccent}</span>
+          </h1>
+          <p className="text-muted-foreground max-w-2xl text-lg leading-8">{hero.description}</p>
+          <div className="flex flex-wrap gap-3">
+            <Button size="lg" asChild>
+              <Link href={`/${locale}/docs/intro`}>
+                {hero.primaryCta}
+                <ArrowRightIcon />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href={`/${locale}/themes`}>{hero.secondaryCta}</Link>
+            </Button>
+          </div>
+          <div className="bg-card flex max-w-full items-center gap-3 rounded-lg border py-1.5 pr-1.5 pl-4 font-mono text-sm shadow-xs">
+            <span className="text-primary-emphasis" aria-hidden="true">
+              $
+            </span>
+            <code className="truncate">{INSTALL_COMMAND}</code>
+            <CopyButton value={INSTALL_COMMAND} size="sm" title={hero.installLabel} />
+          </div>
         </div>
-      </main>
+      </section>
       <BentoShowcase />
+      <WhySection dict={dict} />
+      <ThemesSection locale={locale} dict={dict} />
+      <CtaSection locale={locale} dict={dict} />
     </>
   )
 }

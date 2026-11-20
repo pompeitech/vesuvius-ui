@@ -6,6 +6,20 @@
 @source "../**/*.{ts,tsx}";
 @source "../content/**/*.mdx";
 
+/* Brand typography: next/font exposes the families as variables on <html>
+   (app/[locale]/layout.tsx); map them onto the kit's own font tokens so
+   every component and the `font-heading` utility pick them up. */
+:root {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), var(--font-sans);
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-heading);
+  letter-spacing: -0.025em;
+}
+
 /* Maps `prose` (long-form MDX content) onto our own design tokens instead
    of Typography's own gray defaults, so doc pages inherit theme/dark-mode
    changes automatically instead of drifting from the rest of the site. */
